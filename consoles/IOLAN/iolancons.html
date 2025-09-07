@@ -1,0 +1,1173 @@
+<!--This file created 12/24/00 5:23 by Claris Home Page version 2.0-->
+<HTML>
+<HEAD>
+   <TITLE>IOLAN Rack+ Console Connection Guide</TITLE>
+   <META NAME=GENERATOR CONTENT="Claris Home Page 2.0">
+   <meta keyword="Serial Console, Cisco, async, conserver, RJ-45, rj45 adapter,
+   RS-232, TealDoc, Palm Pilot, Americable, APACN, console, Zonker, N6UOW,
+   Perle, Rychecki">
+</HEAD>
+
+<BODY TEXT="#336600" BGCOLOR="#FFFFFF">
+
+
+<p><center><table border=0 width="98%">
+   <tr>
+      <td width="50%">
+         <P><center><a href="http://www.conserver.com"><img
+         src="../conserver-sm.jpg" alt="Conserver.com logo" width=147
+         height=47 border=0 align=middle></A></center>
+      </td><td width="50%">
+         <p><center>Brought to you by;<br>
+
+         <a href="http://www.conserver.com/">www.conserver.com</a></center>
+      </td>
+   </tr>
+</table></center>
+
+
+<H2 ALIGN=CENTER>IOLAN Console Server Connections Guide</H2>
+
+<H4 ALIGN=CENTER>http://www.conserver.com/consoles/IOLAN/iolancons.html<BR>
+(updated: 
+Jan 06, 2008, 11:46 am)</h4>
+
+<P>This document will outline terminal server connections to Chase
+Research IOLAN Rack+ terminal servers. The connections will likely
+extend to many of the IOLAN series products, but I have not confirmed
+this. Compare the RJ-45 port signaling shown below in this document
+with the signaling information in the product documentation for your 
+device. (I have tested with the Chase Research 16-port version, as well
+as the Perle Systems 4-port version.)
+
+<P ALIGN=CENTER><A NAME="top"></A><B>Table of Contents</B><BR>
+
+<A HREF="#rj45">IOLAN RJ-45 signaling</A><BR>
+
+<A HREF="#ethernet">RJ-45 Cable Diagrams</A><BR>
+
+<A HREF="#null">Making a null modem cable</A><BR>
+
+<A HREF="#crj45">Cisco devices with female RJ-45 ports</A><BR>
+
+<A HREF="#db9">Connecting IOLAN RJ-45 to DB-9</A><BR>
+
+<A HREF="#db25">Connecting IOLAN RJ-45 to DB-25</A><BR>
+
+<A HREF="#rj45schem">RJ-45 adapter Information</A><BR>
+
+<A HREF="#cables">Specialty Cables</A>
+(<A HREF="#iolan-usr">USR</A>, <A HREF="#iolan-sun-t3">Sun</A>,
+<A HREF="#iolan-dec">DEC</A>)<BR>
+
+<A HREF="#cpc">Attaching devices to a PC instead</A><BR>
+
+<A HREF="#credits">Author Credits</A></CENTER></P>
+
+<P>
+<HR>
+</P>
+
+<P><TABLE BORDER=0 WIDTH="100%">
+   <TR>
+      <TD>
+         <P><TABLE BORDER=0 CELLSPACING=0 CELLPADDING=3 WIDTH="100%">
+            <TR>
+               <TD bgcolor="cccccc" WIDTH="70%">
+                  <P><B><A NAME="rj45"></A>IOLAN RJ-45 signaling</B>
+               </TD><TD bgcolor="cccccc" WIDTH="30%">
+                  <P ALIGN=RIGHT><B><A HREF="#top">to Table of
+                  Contents</A></B>
+               </TD></TR>
+         </TABLE></P>
+         
+         <P>Our initial testing was done with the Chase Research IOLAN 
+         Rack+ 16-port model. We found that this unit will send Serial 
+         BREAK to the
+         attached devices on power-off. (You can find out more about
+         this on our
+         <A HREF="http://www.conserver.com/consoles/breakoff.html">serial
+         BREAK testing page</A>.)
+         
+         <P>At the <A HREF="http://www.usenix.org/">USENIX</A>
+         <A HREF="http://www.usenix.org/events/lisa2000/">LISA
+         2000</A> conference, I spoke with folks from
+         <A HREF="http://www.asptech.com/">ASP Technologies</A>, and
+         they told me that a small (4-port) desktop IOLAN unit does
+         not send serial BREAK at inappropriate times, so we tried to 
+         follow up with Chase to find out more information. We found
+         that the IOLAN line now belonged to Perle Systems.
+         
+         <p><a href="http://www.perle.com/">Perle Systems</a> bought 
+         the IOLAN product line from Chase Research, and they continue 
+         to sell the IOLAN products. However, the IOLAN series may 
+         send Serial BREAK when power is disconencted. (Basically, if 
+         the unit uses an <b>AC power cord</b>, the unit will send 
+         Serial BREAK to all of the attached serial devices when AC
+         power is removed. The (smaller, 4- and 8-port) units, with 
+         an external <b>DC power pack</b> will NOT send Serial BREAK 
+         at inappropriate times.
+
+         <P><TABLE BORDER=0>
+            <TR>
+               <TD WIDTH=332>
+                  <P ALIGN=CENTER><CENTER><TABLE BORDER=1>
+                     <TR>
+                        <TD WIDTH=56>
+                           <P ALIGN=CENTER><B>Pin</B>
+                        </TD><TD WIDTH=99>
+                           <P ALIGN=CENTER><B>Description</B>
+                        </TD><TD WIDTH=89>
+                           <P ALIGN=CENTER><B>signal type</B>
+                        </TD></TR>
+                     <TR>
+                        <TD WIDTH=56>
+                           <P ALIGN=CENTER>1
+                        </TD><TD WIDTH=99>
+                           <P ALIGN=CENTER>DCD
+                        </TD><TD WIDTH=89>
+                           <P ALIGN=CENTER>Input
+                        </TD></TR>
+                     <TR>
+                        <TD WIDTH=56>
+                           <P ALIGN=CENTER>2
+                        </TD><TD WIDTH=99>
+                           <P ALIGN=CENTER>RTS
+                        </TD><TD WIDTH=89>
+                           <P ALIGN=CENTER>Output
+                        </TD></TR>
+                     <TR>
+                        <TD WIDTH=56>
+                           <P ALIGN=CENTER>3
+                        </TD><TD WIDTH=99>
+                           <P ALIGN=CENTER>DSR
+                        </TD><TD WIDTH=89>
+                           <P ALIGN=CENTER>Input
+                        </TD></TR>
+                     <TR>
+                        <TD WIDTH=56>
+                           <P ALIGN=CENTER>4
+                        </TD><TD WIDTH=99>
+                           <P ALIGN=CENTER>Tx Data
+                        </TD><TD WIDTH=89>
+                           <P ALIGN=CENTER>Output
+                        </TD></TR>
+                     <TR>
+                        <TD WIDTH=56>
+                           <P ALIGN=CENTER>5
+                        </TD><TD WIDTH=99>
+                           <P ALIGN=CENTER>Rx Data
+                        </TD><TD WIDTH=89>
+                           <P ALIGN=CENTER>Input
+                        </TD></TR>
+                     <TR>
+                        <TD WIDTH=56>
+                           <P ALIGN=CENTER>6
+                        </TD><TD WIDTH=99>
+
+                           <P ALIGN=CENTER>Signal Ground
+                        </TD><TD WIDTH=89>
+                           <P ALIGN=CENTER>Reference
+                        </TD></TR>
+                     <TR>
+                        <TD WIDTH=56>
+                           <P ALIGN=CENTER>7
+                        </TD><TD WIDTH=99>
+                           <P ALIGN=CENTER>CTS
+                        </TD><TD WIDTH=89>
+                           <P ALIGN=CENTER>Input
+                        </TD></TR>
+                     <TR>
+                        <TD WIDTH=56>
+                           <P ALIGN=CENTER>8
+                        </TD><TD WIDTH=99>
+                           <P ALIGN=CENTER>DTR
+                        </TD><TD WIDTH=89>
+                           <P ALIGN=CENTER>Output
+                        </TD></TR>
+                  </TABLE></CENTER>
+               </TD><TD width=125>
+                  <P ALIGN=CENTER><IMG SRC="isignals.gif" ALIGN=bottom>
+               </TD><TD width=125>
+                  <P ALIGN=CENTER><IMG SRC="../porj45m.gif" ALIGN=middle><br>
+                  <IMG SRC="../porj45f.gif" ALIGN=middle></P>
+               </TD></TR>
+         </TABLE><BR>
+         
+         Notes:
+         
+         <BLOCKQUOTE><P>1) The IOLAN + Rack connections are considered
+         to be <B>DTE</B> interfaces<BR>
+         
+         2) <B>Input</B> means a signal from the external device
+         coming <B>in to</B> the IOLAN<BR>
+         
+         3) <B>Output</B> means a signal sourced from the IOLAN,
+         going <B>out to</B> the external device</BLOCKQUOTE>
+         
+         <P>The reference ground, and data signals, are located on
+         the center pairs of the RJ-45, so you can use a
+         straight-through RJ-11 cable for simple, data-only
+         connections. (However, you should not use RJ-11 or RJ-12
+         connectors in your RJ-45 jacks for longer than quick tests,
+         as these smaller connectors will tend to bend the outer
+         RJ-45 pins up, and this can lead to intermittent or open
+         connections on the RJ-45 jack later on, affecting the
+         hardware flow control and hardware handshaking leads.)
+         
+         <P>The IOLAN signals are not symmetrical, so you cannot use
+         <A HREF="#ethernet">USOC-rolled cables</A> to create a
+         null-modem connection. <A HREF="#ethernet">Crossover
+         Ethernet cables</A> will not help you either.
+      </TD></TR>
+</TABLE>
+
+<P><TABLE BORDER=0 WIDTH="100%">
+   <TR>
+      <TD>
+         <P><TABLE BORDER=0 CELLSPACING=0 CELLPADDING=3 WIDTH="100%">
+            <TR>
+               <TD bgcolor="cccccc" WIDTH="70%">
+                  <P><B><A NAME="ethernet"></A>Cable Diagrams</B>
+               </TD><TD bgcolor="cccccc" WIDTH="30%">
+                  <P ALIGN=RIGHT><B><A HREF="#top">to Table of
+                  Contents</A></B>
+               </TD></TR>
+         </TABLE>
+         
+         <P>The best way to make a connection between IOLAN console
+         server ports and adapters is to use an 8-wire 'straight
+         through' Ethernet cable. (Using a Crossover Ethernet cable
+         or CDDI cables (also referred to as 'USOC-rolled' cables)
+         will not work for connecting adapters to the IOLAN ports.)
+         
+         <P><center><TABLE BORDER=0>
+            <TR>
+               <TD VALIGN=top width="30%">
+                  <P ALIGN=CENTER><IMG SRC="../ethern.gif" ALIGN=top><BR>
+                  
+                  APACN part: <FONT
+                  COLOR="#CC0000">24490-21</FONT>
+               </TD><TD VALIGN=top width="30%">
+                  <P ALIGN=CENTER><IMG SRC="../cab-500.gif" ALIGN=top><BR>
+                  
+                  APACN part: <FONT
+                  COLOR="#CC0000">24490-22</FONT>
+               </TD><TD VALIGN=top width="30%">
+                  <P ALIGN=CENTER><IMG SRC="../etherx.gif" ALIGN=top>
+               </TD></TR>
+         </TABLE></center>
+         
+         <P>Standard Ethernet cables follow a specific wiring
+         pattern. However, not ALL ethernet cables have 8 wires in
+         the cable, since a standard Ethernet interface only uses 4
+         of the wires. For console connections, you need to make sure
+         that your cables have <B>all 8 wires</B>, wired 'straight
+         through' (as shown to the left) for your connections.
+      </TD></TR>
+</TABLE></P>
+
+<P><TABLE BORDER=0 WIDTH="100%">
+   <TR>
+      <TD>
+         <P><TABLE BORDER=0 CELLSPACING=0 CELLPADDING=3 WIDTH="100%">
+            <TR>
+               <TD bgcolor="cccccc" WIDTH="70%">
+                  <P><B><A NAME="null"></A>Making a Null Modem Cable
+                  with IOLAN adapters</B>
+               </TD><TD bgcolor="cccccc" WIDTH="30%">
+                  <P ALIGN=RIGHT><B><A HREF="#top">to Table of
+                  Contents</A></B>
+               </TD></TR>
+         </TABLE></P>
+         
+         <P>The four charts below show you how to use adapters to
+         make a Null Modem, using standard ethernet cables to provide
+         the appropriate lengths. (Always match vendor-compatible
+         parts! Connect IOLAN-schema adapters with Xyplex-schema, MOD-TAP
+         with MOD-TAP, etc. Your connection will not work if you mix
+         different vendors wiring schema.)</P>
+         
+         <P><CENTER><IMG SRC="../null-mdm.gif" ALIGN=bottom></CENTER></P>
+         
+         <P><TABLE >
+            <TR>
+               <TD VALIGN=top>
+                  <P><B>Cisco Adapter combinations</B><BR>
+                  
+                  <TABLE BORDER=1 WIDTH="100%">
+                     <TR>
+                        <TD WIDTH="15%">
+                           <P><CENTER>Version</CENTER>
+                        </TD><TD WIDTH="35%">
+                           <P><CENTER><B>A</B>-side</CENTER>
+                        </TD><TD WIDTH="35%">
+                           <P><CENTER><B>B</B>-side</CENTER>
+                        </TD></TR>
+                     <TR>
+                        <TD WIDTH="15%">
+                           <P><CENTER>1</CENTER>
+                        </TD><TD WIDTH="35%">
+                           <P><CENTER>CMDCE</CENTER>
+                        </TD><TD WIDTH="35%">
+                           <P><CENTER>CFDTE</CENTER>
+                        </TD></TR>
+                     <TR>
+                        <TD WIDTH="15%">
+                           <P><CENTER>2</CENTER>
+                        </TD><TD WIDTH="35%">
+                           <P><CENTER>CMDTE</CENTER>
+                        </TD><TD WIDTH="35%">
+                           <P><CENTER>CFDCE</CENTER>
+                        </TD></TR>
+                  </TABLE>(If you connect <B>both DTE</B> adapters,
+                  or <B>both DCE</B> adapters together, you get a
+                  straight-through cable.)
+               </TD><TD>
+                  <P><B>Micro-Annex Adapter combinations</B><BR>
+                  
+                  <TABLE BORDER=1 WIDTH="100%">
+                     <TR>
+                        <TD WIDTH="15%">
+                           <P><CENTER>Version</CENTER>
+                        </TD><TD WIDTH="35%">
+                           <P><CENTER><B>A</B>-side</CENTER>
+                        </TD><TD WIDTH="35%">
+                           <P><CENTER><B>B</B>-side</CENTER>
+                        </TD></TR>
+                     <TR>
+                        <TD WIDTH="15%">
+                           <P><CENTER>1</CENTER>
+                        </TD><TD WIDTH="35%">
+                           <P><CENTER>AMDCE</CENTER>
+                        </TD><TD WIDTH="35%">
+                           <P><CENTER>AFDTE</CENTER>
+                        </TD></TR>
+                     <TR>
+                        <TD WIDTH="15%">
+                           <P><CENTER>2</CENTER>
+                        </TD><TD WIDTH="35%">
+                           <P><CENTER>AMDTE</CENTER>
+                        </TD><TD WIDTH="35%">
+                           <P><CENTER>AFDCE</CENTER>
+                        </TD></TR>
+                  </TABLE>(If you connect <B>both DTE</B> adapters,
+                  or <B>both DCE</B> adapters together, you get a
+                  straight-through cable.)
+               </TD></TR>
+            <TR>
+               <TD>
+                  <P><B>Xyplex/iTouch Adapter combinations</B><BR>
+                  
+                  <TABLE BORDER=1 WIDTH="100%">
+                     <TR>
+                        <TD WIDTH="15%">
+                           <P><CENTER>Version</CENTER>
+                        </TD><TD WIDTH="35%">
+                           <P><CENTER><B>A</B>-side</CENTER>
+                        </TD><TD WIDTH="35%">
+                           <P><CENTER><B>B</B>-side</CENTER>
+                        </TD></TR>
+                     <TR>
+                        <TD WIDTH="15%">
+                           <P><CENTER>1</CENTER>
+                        </TD><TD WIDTH="35%">
+                           <P><CENTER>XMDCE</CENTER>
+                        </TD><TD WIDTH="35%">
+                           <P><CENTER>XFDTE</CENTER>
+                        </TD></TR>
+                     <TR>
+                        <TD WIDTH="15%">
+                           <P><CENTER>2</CENTER>
+                        </TD><TD WIDTH="35%">
+                           <P><CENTER>XMDTE</CENTER>
+                        </TD><TD WIDTH="35%">
+                           <P><CENTER>XFDCE</CENTER>
+                        </TD></TR>
+                  </TABLE>(If you connect <B>both DTE</B> adapters,
+                  or <B>both DCE</B> adapters together, you get a
+                  straight-through cable.)
+               </TD><TD>
+                  <P><B>IOLAN Adapter combinations</B><BR>
+                  
+                  <TABLE BORDER=1 WIDTH="100%">
+                     <TR>
+                        <TD WIDTH="15%">
+                           <P><CENTER>Version</CENTER>
+                        </TD><TD WIDTH="35%">
+                           <P><CENTER><B>A</B>-side</CENTER>
+                        </TD><TD WIDTH="35%">
+                           <P><CENTER><B>B</B>-side</CENTER>
+                        </TD></TR>
+                     <TR>
+                        <TD WIDTH="15%">
+                           <P><CENTER>1</CENTER>
+                        </TD><TD WIDTH="35%">
+                           <P><CENTER>IMDCE</CENTER>
+                        </TD><TD WIDTH="35%">
+                           <P><CENTER>IFDTE</CENTER>
+                        </TD></TR>
+                     <TR>
+                        <TD WIDTH="15%">
+                           <P><CENTER>2</CENTER>
+                        </TD><TD WIDTH="35%">
+                           <P><CENTER>IMDTE</CENTER>
+                        </TD><TD WIDTH="35%">
+                           <P><CENTER>IFDCE</CENTER>
+                        </TD></TR>
+                  </TABLE>(If you connect <B>both DTE</B> adapters,
+                  or <B>both DCE</B> adapters together, you get a
+                  straight-through cable.)
+               </TD></TR>
+         </TABLE></P>
+         
+         <P>You can also use the 'straight-through' cables shown in
+         the tables above to allow you to insert an RS-232 passive
+         signal tracer or a breakout-box in-line between the RJ-45
+         devices, so that you can monitor the signal states on the
+         various leads, as a troubleshooting aid.
+      </TD></TR>
+</TABLE></P>
+
+<P><TABLE BORDER=0 WIDTH="100%">
+   <TR>
+      <TD>
+         <P><TABLE BORDER=0 CELLSPACING=0 CELLPADDING=3 WIDTH="100%">
+            <TR>
+               <TD bgcolor="cccccc" WIDTH="70%">
+                  <P><B><A NAME="crj45"></A>Cisco devices with
+                  RJ-45(f) console ports</B>
+               </TD><TD bgcolor="cccccc" WIDTH="30%">
+                  <P ALIGN=RIGHT><B><A HREF="#top">to Table of
+                  Contents</A></B>
+               </TD></TR>
+         </TABLE></P>
+         
+         <P ALIGN=CENTER><IMG SRC="../patchdv1.gif" ALIGN=bottom></P>
+         
+         <P>The Cisco RJ-45 console is wired differently from the
+         IOLAN RJ-45, so you will need a specialty cable to connect
+         all of the signal leads properly. The Cisco-wired
+         <A HREF="../Cisco/ciscocons.html#patch">patch panel</A> from
+         <A HREF="http://www.apacn.com/">APA Cables and Networks</A> 
+         (APACN) are wired the null-modem opposite from the Cisco 
+         console ports, so you will need a separate specialty cable 
+         to connect the IOLAN to a Cisco-wired patch panel.
+
+         <P><center><TABLE BORDER=0 WIDTH="50%">
+            <TR>
+               <TD WIDTH="25%">
+                  <P><CENTER><IMG SRC="ciscoc-iolan.gif" ALIGN=top><BR>
+                  
+                  APACN p/n <FONT COLOR="#AF0000">24490-71</FONT>
+                  </CENTER>
+               </TD><TD WIDTH="25%">
+                  <P><CENTER><IMG SRC="ciscop-iolan.gif" ALIGN=top><BR>
+                  
+                  APACN p/n <FONT COLOR="#AF0000">24490-74</FONT>
+                  </CENTER>
+               </TD></TR>
+         </TABLE></center>
+         
+         <P>There are a few Cisco devices that have RJ-45 consoles
+         that are wired the null-modem opposite from the Cisco wiring
+         standard. The three devices listed below were (I believe)
+         Catalyst products. They are also listed on the
+         <A HREF="iolan-hosts.html">IOLAN Host-to-Adapters Page</A>,
+         with information about which cable to use. (The RJ-45
+         console on these devices appears to be a Cisco patch panel,
+         and not a Cisco console port.)</P>
+         
+         <UL>
+            <LI>1100 switches
+            
+            <LI>1200 switches
+            
+            <LI>1400 switches
+         </UL>
+      </TD></TR>
+</TABLE></P>
+
+<P><TABLE BORDER=0 WIDTH="100%">
+   <TR>
+      <TD>
+         <P><TABLE BORDER=0 CELLSPACING=0 CELLPADDING=3 WIDTH="100%">
+            <TR>
+               <TD bgcolor="cccccc" WIDTH="70%">
+                  <P><B><A NAME="db9m"></A>Devices with DB-9(m)
+                  console ports</B>
+               </TD><TD bgcolor="cccccc" WIDTH="30%">
+                  <P ALIGN=RIGHT><B><A HREF="#top">to Table of
+                  Contents</A></B>
+               </TD></TR>
+         </TABLE></P>
+         
+         <P ALIGN=CENTER><IMG SRC="../patchdv3.gif" ALIGN=bottom></P>
+         
+         <P>The IOLAN console server is rare in one way; it has a
+         distinct lead for the DCD signal. As a result, there are
+         only four DB-9 to RJ-45 adapters available from
+         <A HREF="http://www.apacn.com/">APA Cables and Networks</A> (where
+         other terminal servers require eight);</P>
+         
+         <UL>
+            <LI>female adapter,
+            <A HREF="http://www.apacn.com/">APACN</A> part
+            number: <FONT COLOR="#CC0000">24490-33</FONT>
+            ("<A HREF="iolankit.html">IFDTE91</A>").
+            
+            <LI>female adapter,
+            <A HREF="http://www.apacn.com/">APACN</A> part
+            number: <FONT COLOR="#CC0000">24490-32</FONT>
+            ("<A HREF="iolankit.html">IFDCE91</A>").
+            
+            <LI>male adapter,
+            <A HREF="http://www.apacn.com/">APACN</A> part
+            number: <FONT COLOR="#CC0000">24490-34</FONT>
+            ("<A HREF="iolankit.html">IMDTE91</A>").
+            
+            <LI>male adapter,
+            <A HREF="http://www.apacn.com/">APACN</A> part
+            number: <FONT COLOR="#AF0000">24490-29</FONT>
+            ("<A HREF="iolankit.html">IMDCE91</A>").
+         </UL>
+         
+         <P>Rather than list all of the devices you might be able to
+         connect to with each adapter here, I have created a separate
+         <A HREF="iolan-hosts.html">IOLAN Host-to-Adapters Page</A>,
+         which lists the various combinations of male and female,
+         DTE/DCE, DB-9 and DB-25, with a list of the various devices
+         which fall under each connector type. The list also tells
+         you which adapter (or cable) you will need to connect each
+         device to an IOLAN console server port.</P>
+         
+         <P>Note: Some Cisco 1900-series switches use a DB-9 console
+         connection, instead of the RJ-45 connector. Some of these
+         devices require a DCD signal on DB-9 pin 1, while other
+         versions of the 1900 do not want a DCD signal applied to
+         DB-9 pin 1.</P>
+         
+         <BLOCKQUOTE><P>If the Cisco 1900 you have attached to is
+         spewing AT modem commands out the port, you have a problem.
+         If you are using a stock adapter (with the DCD signal) you
+         will need to open the adapter, and remove the wire from pin
+         1 of the DB-9 and then label the adapter so you know it has
+         been modified. (If you are seeing the AT commands with a
+         modified adapter install, get an unmodified adapter. :-)
+         </P></BLOCKQUOTE>
+         
+         <P><A HREF="http://www.apacn.com/">APACN</A> sells
+         any of these adapters (individual or bulk), as well as a
+         <A HREF="iolankit.html">complete adapter/cable set</A>.
+      </TD></TR>
+</TABLE>
+<HR>
+</P>
+
+<P><TABLE BORDER=0 WIDTH="100%">
+   <TR>
+      <TD>
+         <P><TABLE BORDER=0 CELLSPACING=0 CELLPADDING=3 WIDTH="100%">
+            <TR>
+               <TD bgcolor="cccccc" WIDTH="70%">
+                  <P><B><A NAME="db25f"></A>Devices with DB-25(f)
+                  console ports</B>
+               </TD><TD bgcolor="cccccc" WIDTH="30%">
+                  <P ALIGN=RIGHT><B><A HREF="#top">to Table of
+                  Contents</A></B>
+               </TD></TR>
+         </TABLE></P>
+         
+         <P ALIGN=CENTER><IMG SRC="../patchdv2.gif" ALIGN=bottom></P>
+         
+         <P>The IOLAN console server is rare in one way; it has a
+         distinct input lead for the DCD signal. This makes connecting 
+         to modems a breeze.</P>
+         
+         <UL>
+            <LI>female adapter,
+            <A HREF="http://www.apacn.com/">APACN</A> part
+            number: <FONT COLOR="#CC0000">24490-27</FONT>
+            ("<A HREF="iolankit.html">IFDTE</A>").
+            
+            <LI>female adapter,
+            <A HREF="http://www.apacn.com/">APACN</A> part
+            number: <FONT COLOR="#CC0000">24490-30</FONT>
+            ("<A HREF="iolankit.html">IFDCE</A>").
+            
+            <LI>male adapter,
+            <A HREF="http://www.apacn.com/">APACN</A> part
+            number: <FONT COLOR="#CC0000">24490-28</FONT>
+            ("<A HREF="iolankit.html">IMDTE</A>").
+            
+            <LI>male adapter,
+            <A HREF="http://www.apacn.com/">APACN</A> part
+            number: <FONT COLOR="#AF0000">24490-31</FONT>
+            ("<A HREF="iolankit.html">IMDCE</A>").
+         </UL>
+         
+         <P>Rather than list all of the devices you might be able to
+         connect to with each adapter here, I have created a separate
+         <A HREF="iolan-hosts.html">IOLAN Host-to-Adapters Page</A>,
+         which lists the various combinations of male and female,
+         DTE/DCE, DB-9 and DB-25, with a list of the various devices
+         which fall under each connector type. The list also tells
+         you which adapter (or cable) you will need to connect each
+         device to an IOLAN console server port.</P>
+         
+         <P><A HREF="http://www.apacn.com/">APACN</A> sells
+         any of these adapters (individual or bulk), as well as a
+         <A HREF="iolankit.html">complete adapter/cable set</A>.
+      </TD></TR>
+</TABLE>
+
+<P><TABLE >
+   <TR>
+      <TD>
+         <P><TABLE BORDER=0 CELLSPACING=0 CELLPADDING=3 WIDTH="100%">
+            <TR>
+               <TD bgcolor="cccccc" WIDTH="70%">
+                  <P><B><A NAME="rj45schem"></A>RJ-45 Adapter
+                  Schematics</B>
+               </TD><TD bgcolor="cccccc" WIDTH="30%">
+                  <P ALIGN=RIGHT><B><A HREF="#top">to Table of
+                  Contents</A></B>
+               </TD></TR>
+         </TABLE></P>
+         
+         <P>I am a strong proponent of buying pre-wired, pre-labeled
+         adapters and cables. Generally speaking, you probably can't
+         build an adapter cheaper, if you consider the value of your
+         time as well as the component costs. And, whether or not I
+         can make 100 adapters without a mistake isn't being
+         questioned, I'm sure I'd rather not make 100 by myself. The
+         best advantages for buying pre-built adapters and pre-wired
+         cables include;</P>
+         
+         <UL>
+            <LI>Consistent wiring and labeling of the parts.
+            
+            <LI>Consistent shell colors and labels aides in
+            troubleshooting, by visually identifying the parts.
+            
+            <LI>Enhances reliability, knowing you can grab any
+            adapter and count on it being wired correctly.
+            
+            <LI>If you need a LOT of adapters or cables for a
+            build-out, you probably don't want to build them all
+            yourself!
+         </UL>
+         
+         <P>You can purchase any of the adapters and cables listed on
+         these pages individually (or in bulk) from APA Cables &amp;
+         Networks
+         (<A HREF="http://www.apacn.com/">www.apacn.com</A>). You
+         also have the option of buying a
+         <A HREF="iolankit.html">IOLAN Console Kit</A>, which
+         includes a complete set of adapters, and some of the
+         specialty <A HREF="#cables">cables</A> listed above, as well
+         as a passive RS-232 Signal Tracer. The default shell color
+         is green for IOLAN adapters. You can get the shells in
+         another color if you want, provided you want one of the
+         colors listed below:</P>
+         
+         <P>Available colors: <B>BK</B> = black, <B>GN</B> = green,
+         <B>RD</B> = red, <B>YL</B> = yellow, <B>BL</B> = blue,
+         <B>GY</B> = grey</P>
+         
+         <P>So, the APACN part number <B>IFDTE91-YL</B> would denote
+         the DB-9 female DTE adapter, wired for the IOLAN RJ-45
+         format, but supplied with a yellow plastic shell (instead of
+         the default green shell).</P>
+         
+         <P>APA Cables &amp; Networks also sells adapters and adapter
+         kits for other RJ-45 schema, including the
+         <A HREF="../Annex/annexkit.html">Annex/Bay/Nortel</A>,
+         <A HREF="../Xyplex/xyplexkit.html">Xyplex/iTouch/MRV</A> and
+         <A HREF="../Cisco/ciscokit.html">Cisco</A> console server
+         families. APA Cables &amp; Networks uses different default
+         colors to make it easier to visually identify the different
+         RJ-45 wiring schema.</P>
+         
+         <P>With all of this said, I also understand that sometimes
+         you just need to make that one cable or adapter, and buying
+         just one isn't practical. So, here are the schematics. (The
+         APA Cables &amp; Networks part number is shown below each
+         adapter. If there is a IOLAN equivalent, I'll note the
+         IOLAN part number as well.)</P>
+         
+         <P><TABLE BORDER=0 WIDTH="100%">
+            <TR>
+               <TD WIDTH="25%">
+                  <P><CENTER><IMG SRC="ifdce.gif" ALIGN=top><BR>
+                  
+                  APACN p/n <FONT COLOR="#AF0000">24490-30</FONT>
+                  </CENTER>
+               </TD><TD WIDTH="25%">
+                  <P><CENTER><IMG SRC="ifdte.gif" ALIGN=top><BR>
+                  
+                  APACN p/n <FONT COLOR="#AF0000">24490-27</FONT>
+                  </CENTER>
+               </TD><TD WIDTH="25%">
+                  <P><CENTER><IMG SRC="imdce.gif" ALIGN=top><BR>
+                  
+                  APACN p/n <FONT COLOR="#AF0000">24490-31</FONT>
+                  </CENTER>
+               </TD><TD WIDTH="25%">
+                  <P><CENTER><IMG SRC="imdte.gif" ALIGN=top><BR>
+                  
+                  APACN p/n <FONT COLOR="#AF0000">24490-28</FONT>
+                  </CENTER>
+               </TD></TR>
+         </TABLE></P>
+         
+         <P><TABLE BORDER=0 WIDTH="100%">
+            <TR>
+               <TD WIDTH="25%">
+                  <P><CENTER><IMG SRC="ifdce91.gif" ALIGN=top><BR>
+                  
+                  APACN p/n <FONT COLOR="#AF0000">24490-32</FONT>
+                  </CENTER>
+               </TD><TD WIDTH="25%">
+                  <P><CENTER><IMG SRC="ifdte91.gif" ALIGN=top><BR>
+                  
+                  APACN p/n <FONT COLOR="#AF0000">24490-33</FONT>
+                  </CENTER>
+               </TD><TD WIDTH="25%">
+                  <P><CENTER><IMG SRC="imdce91.gif" ALIGN=top><BR>
+                  
+                  APACN p/n <FONT COLOR="#AF0000">24490-29</FONT>
+                  </CENTER>
+               </TD><TD WIDTH="25%">
+                  <P><CENTER><IMG SRC="imdte91.gif" ALIGN=top><BR>
+                  
+                  APACN p/n <FONT COLOR="#AF0000">24490-34</FONT>
+                  </CENTER>
+               </TD></TR>
+         </TABLE></P>
+         
+         <P><TABLE BORDER=0 WIDTH="100%">
+            <TR>
+               <TD WIDTH="25%">
+                  <P><CENTER><IMG SRC="ifdce92.gif" ALIGN=top><BR>
+                  
+                  APACN p/n <FONT COLOR="#AF0000">24490-79</FONT>
+                  </CENTER>
+               </TD><TD WIDTH="25%">
+                  <P><CENTER><IMG SRC="ifdte92.gif" ALIGN=top><BR>
+                  
+                  APACN p/n <FONT COLOR="#AF0000">24490-80</FONT>
+                  </CENTER>
+               </TD><TD WIDTH="25%">
+                  <P><CENTER><IMG SRC="imdce92.gif" ALIGN=top><BR>
+                  
+                  APACN p/n <FONT COLOR="#AF0000">24490-81</FONT>
+                  </CENTER>
+               </TD><TD WIDTH="25%">
+                  <P><CENTER><IMG SRC="imdte92.gif" ALIGN=top><BR>
+                  
+                  APACN p/n <FONT COLOR="#AF0000">24490-82</FONT>
+                  </CENTER>
+               </TD></TR>
+         </TABLE>
+      </TD></TR>
+</TABLE></P>
+
+<P><TABLE BORDER=0 WIDTH="100%">
+   <TR>
+      <TD>
+         <P><TABLE BORDER=0 CELLSPACING=0 CELLPADDING=3 WIDTH="100%">
+            <TR>
+               <TD bgcolor="cccccc" WIDTH="70%">
+                  <P><B><A NAME="cables"></A>Specialty Cables for
+                  Xyplex Console Servers</B>
+               </TD><TD bgcolor="cccccc" WIDTH="30%">
+                  <P ALIGN=RIGHT><B><A HREF="#top">to Table of
+                  Contents</A></B>
+               </TD></TR>
+         </TABLE></P>
+         
+         <P>As with adapters, I recommend buying pre-built,
+         pre-labeled, tested cables. APA Cables and Networks sells
+         specialty cables for connecting IOLAN consoles ports to
+         other console servers and devices, and these can be ordered
+         from the descriptions and part numbers shown below. The
+         default length is 7 feet, but you can order custom lengths
+         as needed. The cables come with black boots on the RJ-45
+         end, and labels denoting the IOLAN end. The MMJ end does
+         not get a boot, since they can't find anyone who makes a
+         colored MMJ boot.</P>
+         
+         <P><TABLE BORDER=0 WIDTH="100%">
+            <TR>
+               <TD WIDTH="25%">
+                  <P><CENTER><IMG SRC="xyplex-iolan.jpg" ALIGN=top><BR>
+                  
+                  &nbsp;
+                  </CENTER>
+               </TD><TD WIDTH="25%">
+                  <P><CENTER><IMG SRC="ciscoc-iolan.gif" ALIGN=top><BR>
+                  
+                  APACN p/n <FONT COLOR="#AF0000">24490-71</FONT>
+                  </CENTER>
+               </TD><TD WIDTH="25%">
+                  <P><CENTER><IMG SRC="iolan-annex.jpg" ALIGN=top><BR>
+                  
+                  &nbsp;
+                  </CENTER>
+               </TD><TD WIDTH="25%">
+                  <P><CENTER><IMG SRC="iolan-kentrox.gif" ALIGN=top><BR>
+                  
+                  APACN p/n <FONT COLOR="#AF0000">24490-78</FONT>
+                  </CENTER>
+               </TD></TR>
+         </TABLE></P>
+         
+         <P>There are other cables listed on the
+         <A HREF="iolankit.html">IOLAN Adapter Kit Page</A>.
+      </TD></TR>
+</TABLE></P>
+
+<P>
+<HR WIDTH="60%" NOSHADE>
+</P>
+
+<P><TABLE BORDER=0 WIDTH="100%">
+   <TR>
+      <TD VALIGN=top>
+         <P><B><A NAME="iolan-usr"></A>U.S. Robotics</B> (USR, now
+         3-Com) <B>digital modem chassis</B> have a different pinouts
+         than Cisco on the console ports on their NICs and NACs.</P>
+         
+         <P>You can accommodate these devices by combining a
+         <A HREF="#rj45schem">IFDTE</A> adapter with a USR cable
+         (part number <B>1.009.691-B</B>) attached to the USR console
+         port, and an ethernet cable to connect the
+         <A HREF="#rj45schem">IFDTE</A> adapter to the Xyplex port.
+         </P>
+         
+         <P><CENTER><IMG SRC="../usr-cab2.gif" ALIGN=bottom></CENTER></P>
+         
+         <P>You can also make a single cable, with RJ-45 male
+         connectors on each end. Make sure that you label both ends
+         of the cable, since the wiring is not symmetrical (it makes
+         a difference which end plugs into the IOLAN port!) APA
+         Cables and Networks sells a cable for this (black
+         boot on the IOLAN end, orange boot on the USR end);</P>
+         
+         <P><CENTER><TABLE BORDER=0 WIDTH="75%" align=center>
+            <TR>
+               <TD WIDTH="37%">
+                  <P><CENTER><IMG SRC="iolan-usr.gif" ALIGN=top><BR>
+                  
+                  APACN p/n <FONT COLOR="#AF0000">24490-49</FONT>
+                  </CENTER>
+               </TD><TD WIDTH="37%">
+                  <P><CENTER><IMG SRC="../porj45m.gif" ALIGN=middle></CENTER>
+               </TD></TR>
+         </TABLE></CENTER></P>
+         
+         <P>There are more cables listed on the
+         <A HREF="iolan-hosts.html">IOLAN Host-to-Adapters
+         Page</A>.
+      </TD></TR>
+</TABLE></P>
+
+<P>
+<HR WIDTH="60%" NOSHADE>
+</P>
+
+<P><TABLE BORDER=0 WIDTH="100%">
+   <TR>
+      <TD VALIGN=top>
+         <P><B><A NAME="iolan-sun-t3"></A>Sun Netra, T3 Hardware</B>
+         </P>
+         
+         <P>Most Sun hardware has used a female DB-25 connector for
+         the TTY A and B ports. (Use a <A HREF="#rj45schem">IMDCE</A>
+         adapter to connect these to an IOLAN console server port.)</P>
+         
+         <P>The Sun Netra T-1 (model 105) uses an RJ-45 console, and
+         it happens to be wired identically to the Cisco console
+         port.</P>
+         
+         <UL>
+            <LI>To connect a Netra T-1 105 to an IOLAN console port,
+            use a ciscoc-xyplex cable.
+         </UL>
+         
+         <P><CENTER><TABLE BORDER=0 WIDTH="75%" align=center>
+            <TR>
+               <TD WIDTH="37%">
+                  <P><CENTER><IMG SRC="ciscoc-iolan.gif" ALIGN=top><BR>
+                  
+                  APACN p/n <FONT COLOR="#AF0000">24490-71</FONT>
+                  </CENTER>
+               </TD><TD WIDTH="37%">
+                  <P><CENTER><IMG SRC="../porj45m.gif" ALIGN=middle></CENTER>
+               </TD></TR>
+         </TABLE></CENTER>
+         
+         <P>The DB-25 serial adapter that comes with the Sun Netra
+         T-1 (<B>Sun p/n 530-2889-02</B>) is wired similarly to the
+         Cisco part <B>29-0808-01</B>, (APACN
+         <A HREF="../Cisco/ciscocons.html#rj45schem">CMDCE</A>
+         adapter, with the addition of adding a 'frame ground'
+         connection. The plastic DB-25 shell has a metalized coating,
+         and a drain ground lead is attached from pin 1 of the
+         DB-25(m) connector to a lead attached to the metalized
+         shell. The schematic on the <B>Sun p/n 530-2889-03</B> is
+         similar, except they changed the colors of the wires inside
+         the shell (and the tabs which hold the DB-25 connector are
+         <I>much</I> more fragile, so take my word on the wiring
+         inside!)
+
+         <p>To connect the IOLAN to a Sun Netra, use the 
+         <a href="#crj45">IOLAN-to-Cisco</a> console cable.
+         
+         <P>The Sun Netra T-3 disk arrays use an <B>RJ-13</B>
+         connector for it's RS-232 console, and you only get data and
+         ground for your connection (no flow control or handshaking).
+         APA Cables and Networks sells a couple of cables for
+         connecting these devices (black boot on the IOLAN end, no
+         boot on the RJ-13 end);
+         
+         <P><TABLE BORDER=0 WIDTH="100%">
+            <TR>
+               <TD WIDTH="33%">
+                  <P><CENTER><IMG SRC="../porj13m.jpg" ALIGN=middle></CENTER>
+               </TD><TD WIDTH="33%">
+                  <P><CENTER><IMG SRC="iolan-netrat3.gif" ALIGN=top><BR>
+                  
+                  APACN p/n <FONT COLOR="#AF0000">24490-65</FONT>
+                  </CENTER>
+               </TD><TD WIDTH="33%">
+                  <P><CENTER><IMG SRC="../porj45m.gif" ALIGN=middle></CENTER>
+               </TD></TR>
+         </TABLE></P>
+         
+         <P>There are more cables listed on the
+         <A HREF="iolan-hosts.html">IOLAN Host-to-Adapters
+         Page</A>.
+      </TD></TR>
+</TABLE></P>
+
+<P>
+<HR WIDTH="60%" NOSHADE>
+</P>
+
+<P><TABLE BORDER=0 WIDTH="100%">
+   <TR>
+      <TD VALIGN=top>
+         <P><B><A NAME="iolan-dec"></A>Digital Equipment Corp.</B>
+         (DEC, then Compaq, then H.P.) equipment often used an RJ-13
+         with an offset locking tab, referred to as a Modified
+         Modular jack (<B>MMJ</B>). This included their VT-series
+         terminals, VAX equipment, and even newer Alpha series
+         equipment.</P>
+         
+         <P>APA Cables and Networks sells a cable for this (black
+         boot on the Xyplex end, and no boot on the DEC end);</P>
+         
+         <P><TABLE BORDER=0 WIDTH="100%">
+            <TR>
+               <TD WIDTH="33%">
+                  <P><CENTER><IMG SRC="../pommjm.gif" ALIGN=middle></CENTER>
+               </TD><TD WIDTH="33%">
+                  <P><CENTER><IMG SRC="iolan-decmmj.gif" ALIGN=top><BR>
+                  
+                  APACN p/n <FONT COLOR="#AF0000">24490-50</FONT>
+                  </CENTER>
+               </TD><TD WIDTH="33%">
+                  <P><CENTER><IMG SRC="../porj45m.gif" ALIGN=middle></CENTER>
+               </TD></TR>
+         </TABLE></P>
+         
+         <P>There are other cables listed on the
+         <A HREF="iolan-hosts.html">IOLAN Host-to-Adapters
+         Page</A>.
+      </TD></TR>
+</TABLE></P>
+
+<P><TABLE BORDER=0 WIDTH="100%">
+   <TR>
+      <TD>
+         <P><TABLE BORDER=0 CELLSPACING=0 CELLPADDING=3 WIDTH="100%">
+            <TR>
+               <TD bgcolor="cccccc" WIDTH="70%">
+                  <P><B><A NAME="cpc"></A>Attaching devices to a PC
+                  for configuration</B>
+               </TD><TD bgcolor="cccccc" WIDTH="30%">
+                  <P ALIGN=RIGHT><B><A HREF="#top">to Table of
+                  Contents</A></B>
+               </TD></TR>
+         </TABLE></P>
+         
+         <P ALIGN=CENTER><IMG SRC="../pcdv1.gif" ALIGN=bottom></P>
+         
+         <P><TABLE BORDER=0 WIDTH="100%">
+            <TR>
+               <TD>
+                  <P>When you are deploying console servers, you may
+                  still want to have a way to wheel a terminal or a
+                  laptop up to a machine to check configurations
+                  (basically, the practical (or paranoid) among us
+                  want to have a safety net, in case the console
+                  services fail). In this case, using
+                  <A HREF="#rj45schem">modular adapters</A>
+                  actually simplifies our job!</P>
+                  
+                  <P>By connecting all of your remote consoles to the
+                  patch panels using Ethernet cables, all you need to
+                  do is connect an adapter to your laptop, and set up
+                  a Terminal Emulator package to talk to the serial
+                  port of the laptop.</P>
+                  
+                  <BLOCKQUOTE><P><FONT COLOR="#AF0000">If you want to
+                  set up a "crash cart", I'd also suggest that you
+                  set the serial port speed on all of your consoles
+                  to 9600 bps, 8-N-1 (since is the most common
+                  setting). Having a common speed removes one more
+                  variable to have to remember during a
+                  crisis.</FONT></P>
+                  
+                  <P><FONT COLOR="#AF0000">If you have any
+                  </FONT><B><FONT COLOR="#AF0000">Sun</FONT></B><FONT
+                  COLOR="#AF0000"> workstations connected to your
+                  console services, you should test to make sure that
+                  your terminal emulator software doesn't send a
+                  serial </FONT><B><FONT
+                  COLOR="#AF0000">BREAK</FONT></B><FONT
+                  COLOR="#AF0000"> when you start/stop it, since the
+                  BREAK signal will likely send your Sun host to the
+                  </FONT><B><FONT COLOR="#AF0000">OK</FONT></B><FONT
+                  COLOR="#AF0000"> prompt. (This has also been
+                  reported on some SGI and NeXT hosts.)</FONT></P>
+                  </BLOCKQUOTE>
+                  
+                  <P>Use the APACN
+                  <B><A HREF="iolankit.html">IFDCE91</A></B> adapter
+                  connected to your laptop (and a terminal emulation
+                  program) look like an IOLAN RJ-45 console server
+                  port.</P>
+                  
+                  <P>When you have successfully configured your
+                  devices, all you need to do is disconnect the cable
+                  from the adapter on your PC, and connect the cable
+                  to a port on an IOLAN console server.
+               </TD></TR>
+         </TABLE>
+      </TD></TR>
+</TABLE></P>
+
+<P><TABLE BORDER=0 WIDTH="100%">
+   <TR>
+      <TD>
+         <P><TABLE BORDER=0 CELLSPACING=0 CELLPADDING=3 WIDTH="100%">
+            <TR>
+               <TD bgcolor="cccccc" WIDTH="70%">
+                  <P><B><A NAME="configs"></A>Configuration
+                  Suggestions for Cisco Console Servers</B>
+               </TD><TD bgcolor="cccccc" WIDTH="30%">
+                  <P ALIGN=RIGHT><B><A HREF="#top">to Table of
+                  Contents</A></B>
+               </TD></TR>
+         </TABLE></P>
+         
+         <P>Tips for configuring the serial ports on terminal servers
+         for remote access to attached serial devices.</P>
+         
+         <UL>
+            <LI>Choose which lines will be used for connecting
+            devices.
+            
+            <LI>Don't run a login session on the port. (it'll only
+            chat with the attached device)
+            
+            <LI>Set the port to allow Reverse Telnet.
+            
+            <LI>Set the port speed, data bits, parity, and stop-bits
+            (most folks use 9600-8-N-1)
+            
+            <UL>
+               <LI>(there are arguments for setting the port speeds
+               higher.)
+            </UL>
+            
+            <LI>Decide if you want/need software or hardware flow
+            control.
+         </UL>
+         
+         <P>If you are connecting your network equipment consoles to
+         your console server, remember to consider;</P>
+         
+         <UL>
+            <LI>Setting an idle timeout on the console exec of the
+            network gear
+            
+            <UL>
+               <LI>You probably don't want someone to leave a port in
+               the enabled mode...
+            </UL>
+            
+            <LI>Consider adding a password to the ports (just like
+            you do for read-only access via telnet.)
+         </UL>
+      </TD></TR>
+</TABLE></P>
+
+<P>
+<HR WIDTH="60%" NOSHADE>
+</P>
+
+<P><CENTER><TABLE BORDER=0 CELLSPACING=0 CELLPADDING=3 WIDTH="85%"
+bggcolor="666666">
+   <TR>
+      <TD>
+         <P><CENTER><B>For basic RS-232 troubleshooting info, view my
+         <A HREF="../msock.html">Minor Scroll of Console
+         Knowledge</A></B></CENTER>
+      </TD></TR>
+</TABLE></CENTER></P>
+
+<p>
+<hr align=center width="80%">
+</p>
+
+<A NAME="credits"></a>
+<P><CENTER><TABLE BORDER=5 bgcolor="ffcc99" width="75%" padding=5>
+   <TR>
+      <TD>
+         <P><FONT COLOR="#663300"><B>NOTICE:</B> Most of the pages, 
+         articles, and tutorials on this website are
+         copyrighted works. You may make 'deep links' to various
+         pages. (If you let me know which page(s) you are linking to,
+         I'll let you know if I move the page(s) during updates.)
+         Please send me email if you wish to republish any material,
+         or use it on your own website.</FONT></P>
+      </TD></TR>
+</TABLE></CENTER></P>
+
+
+<p><center>Made using <a href="http://www.nvudev.com">Nvu</a></center></p>
+
+<p><center>Copyright 1996-2007,
+<A HREF="http://www.esperanto.org/person/HARRIS_Dacxjo/">David K. Z.
+Harris, N6UOW</A>&nbsp;&nbsp;
+<a href="http://www.linkedin.com/in/consoleteam" >
+<img src="http://www.linkedin.com/img/webpromo/btn_profile_bluetxt_80x15.gif"
+width="80" height="15" border="0" alt="View David K. Z. Harris's profile on
+LinkedIn"></a><br>
+Questions? Comments? Additions? Email <B>consoles</B> at
+<B>conserver.com</B>.<BR>
+
+<FONT COLOR="#cc0000">(Don't harvest my address, I don't want
+SPAM!)</FONT><BR>
+
+<A HREF="../iloj.html">How does he do it</A>? And
+<A HREF="../about.html">Why</A>?</CENTER></P>
+
+
+
+</BODY>
+</HTML>

@@ -1,0 +1,948 @@
+<!DOCTYPE html PUBLIC "-//w3c//dtd html 4.0 transitional//en">
+<html><head>
+
+
+   <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <meta name="ProgId" content="Word.Document">
+   <meta name="Generator" content="Microsoft Word 9">
+   <meta name="Originator" content="Microsoft Word 9">
+   <meta name="GENERATOR" content="Mozilla/4.77 [en] (Windows NT 5.0; U) [Netscape]"><title>Bluetooth and WLAN coexistance</title>
+   
+<link rel="File-List" href="http://www.eurescom.de/%7Epub-deliverables/P1100-series/P1118/D3/BLTAND%7E1_files/filelist.xml">
+<link rel="Edit-Time-Data" href="http://www.eurescom.de/%7Epub-deliverables/P1100-series/P1118/D3/BLTAND%7E1_files/editdata.mso"><!--[if !mso]>
+<style>
+v\:* {behavior:url(#default#VML);}
+o\:* {behavior:url(#default#VML);}
+w\:* {behavior:url(#default#VML);}
+.shape {behavior:url(#default#VML);}
+</style>
+<![endif]--><!--[if gte mso 9]><xml>
+ <w:WordDocument>
+  <w:Zoom>75</w:Zoom>
+  <w:HyphenationZone>21</w:HyphenationZone>
+ </w:WordDocument>
+</xml><![endif]-->
+
+
+<style>
+<!--
+ /* Style Definitions */
+p.MsoNormal, li.MsoNormal, div.MsoNormal
+	{mso-style-parent:"";
+	margin:0cm;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:11.0pt;
+	mso-bidi-font-size:10.0pt;
+	font-family:Arial;
+	mso-fareast-font-family:"Times New Roman";
+	mso-bidi-font-family:"Times New Roman";
+	mso-ansi-language:DE;
+	mso-fareast-language:EN-US;}
+h1
+	{mso-style-next:Normal;
+	margin-top:12.0pt;
+	margin-right:0cm;
+	margin-bottom:3.0pt;
+	margin-left:0cm;
+	mso-pagination:widow-orphan;
+	page-break-after:avoid;
+	mso-outline-level:1;
+	font-size:14.0pt;
+	mso-bidi-font-size:10.0pt;
+	font-family:Arial;
+	mso-bidi-font-family:"Times New Roman";
+	mso-font-kerning:14.0pt;
+	mso-ansi-language:DE;
+	mso-fareast-language:EN-US;
+	mso-bidi-font-weight:normal;}
+h2
+	{mso-style-next:Normal;
+	margin-top:12.0pt;
+	margin-right:0cm;
+	margin-bottom:3.0pt;
+	margin-left:0cm;
+	mso-pagination:widow-orphan;
+	page-break-after:avoid;
+	mso-outline-level:2;
+	font-size:12.0pt;
+	mso-bidi-font-size:10.0pt;
+	font-family:Arial;
+	mso-bidi-font-family:"Times New Roman";
+	mso-ansi-language:DE;
+	mso-fareast-language:EN-US;
+	mso-bidi-font-weight:normal;
+	font-style:italic;
+	mso-bidi-font-style:normal;}
+p.MsoFooter, li.MsoFooter, div.MsoFooter
+	{margin:0cm;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	tab-stops:center 207.65pt right 415.3pt;
+	font-size:10.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";
+	mso-ansi-language:EN-GB;
+	mso-fareast-language:EN-US;}
+p.MsoCaption, li.MsoCaption, div.MsoCaption
+	{mso-style-next:Normal;
+	margin-top:6.0pt;
+	margin-right:0cm;
+	margin-bottom:6.0pt;
+	margin-left:0cm;
+	text-align:justify;
+	mso-pagination:widow-orphan;
+	font-size:11.0pt;
+	mso-bidi-font-size:10.0pt;
+	font-family:Arial;
+	mso-fareast-font-family:"Times New Roman";
+	mso-bidi-font-family:"Times New Roman";
+	mso-ansi-language:EN-GB;
+	mso-fareast-language:EN-US;
+	font-style:italic;
+	mso-bidi-font-style:normal;}
+a:link, span.MsoHyperlink
+	{color:blue;
+	text-decoration:underline;
+	text-underline:single;}
+a:visited, span.MsoHyperlinkFollowed
+	{color:purple;
+	text-decoration:underline;
+	text-underline:single;}
+@page Section1
+	{size:595.3pt 841.9pt;
+	margin:70.85pt 70.85pt 2.0cm 70.85pt;
+	mso-header-margin:35.4pt;
+	mso-footer-margin:35.4pt;
+	mso-paper-source:0;}
+div.Section1
+	{page:Section1;}
+ /* List Definitions */
+@list l0
+	{mso-list-id:361173962;
+	mso-list-type:simple;
+	mso-list-template-ids:67567617;}
+@list l0:level1
+	{mso-level-number-format:bullet;
+	mso-level-text:\F0B7;
+	mso-level-tab-stop:18.0pt;
+	mso-level-number-position:left;
+	margin-left:18.0pt;
+	text-indent:-18.0pt;
+	font-family:Symbol;}
+@list l1
+	{mso-list-id:689525611;
+	mso-list-type:simple;
+	mso-list-template-ids:-13367878;}
+@list l1:level1
+	{mso-level-start-at:3;
+	mso-level-number-format:alpha-lower;
+	mso-level-tab-stop:70.5pt;
+	mso-level-number-position:left;
+	margin-left:70.5pt;
+	text-indent:-35.25pt;}
+@list l2
+	{mso-list-id:1593197100;
+	mso-list-type:simple;
+	mso-list-template-ids:67567617;}
+@list l2:level1
+	{mso-level-number-format:bullet;
+	mso-level-text:\F0B7;
+	mso-level-tab-stop:18.0pt;
+	mso-level-number-position:left;
+	margin-left:18.0pt;
+	text-indent:-18.0pt;
+	font-family:Symbol;}
+ol
+	{margin-bottom:0cm;}
+ul
+	{margin-bottom:0cm;}
+-->
+</style><!--[if gte mso 9]><xml>
+ <u1:DocumentProperties>
+  <u1:Author>Kraus</u1:Author>
+  <u1:LastAuthor>Josef Noll</u1:LastAuthor>
+  <u1:Revision>2</u1:Revision>
+  <u1:TotalTime>2</u1:TotalTime>
+  <u1:LastPrinted>2002-06-05T07:31:00Z</u1:LastPrinted>
+  <u1:Created>2002-10-06T18:40:00Z</u1:Created>
+  <u1:LastSaved>2002-10-06T18:40:00Z</u1:LastSaved>
+  <u1:Pages>6</u1:Pages>
+  <u1:Words>2384</u1:Words>
+  <u1:Characters>13589</u1:Characters>
+  <u1:Company> </u1:Company>
+  <u1:Lines>113</u1:Lines>
+  <u1:Paragraphs>27</u1:Paragraphs>
+  <u1:CharactersWithSpaces>16688</u1:CharactersWithSpaces>
+  <u1:Version>9.4402</u1:Version>
+ </u1:DocumentProperties>
+</xml><![endif]--><!--[if gte mso 9]><xml>
+ <u2:WordDocument>
+  <u2:ActiveWritingStyle Lang="DE" VendorID="9" DLLVersion="512" NLCheck="0">1</u2:ActiveWritingStyle>
+  <u2:HyphenationZone>21</u2:HyphenationZone>
+  <u2:DisplayHorizontalDrawingGridEvery>0</u2:DisplayHorizontalDrawingGridEvery>
+  <u2:DisplayVerticalDrawingGridEvery>0</u2:DisplayVerticalDrawingGridEvery>
+  <u2:UseMarginsForDrawingGridOrigin/>
+  <u2:Compatibility>
+   <u2:FootnoteLayoutLikeWW8/>
+   <u2:ShapeLayoutLikeWW8/>
+   <u2:AlignTablesRowByRow/>
+   <u2:ForgetLastTabAlignment/>
+   <u2:LayoutRawTableWidth/>
+   <u2:LayoutTableRowsApart/>
+  </u2:Compatibility>
+ </u2:WordDocument>
+</xml><![endif]--><!--[if gte mso 9]><xml>
+ <u3:shapedefaults u4:ext="edit" spidmax="2050"/>
+</xml><![endif]--><!--[if gte mso 9]><xml>
+ <u5:shapelayout u6:ext="edit">
+  <u5:idmap u6:ext="edit" data="1"/>
+  <u5:regrouptable u6:ext="edit">
+   <u5:entry new="1" old="0"/>
+  </u5:regrouptable>
+ </u5:shapelayout>
+</xml><![endif]--></head><body style="" lang="NO-BOK" link="#0000ff" vlink="#800080">
+
+<div class="Section1">
+<h1>
+Bluetooth and WLAN</h1>
+
+<div class="MsoNormal" style="text-align: justify;"><a href="#Introduction">Introduction</a></div>
+
+<div class="MsoNormal" style="text-align: justify;"><a href="#BluetoothRadio">Bluetooth
+Radio interface</a></div>
+
+<div class="MsoNormal" style="text-align: justify;"><a href="#WLANradio">WLAN
+Radio interface</a></div>
+
+<div class="MsoNormal" style="text-align: justify;"><a href="#Interference">Mutual
+Interference</a></div>
+
+<div class="MsoNormal" style="text-align: justify;">&nbsp; - <a href="#BLT-WLAN-interference">Bluetooth
+interferes WLAN</a></div>
+
+<div class="MsoNormal" style="text-align: justify;">&nbsp; - <a href="#WLAN-Bluetooth-interference">WLAN
+interferes Bluetooth</a></div>
+
+<div class="MsoNormal" style="text-align: justify;">&nbsp; - <a href="#Measurements">Measurements</a></div>
+
+<div class="MsoNormal" style="text-align: justify;"><a href="#Coexistance">Co-existance
+of Bluetooth and WLAN</a>
+<br><a href="#Details">Comparison of different access technologies</a><a href="#Details"></a></div>
+
+<h2 style="text-align: justify;">
+<a name="Introduction"></a>Introduction</h2>
+
+<div class="MsoNormal" style="text-align: justify;">This chapter will first
+provide an overview over the radio interfaces of Bluetooth and WLAN (IEEE
+802.11), as they are essential for the understanding of the discussion
+"co-existance, competition and interference".</div>
+
+<div class="MsoNormal" style="text-align: justify;">For the radio transmission
+Bluetooth and WLAN (IEEE 802.11b) both uses the unprotected ISM-band (Industrial,
+Scientific, Medical) at 2.4 GHz. In the US and in most countries of Europe,
+a band of 83.5 MHz width is available. To understand the issue of coexistence
+between Bluetooth and WLAN a short description of both radio types is necessary.</div>
+
+<div class="MsoNormal" style="text-align: justify;">The final part of this
+chapter will then address why the project team supports the vision of co-existance
+between the two standards.</div>
+
+<h2>
+<a name="BluetoothRadio"></a>Bluetooth Radio Interface</h2>
+
+<div class="MsoNormal" style="text-align: justify;">For Bluetooth transmission
+79 RF channels spaced 1 MHz apart are defined. The transmitting frequencies
+in the majority of countries can be calculated by:</div>
+
+<div class="MsoNormal" style="text-align: justify;"><span style="" lang="EN-GB"><u7:p></u7:p>f
+= (2402 + k)
+MHz&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+k= 0,...,78 (channel number)&nbsp;<u7:p></u7:p></span><span lang="EN-GB"></span><span lang="DE"><o:p></o:p></span></div>
+
+<div class="MsoNormal" style="text-align: justify;"><span style="" lang="EN-GB"><u7:p></u7:p>For
+the transfer of the digital data symbols the signal is modulated with the
+help of Gaussian Frequency Shift Keying (GFSK). Thereby the transmitting
+frequency for the transfer of a logical ONE is increased by at least 115
+kHz and is correspondingly decreased for the transfer of a logical ZERO.
+To avoid a widening of the power density spectrum and therefore to avoid
+a high power consumption, the steep transitions are rounded off in the
+base band by the use of a Gaussian Filter. GFSK distinguishes itself by
+a cheap and simple modulation technique. The channel bandwidth (20dB transmit
+bandwidth) is about 1 MHz and a gross transmission rate of about one 1
+Mbit/s is reached.<u7:p></u7:p></span><span lang="EN-GB"></span></div>
+
+
+<p class="MsoNormal" style="text-align: justify;"><span style="" lang="EN-GB">In
+the standard the transmitting power level is classified into three classes:
+0 dBm = 1mW, 4 dBm = 2,5 mW and 20 dBm = 100 mW. Products with a transmitting
+power of 4 dBm are currently only poor represented on the market. With
+1 mW transmitting power a range of approximately 10 m can be reached and
+with 100 mW distances of 30 m to 100 m are achieved. The requirement for
+a Bluetooth receiver is an actual sensitivity level of -70 dBm or better.
+To increase the range at small transmitting power, products with -90 dBm
+receiving sensitivity are announced.<u7:p></u7:p></span><span lang="EN-GB"></span><span lang="DE"><o:p></o:p></span>
+
+</p><p class="MsoNormal" style="text-align: justify;"><span style="" lang="EN-GB"><u7:p></u7:p>A
+Frequency Hopping Spread Spectrum technology (FHSS) is applied to combat
+interference and fading.&nbsp;<span style="">The
+Bluetooth channel is represented by a pseudo-random hopping sequence hopping
+through the 79 RF channels. The hopping sequence is unique for the generated
+net and is determined by the Bluetooth device address of the master.&nbsp;</span>The
+phase in the hopping sequence is determined by the Bluetooth clock of the
+master. The channel is divided into time slots where each slot corresponds
+to an RF hop. Consecutive hops correspond to different RF hop frequencies.
+The nominal hop rate is 1600 hops/s and therefore the slot length is 625&nbsp;</span><span style="font-family: Symbol;" lang="EN-GB">m</span><span style="" lang="EN-GB">s.
+All Bluetooth units participating in one net are time and hop synchronised
+to the channel. Prior to participating in a net the initiating Bluetooth
+node most enter the paging mode. Paging requires an average of 1.3 s to
+complete. During paging, the involved devices hop at 3200 hops/s and transmit
+very short ID packets with a duration of only 70&nbsp;</span><span style="font-family: Symbol;" lang="EN-GB">m</span><span style="" lang="EN-GB">sec.With
+frequency hopping it is possible to get statistically out of the way of
+other interferers in the ISM-band. On the other side Bluetooth is now acting
+himself as interferer distributed in time over the whole ISM-Band. Signal
+break downs due to interferences caused by multiway spreading are limited
+to the short hopping periods. A disadvantage caused by frequency hopping
+is the long time of up to 5 s (sometimes 10 s) to build up the Bluetooth
+connections.<u7:p></u7:p></span><span lang="EN-GB"></span>
+
+</p><p class="MsoNormal" style="text-align: justify;"><span style="" lang="EN-GB">For
+fullduplex transmission, a Time-Division Duplex (TDD) scheme is used. On
+the channel, information is exchanged through packets. Each packet is transmitted
+on a different hop frequency. A packet nominally covers a single slot,
+but can be extended to cover up to five slots. The Bluetooth protocol uses
+a combination of circuit and packet switching. Slots can be reserved for
+synchronous packets. Bluetooth can support an asynchronous data channel,
+up to three simultaneous synchronous voice channels, or a channel which
+simultaneously supports asynchronous data and synchronous voice. Each voice
+channel supports a 64 kb/s synchronous (voice) channel in each direction.
+The asynchronous channel can support maximal 723.2 kb/s asymmetric (and
+still up to 57.6 kb/s in the return direction), or 433.9 kb/s symmetric.&nbsp;</span><span style="" lang="EN-GB">These
+data rates are reduced by other systems in the ISM band like microwave
+ovens, WLAN, HomeRF, door opening systems or other independent Bluetooth
+nets.&nbsp;<u7:p></u7:p></span><span lang="EN-GB"></span><span lang="DE"><o:p></o:p></span>
+</p><h2>
+<a name="WLANradio"></a><span style="" lang="EN-GB"><u7:p></u7:p>WLAN
+Radio Interface<u7:p></u7:p></span><span lang="DE"><o:p></o:p></span></h2>
+
+<div class="MsoNormal"><span style="" lang="EN-GB"><u7:p></u7:p><u7:p></u7:p>For
+802.11b systems both Frequency Hopping Spread Spectrum(FHSS) and Direct
+Sequence Spread Spectrum (DSSS)technologies are defined in the IEEE standard.
+However almost all of the 802.11b products don&#8217;t supply FHSS and therefore
+the following is restricted to DSSS.<u7:p></u7:p></span><span lang="EN-GB"></span><span lang="DE"><o:p></o:p></span></div>
+
+<div class="MsoNormal"><span style="" lang="EN-GB"><u7:p></u7:p>A
+DSSS system spreads the baseband data by directly multiplyingthe baseband
+data pulses with a pseudo-noise sequence (PN) that is produced by a pseudo-noise
+code generator. A single pulse or a symbol of the PN waveform is called
+a chip. One data bit is therefore expressed by several chips and this "spreads"
+the data into a large coded stream that takes the full bandwidth of the
+channel. Interferences are expected to emerge only in a small frequency
+part of the channel. At the receiver, multiplication with the spreading
+waveform generates the data signal with its small bandwidth and smuts the
+interfering signal over the whole channel bandwidth. In 802.11b systems
+the channel bandwidth is 22 MHz and a chipping rate of 11 MHz is used.
+As PN sequence a 11-chip Barker code or 8-chip Complementary Code Keying
+(CCK) is used. For modulation Differential Quadrature Phase Shift Keying
+(DQPSK)or Differential Binary Phase Shift Keying (DBPSK) is applied.As
+shown in table 1 this results in bit rates up to 11 Mbit/s with fallback
+modes of 5,5 Mbit/s, 2 Mbit/s and 1 Mbit/s.</span></div>
+
+<div class="MsoNormal"><i>Table 1: Key characteristics of IEEE 802.11</i></div>
+
+<br>&nbsp;
+<table border="1" cols="4" width="100%">
+<tbody><tr>
+<td><b>Bit Rate</b></td>
+
+<td><b>Spreading</b></td>
+
+<td><b>Modulation</b></td>
+
+<td><b>Symbol Rate</b></td>
+</tr>
+
+<tr>
+<td>11 Mbit/s</td>
+
+<td>CCK</td>
+
+<td>DQPSK</td>
+
+<td>1.375 MSps</td>
+</tr>
+
+<tr>
+<td>5.5 Mbit/s</td>
+
+<td>CCK</td>
+
+<td>DQPSK</td>
+
+<td>1.375 MSps</td>
+</tr>
+
+<tr>
+<td>2 Mbit/s</td>
+
+<td>Barker</td>
+
+<td>DQPSK</td>
+
+<td>1.0 MSps</td>
+</tr>
+
+<tr>
+<td>1 Mbit/s</td>
+
+<td>Barker</td>
+
+<td>DBPSK</td>
+
+<td>1.0 MSps</td>
+</tr>
+</tbody></table>
+
+
+<p class="MsoNormal">Typical transfer rates for user data are 5 Mbit/s.
+For difficult propagation conditions (i.e. larger range, interference,
+...), the system uses link adaptation to lower transfer rates. The next
+table gives an overview about the different data rates on the physical
+layer of 802.11b systems and the corresponding maximum range for open environments
+(i.e., outdoor or large halls) and for &#8220;closed&#8221; environments (i.e. indoor):
+</p><p><i>Table 2: Use cases (range and capacity) for IEEE 802.11</i>
+<br>&nbsp;
+<table style="border: medium none ; border-collapse: collapse;" border="1" cellpadding="0" cellspacing="0">
+<tbody><tr style="height: 15pt;">
+<td style="border-style: none solid solid none; border-color: -moz-use-text-color windowtext windowtext -moz-use-text-color; border-width: medium 0.5pt 0.5pt medium; padding: 0cm 3.5pt; width: 173.6pt; height: 15pt;" valign="top" width="231"><span style="font-size: 12pt; font-family: &quot;Times New Roman&quot;;"><u7:p></u7:p></span>
+
+<p class="MsoNormal"><!--[if !supportEmptyParas]--><!--[endif]--><span style="font-size: 12pt; font-family: &quot;Times New Roman&quot;;"><o:p></o:p></span></p></td>
+
+<td style="border-style: solid solid solid none; border-color: windowtext windowtext windowtext -moz-use-text-color; border-width: 0.5pt 0.5pt 0.5pt medium; padding: 0cm 3.5pt; width: 63.8pt; height: 15pt;" valign="top" width="85">
+<div class="MsoNormal"><span style="" lang="EN-GB"><b>11
+Mbit/s</b><u7:p></u7:p></span></div>
+</td>
+
+<td style="border-style: solid solid solid none; border-color: windowtext windowtext windowtext -moz-use-text-color; border-width: 0.5pt 0.5pt 0.5pt medium; padding: 0cm 3.5pt; width: 63.8pt; height: 15pt;" valign="top" width="85">
+<div class="MsoNormal"><span style="" lang="EN-GB"><b>5.5
+Mbit/s</b><u7:p></u7:p></span></div>
+</td>
+
+<td style="border-style: solid solid solid none; border-color: windowtext windowtext windowtext -moz-use-text-color; border-width: 0.5pt 0.5pt 0.5pt medium; padding: 0cm 3.5pt; width: 2cm; height: 15pt;" valign="top" width="76">
+<div class="MsoNormal"><span style="" lang="EN-GB"><b>2
+Mbit/s</b><u7:p></u7:p></span></div>
+</td>
+
+<td style="border-style: solid solid solid none; border-color: windowtext windowtext windowtext -moz-use-text-color; border-width: 0.5pt 0.5pt 0.5pt medium; padding: 0cm 3.5pt; width: 63.8pt; height: 15pt;" valign="top" width="85">
+<div class="MsoNormal"><span style="" lang="EN-GB"><b>1
+Mbit/s</b><u7:p></u7:p></span></div>
+</td>
+</tr>
+
+<tr style="height: 15pt;">
+<td style="border-style: none solid solid; border-color: -moz-use-text-color windowtext windowtext; border-width: medium 0.5pt 0.5pt; padding: 0cm 3.5pt; width: 173.6pt; height: 15pt;" valign="top" width="231">
+<div class="MsoNormal"><span style="" lang="EN-GB">Open
+environment; range up to<u7:p></u7:p></span></div>
+</td>
+
+<td style="border-style: none solid solid none; border-color: -moz-use-text-color windowtext windowtext -moz-use-text-color; border-width: medium 0.5pt 0.5pt medium; padding: 0cm 3.5pt; width: 63.8pt; height: 15pt;" valign="top" width="85">
+<div class="MsoNormal"><span style="" lang="EN-GB">150
+m<u7:p></u7:p></span></div>
+</td>
+
+<td style="border-style: none solid solid none; border-color: -moz-use-text-color windowtext windowtext -moz-use-text-color; border-width: medium 0.5pt 0.5pt medium; padding: 0cm 3.5pt; width: 63.8pt; height: 15pt;" valign="top" width="85">
+<div class="MsoNormal"><span style="" lang="EN-GB">250
+m<u7:p></u7:p></span></div>
+</td>
+
+<td style="border-style: none solid solid none; border-color: -moz-use-text-color windowtext windowtext -moz-use-text-color; border-width: medium 0.5pt 0.5pt medium; padding: 0cm 3.5pt; width: 2cm; height: 15pt;" valign="top" width="76">
+<div class="MsoNormal"><span style="" lang="EN-GB">300
+m<u7:p></u7:p></span></div>
+</td>
+
+<td style="border-style: none solid solid none; border-color: -moz-use-text-color windowtext windowtext -moz-use-text-color; border-width: medium 0.5pt 0.5pt medium; padding: 0cm 3.5pt; width: 63.8pt; height: 15pt;" valign="top" width="85">
+<div class="MsoNormal"><span style="" lang="EN-GB">400
+m<u7:p></u7:p></span></div>
+</td>
+</tr>
+
+<tr style="height: 15pt;">
+<td style="border-style: none solid solid; border-color: -moz-use-text-color windowtext windowtext; border-width: medium 0.5pt 0.5pt; padding: 0cm 3.5pt; width: 173.6pt; height: 15pt;" valign="top" width="231">
+<div class="MsoNormal"><span style="" lang="EN-GB">Closes
+Environment, range up to<u7:p></u7:p></span></div>
+</td>
+
+<td style="border-style: none solid solid none; border-color: -moz-use-text-color windowtext windowtext -moz-use-text-color; border-width: medium 0.5pt 0.5pt medium; padding: 0cm 3.5pt; width: 63.8pt; height: 15pt;" valign="top" width="85">
+<div class="MsoNormal"><span style="" lang="EN-GB">30
+m<u7:p></u7:p></span></div>
+</td>
+
+<td style="border-style: none solid solid none; border-color: -moz-use-text-color windowtext windowtext -moz-use-text-color; border-width: medium 0.5pt 0.5pt medium; padding: 0cm 3.5pt; width: 63.8pt; height: 15pt;" valign="top" width="85">
+<div class="MsoNormal"><span style="" lang="EN-GB">35
+m<u7:p></u7:p></span></div>
+</td>
+
+<td style="border-style: none solid solid none; border-color: -moz-use-text-color windowtext windowtext -moz-use-text-color; border-width: medium 0.5pt 0.5pt medium; padding: 0cm 3.5pt; width: 2cm; height: 15pt;" valign="top" width="76">
+<div class="MsoNormal"><span style="" lang="EN-GB">40
+m<u7:p></u7:p></span></div>
+</td>
+
+<td style="border-style: none solid solid none; border-color: -moz-use-text-color windowtext windowtext -moz-use-text-color; border-width: medium 0.5pt 0.5pt medium; padding: 0cm 3.5pt; width: 63.8pt; height: 15pt;" valign="top" width="85">
+<div class="MsoNormal"><span style="" lang="EN-GB">50
+m<u7:p></u7:p></span></div>
+</td>
+</tr>
+</tbody></table>
+
+
+</p><p class="MsoNormal">Note that the figures for the ranges are average values
+which may vary significantly depending on the specific environment structure.
+
+</p><p class="MsoNormal">According to European regulations, in the ISM band,
+ranging from 2.400 to 2.4835 GHz, there are 13 overlapping channels with
+a separation of 5 MHzavailable for WLANs (with a very few exceptions in
+some countries). Avoiding interference the minimum distance between the
+centre frequencies is at least 25 MHz. Therefore, up to three non-overlapping
+channels are available in the ISM band. Studies show that adjacent cells
+will not interfere with each other when the channel spacing uses channel
+center frequencies that are 15 MHz apart. The transmitted power of WLAN
+systems usually is 100 mW. At a data rate of 11 Mbit/s the receiver sensitivity
+should be at least-76 dBm.
+
+</p><p class="MsoNormal">Additional information concerning WLAN and other 802.11
+systems, DECT and Home RF in comparison to Bluetooth is given in the project
+report of PIR 3.6: &#8222;State-of-the-art-study: Alternative technologies and
+mechanisms&#8220; (<a href="http://www.eurescom.de/%7Epub-deliverables/P1100-series/P1118/D4/P1118-doc36.pdf">P1118-doc36.pdf</a>
+).
+<br>&nbsp;
+</p><h2 class="MsoNormal">
+<img src="image001.gif" id="_x0000_i1025" u8:shapes="_x0000_s1854 _x0000_s1855 _x0000_s1856 _x0000_s1857 _x0000_s1858 _x0000_s1859 _x0000_s1860 _x0000_s1861 _x0000_s1862 _x0000_s1863 _x0000_s1864 _x0000_s1865 _x0000_s1866 _x0000_s1867 _x0000_s1868 _x0000_s1869 _x0000_s1870 _x0000_s1871 _x0000_s1872 _x0000_s1873 _x0000_s1874 _x0000_s1875 _x0000_s1876 _x0000_s1877 _x0000_s1878 _x0000_s1879 _x0000_s1880 _x0000_s1881 _x0000_s1882 _x0000_s1883 _x0000_s1884 _x0000_s1885 _x0000_s1886 _x0000_s1887 _x0000_s1888 _x0000_s1889 _x0000_s1890 _x0000_s1891 _x0000_s1892 _x0000_s1893 _x0000_s1894 _x0000_s1895 _x0000_s1896 _x0000_s1897 _x0000_s1898 _x0000_s1899 _x0000_s1900 _x0000_s1901 _x0000_s1902 _x0000_s1903 _x0000_s1904 _x0000_s1905 _x0000_s1906 _x0000_s1907 _x0000_s1908 _x0000_s1909 _x0000_s1910 _x0000_s1911 _x0000_s1912 _x0000_s1913 _x0000_s1914 _x0000_s1915 _x0000_s1916 _x0000_s1917 _x0000_s1918 _x0000_s1919 _x0000_s1920 _x0000_s1921 _x0000_s1922 _x0000_s1923 _x0000_s1924 _x0000_s1925 _x0000_s1926 _x0000_s1927 _x0000_s1928 _x0000_s1929 _x0000_s1930 _x0000_s1931 _x0000_s1932 _x0000_s1933 _x0000_s1934 _x0000_s1935 _x0000_s1936 _x0000_s1937 _x0000_s1938 _x0000_s1939 _x0000_s1940 _x0000_s1941 _x0000_s1942 _x0000_s1943 _x0000_s1944 _x0000_s1945 _x0000_s1946 _x0000_s1947 _x0000_s1948 _x0000_s1949 _x0000_s1950 _x0000_s1951 _x0000_s1952 _x0000_s1953 _x0000_s1954 _x0000_s1955 _x0000_s1956 _x0000_s1957 _x0000_s1958 _x0000_s1959 _x0000_s1960 _x0000_s1961 _x0000_s1962 _x0000_s1963 _x0000_s1964 _x0000_s1965 _x0000_s1966 _x0000_s1967 _x0000_s1968 _x0000_s1969 _x0000_s1970 _x0000_s1971 _x0000_s1972 _x0000_s1973 _x0000_s1974 _x0000_s1975 _x0000_s1976 _x0000_s1977 _x0000_s1978 _x0000_s1979 _x0000_s1980 _x0000_s1981 _x0000_s1982 _x0000_s1983 _x0000_s1984 _x0000_s1985 _x0000_s1986 _x0000_s1987 _x0000_s1988 _x0000_s1989 _x0000_s1990 _x0000_s1991 _x0000_s1992" border="0" height="428" width="705"></h2>
+
+<div class="MsoNormal" style="margin: 6pt 0cm; text-align: justify;"><i>Fig.
+1: WLAN and Bluetooth RF channels in the ISM-Band at 2.4 GHz in most European
+countries</i></div>
+
+<h2 class="MsoNormal">
+<a name="Interference"></a>Mutual interferences</h2>
+
+<div class="MsoNormal" style="margin-top: 6pt;"><i>Fig. 1</i> shows some
+possible WLAN channels and the Bluetooth RF channels available in most
+European countries. Bluetooth is hopping over 79 RF channels with a bandwidth
+of 1 MHz. It can be estimated that a frequency hop of one active Bluetooth
+transmitter overlaps a WLAN channel with a probability of about 20% - 25%since
+the power density at the boarder of a WLAN channel decreases.</div>
+
+<div class="MsoNormal" style="margin-top: 6pt;">In order to determine the
+degree to which the radios will cause harmful interference to each other,
+a number of assumptions are necessary. It is difficult, if not impossible,
+to define a &#8220;typical&#8221; network topology. User scenarios and even indoor
+propagation models can be rather subjective. However, by using some reasonable
+assumptions, analysis of the interference caused by co-location of the
+two radio types can proceed.</div>
+
+<div class="MsoNormal" style="margin-top: 6pt;">These assumptions must
+include:</div>
+
+<div class="MsoNormal" style="margin-top: 6pt;">a. a network topology and
+user density</div>
+
+<div class="MsoNormal" style="margin-top: 6pt;">b. propagation model</div>
+
+<div class="MsoNormal" style="margin-top: 6pt;">c. network traffic loads
+for IEEE 802.11b and Bluetooth</div>
+
+<div class="MsoNormal" style="margin-top: 6pt;">A simplified indoor propagation
+model has been proposed by A.Kamerman, Lucent Technologies. Line-of-sight
+propagation is assumed for the first 8 meters. Beyond this point, path
+loss increases as a function of <b>r<sup>n</sup></b>, where <b>r </b>is
+range and <b>n</b> = 3.3. This can be expressed in terms of decibels:</div>
+
+<div class="MsoNormal">L<sub>path</sub>=20 log (4 pi&nbsp; r / <i>lambda</i>
+),&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+r &lt; 8 m&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; (1)</div>
+
+<div class="MsoNormal">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; =
+58.3
++ 33 log ( r / 8
+),&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+r &gt; 8 m&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; (2)</div>
+
+<div class="MsoNormal">where:</div>
+
+<div class="MsoNormal">&nbsp;&nbsp;&nbsp;<i> lambda</i>&nbsp; = free space
+wavelength @ 2.45 GHz (0.1224 m)</div>
+
+<div class="MsoNormal">&nbsp;&nbsp;&nbsp; r = range (m)</div>
+
+<h2>
+<a name="BLT-WLAN-interference"></a>Bluetooth interferes WLAN</h2>
+
+<div class="MsoNormal">The impact of Bluetooth personal area networks on
+a WLAN system is investigated in a paper written by Jim Zyren with the
+title: &#8222;The reliability of IEEE 802.11 Hi Rate DSSS WLANs in a high density
+Bluetooth environment&#8220; (<a href="http://www.eurescom.de/%7Epub-deliverables/P1100-series/P1118/D3/BLT-WLAN-interference.pdf">Bluetooth-WLAN-interference.pdf</a>).</div>
+
+<div class="MsoNormal">A high density environment has been postulated.
+Large numbers of both types of devices are present within the topology
+analysed. In addition, traffic loads are assumed for the Bluetooth piconets.
+This paper focuses exclusively on the reliability of the IEEE 802.11b high
+speed wireless network in the presence of interference from Bluetooth radios.</div>
+
+<div class="MsoNormal">For the purpose of this analysis, the following
+assumptions were made:</div>
+
+<div class="MsoNormal">· WLAN mobile station may be located up to
+20 meters from theWLANaccess point</div>
+
+<div class="MsoNormal" style="margin-left: 18pt; text-indent: -18pt;">·
+The average density is one WLAN mobile station every 25 sq. meters</div>
+
+<div class="MsoNormal" style="margin-left: 18pt; text-indent: -18pt;">·
+The transmitter power for both WLAN mobile nodes and the WLAN access point
+is +20dBm</div>
+
+<div class="MsoNormal" style="margin-left: 18pt; text-indent: -18pt;">·
+There is one Bluetooth piconet co-located with each WLAN node.</div>
+
+<div class="MsoNormal" style="margin-left: 18pt; text-indent: -18pt;">·
+The Bluetooth piconet consists of two or more Bluetooth devices which are
+capable of establishing at least a point-to-point link.</div>
+
+<div class="MsoNormal" style="margin-left: 18pt; text-indent: -18pt;">·
+The Bluetooth devices are limited to 0 dBm transmit power.</div>
+
+<div class="MsoNormal">The degree to which an IEEE 802.11b terminal is
+susceptible to interference from nearby Bluetooth transmitters is clearly
+dependent upon the strength of the desired DSSS signal from the access
+point.</div>
+
+
+<p class="MsoNormal"><b>An 11 Mbps DSSS radio can provide reliable service
+with a narrow band interferer (such as a Bluetooth transmitter) falling
+within its pass band as long as the Signal-to-Interference Ratio (SIR)
+is greater than roughly 10 dB. </b>This approximation is conservative and
+has been verified in lab tests. Therefore, if the Bluetooth signal is more
+than 10 dB below the DSSS signal, it will not cause significant interference.
+However, when the Bluetooth interference exceeds the 10 dB SIR threshold,
+the DSSS terminal will experience a dropped packet provided there is an
+overlap in time and frequency. Therefore, the number of potential Bluetooth
+interferers to which a DSSS node is exposed to depends on the range from
+the AP.
+
+</p><p class="MsoNormal"><b>However, there is only about a 25% probability
+that an active Bluetooth transmitter will be in the DSSS passband on any
+given hop period. </b>It should also be mentioned that the probability
+of collision is further reduced by the fact that the Bluetooth transmitter
+is only active for 366 msec in each 625 msec Bluetooth hopping period.
+
+</p><p class="MsoNormal">Accurate estimates of IEEE 802.11b network throughput
+in the presence of a single but fully loaded Bluetooth interferer must
+account for the possibility of Bluetooth collisions with ACK packets, and
+network overhead associated with re-contention for the network in the event
+the transmitting station fails to receive an ACK. This results in a drop
+down of the WLAN throughput rate from about 6 Mbit/s without interferences
+to 3.5 Mbit/s at a typical packet size of 750 bytes.
+
+</p><p class="MsoNormal">Generally the following conclusions can be drawn from
+the study and simulations of Jim Zyren:
+
+</p><p class="MsoNormal">1.) The degree of interference experienced in any
+installation is dependent on local propagation conditions, the density
+of Bluetooth piconets, and Bluetooth piconet loading.
+
+</p><p class="MsoNormal">2.) IEEE 802.11b DSSS WLAN susceptibility to Bluetooth
+interference increases as a function of range from the DSSS wireless node
+to the DSSS AP
+
+</p><p class="MsoNormal">3.) IEEE 802.11b DSSS Hi Rate systems show graceful
+degradation in the presence of significant levels of Bluetooth interference
+
+</p><p class="MsoNormal">4.) Based on typical utilisation models of Bluetooth
+piconets, IEEE 802.11b High Speed WLANs show good reliability even in a
+fairly dense environment of Bluetooth piconets. (for details look at thepaper
+of Jim Zyren)
+</p><h2>
+<a name="WLAN-Bluetooth-interference"></a>WLAN interferes Bluetooth</h2>
+
+<div class="MsoNormal">The impact of a 20dBm 802.11 Direct-Sequence WLAN
+system on a 0dBm Bluetooth link is studied in a paper written by Jaap C.
+Haartsen and Stefan Zürbes, Ericsson, with the title: &#8222;Bluetooth voice
+and data performance in 802.11 DS WLAN environment&#8220; (<a href="http://www.eurescom.de/%7Epub-deliverables/P1100-series/P1118/D3/..%5C..%5C..%5C..%5CDocuments%20and%20Settings%5Cgrego%5CLocal%20Settings%5CTemp%5CBluetooth_and_WLAN_reports%5C802_11interferens_ericsson.pdf">Bluetooth-WLAN-interference.pdf</a>).
+Thereby simulation results are presented.</div>
+
+<div class="MsoNormal">For the interference studies, a typical office environment
+with 2 WLAN access points is assumed. WLAN terminals are uniformly distributed
+with a density of one terminal per 25 m<sup>2</sup>. A single access point
+serves 50 WLAN terminals. It is also assumed that a single Bluetooth piconet
+is associated with each WLAN terminal. Because of the distance between
+the WLAN terminals and the low Bluetooth transmit power the mutual interference
+between Bluetooth piconets is ignored.</div>
+
+<div class="MsoNormal">The performance of the Bluetooth terminal is determined
+by the intended power received and the interfering power received, or the
+total C/I. This in turn will depend on</div>
+
+
+<p class="MsoNormal">1. The distance between the Bluetooth receiver and
+Bluetooth transmitter
+</p><div class="MsoNormal">2. The distance between the Bluetooth receiver and
+the WLAN terminal transmitter</div>
+
+<div class="MsoNormal">3. The distance between the Bluetooth receiver and
+the WLAN access point transmitter</div>
+
+<div class="MsoNormal">When transmitting in its 22 MHz channel, the WLAN
+system effectively occupies about 17MHz of the 2.45GHz ISM band (20dBm
+bandwidth). The total amount of power transmitted amounts to 20dBm. When
+the Bluetooth receiver hops in the WLAN band, it filters out the Bluetooth
+hop bandwidth. For the Bluetooth receiver, the WLAN signal is regarded
+as white noise. Assuming a 0.85MHz noise bandwidth in the Bluetooth receiver,
+a filter suppression of 13dB is achieved. With a C/N required of 17dB @
+10<sup>-3</sup>BER, the required C/I towards a WLAN transmitter amounts
+to 4dB. The Bluetooth system transmits with a 0dBm power level. The 20dB
+transmit bandwidth is 1MHz.</div>
+
+
+<p class="MsoNormal">For the range of interference, it is distinguished
+between voice and data performance. The Bluetooth data channel applies
+retransmission and can therefore cope with a higher packet erasure rate
+(PER) than voice. For the performance thresholds (the thresholds where
+still acceptable performance is experienced), PER=10% for data and PER=1%
+for voice was chosen. These two values must be considered with care since
+the user experience is largely determined by the time period the interference
+lasts. For example, a 2% PER for a period of 10 seconds in a voice connection
+will be more annoying to the user than a 10% PER in a period of 100ms.
+
+</p><p class="MsoNormal">Under normal traffic conditions in the WLAN (40 emails,
+20 file transfers and 1000 Internet accesses per WLAN terminal in 8 hours,
+resulting in a total transfer of approximately 11 Mbyte per terminal),
+the Bluetooth voice user is not affected as long as his operating distance
+remains below 2m. If the operating distance increases to 10m, the probability
+that there is a noticeable interference on the link increases to 8%. The
+Bluetooth data link allows and experiences more degradation. A throughput
+reduction of more than 10% occurs with 24% probability at an operating
+distance of 10m. However, because of the limited frequency overlap of the
+WLAN and Bluetooth systems, the throughput reduction in the Bluetooth system
+can never exceed 22%, if only one WLAN system is installed.
+</p><h2>
+<a name="Measurements"></a>Measurements</h2>
+
+<div class="MsoNormal">Measurements especially including mutual interferences
+with WLAN are shown in the measurement section "<a href="http://www.eurescom.de/%7Epub-deliverables/P1100-series/P1118/D3/Radio_Measurements%5Cindex.htm">Radio
+Measurements</a>".</div>
+
+<h2>
+<a name="Coexistance"></a>Co-existance of Bluetooth and WLAN</h2>
+
+<div class="MsoNormal">The project members have performed tests which demonstrate
+that both Bluetooth and WLAN can co-exist in the same area, and even in
+the same devices (e.g. Laptop). Both technologies have their preferred
+area of usage, and these areas are almost complementary rather than competitive.
+WLAN dominates in the area of data connectivity, with the implementation
+of the wireless Ethernet. Bluetooth dominates in the "Personal Area Networking"
+domain, interconnecting all devices of your personal sphere, as e.g. Mobile
+Phone, PDA, Camera, Stereo, PC. Bluetooth has also implemented voice support
+(<a href="http://www.eurescom.de/%7Epub-deliverables/P1100-series/P1118/D3/VoiceOverBluetooth.html">see own section </a>on this topic).
+<p>The Specifications of both systems describe how the technology works,
+i.e. Bluetooth resp. WLAN protocol architecture.&nbsp; While the WLAN architecture
+only covers the lower layers 1-3, Bluetooth covers the whole range from
+layer 1 (radio) to layer 7 (applications). A visualisation of the Bluetooth
+protocoll architecture is provided in figure 2, further information is
+available in the chapter on <a href="http://www.eurescom.de/%7Epub-deliverables/P1100-series/P1118/D3/bluetooth_profiles.htm">Bluetooth
+profiles</a>.</p></div>
+
+<div class="MsoNormal"><span lang="DE"><img src="BLT-architecture.jpg" id="_x0000_i1026" border="0" height="374" width="536"></span></div>
+
+<div class="MsoNormal"><span lang="DE"><i>Figure 2: The Bluetooth architecture,
+protocolls related to the OSI model</i></span></div>
+
+
+<p class="MsoNormal"><span lang="DE">In summarising the above chapter, our
+assumption is a co-existance of WLAN and Bluetooth is the most likely scenario
+in the future. An assumption which is supported by the comparison of both
+technologies (see <a href="#table3">table 3</a>)</span>
+
+</p><p class="MsoNormal"><span style="font-size: 12pt; font-family: &quot;Times New Roman&quot;;" lang="EN-GB"><o:p></o:p></span>
+
+</p><p class="MsoNormal"><span style="font-size: 12pt; font-family: &quot;Times New Roman&quot;;" lang="EN-GB"><a name="table3"></a><i>Table
+3: Comparison of Bluetooth and WLAN</i><o:p></o:p></span>
+<br>&nbsp;
+<table style="border: medium none ; width: 495.25pt; border-collapse: collapse;" border="1" cellpadding="0" cellspacing="0" width="660">
+<tbody><tr>
+<td style="border-style: none solid solid none; border-color: -moz-use-text-color white white -moz-use-text-color; border-width: medium 2.25pt 2.25pt medium; padding: 0cm 5.4pt; background: rgb(204, 204, 204) none repeat scroll 0%; width: 99.15pt; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial;" valign="top" width="132">
+<div class="MsoNormal"><!--[if !supportEmptyParas]--><!--[endif]--><span style="font-size: 16pt;" lang="DE"><o:p></o:p></span></div>
+</td>
+
+<td style="border-style: none solid solid none; border-color: -moz-use-text-color white white -moz-use-text-color; border-width: medium 2.25pt 2.25pt medium; padding: 0cm 5.4pt; background: rgb(204, 204, 204) none repeat scroll 0%; width: 198.05pt; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial;" valign="top" width="264">
+<div class="MsoNormal"><span style="font-size: 16pt;" lang="DE"><b>Bluetooth</b><o:p></o:p></span></div>
+</td>
+
+<td style="border-style: none none solid; border-color: -moz-use-text-color -moz-use-text-color white; border-width: medium medium 2.25pt; padding: 0cm 5.4pt; background: rgb(204, 204, 204) none repeat scroll 0%; width: 198.05pt; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial;" valign="top" width="264">
+<div class="MsoNormal"><span style="font-size: 16pt;" lang="DE"><b>WLAN
+(802.11, 802.11b)</b><o:p></o:p></span></div>
+</td>
+</tr>
+
+<tr>
+<td style="border-style: none solid solid none; border-color: -moz-use-text-color white white -moz-use-text-color; border-width: medium 2.25pt 2.25pt medium; padding: 0cm 5.4pt; background: rgb(242, 242, 242) none repeat scroll 0%; width: 99.15pt; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial;" valign="top" width="132">
+<div class="MsoNormal"><span lang="DE">Data rate</span></div>
+</td>
+
+<td style="border-style: none solid solid none; border-color: -moz-use-text-color white white -moz-use-text-color; border-width: medium 2.25pt 2.25pt medium; padding: 0cm 5.4pt; background: rgb(242, 242, 242) none repeat scroll 0%; width: 198.05pt; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial;" valign="top" width="264">
+<div class="MsoNormal"><span lang="DE">4-700 kbps</span></div>
+</td>
+
+<td style="border-style: none none solid; border-color: -moz-use-text-color -moz-use-text-color white; border-width: medium medium 2.25pt; padding: 0cm 5.4pt; background: rgb(242, 242, 242) none repeat scroll 0%; width: 198.05pt; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial;" valign="top" width="264">
+<div class="MsoNormal"><span lang="DE">4-6 Mbps</span></div>
+</td>
+</tr>
+
+<tr>
+<td style="border-style: none solid solid none; border-color: -moz-use-text-color white white -moz-use-text-color; border-width: medium 2.25pt 2.25pt medium; padding: 0cm 5.4pt; background: rgb(204, 204, 204) none repeat scroll 0%; width: 99.15pt; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial;" valign="top" width="132">
+<div class="MsoNormal"><span lang="DE">Range</span></div>
+</td>
+
+<td style="border-style: none solid solid none; border-color: -moz-use-text-color white white -moz-use-text-color; border-width: medium 2.25pt 2.25pt medium; padding: 0cm 5.4pt; background: rgb(204, 204, 204) none repeat scroll 0%; width: 198.05pt; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial;" valign="top" width="264">
+<div class="MsoNormal"><span lang="DE">10 m, up to 100 m</span></div>
+</td>
+
+<td style="border-style: none none solid; border-color: -moz-use-text-color -moz-use-text-color white; border-width: medium medium 2.25pt; padding: 0cm 5.4pt; background: rgb(204, 204, 204) none repeat scroll 0%; width: 198.05pt; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial;" valign="top" width="264">
+<div class="MsoNormal"><span lang="DE">100 meter</span></div>
+</td>
+</tr>
+
+<tr>
+<td style="border-style: none solid solid none; border-color: -moz-use-text-color white white -moz-use-text-color; border-width: medium 2.25pt 2.25pt medium; padding: 0cm 5.4pt; background: rgb(242, 242, 242) none repeat scroll 0%; width: 99.15pt; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial;" valign="top" width="132">
+<div class="MsoNormal"><span lang="DE"># simultaneous users</span></div>
+</td>
+
+<td style="border-style: none solid solid none; border-color: -moz-use-text-color white white -moz-use-text-color; border-width: medium 2.25pt 2.25pt medium; padding: 0cm 5.4pt; background: rgb(242, 242, 242) none repeat scroll 0%; width: 198.05pt; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial;" valign="top" width="264">
+<div class="MsoNormal"><span lang="DE">7</span></div>
+</td>
+
+<td style="border-style: none none solid; border-color: -moz-use-text-color -moz-use-text-color white; border-width: medium medium 2.25pt; padding: 0cm 5.4pt; background: rgb(242, 242, 242) none repeat scroll 0%; width: 198.05pt; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial;" valign="top" width="264">
+<div class="MsoNormal"><span lang="DE">10 &#8211; 50 depending on application</span></div>
+</td>
+</tr>
+
+<tr>
+<td style="border-style: none solid solid none; border-color: -moz-use-text-color white white -moz-use-text-color; border-width: medium 2.25pt 2.25pt medium; padding: 0cm 5.4pt; background: rgb(204, 204, 204) none repeat scroll 0%; width: 99.15pt; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial;" valign="top" width="132">
+<div class="MsoNormal"><span lang="DE">Frequency band</span></div>
+</td>
+
+<td style="border-style: none solid solid none; border-color: -moz-use-text-color white white -moz-use-text-color; border-width: medium 2.25pt 2.25pt medium; padding: 0cm 5.4pt; background: rgb(204, 204, 204) none repeat scroll 0%; width: 198.05pt; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial;" valign="top" width="264">
+<div class="MsoFooter" style=""><span lang="EN-GB">2,4 GHz</span></div>
+</td>
+
+<td style="border-style: none none solid; border-color: -moz-use-text-color -moz-use-text-color white; border-width: medium medium 2.25pt; padding: 0cm 5.4pt; background: rgb(204, 204, 204) none repeat scroll 0%; width: 198.05pt; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial;" valign="top" width="264">
+<div class="MsoNormal"><span lang="DE">2,4 GHz</span></div>
+</td>
+</tr>
+
+<tr>
+<td style="border-style: none solid solid none; border-color: -moz-use-text-color white white -moz-use-text-color; border-width: medium 2.25pt 2.25pt medium; padding: 0cm 5.4pt; background: rgb(242, 242, 242) none repeat scroll 0%; width: 99.15pt; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial;" valign="top" width="132">
+<div class="MsoNormal"><span lang="DE">Transmitt power</span></div>
+</td>
+
+<td style="border-style: none solid solid none; border-color: -moz-use-text-color white white -moz-use-text-color; border-width: medium 2.25pt 2.25pt medium; padding: 0cm 5.4pt; background: rgb(242, 242, 242) none repeat scroll 0%; width: 198.05pt; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial;" valign="top" width="264">
+<div class="MsoNormal"><span lang="DE">1 mW, 2.5 or 100 mW&nbsp;</span></div>
+</td>
+
+<td style="border-style: none none solid; border-color: -moz-use-text-color -moz-use-text-color white; border-width: medium medium 2.25pt; padding: 0cm 5.4pt; background: rgb(242, 242, 242) none repeat scroll 0%; width: 198.05pt; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial;" valign="top" width="264">
+<div class="MsoNormal"><span lang="DE">100 mW</span></div>
+</td>
+</tr>
+
+<tr>
+<td style="border-style: none solid solid none; border-color: -moz-use-text-color white white -moz-use-text-color; border-width: medium 2.25pt 2.25pt medium; padding: 0cm 5.4pt; background: rgb(204, 204, 204) none repeat scroll 0%; width: 99.15pt; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial;" valign="top" width="132">
+<div class="MsoNormal"><span lang="DE">Interfaces</span></div>
+</td>
+
+<td style="border-style: none solid solid none; border-color: -moz-use-text-color white white -moz-use-text-color; border-width: medium 2.25pt 2.25pt medium; padding: 0cm 5.4pt; background: rgb(204, 204, 204) none repeat scroll 0%; width: 198.05pt; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial;" valign="top" width="264">
+<div class="MsoNormal"><span lang="DE">ADSL, Ethernet, ISDN, PSTN, USB, RS232</span></div>
+</td>
+
+<td style="border-style: none none solid; border-color: -moz-use-text-color -moz-use-text-color white; border-width: medium medium 2.25pt; padding: 0cm 5.4pt; background: rgb(204, 204, 204) none repeat scroll 0%; width: 198.05pt; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial;" valign="top" width="264">
+<div class="MsoNormal"><span lang="DE">Primary Ehernet</span></div>
+</td>
+</tr>
+
+<tr>
+<td style="border-style: none solid solid none; border-color: -moz-use-text-color white white -moz-use-text-color; border-width: medium 2.25pt 2.25pt medium; padding: 0cm 5.4pt; background: rgb(242, 242, 242) none repeat scroll 0%; width: 99.15pt; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial;" valign="top" width="132">
+<div class="MsoNormal"><span lang="DE">Support for voice</span></div>
+</td>
+
+<td style="border-style: none solid solid none; border-color: -moz-use-text-color white white -moz-use-text-color; border-width: medium 2.25pt 2.25pt medium; padding: 0cm 5.4pt; background: rgb(242, 242, 242) none repeat scroll 0%; width: 198.05pt; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial;" valign="top" width="264">
+<div class="MsoNormal"><span lang="DE">Yes</span></div>
+</td>
+
+<td style="border-style: none none solid; border-color: -moz-use-text-color -moz-use-text-color white; border-width: medium medium 2.25pt; padding: 0cm 5.4pt; background: rgb(242, 242, 242) none repeat scroll 0%; width: 198.05pt; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial;" valign="top" width="264">
+<div class="MsoNormal"><span lang="DE">Only VoIP</span></div>
+</td>
+</tr>
+
+<tr>
+<td style="border-style: none solid solid none; border-color: -moz-use-text-color white white -moz-use-text-color; border-width: medium 2.25pt 2.25pt medium; padding: 0cm 5.4pt; background: rgb(204, 204, 204) none repeat scroll 0%; width: 99.15pt; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial;" valign="top" width="132">
+<div class="MsoNormal"><span lang="DE">Type of clients</span></div>
+</td>
+
+<td style="border-style: none solid solid none; border-color: -moz-use-text-color white white -moz-use-text-color; border-width: medium 2.25pt 2.25pt medium; padding: 0cm 5.4pt; background: rgb(204, 204, 204) none repeat scroll 0%; width: 198.05pt; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial;" valign="top" width="264">
+<div class="MsoNormal"><span lang="DE">Inbuilt in PC, PDA, Mobile Phone,
+PC-card, CF-card, Memory Stick (Sony), SSD-card, USB dongle, RS-232 Dongle</span></div>
+</td>
+
+<td style="border-style: none none solid; border-color: -moz-use-text-color -moz-use-text-color white; border-width: medium medium 2.25pt; padding: 0cm 5.4pt; background: rgb(204, 204, 204) none repeat scroll 0%; width: 198.05pt; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial;" valign="top" width="264">
+<div class="MsoNormal"><span lang="DE">Inbuilt in PC, PC-card, CF-card, RS-232
+dongle and Ethernet dongle</span></div>
+</td>
+</tr>
+
+<tr>
+<td style="border-style: none solid solid none; border-color: -moz-use-text-color white white -moz-use-text-color; border-width: medium 2.25pt 2.25pt medium; padding: 0cm 5.4pt; background: rgb(242, 242, 242) none repeat scroll 0%; width: 99.15pt; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial;" valign="top" width="132">
+<div class="MsoNormal"><span lang="DE">Power management</span></div>
+</td>
+
+<td style="border-style: none solid solid none; border-color: -moz-use-text-color white white -moz-use-text-color; border-width: medium 2.25pt 2.25pt medium; padding: 0cm 5.4pt; background: rgb(242, 242, 242) none repeat scroll 0%; width: 198.05pt; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial;" valign="top" width="264">
+<div class="MsoNormal"><span lang="DE">Yes</span></div>
+</td>
+
+<td style="border-style: none none solid; border-color: -moz-use-text-color -moz-use-text-color white; border-width: medium medium 2.25pt; padding: 0cm 5.4pt; background: rgb(242, 242, 242) none repeat scroll 0%; width: 198.05pt; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial;" valign="top" width="264">
+<div class="MsoNormal"><span lang="DE">Proprieatairy solutions</span></div>
+</td>
+</tr>
+
+<tr>
+<td style="border-style: none solid solid none; border-color: -moz-use-text-color white white -moz-use-text-color; border-width: medium 2.25pt 2.25pt medium; padding: 0cm 5.4pt; background: rgb(204, 204, 204) none repeat scroll 0%; width: 99.15pt; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial;" valign="top" width="132">
+<div class="MsoNormal"><span lang="DE"># of parallel systems</span></div>
+</td>
+
+<td style="border-style: none solid solid none; border-color: -moz-use-text-color white white -moz-use-text-color; border-width: medium 2.25pt 2.25pt medium; padding: 0cm 5.4pt; background: rgb(204, 204, 204) none repeat scroll 0%; width: 198.05pt; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial;" valign="top" width="264">
+<div class="MsoNormal"><span lang="DE">15 &#8211; 50 depending on application</span></div>
+</td>
+
+<td style="border-style: none none solid; border-color: -moz-use-text-color -moz-use-text-color white; border-width: medium medium 2.25pt; padding: 0cm 5.4pt; background: rgb(204, 204, 204) none repeat scroll 0%; width: 198.05pt; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial;" valign="top" width="264">
+<div class="MsoNormal"><span lang="DE">3</span></div>
+</td>
+</tr>
+
+<tr>
+<td style="border-style: none solid none none; border-color: -moz-use-text-color white -moz-use-text-color -moz-use-text-color; border-width: medium 2.25pt medium medium; padding: 0cm 5.4pt; background: rgb(242, 242, 242) none repeat scroll 0%; width: 99.15pt; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial;" valign="top" width="132">
+<div class="MsoNormal"><span lang="DE">Interoperability</span></div>
+</td>
+
+<td style="border-style: none solid none none; border-color: -moz-use-text-color white -moz-use-text-color -moz-use-text-color; border-width: medium 2.25pt medium medium; padding: 0cm 5.4pt; background: rgb(242, 242, 242) none repeat scroll 0%; width: 198.05pt; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial;" valign="top" width="264">
+<div class="MsoNormal"><span lang="DE">Yes</span></div>
+</td>
+
+<td style="border: medium none ; padding: 0cm 5.4pt; background: rgb(242, 242, 242) none repeat scroll 0%; width: 198.05pt; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial;" valign="top" width="264">
+<div class="MsoNormal"><span lang="DE">Through WECA, not through standard</span></div>
+</td>
+</tr>
+</tbody></table>
+
+</p><h2>
+<a name="Details"></a>Comparison of different access technologies</h2>
+A more detailed comparison of the different access technologies is <a href="http://www.eurescom.de/secure/p1100-series/P1118/D4/P1118-doc36.pdf">available
+in the technical report</a></div>
+
+</body></html>

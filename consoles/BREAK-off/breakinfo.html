@@ -1,0 +1,1953 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <title>Console Server BREAK-off Results</title>
+
+
+  <meta name="GENERATOR" content="Nvu 1.0">
+
+  <meta name="KEYWORD" content="Cisco, Xylogics, Annex, MicroAnnex, Cyclades,
+Micro-Annex, Xyplex, Conserver, CS-500, cs-516, MaxServer, IR-MGRM,
+Lightwave 3200, Zonker, conserver, NM-32A, Livingston, iTouch, MRGM,
+portmaster, serial BREAK, IOLAN, computone, RAS2000, console server,
+perle systems, CS9000, TS2000, RAS 2000, TS1000, TS3000, lantronix,
+MRV, ACS-16, IR-8020, TS-16 Digi, ACS-1, CM 8, CM8, Raritan,
+Dominion, SX, N6UOW, BREAK-off, PR-3000, DECServer 90M+, DPNG,
+Moxa, OpenGear, CN2510, CM4116, NM-16A, NM-32A. HWIC-8A, HWIC-16A,
+C2800, C3800, C3600, C3620, C3640, C2811, C3821, Bay, 2000, 
+Lantronix, ETS32, SLC, SLC8, SLC16, SLC32">
+
+<BODY TEXT="#336600" BGCOLOR="#FFFFFF">
+
+</head>
+<body>
+<p><center><table border=0 width="98%">
+   <tr>
+      <td width="40%">
+         <P><center><a href="http://www.conserver.com"><img
+         src="../conserver-sm.jpg" alt="Conserver.com logo" width=147
+         height=47 border=0 align=middle></A></center>
+      </td><td width="20%">
+      <center><a href="http://www.conserver.com/consoles/"><img
+         src="../home-marble.gif" alt="link to the Consoles home page" width=47
+         height=50 border=0 align=middle></A></center>
+      </td><td width="40%">
+         <p><center>Brought to you by;<br>
+
+         <a href="http://www.conserver.com/">www.conserver.com</a></center>
+      </td>
+   </tr>
+</table></center>
+
+
+<p>
+<table border="0" width="100%">
+
+  <tbody>
+
+    <tr>
+
+      <td>
+      <h2 align="center">Terminal Server BREAK-off Test Results</h2>
+
+      <h4 align="center">http://www.conserver.com/consoles/BREAK-off/breakinfo.html<br>
+
+      version 2.93 (updated:
+May 06, 2009, 10:26 pm)</h4>
+
+      <h4 align="center">(Questions about testing? email <b>break-off</b>
+at<!-- SPAM harvester killer --> <b>conserver.com</b>)</h4>
+
+      <p>Our testing, to date, has shown that serial BREAK
+usually occurs at power-off, if it does occur. (We have some cases
+where the devices sent BREAK at power-on, but some of these cases were
+due to power issues while others were due to the software
+initialization routines.) This page will document information about
+the console servers we have tested which will send BREAK when
+you need it, without sending surprise BREAKs when you reset the units,
+or power cycle the console servers.</p>
+
+      <ul>
+
+        <p><i>Most of the power-related BREAK issues
+stemmed from the use of multiple-voltage RS-232 driver interface I.C.s,
+and the switch-mode power supplies in the terminal servers. The power
+supplies have a 'logic' power rail, and then other positive and
+negative power rails (typically +/- 12 VDC). The +/- supply is what
+provides the RS-232 output signals. When the supply loses power, the
+'logic' power rail falls more quickly (due to a larger current load),
+and the other power rails retain their voltage a bit longer. So, when
+logic level going into the RS-232 driver falls, the power for the
+output is still there a bit longer, and this makes the RS-232 output
+shift, long enough to appear to be a serial BREAK signal.</i></p>
+      </ul>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</p>
+<p>
+<table border="0" width="100%">
+  <tbody>
+    <tr>
+      <td>
+      <p><b>Why we are doing this testing:</b></p>
+
+      <p>We started this project because finding information on
+whether or not a device has the serial BREAK problem was more like
+tracking down an urban legend than science. Even with high confidence
+in a device, you can usually find someone who will suggest that some
+unidentified third party has had some trouble with that same device in
+the past. We have posted our test methodologies on a 
+<a href="breaktest.html">separate web page</a>. </p>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+</p>
+
+<p>I do realize that good science relies on larger sample pools.
+We
+are continuing to solicit loaner equipment that we can put through
+our testbed. As we run out of easy access to equipment, we will begin
+to accept more offers from other teams at universities and other
+large sites to perform this testing on their own gear using our test
+methods. We'll review their test results, and add those results to
+our database as 'external data' submissions, in order to identify
+which testing we have performed personally. In some cases, the
+manufacturers are contacting us directly now, which has made it
+easier to get equipment loaned for testing. (Manufacturers may want
+to look at the <a href="breakfaq.html">Frequently Asked
+Questions</a>
+page for information about how to inquire about testing.</p>
+
+<p>Our initial test run was intended to help prove how many
+devices had software-related causes versus hardware-related causes, and
+which devices do not exhibit the problem. (A side effect of the testing
+was that we could be confident about certain hardware, when suggesting
+the devices to customers that have BREAK-sensitive equipment.)</p>
+
+<p>
+<table border="0" width="100%">
+  <tbody>
+    <tr>
+      <td>
+      <p><b>Devices that work with Conserver, and don't
+have the BREAK Problem</b></p>
+
+      <p>We have not found any add-in cards for Intel-based
+servers which do not send BREAK when the PC is power-cycled. We have
+seen mixed results with a combination of in-chassis card with
+externally-powered interface pods (Cyclades PR series, Digi
+PortServer). If you have information about hardware that does well,
+please let us know.</p>
+
+      <p>Since our initial interest was to find devices that we
+could use with the Conserver application, and which would be compatible
+with Sun machines, this has been the main focus of the testing. The
+devices that we will recommend at this point;</p>
+
+      <blockquote>
+        <p><b>Cisco 2800</b> and <b>3800</b>
+series units with the <b>HWIC-xxA</b> async modules.<br>
+
+(While you can use reverse-TCP to reach the AUX ports on these units,
+be aware that the AUX and CON ports <b>WILL</b> send BRAKE
+when these units lose power.)</p>
+
+        <p><b>Cisco 2600</b> and <b>3600</b>
+series units, with the <b>NM-xxA</b> async modules.<br>
+
+(We have three reports of possible BREAK problems on different 3660
+chassis, but we have not determined what adapters/wiring they were
+using. In two cases, using a Cisco adapter resolved the problem, but I
+haven't received the adapters that failed (or a diagram of how they
+were wired). If I get more info, I'll post it, but we've had good luck
+with
+more than three dozen 3600 series devices in long-term service.)</p>
+
+        <p><b>Cyclades PR-3000</b> server, using the <b>latest</b>
+version of software.<br>
+
+        <b>Cyclades TS2000</b> 24-port server.<br>
+
+        <b>Cyclades ACS 16</b> 16-port server.<br>
+
+        <b>Cyclades ACS 32</b> 32-port server.<br>
+
+        <b>Cyclades ACS-1</b> 1-port unit. </p>
+
+        <p><b>Digi PortServer TS 16</b> server.<br>
+
+        <b>Digi STS-1610</b> with the <b>ASP
+Technologies power dongle</b>.<br>
+
+        <b>Digi CM 8</b> server.</p>
+
+        <p><b>iTouch In-Reach Manager</b> model <b>IR-MGRM-111AC</b>
+(but not the IR-MGRM-101AC.)<br>
+
+        <b>iTouch IR-8020 terminal server</b> </p>
+
+        <p><b>Perle Systems CS9000</b> Console Server
+line<br>
+
+        <b>CS9024</b> 24-port unit, but the manufacturer
+assured me that the product line was built to be SUN-safe...</p>
+
+        <p><b>Chase IOLAN model 104</b> 4-port
+desktop terminal server<br>
+
+(Perle Systems now owns the Chase IOLAN line.)</p>
+
+        <p><b>Computone (now Altura XL) Intelliserver RAS
+2000</b> with rev B cards<br>
+
+(read this section for details about hardware issues to know...)</p>
+
+        <p><b>Digital Networks (DPNG) DECserver 90M+</b>
+is also break-safe, as well as supporting the legacy DEC protocols!</p>
+
+        <p><b>OpenGear CM4116</b> Console Server. </p>
+
+        <p><b>Moxa CN2510</b> (in RTELNET mode). </p>
+
+        <p>(You can read more about these devices <a href="#vendors">below...</a>)</p>
+
+      </blockquote>
+
+      </td>
+
+    </tr>
+
+  </tbody>
+</table>
+
+</p>
+
+<p>
+<table border="0" width="100%">
+
+  <tbody>
+
+    <tr>
+
+      <td>
+      <p><b><a name="non-conserver"></a>Good
+Hardware that Conserver doesn't work with...</b></p>
+
+      <p>We have found a class of hardware that provides remote
+access to console services, but doesn't allow a method for Conserver to
+connect to each serial port. While providing useful features, it
+doesn't allow Conserver an ability to connect at high TCP ports, to add
+the logging and multi-user access features.</p>
+
+      <p>Rather than list everything that falls into this
+category, I'll simply list the gear that doesn't have the BREAK
+problem, since I can imagine there are reasons that some sites may want
+to use this hardware, even without the benefits of Conserver.</p>
+
+      <blockquote>
+        <p><b>Lightwave Communications 3200</b></p>
+
+        <p>This unit supports 4 ports per card, and allowed
+telnet and SSH to the unit, but you need to use the Command Line
+Interface (CLI) to talk to the ports. Each port provides a cyclic 64 KB
+scrollback buffer, but there is no long-term logging in the unit. The
+feature that impressed us the most during the testing was that the unit
+doesn't send BREAK at the wrong times, even if you hot-swap the async
+interface cards! The unit has some other nice features, including an
+LCD display on the front panel. If BREAK is a problem, and you don't
+care about the long-term logging, give this device a look.</p>
+      </blockquote>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</p>
+
+<p></p>
+
+<hr>
+<p></p>
+
+<p>
+<table border="0" width="100%">
+  <tbody>
+    <tr>
+      <td>
+      <p><b><a name="table"></a>When do
+they send BREAK?</b></p>
+
+      <p>Here is a list of the vendor and models that we have
+tested so far. (Basically, we only want to see "yes" in the
+far-right-hand column for remotely controlling console ports.) Notice
+that there is some duplication of server models...these are cases where
+we were able to get more than one of each unit to test.</p>
+
+      <p>Each line below represents one of the units that we have tested.</p>
+
+      <p></p>
+      <center>
+      <table border="1" width="98%">
+        <tbody>
+          <tr>
+            <td width="269">
+            <p><b>Server model</b> </p>
+            </td>
+            <td width="50">
+            <p></p>
+            <center><b>power<br>off</b></center>
+            </td>
+            <td width="50">
+            <p></p>
+            <center><b>power<br>on</b></center>
+            </td>
+            <td width="50">
+            <p></p>
+            <center><b>warm<br>
+			start</b></center>
+            </td>
+            <td width="50">
+            <p></p>
+            <center><b>port<br>
+			reset</b></center>
+            </td>
+            <td width="50">
+            <p></p>
+            <center><b>if we<br>
+			send it</b></center>
+            </td>
+          </tr>
+          <tr>
+            <td bgcolor="#66ff99" width="269">
+            <p>(#1) Cisco 3620 with NM-32A (32) </p>
+            </td>
+            <td width="50">
+            <p></p>
+            <center>No</center>
+            </td>
+            <td width="50">
+            <p></p>
+            <center>No</center>
+            </td>
+            <td width="50">
+            <p></p>
+            <center>No</center>
+            </td>
+            <td width="50">
+            <p></p>
+            <center>No</center>
+            </td>
+            <td width="50">
+            <p></p>
+            <center>Yes</center>
+            </td>
+          </tr>
+          <tr>
+            <td width="269">
+            <p>(#2) Cisco 2511 (16) </p>
+            </td>
+            <td bgcolor="#ffcc99" width="50">
+            <p></p>
+            <center>Yes</center>
+            </td>
+            <td width="50">
+            <p></p>
+            <center>No</center>
+            </td>
+            <td width="50">
+            <p></p>
+            <center>No</center>
+            </td>
+            <td width="50">
+            <p></p>
+            <center>No</center>
+            </td>
+            <td width="50">
+            <p></p>
+            <center>Yes</center>
+            </td>
+          </tr>
+          <tr>
+            <td width="269">
+            <p>(#3) <a href="http://www.nbase-xyplex.com/products/access_server/maxserver_series.cfm">Xyplex
+			MaxServer 1620</a> (20) </p>
+            </td>
+            <td bgcolor="#ffcc99" width="50">
+            <p></p>
+            <center>Yes</center>
+            </td>
+            <td width="50">
+            <p></p>
+            <center>No</center>
+            </td>
+            <td bgcolor="#ffff99" width="50">
+            <p></p>
+            <center>NA</center>
+            </td>
+            <td bgcolor="#ffff99" width="50">
+            <p></p>
+            <center>NA</center>
+            </td>
+            <td width="50">
+            <p></p>
+            <center>Yes</center>
+            </td>
+          </tr>
+          <tr>
+            <td width="269">
+            <p>(#4) <a href="http://www.support.baynetworks.com/library/rannex/">Xylogics
+			Micro-Annex XL</a> (16) </p>
+            </td>
+            <td bgcolor="#ffcc99" width="50">
+            <p></p>
+            <center>Yes</center>
+            </td>
+            <td width="50">
+            <p></p>
+            <center>No</center>
+            </td>
+            <td width="50">
+            <p></p>
+            <center>No</center>
+            </td>
+            <td width="50">
+            <p></p>
+            <center>No</center>
+            </td>
+            <td width="50">
+            <p></p>
+            <center>Yes</center>
+            </td>
+          </tr>
+          <tr>
+            <td width="269">
+            <p>(#5) <a href="http://www.support.baynetworks.com/library/rannex/">Bay
+			MicroAnnex ELS</a> (8) </p>
+            </td>
+            <td bgcolor="#ffcc99" width="50">
+            <p></p>
+            <center>Yes</center>
+            </td>
+            <td width="50">
+            <p></p>
+            <center>No</center>
+            </td>
+            <td width="50">
+            <p></p>
+            <center>No</center>
+            </td>
+            <td width="50">
+            <p></p>
+            <center>No</center>
+            </td>
+            <td width="50">
+            <p></p>
+            <center>Yes</center>
+            </td>
+          </tr>
+          <tr>
+            <td width="269">
+            <p>(#6) <a href="http://www.support.baynetworks.com/library/rannex/">Xylogics
+			Micro-Annex XL</a> (8) </p>
+            </td>
+            <td bgcolor="#ffcc99" width="50">
+            <p></p>
+            <center>Yes</center>
+            </td>
+            <td width="50">
+            <p></p>
+            <center>No</center>
+            </td>
+            <td width="50">
+            <p></p>
+            <center>No (3)</center>
+            </td>
+            <td width="50">
+            <p></p>
+            <center>No</center>
+            </td>
+            <td width="50">
+            <p></p>
+            <center>Yes</center>
+            </td>
+          </tr>
+          <tr>
+            <td width="269">
+            <p>(#7) Lucent ACN-200 </p>
+            </td>
+            <td bgcolor="#ffff99" width="50">
+            <p></p>
+            <center>(2)</center>
+            </td>
+            <td bgcolor="#ffff99" width="50">
+            <p></p>
+            <center>(2)</center>
+            </td>
+            <td bgcolor="#ffff99" width="50">
+            <p></p>
+            <center>(2)</center>
+            </td>
+            <td bgcolor="#ffff99" width="50">
+            <p></p>
+            <center>(2)</center>
+            </td>
+            <td bgcolor="#ffff99" width="50">
+            <p></p>
+            <center>(2)</center>
+            </td>
+          </tr>
+          <tr>
+            <td width="269">
+            <p>(#8) Cisco CS-516 (16) </p>
+            </td>
+            <td bgcolor="#ffcc99" width="50">
+            <p></p>
+            <center>Yes</center>
+            </td>
+            <td width="50">
+            <p></p>
+            <center>No</center>
+            </td>
+            <td bgcolor="#ffff99" width="50">
+            <p></p>
+            <center>No (3)</center>
+            </td>
+            <td width="50">
+            <p></p>
+            <center>No</center>
+            </td>
+            <td bgcolor="#ffff99" width="50">
+            <p></p>
+            <center>-</center>
+            </td>
+          </tr>
+          <tr>
+            <td width="269">
+            <p>(#9) <a href="http://www.itouchcom.com/">Xyplex
+			MaxServer 1600</a> (16) </p>
+            </td>
+            <td bgcolor="#ffcc99" width="50">
+            <p></p>
+            <center>Yes</center>
+            </td>
+            <td width="50">
+            <p></p>
+            <center>No</center>
+            </td>
+            <td bgcolor="#ffff99" width="50">
+            <p></p>
+            <center>NA</center>
+            </td>
+            <td bgcolor="#ffff99" width="50">
+            <p></p>
+            <center>NA</center>
+            </td>
+            <td width="50">
+            <p></p>
+            <center>Yes</center>
+            </td>
+          </tr>
+          <tr>
+            <td width="269">
+            <p>(#10) Cisco 2511 (16) </p>
+            </td>
+            <td bgcolor="#ffff99" width="50">
+            <p></p>
+            <center>No (4)</center>
+            </td>
+            <td width="50">
+            <p></p>
+            <center>No</center>
+            </td>
+            <td width="50">
+            <p></p>
+            <center>No</center>
+            </td>
+            <td width="50">
+            <p></p>
+            <center>No</center>
+            </td>
+            <td width="50">
+            <p></p>
+            <center>Yes</center>
+            </td>
+          </tr>
+          <tr>
+            <td width="269">
+            <p>(#11) IOLAN +Rack (16) </p>
+            </td>
+            <td bgcolor="#ffcc99" width="50">
+            <p></p>
+            <center>Yes</center>
+            </td>
+            <td bgcolor="#ffcc99" width="50">
+            <p></p>
+            <center>Yes</center>
+            </td>
+            <td width="50">
+            <p></p>
+            <center>No</center>
+            </td>
+            <td width="50">
+            <p></p>
+            <center>No</center>
+            </td>
+            <td width="50">
+            <p></p>
+            <center>Yes</center>
+            </td>
+          </tr>
+          <tr>
+            <td width="269">
+            <p>(#12) Cisco 2511 (16) </p>
+            </td>
+            <td bgcolor="#ffcc99" width="50">
+            <p></p>
+            <center>Yes</center>
+            </td>
+            <td width="50">
+            <p></p>
+            <center>No</center>
+            </td>
+            <td width="50">
+            <p></p>
+            <center>No</center>
+            </td>
+            <td width="50">
+            <p></p>
+            <center>No</center>
+            </td>
+            <td width="50">
+            <p></p>
+            <center>Yes</center>
+            </td>
+          </tr>
+          <tr>
+            <td bgcolor="#66ff99" width="269">
+            <p>(#13) Cisco 2621 (32) </p>
+            </td>
+            <td width="50">
+            <p></p>
+            <center>No</center>
+            </td>
+            <td width="50">
+            <p></p>
+            <center>No</center>
+            </td>
+            <td width="50">
+            <p></p>
+            <center>No</center>
+            </td>
+            <td width="50">
+            <p></p>
+            <center>No</center>
+            </td>
+            <td width="50">
+            <p></p>
+            <center>Yes</center>
+            </td>
+          </tr>
+          <tr>
+            <td width="269">
+            <p>(#14) <a href="http://www.lightwavecom.com/products/conserver.htm">Lightwave
+			3200</a> (32) </p>
+            </td>
+            <td bgcolor="#ffff99" width="50">
+            <p></p>
+            <center>No (5)</center>
+            </td>
+            <td bgcolor="#ffff99" width="50">
+            <p></p>
+            <center>No (5)</center>
+            </td>
+            <td bgcolor="#ffff99" width="50">
+            <p></p>
+            <center>No (5)</center>
+            </td>
+            <td bgcolor="#ffff99" width="50">
+            <p></p>
+            <center>No (5)</center>
+            </td>
+            <td width="50">
+            <p></p>
+            <center>Yes</center>
+            </td>
+          </tr>
+          <tr>
+            <td width="269">
+            <p>(#15) <a href="http://www.cyclades.com/">Cyclades
+			PR3000/TS</a> (64) </p>
+            </td>
+            <td width="50">
+            <p></p>
+            <center>No</center>
+            </td>
+            <td bgcolor="#ffff99" width="50">
+            <p></p>
+            <center>No (1)</center>
+            </td>
+            <td bgcolor="#ffff99" width="50">
+            <p></p>
+            <center>No (1)</center>
+            </td>
+            <td bgcolor="#ffff99" width="50">
+            <p></p>
+            <center>NA</center>
+            </td>
+            <td width="50">
+            <p></p>
+            <center>Yes</center>
+            </td>
+          </tr>
+          <tr>
+            <td width="269">
+            <p>(#17) <a href="http://www.itouchcom.com/">Xyplex
+			MaxServer 1600</a> (16) </p>
+            </td>
+            <td bgcolor="#ffcc99" width="50">
+            <p></p>
+            <center>Yes</center>
+            </td>
+            <td width="50">
+            <p></p>
+            <center>No</center>
+            </td>
+            <td bgcolor="#ffff99" width="50">
+            <p></p>
+            <center>NA</center>
+            </td>
+            <td bgcolor="#ffff99" width="50">
+            <p></p>
+            <center>NA</center>
+            </td>
+            <td width="50">
+            <p></p>
+            <center>Yes</center>
+            </td>
+          </tr>
+          <tr>
+            <td width="269">
+            <p>(#18) <a href="http://www.itouchcom.com/">Xyplex
+			MaxServer 1800</a> (16) </p>
+            </td>
+            <td bgcolor="#ffcc99" width="50">
+            <p></p>
+            <center>Yes</center>
+            </td>
+            <td width="50">
+            <p></p>
+            <center>No</center>
+            </td>
+            <td bgcolor="#ffff99" width="50">
+            <p></p>
+            <center>NA</center>
+            </td>
+            <td bgcolor="#ffff99" width="50">
+            <p></p>
+            <center>NA</center>
+            </td>
+            <td width="50">
+            <p></p>
+            <center>Yes</center>
+            </td>
+          </tr>
+          <tr>
+            <td width="269">
+            <p>(#19) <a href="http://www.computone.com/Products/console_management.html">Computone
+			RAS 2000</a> (32) </p>
+            </td>
+            <td bgcolor="#ffff99" width="50">
+            <p></p>
+            <center>Yes (6)</center>
+            </td>
+            <td bgcolor="#ffff99" width="50">
+            <p></p>
+            <center>Yes (6)</center>
+            </td>
+            <td width="50">
+            <p></p>
+            <center>No</center>
+            </td>
+            <td width="50">
+            <p></p>
+            <center>No</center>
+            </td>
+            <td width="50">
+            <p></p>
+            <center>Yes</center>
+            </td>
+          </tr>
+          <tr>
+            <td width="269">
+            <p>(#20) <a href="http://www.cyclades.com/">Cyclades
+			PR-3000</a> (16) </p>
+            </td>
+            <td width="50">
+            <p></p>
+            <center>No</center>
+            </td>
+            <td bgcolor="#ffff99" width="50">
+            <p></p>
+            <center>Yes (7)</center>
+            </td>
+            <td width="50">
+            <p></p>
+            <center>No</center>
+            </td>
+            <td width="50">
+            <p></p>
+            <center>No</center>
+            </td>
+            <td width="50">
+            <p></p>
+            <center>Yes</center>
+            </td>
+          </tr>
+          <tr>
+            <td bgcolor="#66ff99" width="269">
+            <p>(#21) <a href="http://www.mrv.com/product/MRV-IR-003/">iTouch Comm.
+			IR-MGRM-111</a> (8) </p>
+            </td>
+            <td width="50">
+            <p></p>
+            <center>No</center>
+            </td>
+            <td width="50">
+            <p></p>
+            <center>No</center>
+            </td>
+            <td width="50">
+            <p></p>
+            <center>No</center>
+            </td>
+            <td width="50">
+            <p></p>
+            <center>No</center>
+            </td>
+            <td width="50">
+            <p></p>
+            <center>Yes</center>
+            </td>
+          </tr>
+          <tr>
+            <td bgcolor="#66ff99" width="269">
+            <p>(#22) <a href="http://www.cyclades.com/products/stdalone/ts1_2000.htm">Cyclades
+			TS2000</a> (32) </p>
+            </td>
+            <td width="50">
+            <p></p>
+            <center>No</center>
+            </td>
+            <td width="50">
+            <p></p>
+            <center>No</center>
+            </td>
+            <td width="50">
+            <p></p>
+            <center>No</center>
+            </td>
+            <td width="50">
+            <p></p>
+            <center>No</center>
+            </td>
+            <td width="50">
+            <p></p>
+            <center>Yes</center>
+            </td>
+          </tr>
+          <tr>
+            <td bgcolor="#66ff99" width="269">
+            <p>(#23) <a href="http://www.mrv.com/product/MRV-IR-003/">iTouch Comm.
+			IR-8020</a> (24) </p>
+            </td>
+            <td width="50">
+            <p></p>
+            <center>No</center>
+            </td>
+            <td width="50">
+            <p></p>
+            <center>No</center>
+            </td>
+            <td width="50">
+            <p></p>
+            <center>No</center>
+            </td>
+            <td width="50">
+            <p></p>
+            <center>No</center>
+            </td>
+            <td width="50">
+            <p></p>
+            <center>Yes</center>
+            </td>
+          </tr>
+          <tr>
+            <td bgcolor="#66ff99" width="269">
+            <p>(#24) <a href="http://www.perle.com/products/prod_family/console_server/cs9000.html">Perle
+			CS9000</a> (24) </p>
+            </td>
+            <td width="50">
+            <p></p>
+            <center>No</center>
+            </td>
+            <td width="50">
+            <p></p>
+            <center>No</center>
+            </td>
+            <td width="50">
+            <p></p>
+            <center>No</center>
+            </td>
+            <td width="50">
+            <p></p>
+            <center>No</center>
+            </td>
+            <td width="50">
+            <p></p>
+            <center>Yes</center>
+            </td>
+          </tr>
+          <tr>
+            <td bgcolor="#66ff99" width="269">
+            <p>(#25) <a href="http://www.perle.com/products/prod_family/serial_servers/iolan_pl.html">IOLAN
+			(Perle) model 104</a> (4) </p>
+            </td>
+            <td width="50">
+            <p></p>
+            <center>No</center>
+            </td>
+            <td width="50">
+            <p></p>
+            <center>No</center>
+            </td>
+            <td width="50">
+            <p></p>
+            <center>No</center>
+            </td>
+            <td width="50">
+            <p></p>
+            <center>No</center>
+            </td>
+            <td width="50">
+            <p></p>
+            <center>Yes</center>
+            </td>
+          </tr>
+          <tr>
+            <td bgcolor="#66ff99" width="269">
+            <p>(#26) <a href="http://www.digi.com/products/terminalservers/portserverts816.jsp">Digi
+			PortServer TS-16</a> (16) </p>
+            </td>
+            <td width="50">
+            <p></p>
+            <center>No</center>
+            </td>
+            <td width="50">
+            <p></p>
+            <center>No</center>
+            </td>
+            <td width="50">
+            <p></p>
+            <center>No</center>
+            </td>
+            <td width="50">
+            <p></p>
+            <center>No</center>
+            </td>
+            <td width="50">
+            <p></p>
+            <center>Yes</center>
+            </td>
+          </tr>
+          <tr>
+            <td bgcolor="#66ff99" width="269">
+            <p>(#27) <a href="http://www.cyclades.com/products/?id=3">Cyclades ACS-16</a>
+			(16) </p>
+            </td>
+            <td width="50">
+            <p></p>
+            <center>No</center>
+            </td>
+            <td width="50">
+            <p></p>
+            <center>No</center>
+            </td>
+            <td width="50">
+            <p></p>
+            <center>No</center>
+            </td>
+            <td width="50">
+            <p></p>
+            <center>No</center>
+            </td>
+            <td width="50">
+            <p></p>
+            <center>Yes</center>
+            </td>
+          </tr>
+          <tr>
+            <td bgcolor="#66ff99" width="269">
+            <p>(#28) <a href="http://www.alturaxl.com/Products/console_management.html">(Altura
+			XL) Computone RAS 2000</a> with rev B REX-16RJ card </p>
+            </td>
+            <td width="50">
+            <p></p>
+            <center>No</center>
+            </td>
+            <td width="50">
+            <p></p>
+            <center>No</center>
+            </td>
+            <td width="50">
+            <p></p>
+            <center>No</center>
+            </td>
+            <td width="50">
+            <p></p>
+            <center>No</center>
+            </td>
+            <td width="50">
+            <p></p>
+            <center>Yes</center>
+            </td>
+          </tr>
+          <tr>
+            <td bgcolor="#66ff99" width="269">
+            <p>(#29) <a href="http://www.cyclades.com/products/2/ts_series">Cyclades
+			TS800</a> (8) </p>
+            </td>
+            <td width="50">
+            <p></p>
+            <center>No</center>
+            </td>
+            <td width="50">
+            <p></p>
+            <center>No</center>
+            </td>
+            <td width="50">
+            <p></p>
+            <center>No</center>
+            </td>
+            <td width="50">
+            <p></p>
+            <center>No</center>
+            </td>
+            <td width="50">
+            <p></p>
+            <center>Yes</center>
+            </td>
+          </tr>
+          <tr>
+            <td bgcolor="#66ff99" width="269">
+            <p>(#30) <a href="http://www.cyclades.com/products/?id=3">Cyclades ACS-1</a>
+			(1) </p>
+            </td>
+            <td width="50">
+            <p></p>
+            <center>No</center>
+            </td>
+            <td width="50">
+            <p></p>
+            <center>No</center>
+            </td>
+            <td width="50">
+            <p></p>
+            <center>No</center>
+            </td>
+            <td width="50">
+            <p></p>
+            <center>No</center>
+            </td>
+            <td width="50">
+            <p></p>
+            <center>Yes</center>
+            </td>
+          </tr>
+          <tr>
+            <td bgcolor="#66ff99" width="269">
+            <p>(#31) <a href="http://www.digi.com/products/consolemanagement/digicm.jsp">Digi
+			CM 8</a> (8) </p>
+            </td>
+            <td width="50">
+            <p></p>
+            <center>No</center>
+            </td>
+            <td width="50">
+            <p></p>
+            <center>No</center>
+            </td>
+            <td width="50">
+            <p></p>
+            <center>No</center>
+            </td>
+            <td width="50">
+            <p></p>
+            <center>No</center>
+            </td>
+            <td width="50">
+            <p></p>
+            <center>Yes</center>
+            </td>
+          </tr>
+          <tr>
+            <td bgcolor="#66ff99" width="269">
+            <p>(#32) <a href="http://www.dnpg.com/serial_device_servers.asp">DECserver
+			90M+</a> (8) </p>
+            </td>
+            <td width="50">
+            <p></p>
+            <center>No</center>
+            </td>
+            <td width="50">
+            <p></p>
+            <center>No</center>
+            </td>
+            <td width="50">
+            <p></p>
+            <center>No</center>
+            </td>
+            <td width="50">
+            <p></p>
+            <center>No</center>
+            </td>
+            <td width="50">
+            <p></p>
+            <center>Yes</center>
+            </td>
+          </tr>
+          <tr>
+            <td bgcolor="#66ff99" width="269">
+            <p>(#33) <a href="http://www.opengear.com/product-cm4116.html">OpenGear
+			CM4116</a> (16) </p>
+            </td>
+            <td width="50">
+            <p></p>
+            <center>No</center>
+            </td>
+            <td width="50">
+            <p></p>
+            <center>No</center>
+            </td>
+            <td width="50">
+            <p></p>
+            <center>No</center>
+            </td>
+            <td width="50">
+            <p></p>
+            <center>No</center>
+            </td>
+            <td width="50">
+            <p></p>
+            <center>Yes</center>
+            </td>
+          </tr>
+          <tr>
+            <td bgcolor="#66ff99" width="269">
+            <p>(#34) <a href="http://www.moxa.com/product/CN2510.htm">Moxa
+			Technologies CN2510</a> (8) </p>
+            </td>
+            <td width="50">
+            <p></p>
+            <center>No</center>
+            </td>
+            <td width="50">
+            <p></p>
+            <center>No</center>
+            </td>
+            <td width="50">
+            <p></p>
+            <center>No</center>
+            </td>
+            <td width="50">
+            <p></p>
+            <center>No</center>
+            </td>
+            <td width="50">
+            <p></p>
+            <center>Yes</center>
+            </td>
+          </tr>
+          <tr>
+            <td bgcolor="#66ff99" width="269">
+            <p>(#35) Cisco 3811 with HWIC-16A (16)</p>
+            </td>
+            <td width="50">
+            <p></p>
+            <center>No</center>
+            </td>
+            <td width="50">
+            <p></p>
+            <center>No</center>
+            </td>
+            <td width="50">
+            <p></p>
+            <center>No</center>
+            </td>
+            <td width="50">
+            <p></p>
+            <center>No</center>
+            </td>
+            <td width="50">
+            <p></p>
+            <center>Yes</center>
+            </td>
+          </tr>
+          <tr>
+            <td bgcolor="#66ff99" width="269">
+            <p>(#36) Cisco 2821 with HWIC-8a (8)</p>
+            </td>
+            <td width="50">
+            <p></p>
+            <center>No</center>
+            </td>
+            <td width="50">
+            <p></p>
+            <center>No</center>
+            </td>
+            <td width="50">
+            <p></p>
+            <center>No</center>
+            </td>
+            <td width="50">
+            <p></p>
+            <center>No</center>
+            </td>
+            <td width="50">
+            <p></p>
+            <center>Yes</center>
+            </td>
+          </tr>
+          <tr>
+            <td bgcolor="#66ff99" width="269">
+            <p>(#37) Lantronix ETS32PR (32)</p>
+            </td>
+            <td bgcolor="#ffcc99" width="50">
+            <p></p>
+            <center>Yes</center>
+            </td>            <td width="50">
+            <p></p>
+            <center>No</center>
+            </td>
+            <td width="50">
+            <p></p>
+            <center>No</center>
+            </td>
+            <td width="50">
+            <p></p>
+            <center>No</center>
+            </td>
+            <td width="50">
+            <p></p>
+            <center>Yes</center>
+            </td>
+          </tr>
+          <tr>
+            <td bgcolor="#66ff99" width="269">
+            <p>(#38) 
+            <a href="http://www.lantronix.comit-management/console-servers/securelinx-slc.html">Lantronix 
+            SCL32</a> (32) </p>
+            </td>
+            <td width="50">
+            <p></p>
+            <center>No</center>
+            </td>
+            <td width="50">
+            <p></p>
+            <center>No</center>
+            </td>
+            <td width="50">
+            <p></p>
+            <center>No</center>
+            </td>
+            <td width="50">
+            <p></p>
+            <center>No</center>
+            </td>
+            <td width="50">
+            <p></p>
+            <center>Yes</center>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      </center>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</p>
+<p>
+<table border="0" width="100%">
+  <tbody>
+    <tr>
+      <td bgcolor="#ffff99">
+      <p>Footnotes to the test results;</p>
+      <ol>
+        <li>We originally tested with a code revision from
+mid-2000, and found that if the main unit *and* the pod lost power at
+the same time, a BREAK would be sent when the main unit finished
+booting, and it initialized the pod. Cycling only one or the other does
+not send BREAK. <b>This problem was resolved with a software
+patch. This fix was rolled into the main code tree late in December,
+2000. Newer versions of code should not send BREAK.</b> (Let us
+know if you do find any problems with newer code...make sure you let
+Cyclades Support know as well!) </li>
+        <li>We were unable to configure the Nortel ACN-200 into
+an async mode, using the wiring pinouts obtained from their external
+web pages. We were unsuccessful in getting the box into a debug or
+config mode before we had to return the unit. </li>
+        <li>Unit has an extended boot sequence (greater than 2
+minutes). </li>
+        <li>We've turned up a number of details about 2500 series
+see the <a href="#cisco">Cisco section</a> for more
+info. </li>
+        <li>Cannot be used by Conserver, because it won't support
+the per-port connections at high TCP ports. (<a href="#non-conserver">More
+info below</a>.) </li>
+        <li>This testing was made with their current production
+card. We are expecting a newer version of the async card, which should
+not send BREAK. </li>
+        <li>The unit only sends BREAK when both the main unit and
+the pod are power cycled.</li>
+        <li>The HWIC-8A and HWIC-16A cards passed the test, but
+the CONS and AUX ports on the chassis failed this test.</li>
+      </ol>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</p>
+
+<p>
+<table border="0" width="100%">
+  <tbody>
+    <tr>
+      <td>
+      <p><b>Next hardware I'd like to test...</b></p>
+      <ul>
+        <li><a href="http://www.lantronix.com/products/cs/scs1600_3200/index.html">Lantronix
+SCS1600</a> 16-port Secure Console Server </li>
+        <li><a href="http://www.raritan.com/products/serial_console/dominion_sx/dom_sx/prd_cms_index.aspx?currpg=prd_cms_index&amp;name=Dominion%20SX&amp;content_category=1&amp;overview_flag=Y&amp;features_flag=Y&amp;spec_flag=Y&amp;support_flag=Y&amp;status=4">Raritan
+Dominion SX</a> secure console server. </li>
+      </ul>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</p>
+<p>The Lantronix line has been evolving and expanding. (I've only
+just heard that Lantronix acquired the Lightwaves products last year,
+which rolls in some good high-security experience to a robust group of
+hardware folks!) The SCS should have some interesting features, and I
+want to try their user interface. Wiring for the Lantronix will be
+easy, since they use the same RJ-45 pinouts as Cisco console ports, so
+I can use my <a href="../Cisco/ciscokit.html">Cisco
+adapters</a> on the Lantronix gear as well.</p>
+<p><b>Other equipment we'd like to test...</b></p>
+<ul>
+  <li>Cisco 2511 (wider sample group) </li>
+  <li><a href="http://www.baytechdcd.com/">BayTech
+power controller+TS</a> </li>
+  <li>Integrated power controllers with console servers </li>
+</ul>
+<p>Please let us know if you have any other suggestions for
+vendors devices that you think we should test. If you are a vendor, and
+would like us to test your terminal server, please contact us (email to
+<b>break-off</b> at
+<b>conserver.com</b>).
+</p>
+
+<p></p>
+<hr>
+<p><a name="vendors"></a></p>
+<table border="0" width="100%">
+  <tbody>
+    <tr>
+      <td>
+      <h3 align="center">Product Information, by Vendor</h3>
+      <p><b><a name="annex"></a>Annex/Bay
+Networks/Nortel information </b></p>
+      <p>The (Xylogics) <b>MicroAnnex</b> was an 8-
+or 16-port terminal server. These units <b>DO</b> send
+BREAK.</p>
+      <ul>
+        <p><i>I have received word that a set of
+configuration commands <b>may</b> make the Annex units <b>not</b>
+send BREAK upon power-off and power-on. I have not received the set of
+commands, so I have not been able to verify this. If you think you have
+a set we can try, please contact us.</i></p>
+      </ul>
+      <p><b>Bay Networks</b> bought the Annex product
+line, and they <b>fixed</b> the BREAK problem. The
+MicroAnnex became the <b>Bay 2000</b>, and these work
+fine! You can tell the new units as the case color changed from the
+original off-white to a tan plastic/dark beige label color combination.</p>
+      <p>Bay also reworked the Annex 3, calling it the <b>Bay
+4000</b>, adding a redundant power supply. Unfortunately, we have
+seen cases where a fully-loaded Bay 4000 chassis cannot run on a single
+supply. (That is, the redundant supply isn't really redundant, but is
+needed in fully-loaded chassis. If one power supply should fail, the
+other power supply cannot support the full load, and the entire chassis
+shuts down.)</p>
+      <p><b>Nortel Networks</b> bought Bay Networks,
+and the Bay 2000 became the <b>Nortel 2000</b>. The Bay
+4000 became the <b>Nortel 4000</b>. Nortel decided that
+the Annex line was competing with their existing Nortel products, so
+they killed the Bay 2000-4000 products in the winter of 1999. The plan
+was to recommend the Nortel ACN-200 as a functional replacement for
+these servers.</p>
+      <p>We were unable to configure the Nortel ACN-200 into an
+async mode, using the wiring pinouts obtained from the Nortel external
+web pages, and instructions from the product manual. The units support
+less than 20 async ports, in a relatively large chassis. We were
+unsuccessful in getting the box into a debug or config mode before we
+had to return the unit. </p>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<p>
+<table border="0" width="100%">
+  <tbody>
+    <tr>
+      <td>
+      <p><b><a name="cisco"></a>Cisco
+information</b></p>
+
+      <p><b>Note:</b> You should be aware that the
+Console and Aux ports
+on many Cisco products will send serial BREAK when the device power is
+turned off. If you are connecting these devices to the serial port on a
+Sun device for control or monitoring, it is possible that the Cisco
+could cause the Sun device to halt when the Cisco loses power.</p>
+      <p>As for other Asynch lines (other than the Console and
+Aux ports), these are the the results of testing on some of the Access
+products;</p>
+      <p><b>2509-11</b> series devices <b>DO</b>
+send BREAK when the power is <b>turned off</b>.</p>
+      <p><b>2600</b> and <b>3600</b>
+series devices (using the <b>NM-xxA</b> async modules)
+work fine!</p>
+      <p><span style="font-weight: bold;">2800</span>
+and <span style="font-weight: bold;">3800</span>
+series devices (using the <span style="font-weight: bold;">HWIC-xxA</span>
+async modules) work fine!</p>
+      <p>The result of our testing is a very high confidence in
+the Cisco 3600 series devices (3620, 3640, 3660 tested) and the Cisco
+2600 series devices (2621 tested) with the NM-32A modules. They have
+not sent a detectable BREAK signal under our test conditions.</p>
+      <p>Cisco had an ECO (Engineering Change Order) for the <b>2511-RJ</b>
+models only, which inhibited the BREAK when power was turned off. This
+ECO was not
+available for the non-RJ units. This was a change to the main board of
+the units, and was in effect for hardware revisions <span style="font-weight: bold;">J and K</span>, 
+but the ECO was
+later revoked, deeming that the problem only affected a limited number
+of sites.</p>
+      <p>In one <span style="font-weight: bold;">2511</span>
+that we tested, it appeared as though the DC
+Ground was removed when the power was switched off, resulting in some
+large potential voltages appearing on other signal lines, as the
+reference ground between the terminal server and the host was lost. In
+one test case, the target host was halted, and we actually lost data on
+the drive, requiring four FSCK passes to get the system back on-line.
+While I can't attribute this event to the terminal server sending
+BREAK, I will note that this was the only time that we have seen any
+data damaged on the target host during the testing.</p>
+      <p>We have found one <span style="font-weight: bold;">2511</span>
+which does not send BREAK! I
+believe that this is attributable to the particular power supply in the
+unit, but I wasn't able to open it up to get more information on
+that particular unit. </p>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</p>
+
+<p>
+<table border="0" width="100%">
+  <tbody>
+    <tr>
+      <td>
+      <p><b><a name="computone"></a>Computone
+information </b> </p>
+      <p>The <a href="http://www.computone.com/Products/console_management.html">RAS-2000
+units</a> <b>MAY</b> send BREAK (depending on which
+which revision of the serial card hardware you have); they key is the
+revision of the serial cards in the units, not the chassis! If BREAK is
+a problem for you, get the <b>Rev. B</b> boards for your
+chassis. With the older (Rev. A) boards, the ports will send BREAK when
+power is <b>turned off</b> and <b>turned on</b>.
+However, We tested a prototype of the Rev. B boards early in 2000, and
+found that they solved the BREAK problem. We are hoping to get a
+production Rev. B board once they get their backlog cleared. </p>
+      <p>We also have a version of their <b>IntelliServer</b>
+to test (good for use at a co-location site when you only need a small
+number of ports). We are also negotiating to get an <b>RCM24</b>
+or <b>RCM48</b> unit in for testing (one RU tall, and 24
+or 48 ports).</p>
+      <p>Note: (Summer of 2002) Computone was acquired by
+Symbiat, and they no longer sell Console Server hardware. (I believe
+they will still sell you a hardware support contract for currently
+deployed Computone hardware...)</p>
+
+      <p><b>NEWS: (March 2003) <a href="http://www.alturaxl.com/">Altura XL</a></b>
+has bought the Computone IntelliServer&reg; RAS 2000 line from
+Symbiat! I have received a production version of the REX-16RJ (rev B
+card), and it has passed the BREAK tests. They say they are developing
+24- and 48-port single rack-unit servers as well! I hope they will hire
+the technical writer, as I believe the older Computone documentation
+was probably the easiest to work with, regarding setting up console
+services.</p>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</p>
+
+<p>
+<table border="0" width="100%">
+  <tbody>
+    <tr>
+      <td>
+      <p><b><a name="cyclades"></a>Cyclades
+information </b></p>
+      <p>The <b>AlterPath ACS 16</b>, <b>ACS-1</b>,
+      <b>TS2000</b>, <b>TS800</b>, and the <b>PR3000</b>
+models have passed our BREAK tests.</p>
+      <p>The <b>PR-3000</b> device is actually a
+combination, stackable unit. There is a Main Unit, and then you can
+daisy-chain attach a number of multi-port Pods. During our early tests,
+the PR-3000 was the first device that seemed to have a BREAK problem
+due to software, versus hardware. We had found that if the main unit
+*and* the pod lose power at the same time, a BREAK would be sent when
+the main unit finished booting, and it then initialized the pod.
+Cycling only one or the other did not send BREAK.</p>
+      <p>We reported our test cases and results to Cyclades, and
+they turned out a software revision within two weeks. We found that
+this had solved the problem. They report that this fix will be rolled
+into the standard code tree, so any newer revisions should include this
+fix.</p>
+      <p>We have returned our testing unit to Cyclades, at their
+request. They are phasing this product out of the sales chain, though
+they will be continuing to sell it in a few markets, and they say they
+will be maintaining support for units already in the field.</p>
+      <p>We received our <a href="http://www.cyclades.com/products/stdalone/ts1_2000.php">TS2000</a>
+unit to test, and it has performed in the BEAK test very well. These
+come in a variety of port densities, from 4 to 48, and they even sell a
+1-port (<a href="http://www.cyclades.com/products/stdalone/ts100.php">TS100</a>
+unit for applications where you really need an ethernet-based serial
+port to talk to a console, etc.)</p>
+You may have noticed the <i><b>Linux Inside</b></i>
+icons on the Cyclades web site, and the stickers on their TS products.
+We now have the Software Developers Kit for the TSnnn family, and we
+will be trying to port Conserver to the unit directly. (If you are
+interested in the outcome of this effort, please sign up for the
+Conserver Announcements email list on the <a href="http://www.conserver.com/">Conserver main page</a>.)
+      <p>We received an <a href="http://www.cyclades.com/products/index.php?id=3">ACS 16</a>
+in early December 2003 for testing. The unit has a dark blue paint
+coating, darker than the TS2000 pebble-finish paint job. The other
+difference that caught my eye on first look was that the status LEDs
+for each port are now on the RJ-45 jack itself, which is good if you
+want your LEDs and cables on the same side of the server. Finally,
+there was an assortment of DB-25 and DB-9 pre-wired adapters in the
+box, as well a male-RJ45-to-female-RJ45 adapter to connect a Cisco
+console to the Cyclades AlterPath RJ45 wiring scheme. I'm glad to see
+this type of hardware available from the vendors.</p>
+      <p>As for the BREAK testing, the unit passed, but this was
+something I expected. The hardware under the hood is largely an
+expansion of the TS product line, as far as the serial path hardware is
+concerned. There is more memory in the unit, and the two PCMCIA slots
+on the opposite side from the serial and power connections.</p>
+      <p>In the fall of 2003, I also had the chance to test a
+couple of Cyclades smaller units! The <b>TS800</b> (8-port
+unit) is small, easily portable, and doesn't send BREAK. This is small
+and light enough to carry in your laptop case, giving a field service
+person the ability to quickly connect 8 serial devices to their laptop
+for field work. It's also a good low-power device to use with your UPS,
+to ensure that you can get console access to those few critical devices
+you have at the core of your critical networks! The other unit was a
+prototype <b>ACS-1</b>, which is a 1-port version of the
+ACS (giving you the power of the ACS line, as well as the PCMCIA slots,
+and the RS-232 port and RS-422/485 ports as well. This unit is a bit
+larger than the TS-1 (the ACS-1 I have is 1.5" x 6.5" x 4"), and uses a
+middle-of-the-cord single-voltage switch-mode power supply. This is a
+beefy little computer, with a few interfaces, and a single serial port
+to connect to an adjacent device, and will probably lend itself well to
+Home Automation.</p>
+
+      <p><b>NOTE:</b> Cyclades has produced a good
+booklet, supporting remote console management, and comparing it to
+other system management options. You can get a free copy from their
+website, on most of the product pages you'll find a link to "request
+your free copy" of their <a href="http://www.cyclades.com/booklet/index.php"><b>Console
+Port Management booklet</b></a>.</p>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</p>
+
+<p>
+<table border="0" width="100%">
+  <tbody>
+    <tr>
+      <td>
+      <p><b><a name="dnpg"></a>DECServer II information</b></p>
+      <p>DEC Network Products Group <a href="http://www.dnpg.com/">(http://www.dnpg.com/)</a>
+makes a wide array of network connectivity products.</p>
+      <p>The DECServer product line still supports DEC protocols,
+but now also include a reverst-TCP capability as well. If you have a
+DEC environment, the DECServers will give you console access as well as
+providing DEC protocol support for serial printers and more.</p>
+      <p>The DECServer 90+M line is small device, that can be
+used as a stand-alone unit, or as a module in a larger chassis, to add
+serial conenctions with Ethernet connections.</p>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</p>
+
+<p>
+<table border="0" width="100%">
+  <tbody>
+    <tr>
+      <td>
+      <p><b><a name="digi"></a>Digi
+Connectware information </b></p>
+      <p><a href="http://www.digi.com/">Digi
+(http://www.digi.com/)</a> makes a wide array of serial
+connectivity products, including the PortServer TS line, and the
+"Secure" PortServer CM lines.</p>
+      <p>The PortServer TS line is small (front-to-back), and
+lightweight, making it easy for one person to install it. Configuration
+was also easy, out of the box. The one part I had trouble spotting was
+that the ports needs to be configured as 'printers' to allow the
+reverse-TCP connections from Conserver. Use the command;</p>
+      <ul>
+        <p><i>set port range-1-16 dev=prn</i></p>
+      </ul>
+      <p>There are a few LEDs on the front of these units, but
+the functions are basic. If you like LEDs to see the status of your
+serial lines, take a look at their <a href="http://www.digi.com/solutions/devtermsrv/cm/index.shtml">CM
+series</a> before you by a TS unit.</p>
+      <p>I tested a <b>CM 8</b>, and it performed
+very well in the BREAK tests. But, I was also impressed with their
+documentation. The steps in the manual follow the structure of their
+Command Line menu tree (which is also reflected in their Web-based
+config GUI), but they also have a great 'getting started' overview
+poster, which will help get admins working quickly.</p>
+
+      <p>The CM software also supports PCMCIA cards, and the
+system is geared to easily configure various PC Card devices and
+interfaces including memory drives, NICs, and wireless NICs. I found
+this aspect of the configuration to be much simpler on the Digi CM,
+because of the software and the manual combined. </p>
+
+      <p>I also tried testing the integration with other power
+controllers, but the firmware I was testing only recognized a
+BayTech-DCD device. (I was surprised that the software didn't list a
+selection for the <a href="http://www.digi.com/products/consolemanagement/digiremotepowermanager.jsp">Digi
+RPM 8</a> power controller. Perhaps that is an OEM'd product, or
+maybe I have old firmware? I will look into firmware upgrades this
+fall.) </p>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</p>
+
+<p>
+<table border="0" width="100%">
+  <tbody>
+    <tr>
+      <td>
+      <p><b><a name="iolan"></a>IOLAN
+information </b></p>
+      <p>Made by <b>Chase Research</b>, the IOLAN
+Rack+ devices <b>DO</b> send BREAK when the power is <b>turned
+off</b>. These are rack-mounted units, meant for data center
+access. </p>
+      <p>It seems that I was mistaken, when I posted here that
+the old Chase IOLAN line was being discontinued. The products were
+picked up by <a href="http://www.perle.com/">Perle Systems</a>.
+The rackmount servers still send BREAK, but we've tested the <b>model
+104</b> and it does not have a serial BREAK problem. This is
+probably the 4-port unit that <a href="http://www.asptech.com">ASP
+Technologies</a> told me about in December 2000. These units have
+an external, single-voltage power pack. There is a <b>model 108</b>
+as well.</p>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</p>
+
+<p>
+<table border="0" width="100%">
+  <tbody>
+    <tr>
+      <td>
+      <p><b><a name="itouch"></a>iTouch
+(MRV) information </b></p>
+      <p><b>iTouch Communications</b> picked up the
+legacy <b>Xyplex</b> line from N-Base, and they are
+continuing to support the older units. They have also been working on
+designing newer units to expand the family line, and they have been
+designing their new hardware to be <b>BREAK-free</b>,
+including their replacement series for the Xyplex 1600 (look at the <a href="http://www.mrv.com/product/MRV-IR-003/">8000</a>
+and <a href="http://www.mrv.com/product/MRV-IR-001/">9000</a>
+product lines.) </p>
+      <p>We have tested two In-Reach Manager devices. The
+IR-MGRM-101AC devices <b>DO</b> send BREAK. The
+IR-MGRM-111AC devices, however, work fine! (Look for the "Sun
+Certified" symbols on the front of the units.)</p>
+      <p>We tested an <b>IR-8020</b> unit, and it
+also performed well. (These seem to be the non-BREAK Heirs to the
+Xyplex 1600 series, since the RJ-45 serial pinouts are the same.</p>
+      <p>In mid-2003, <a href="http://www.mrv.com/">MRV
+Communications</a>, the parent of N-Base and iTouch, decided to
+start branding the console products themselves, including a color
+change to black. They really like Flash animations on their website,
+and it's hard to skip the intro, so here is a link to their <a href="" http://www.mrv.com/product/mrv-ir-002="">In-Reach
+products main page</a>.</p>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</p>
+
+<p>
+<table border="0" width="100%">
+  <tbody>
+    <tr>
+      <td>
+      <p><b><a name="Moxa"></a>Moxa
+Technologies information </b></p>
+      <p><a href="http://www.moxa.com/">Moxa
+Technologies (http://www.moxa.com/)</a> manufactures a wide
+variety of computing products and accessories. They have a variety of
+devices that work well to provide remote serial ports under Microsoft
+OSs, as well as a few devices that will provide remote serial ports for
+UNIX and Linux platforms. </p>
+      <p>Their <a href="http://www.moxa.com/product/Terminal_Servers.htm">Terminal
+Server</a> family has basic dial-up and remote printing
+capabilities, but they also support a <b>RTELNET</b> that
+serves a a Reverse-TCP service, which can work with a console
+management server. </p>
+      <p>I tested the <a href="http://www.moxa.com/product/CN2510.htm">CN2510</a>,
+and found that it passed our BREAK testing. The programming of the
+device was done using a Command Line Interface, using cursor keys to
+navigate. </p>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</p>
+
+<p>
+<table border="0" width="100%">
+  <tbody>
+    <tr>
+      <td>
+      <p><b><a name="opengear"></a>OpenGear
+information </b></p>
+      <p><a href="http://www.opengear.com/">OpenGear
+(http://www.opengear.com/)</a> is a new player in this field, and
+they are using an Open Source model for code development. It will be
+interesting to see how well this does, in the area of addressing any
+SSH vulnerabilities that may turn up in the future. (Their pricing is
+certainly lower than most of their competition!) </p>
+      <p>I tested a <a href="http://www.opengear.com/product-cm4116.html">CM4116</a>
+server, and it passed the BREAK tests well. The setup was easy, even
+though I didn't have the quick-start guide handy. The only complication
+I had was due to their device RS232 console speed being 115.2 Kbps.
+(This was noted in the quick-start guide, and it's one of only 3
+devices I've found which used 115.2 Kbps as a default speed.) After
+finding the correct speed, the set-up was very intuitive (to me). </p>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</p>
+
+<p>
+<table border="0" width="100%">
+  <tbody>
+    <tr>
+      <td>
+      <p><b><a name="perle"></a>Perle
+Systems information </b></p>
+      <p><a href="http://www.perle.com/">Perle
+Systems (http://www.perle.com/)</a> markets a number of network
+products. They also bought up the <b>Chase IOLAN</b>
+product line.</p>
+
+      <p>The <a href="http://www.perle.com/products/prod_family/console_server/cs9000.html">Perle
+CS9000</a> is designed to be a Console Server first, although it
+also has plenty of dialup/terminal server features. One handy example
+is that the CS9000 starts off with ports set for reverse-telnet
+service, right out of the box. It will try to configure itself using
+DHCP, but it also has a dedicated "admin" (RS-232) serial port for
+configuring the unit manually. Another fine feature is the way the
+hardware was designed to avoid the BREAK problem. (The unit I tested
+was probably the cleanest power cycle I observed at the serial port.)
+And the units boot quickly in stand-alone mode.</p>
+
+      <p>One feature that I really like is that the console
+server ports use an ethernet NIC-style RJ-45 jack, with an LED on
+either side of the locking tab of the jack...one LED indicates input
+traffic on that port, while the other LED indicates outbound traffic.
+Having these LEDs on the same side of the units as the cables is a good
+thing, in my opinion. Using these illuminated jacks is a great idea, as
+the LEDs are literally part of the jack, so you don't have to think
+hard to compare a bank of LEDs to a bank of cables.</p>
+
+      <p>The <a href="http://www.perle.com/products/prod_family/serial_servers/iolan_pl.html">IOLAN
+model 102 and 104</a> (2-port and 4-port desktop units,
+respectively) use a single-voltage DC-based power pack, and they do not
+have the BREAK problem. These may work well in small sites, where
+you'll never need more than 4 ports, and you definitely need something
+that will not send BREAK unless you tell it to. </p>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</p>
+
+<p>
+<table border="0" width="100%">
+  <tbody>
+    <tr>
+      <td>
+      <p><b><a name="opengear"></a>OpenGear
+information </b></p>
+      <p><a href="http://www.opengear.com/">OpenGear
+(http://www.opengear.com/)</a> is a new player in this field, and
+they are using an Open Source model for code development. It will be
+interesting to see how well this does, in the area of addressing any
+SSH vulnerabilities that may turn up in the future. (Their pricing is
+certainly lower than most of their competition!) </p>
+      <p>I tested a <a href="http://www.opengear.com/product-cm4116.html">CM4116</a>
+server, and it passed the BREAK tests well. The setup was easy, even
+though I didn't have the quick-start guide handy. The only complication
+I had was due to their device RS232 console speed being 115.2 Kbps.
+(This was noted in the quick-start guide, and it's one of only 3
+devices I've found which used 115.2 Kbps as a default speed.) After
+finding the correct speed, the set-up was very intuitive (to me). </p>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</p>
+
+<p>
+<table border="0" width="100%">
+  <tbody>
+    <tr>
+      <td>
+      <p><b><a name="xyplex"></a>Xyplex
+information </b></p>
+      <p>(Also see the <b>iTouch</b> information
+below! The Xyplex, iTouch, and MRV Communications products share the
+same RJ-45 serial wiring pinouts.)</p>
+      <p>We have tested the 1600, 1620, and 1800 units. These
+devices <b>DO</b> send BREAK when the power is <b>turned
+off</b>. We are expecting the loan of a 1640, to see if there is
+any difference with that model (but we are expecting that it will also
+send BREAK).</p>
+      <p>The folks at <a href="http://www.asptech.com/">ASP
+Technologies</a> make a special power control modules that can be
+installed <b>inside</b> the case of the Xyplex units
+listed above. These require a soldering iron to install. You can find
+more information about these dongles from their 
+<a href="http://www.datacomideas.com/PowerControlModule.html">hardware
+website</a>. (The dongles were designed for use with the 
+<a href="http://www.digi.com/">Digi</a> SCSI-attached
+devices, but have been used successfully in Xyplex units.) </p>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</p>
+
+<hr>
+<p>
+<table border="0" width="100%">
+  <tbody>
+    <tr>
+      <td>
+      <p><b><a name="non-conserver"></a>Good Hardware that Conserver doesn't work with...</b></p>
+      <p>We have found a class of hardware that provides remote
+access to console services, but doesn't allow a method for Conserver to
+connect to each serial port. While providing useful features, it
+doesn't allow Conserver an ability to connect at high TCP ports, to add
+the logging and multi-user access features.</p>
+      <p>Rather than list everything that falls into this
+category, I'll simply list the gear that doesn't have the BREAK
+problem, since I can imagine there are reasons that some sites may want
+to use this hardware, even without the benefits of Conserver.</p>
+      <blockquote>
+        <p><b>Lightwave Communications 3200</b></p>
+        <p>This unit supports 4 ports per card, and allowed
+telnet and SSH to the unit, but you need to use the Command Line
+Interface (CLI) to talk to the ports. Each port provides a cyclic 64 KB
+scrollback buffer, but there is no long-term logging in the unit. The
+feature that impressed us the most during the testing was that the unit
+doesn't send BREAK at the wrong times, even if you hot-swap the async
+interface cards! The unit has some other nice features, including an
+LCD display on the front panel. If BREAK is a problem, and you don't
+care about the long-term logging, give this device a look.</p>
+      </blockquote>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</p>
+
+<p>
+<hr align=center width="80%">
+</p>
+
+<A NAME="credits"></a>
+<P><CENTER><TABLE BORDER=5 bgcolor="ffcc99" width="75%" padding=5>
+   <TR>
+      <TD>
+         <P><FONT COLOR="#663300"><B>NOTICE:</B> Most of the pages, 
+         articles, and tutorials on this website are
+         copyrighted works. You may make 'deep links' to various
+         pages. (If you let me know which page(s) you are linking to,
+         I'll let you know if I move the page(s) during updates.)
+         Please send me email if you wish to republish any material,
+         or use it on your own website.</FONT></P>
+      </TD></TR>
+</TABLE></CENTER></P>
+
+
+<p><center>Made using <a href="http://www.nvudev.com">Nvu</a></center></p>
+
+<p><center>Copyright 1996-2009,
+<A HREF="http://www.esperanto.org/person/HARRIS_Dacxjo/">David K. Z.
+Harris, N6UOW</A>&nbsp;&nbsp;
+<a href="http://www.linkedin.com/in/consoleteam" >
+<img src="http://www.linkedin.com/img/webpromo/btn_profile_bluetxt_80x15.gif"
+width="80" height="15" border="0" alt="View David K. Z. Harris's profile on
+LinkedIn"></a><br>
+Questions? Comments? Additions? Email <B>consoles</B> at
+<B>conserver.com</B>.<BR>
+
+<FONT COLOR="#cc0000">(Don't harvest my address, I don't want
+SPAM!)</FONT><BR>
+
+<A HREF="../iloj.html">How does he do it</A>? And
+<A HREF="../about.html">Why</A>?</CENTER></P>
+
+
+</body>
+</html>

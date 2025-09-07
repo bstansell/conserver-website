@@ -1,0 +1,811 @@
+<!--This file created 3/14/05 10:37 PM by Claris Home Page version 2.0-->
+<HTML>
+<HEAD>
+   <TITLE>Zonker's Passive Signal Tracer Page</TITLE>
+   <META NAME=GENERATOR CONTENT="Claris Home Page 2.0">
+   <meta name=keyword content="passive signal tracer, zonker, N6UOW, 
+   doctors bag, RS-232, Americable, APACN, Vacik, Datatran, MT-11,
+   MT-21, MT-31, MT-41, breakout box, rj-45, bob100, bob100dlx,
+   Benedict Communications">
+</HEAD>
+
+<BODY TEXT="#336600" BGCOLOR="#FFFFFF">
+
+
+<p><center><table border=0 width="98%">
+   <tr>
+      <td width="50%">
+         <P><center><a href="http://www.conserver.com"><img
+         src="../conserver-sm.jpg" alt="Conserver.com logo" width=147
+         height=47 border=0 align=middle></A></center>
+      </td><td width="50%">
+         <p><center>Brought to you by;<br>
+
+         <a href="http://www.conserver.com/">www.conserver.com</a></center>
+      </td>
+   </tr>
+</table></center>
+
+
+<H2><CENTER>Zonker's RS-232 Passive Signal Tracer Page</CENTER></H2>
+
+<H4><CENTER>http://www.conserver.com/consoles/Tracers/tracers.html<BR>
+
+(updated: 
+Nov 06, 2005, 11:46 pm)</CENTER></H4>
+
+<H3><A NAME="Top"></A>This page is divided into 3 sections</H3>
+
+<OL>
+   <LI><A HREF="#whatIDo">What a Passive Signal Tracer is (and what
+   it is NOT)</A>
+   
+   <LI><A HREF="#using">How to use them, and what they can tell
+   you</A>
+   
+   <LI><A HREF="#good-bad">What I think makes a tracer good or bad
+   (the buyers guide...)</A>
+</OL>
+
+<p>Beyond these three, there are some images and ramblings about an
+RJ-45 signal tracer that I'm cobbling together, and some artwork about
+using the signal tracer.
+
+<P>My <B>DataTran</B> signal tracers are a vital troubleshooting tool
+for me, and they have earned their place in
+<A HREF="../MyDoctorBag/doctorbag.html">my Doctor Bag</A>. I wish they
+were still in business, so that they could make these RJ-45 tracers!
+(I wish I could find permission (and the plastic case molds) to make more 
+of their DE-9 and DB-25 tracers...)
+
+<P>You can get more basic serial clues from my
+<A HREF="../msock.html">Minor Scroll of Console Knowledge</A>
+(<A HREF="../msock.html">http://www.conserver.com/consoles/msock.html</A>)
+
+<P><TABLE BORDER=0>
+   <TR>
+      <TD>
+         <P><TABLE BORDER=0 CELLSPACING=0 CELLPADDING=3 WIDTH="100%">
+            <TR>
+               <TD bgcolor="cccccc" WIDTH="70%">
+                  <P><B><A NAME="whatIDo"></A>What a Passive Signal
+                  Tracer is, and is not...</B>
+               </TD><TD bgcolor="cccccc" WIDTH="30%">
+                  <P ALIGN=RIGHT><B><A HREF="#top">Top of the page</A></B>
+               </TD></TR>
+         </TABLE>
+         
+         <P>Looking at some definitions for the words <B><I>Passive
+         Signal Tracer;</I></B>
+         
+         <UL>
+            <LI><B>Passive</B>
+            
+            <UL>
+               <LI>unpowered, no batteries, no 'active components'
+               
+               <LI>no emitted signals
+               
+               <LI>minimal load on the signal(s) under test
+            </UL>
+            
+            <LI><B>Signal </B>
+            
+            <UL>
+               <LI>RS-232 signals are +/- 12 volts DC
+            </UL>
+            
+            <LI><B>Tracer</B>
+            
+            <UL>
+               <LI>Is this the cable I am following?
+            </UL>
+         </UL>
+         
+         <P>This is a device, meant for looking at RS-232 signal
+         levels. Because there are no batteries, the power for the
+         display is derived from the signal leads. One benefit of
+         this, is that you can usually see a low-voltage condition,
+         which could be one cause for communications problems.
+         However, drawing power from the signal leads can cause a
+         drop in the signal voltages, so you cannot use these devices
+         in the 'fringe cases'. (If your signal path is at the limits
+         of length, or drive power, you may see a degradation of data
+         when you insert a signal tracer.)
+         
+         <P>Because they don't have batteries, a <I>passive signal
+         tracer</I> is usually smaller and lighter than a Break-Out
+         Box.
+         
+         <P>Because there are no active components, these devices
+         don't have the intelligence to monitor the data on the wire.
+         A <I>passive signal tracer</I> is <B>NOT</B> a <B>serial
+         protocol analyzer</B>, or a <B>serial data tap</B> device.
+         
+         <P>Because a <I>passive signal tracer</I> does not emit a
+         signal, it is <B>NOT</B> a <B>cable tracer</B>, or a
+         <B>cable analyzer</B>.
+         
+         <P>The signals (voltage levels) for RS-232 are different
+         from the signals for Ethernet, Token Ring, and most other
+         data interchange interfaces, so a <I>passive signal
+         tracer</I> is <B>NOT</B> an <B>Ethernet Link Checker</B>.
+         
+         <P><CENTER>A <I>passive signal tracer</I> is designed to
+         troubleshoot at the <B><I>Physical-Layer</I></B>.</CENTER>
+         
+         <P>When you are following a cable through a 'rats nest',
+         under a data center floor, or across a hanging ceiling,
+         sometimes you can make a mistake, and wind up following the
+         wrong cable. When you get to the "other end", a <I>passive
+         signal tracer</I> will let you see if you've still got an
+         RS-232 signal, and with some simple testing, you can
+         determine if this is the cable that you think it is.
+         
+         <UL>
+            <LI>A <I>passive signal tracer</I> doesn't normally have
+            any switches or jumpers.
+            
+            <LI>A <I>passive signal tracer</I> won't automatically
+            match the signals between two RS-232 cables.
+            
+            <LI>A <I>passive signal tracer</I> is meant for momentary
+            troubleshooting, and is not left <I>in-line</I>.
+         </UL>
+
+         <p>A <B>breakout box</B> is a device that lets you view the
+         logic state of many, or all, of the signal leads, as well as
+         providing some ability to interrupt some (or all) of the signal
+         leads. Sometimes these devices need batteries to function. 
+         The access to the signal leads allows you to pass-through, 
+         disconnect, or cross-connect leads from one connector to 
+         another with jumper wires. The intention of a breakout box is
+         to allow you to monitor the signals, and also simulate the
+         adapter or cable that you need. However, I often find that
+         breakout boxes are often left in service, rather than being
+         replaced by the appropriate adapter(s) or custom cable. If
+         the breakout box is allowed to hang freely, the weight of
+         the breakout box can cause damage to the pins on the
+         connectors (of the breakout box and the equipment it is
+         hanging from), leading to reliability problems later on.
+
+         <p><b>One Breakout Box that I like</b> is available from
+         <a href="http://www.protocolanalyser.com/boball.htm">Benedict
+         Communications</a>. The 
+         <a href="http://www.protocolanalyser.com/boball.htm#BOB-100">BOB-100</a>
+         is a low-profile device, and the LEDs and switches lie below
+         the surface of the device. It has the ability to use an external
+         9-volt battery to provide +/- signals to stimulate signal leads,
+         but you don't need to have the battery for most funtions. The
+         unit also can test <b>Current Loop</b> interfaces! While I also
+         like the ability to use the triggers (found on the 
+         <a href="http://www.protocolanalyser.com/100dclos.htm">BOB-100 Deluxe</a>),
+         but the larger size outweighed my occassional need for a trap.
+         However, it's still a much nicer package than most that I've
+         worked with to date.
+         
+         <P>I prefer the <B>Passive Signal Tracer</B>. It is much
+         smaller, and cheaper, than a Breakout Box, and I find that
+         the signal tracer tells me all I need to know to establish
+         the physical RS-232 link on DB-25 and DB-9 connections. It
+         gives me a good clue if I have a reasonable cable, or (if
+         the signals appear on strange pins) whether the cable may be
+         wired strangely. It can tell me if an RJ-45 to DB-25 adapter
+         is DTE or DCE, or (if the signals appear on strange pins)
+         maybe the adapter isn't built with the RJ-45 wiring that I
+         need.
+      </TD></TR>
+</TABLE>
+
+<P><TABLE BORDER=0>
+   <TR>
+      <TD>
+         <P><TABLE BORDER=0 CELLSPACING=0 CELLPADDING=3 WIDTH="100%">
+            <TR>
+               <TD bgcolor="cccccc" WIDTH="70%">
+                  <P><B><A NAME="using"></A>How to use a Passive
+                  Signal Tracer is, what they tell you</B>
+               </TD><TD bgcolor="cccccc" WIDTH="30%">
+                  <P ALIGN=RIGHT><B><A HREF="#top">to the Top of the
+                  page</A></B>
+               </TD></TR>
+         </TABLE>
+         
+         <P>While the signal tracer won't automatically make the
+         connection work if I have the wrong cable or adapter in
+         place, it does gives me a quick, visual indication that I
+         have the right or wrong parts. The signal tracer lets me see
+         what "normal", working circuits look like, which lets me
+         spot the abnormal conditions when they occur. The lights are
+         the clues to what isn't right, and they tell me what to
+         check next to resolve the interface conflict.
+         
+         <P>If you are trying to connect two devices, your main clues
+         lie with <B>pins 2 &amp; 3</B> on the DB-25 and DE-9
+         connectors. It really doesn't matter which pins are used to
+         transmit and receive. The secret is knowing which pin is the
+         transmitter from each device, and which is the receiver. The
+         signal monitor will tell you this.(This is because you will
+         need to tie the transmitter on one device to the receiver of
+         the other device in order for traffic to pass, right?)
+
+         <P>There is a good description of how to select a pair of
+         RJ-45 to DB-type connectors to connect two serial ports on
+         the <A HREF="../msock.html#simple">Minor Scroll</A> page, as
+         well as showing how to use a passive signal tracer to
+         confirm that the connectors were the correct choice.
+      </TD></TR>
+</TABLE>
+
+<p>The animated image below will show you how you can use a Passive
+Signal Tracer to connect to a serial port to check whether the transmit
+data is on pin 2 or pin 3, and then check the cable to see if you have
+the correct adapter (by looking for transmit data on the cable, before
+you try to connect the cables).
+
+<P><CENTER><IMG SRC="tracer-howto.gif" WIDTH=474 HEIGHT=237
+ALIGN=bottom></CENTER>
+
+<P>You can insert a passive signal tracer into a working serial
+connection, and watch the signals while the connection is working.
+The tracer can show you what "normal" looks like. Does the
+handshaking leads change state? Is the flow control ever invoked? How
+'regular' or how 'bursty' is the data? Is it more in one direction
+than the other? Troubleshooting a system is easier when you know what
+the signals look like when the system is working.
+
+<P>When you are trying to troubleshoot a connection, you usually need
+to start with an understanding of how the physical connection is
+made, and what signals are connected. If you already have an idea how
+the connection is built, you can use the signal tracer to confirm
+what you already know. (Sometimes, the tracer will show you that the
+connection is NOT built the way you expected! Maybe you were wrong,
+or maybe someone changed it after you knew how it was built...but the
+tracer can show you how it is built NOW.)
+
+<P>If you don't know how the connection is built, you can use the
+signal tracer to find out. By inserting the passive signal tracer in
+the connection path at various points, you can determine if there is
+a wiring problem, and locate the failure between two connectors.
+
+<P>While a passive signal tracer doesn't allow you to make a special
+connection (like a Break-out Box would), it will show you what
+signals are present, so you can decide if the connection will work.
+
+<P><TABLE BORDER=0>
+   <TR>
+      <TD>
+         <P><TABLE BORDER=0 CELLSPACING=0 CELLPADDING=3 WIDTH="100%">
+            <TR>
+               <TD bgcolor="cccccc" WIDTH="70%">
+                  <P><B><A NAME="good-bad"></A>My opinions about
+                  various signal tracers</B>
+               </TD><TD bgcolor="cccccc" WIDTH="30%">
+                  <P ALIGN=RIGHT><B><A HREF="#top">to the Top of the
+                  page</A></B>
+               </TD></TR>
+         </TABLE>
+         
+         <P>To start off, I think that the <B>DataTran</B> folks 'had
+         it right' when they designed their <B>Mini-Tracker</B> line
+         of passive RS-232 signal tracers. As a company, DataTran
+         died off, and it's nearly impossible to find their devices
+         anymore. But, the tracers that I bought in the mid-80's are
+         STILL in <A HREF="../MyDoctorBag/doctorbag.html">my doctor
+         bag</A> or my pocket, working every week. They are rugged,
+         reliable, small and light. Because of this, the Mini-Tracker
+         family are what I use to measure all the other passive signal
+         tracers that I see. I've also recently purchased a
+         <a href="http://www.protocolanalyser.com/boball.htm#BOB-100">BOB-100</a>
+         from <a href="http://www.protocolanalyser.com/">Benedict
+         Communications, because of it's low-profile design, and it's
+         ability to be used without a battery, for those few occassions
+         when I want to try to make a connection work BEFORE I've
+         made a proper cable or adapter.
+
+         <p>The rest of this section is devoted to showing you what I 
+         think are the good and bad aspects and features of passive
+         RS-232 signal tracers. (The <b>BOB-100</b> and the <b>Black Box</b>
+         devices meet most of these criteria. The BOB-100 costs about 
+         twice the price ofe the Black Box signal tracer, but it also
+         provides the Break-out Box funtionality.)
+      </TD></TR>
+</TABLE></P>
+
+<P><TABLE BORDER=0 WIDTH="100%">
+   <TR>
+      <TD>
+         <P><B>Look for a tracer that uses two separate LEDs for each
+         signal lead</B>
+         
+         <P>This is a personal preference, I admit, but it comes from
+         practical needs. Primarily, you have three signal conditions
+         that you need to monitor (no signal, positive voltage, and
+         negative voltage, in reference to the signal reference
+         ground). You cannot do that with a single LED, as shown in
+         the illustration at the right.
+         
+         <BLOCKQUOTE><P><I><FONT COLOR="#AF0000">When the signal lead
+         is more positive than the reference signal, the single RED LED
+         will light. (The single red LED cannot tell you if the signal 
+         is more negative than the reference signal, or if the signal is
+         simply not there, because the red LED will be dark in
+         either case.)</FONT></I>
+         </BLOCKQUOTE>
+         
+         <P>A Bi-Color LED has two LED elements in the same device,
+         biased in opposite directions. You pick which LED will light
+         based on the polarity of the power applied. With this device,
+         RED indicates one polarity, and GREEN indicates the other,
+         while a dark LED indicates no signal at all. (A 'yellow' or
+         'orange' color indicates that the polarity is alternating
+         rapidly.)
+         
+         <P>Back in the 300-2400 bits-per-second data days, it was
+         easy enough to notice when a bi-color LED was in a steady
+         red or green, and when it was flickering to a different
+         shade because of data transitions. But, with 'normal' speeds
+         set at 9600 bps and above, it's nearly impossible to see the
+         transitions of a character or two. Don't waste your time
+         looking at a bi-color LED with data speeds of 57.6 Kbps and
+         above.
+      </TD><TD WIDTH=125>
+         <P><CENTER><IMG SRC="mixed-leds.jpg" WIDTH=88 HEIGHT=231 ALIGN=bottom>
+         </CENTER>
+      </TD></TR>
+</TABLE>
+
+<P><TABLE BORDER=0>
+   <TR>
+      <TD>
+      <P>It is much easier to 'see' high-speed data with two LEDs, 
+      because the 'idle' state is shown on one LED, while the data 
+      becomes a flicker on the second LED. Even with brief 
+      transitions of one or two characters, you can see the faint 
+      flicker on the second LED. (You may need to block your view 
+      of the first LED if it is really bright, using a finger, 
+      if you are looking for really fast/brief data.)
+      </TD><TD width=250 align=center>
+         <P><img src="DataTran-MT31-tracer.jpg">
+      </TD></TR>
+</TABLE>
+
+<P>It's easier to notice when the second LED blinks if it is a
+different color than the first LED. If the manufacturer used the same
+color for all of the LEDs, consider finding another product.
+
+<P>With most Bi-Color LEDs, the body plastic of the LED is usually a
+'water clear' (transparent, no color), or a 'clear diffused
+(translucent, milky-white). Unless you read the product
+specifications, you can't be sure if it is a bi-color part, or if it
+is a single color part. When you buy a device that uses two separate
+colored LEDs, the body plastic of the LEDs is usually colored, making
+it easy to see that you are getting different color LEDs.</P>
+
+<P><TABLE BORDER=0>
+   <TR>
+      <TD>
+         <P><B>The LEDs should NOT extend above the surface of the
+         case</B>
+         
+         <P>This is where most of the cheap signal tracers will fail
+         you. The pictures at the right are examples of the typical
+         offering that I find when I'm shopping for signal tracers. I
+         think this type of construction is '<I>Bad</I>', and I think
+         that they should be avoided.</P>
+         
+         <P>When the LEDs stick out of the case like this, the device
+         becomes vulnerable to early failure of circuit board (broken
+         solders, or 'popped' traces).
+      </TD><TD width=250 align=center>
+         <P><img src="DB9-tracer-bicolor.jpg">
+      </TD></TR>
+</TABLE>
+
+<P>Whether it's pressure from being in your pocket, carried in your 
+hands with other tools and equipment, or floating around in your tool 
+bag, pressure can be directly applied to the case of the LEDs, and 
+this pressure normally pushes down against the underlying circuit 
+board. If the pressure is relatively even on both leads, you may 
+only cause the solder pad to lift away from the circuit board inside. 
+If the pressure causes more pressure against one lead than the
+other, it can cause a fracture of the plastic body of the LED.</P>
+         
+<P>When a signal tracer becomes unreliable, it is no longer valuable. 
+If you are going to consider buying this type of tracer, you should 
+also consider whether you will be able to open the case plastic later, 
+so you can try to repair it. If the case is glued or molded, and the 
+LEDs stick out, I recommend passing up on that purchase. (Even if you 
+don't get paid for your time, an unreliable tool will frustrate you, 
+and make your troubleshooting harder, and it will take longer. Save 
+your money, and keep looking!)
+
+<P>DataTran used LEDs that were mounted 'flush', sitting directly on
+the circuit board, so that you couldn't push them down any farther.
+(This technique required careful soldering, as the short leads would
+transmit the heat from soldering to the LED body quickly. But this
+attention is one of the strengths of the DataTran design, because
+it's very hard to pop a trace on them!)
+
+<P><A HREF="http://www.blackbox.com/">Black Box Co</A>. also offers a
+product, made in France, that keeps the LEDs safe from harm. The
+Black Box <B>Quick Test-RS232</B> (p/n 724-746-5500) keeps the LEDs
+under a plastic overlay with silkscreen printing. You can see the
+LEDs under the plastic label. This device is larger than the largest
+DataTran Mini-Tracker was, and is at a higher cost. However, it also
+comes with a set of DB9-to-DB25 mini-adapters, making it easy to use
+it for DB9 or DB25 connections.</P>
+
+<P><TABLE BORDER=0 WIDTH="100%">
+   <TR>
+      <TD>
+         <P><B>The LEDs should have a wide viewing angle</B></P>
+         
+         <P>This becomes a bit harder, if the LEDs are kept within
+         the body of the tracer. Again, it's a case where I think the
+         DataTran design is still the heads-up winner! The reason for
+         this was their choice of components (ROHM LEDs, I believe),
+         as well as the choice to NOT have a label above the LEDs.
+         </P>
+         
+         <P>The
+         <A HREF="http://www.rohm.com/products/index.html">ROHM</A>
+         LEDs (red p/n
+         <A HREF="http://www.rohm.com/products/databook/led/pdf/slr-322.pdf">SLR-322VR3F</A>,
+         green p/n
+         <A HREF="http://www.rohm.com/products/databook/led/pdf/slr-322.pdf">SLR-322MG3F</A>,
+         available from
+         <A HREF="http://www.digikey.com/">DigiKey</A> as parts 511-1226-ND
+         and 511-1228-ND respectively) have an
+         oval-ish contour (as viewed from above), instead of the
+         usual round design. This allowed the designer to put the
+         LEDs closer together. But these LEDs also have a nice wide
+         viewing angle.
+         
+         <P>In this case, the label on the Black Box tracer works
+         against the user. The plastic label has a mask on the
+         underside of the label, which limits the amount of light
+         that escapes, so it is difficult to see the signals at a
+         severe angle. The mask can sometimes reflect glare from
+         other ligths nearby, obscuring the view of the LEDs.</p>
+      </TD><TD WIDTH=370>
+         <P><CENTER><IMG SRC="tracer-view-3.jpg" WIDTH=354 HEIGHT=263 ALIGN=bottom>
+         </CENTER>
+      </TD></TR>
+</TABLE>
+
+<p>The <a href="http://www.protocolanalyser.com/bob100.htm">BOB-100</a>
+has a clear mask, but the LEDs are brighter than on the <b>Black Box</b>
+device, and I find the viewing angle to be better on the <b>BOB-100</b>.
+
+<P><TABLE BORDER=0>
+   <TR>
+      <TD>
+         <P>With single Rack Unit-tall devices showing up more
+         frequently, I often find myself needing to look at signals
+         of a shallow chassis, buried between a couple deeper
+         chassis. It's nearly impossible to read a tracer at such a
+         steep angle, so I always have a couple of ribbon cable DB
+         extension cables. The cable is 18 inches long, with a male
+         connector on one end, and a female connector on the other. I
+         have one for DB-9, and one for DB-25. No matter which gender
+         I need, these cables will let me use the tracer beyond the
+         shadow of the deeper chassis, and the connector gender at 
+         the tracer will be the same as the connector on the port 
+         under test (so it is a good reminder of the gender the 
+         connector on the chassis).
+      </TD></TR>
+</TABLE>
+
+<P><TABLE BORDER=0>
+   <TR>
+      <TD>
+         <p><b>What's inside your average tracer?</b>
+
+         <p>As described above, there is usually an LED, connected to each
+         of the signal leads being monitored. There is usually a small
+         resistor in series with the LED, to limit the current and reduce
+         the signal voltage through the LED. (And, in a good tracer, there
+         will be two LEDs on each lead, sharing a single resistor.) The 
+         to the right shows you a basic schematic for a &quot;good&quot;
+         passive signal tracer.
+
+         <p>The resistor pack shown is XICOM Part number 265-1.2K
+         (<a href="http://www.jameco.com/">JAMECO</a> part 276091), but
+         they can also be 1/8-watt, 10% carbon-composition resistors.
+         The value of 1.2k was determined by testing the LEDs I was
+         using for good brightness at 12 volts DC, since some LEDs
+         are brighter or darker at any given current.
+
+         <p>Some tracers will only monitor a couple leads, while
+         some monitor the &quot;Big Six&quot; (TD, RD, RTS, CTS,
+         DTR, and DSR), while others will include DCD, and even
+         RI (Ring Indicator). Add the pin numbers for your favorite
+         RS-232 interface...
+
+         <p>The LEDs here are reverse-polarity from each other.
+         If the tracer uses bi-color LEDs, the schematic is basically
+         the same, because the two-lead bi-color LED has the two LED
+         components inside in this same reverse-polarity orientation.
+      </TD><td width=240>
+         <p><center><img src="tracer-schem.jpg"></center>
+      </td></TR>
+</TABLE>
+
+<P><TABLE BORDER=0>
+   <TR>
+      <TD>
+         <p><b>Make SURE you know where your signal ground is!</b> This
+         schematic is getting the common ground for the signals from 
+         pin 4 of the RJ-45 connector. If you are adapting the schematic
+         for your own use, make sure you connect the common side of
+         the resistors to the signal ground of your device!</p>
+
+         <p>I've cobbled together an RJ-45 tracer, for use with Cisco, 
+         Cyclades, Xyplex (iTouch, MRV) and others. The main reliance 
+         is that the signal ground is on pin 4 of the RJ-45, and a 
+         switch is used to connect ground to pin 5 for use with Cisco 
+         devices.</p>
+
+         <p>The modified schematic is shown to the right, and includes a
+         switch (S-1). The pins are labeled for the RJ-45 pins. The switch
+         I picked was a DPDT DIP switch, just because of the form factor
+         (about as wide as the LEDs, and could be mounted flush with
+         the case, so that the switch handle doesn't get broken off)
+
+         <ul><i>The orientation of the poles of the switch are important!
+            The 'common' pole of the switch must be connected to pin 5 of
+            the RJ-45, to ensure that pin 5 is connected to ground <b>or</b>
+            to the LEDs for pin 5...</i>
+         </ul>
+
+         <p>The first prototype worked well, but I couldn't find a
+         small cable interconnect to use. (Consider how thin the device
+         could be if I wanted to solder the RJ-45 cables to the board!)
+      </TD><td width=240>
+         <p><center><img src="rj45-tracer-schem.jpg"></center>
+      </td></TR>
+</TABLE>
+
+<a name="homemade"></a><p>The pictures below show the first prototype,
+on perf-board, and hand-soldered. You can see how well the DIP switch 
+lined up vertically with the LEDs, and you can also see the density 
+of these 'oval' <b>ROHM</b> LEDs.
+
+<P><IMG SRC="rj45t1-06.jpg" WIDTH=169 HEIGHT=215 ALIGN=bottom>&nbsp;&nbsp;
+&nbsp;<IMG SRC="rj45t1-02.jpg" WIDTH=534 HEIGHT=149 ALIGN=bottom>
+
+<P><TABLE BORDER=0>
+   <TR>
+      <TD>
+         <p>Once the first prototype passed the initial testing in 
+         service, I decided to make the second prototype, raising the 
+         LEDs and the switch to extend up to be flush with the case 
+         (due to the height of the insulation-displacement connector 
+         I had picked for the cable connection).</p>
+
+         <p>With the RJ-45 cable as a pass-through, you can plug the
+         tracer easily into RJ-45 adapters, or into connections on
+         the Console Servers or RJ-45 patch panels.</p>
+
+         <p>The switch sits flush with the case, and should not be
+         easily changed 'by accident'. The LEDs are protected from
+         pressure by the case, and the case is also holding the
+         cable interconnect on its pins (preventing the connector
+         from coming loose).</p>
+
+         <p>The pigtail cable soming from either end makes it easy
+         to add an RJ-45 cable coupler. This helps to protect the
+         RJ-45 connectors when it's not in use, and also makes it
+         easy to add the tracer in-line easily for quick monitoring
+         of active consoles.</p>
+      </TD><td width=220>
+         <p><center><IMG SRC="homemade-202.jpg"><br>
+         <IMG SRC="homemade-203.jpg"></center></p>
+      </td></TR>
+</TABLE></P>
+
+<p><center><IMG SRC="homemade-201.jpg"></center></p>
+
+<P><TABLE BORDER=0>
+   <TR>
+      <TD width=340>
+         <p><IMG SRC="homemade-1.jpg" WIDTH=331 HEIGHT=274 ALIGN=middle></p>
+      </TD><td>
+         <p>The image to the left shows the first prototype, next to an
+         old tracer I built to monitor RS-232 signals using the Mini-DIN-8
+         connector used on Apple Macintosh (and SGI) computers.)</p>
+   
+         <p>The size of the case used on the Mac tracer was similar in size
+         to the box used for the second RJ-45 prototype, as an example of
+         the scale in the photo.</P>
+
+         <p>The Mac only has one pair of in/out control leads, besides the
+         TD/RD pair. This allows for either Flow Control <b>or</b>
+         hardware handshaking, but not both (which is why there are only 
+         4 pairs of LEDs).</p>
+
+         <p>I found an in-line female Mini-DIN-8 connector, so I used that
+         on the cable, instead of building a board- or chassis-mounted
+         connector into the case (to keep the case size small).</p>
+      </td></TR>
+</TABLE></P>
+
+<P>
+<HR>
+</P>
+
+<P>Here are some examples of the signal indications that are commonly seen, 
+using the DataTran tracers.</P>
+
+<P>DB-25 Signal Patterns<br><TABLE BORDER=1 width="100%">
+   <TR>
+      <TD width="19%">
+         <P><CENTER><IMG SRC="leds1.gif" WIDTH=63 HEIGHT=146 ALIGN=bottom>
+         </CENTER>
+      </TD><TD width="19%">
+         <P><CENTER><IMG SRC="leds2.gif" WIDTH=56 HEIGHT=146 ALIGN=bottom>
+         </CENTER>
+      </TD><TD width="19%">
+         <P><CENTER><IMG SRC="leds3.gif" WIDTH=56 HEIGHT=146 ALIGN=bottom>
+         </CENTER>
+      </TD><TD width="19%">
+         <P><CENTER><IMG SRC="leds4.gif" WIDTH=57 HEIGHT=145 ALIGN=bottom>
+         </CENTER>
+      </TD><TD width="19%">
+         <P><CENTER><IMG SRC="leds5.gif" WIDTH=57 HEIGHT=145 ALIGN=bottom>
+         </CENTER>
+      </TD></TR>
+</TABLE></P>
+
+<P>DB-9 Signal Patterns<br><TABLE BORDER=1 width="100%">
+   <TR>
+      <TD width="19%">
+         <P><CENTER><IMG SRC="leds6.gif" WIDTH=57 HEIGHT=145 ALIGN=bottom>
+         </CENTER>
+      </TD><TD width="19%">
+         <P><CENTER><IMG SRC="leds7.gif" WIDTH=57 HEIGHT=145 ALIGN=bottom>
+         </CENTER>
+      </TD><TD width="19%">
+         <P><CENTER><IMG SRC="leds8.gif" WIDTH=57 HEIGHT=145 ALIGN=bottom>
+         </CENTER>
+      </TD><TD width="19%">
+         <P><CENTER><IMG SRC="leds9.gif" WIDTH=57 HEIGHT=145 ALIGN=bottom>
+         </CENTER>
+      </TD><TD width="19%">
+         <P><CENTER><IMG SRC="leds10.gif" WIDTH=57 HEIGHT=145 ALIGN=bottom>
+         </CENTER>
+      </TD></TR>
+</TABLE></P>
+
+<P>Mixed DB-9 and DB-25 Signal Patterns<br><TABLE BORDER=1 width="100%">
+   <TR>
+      <TD width="19%">
+         <P><CENTER><IMG SRC="leds11.gif" WIDTH=57 HEIGHT=130 ALIGN=bottom>
+         </CENTER>
+      </TD><TD width="19%">
+         <P><CENTER><IMG SRC="leds12.gif" WIDTH=57 HEIGHT=130 ALIGN=bottom>
+         </CENTER>
+      </TD><TD width="19%">
+         <P><CENTER><IMG SRC="leds13.gif" WIDTH=78 HEIGHT=130 ALIGN=bottom>
+         </CENTER>
+      </TD><TD width="19%">
+         <P><CENTER><IMG SRC="leds14.gif" WIDTH=56 HEIGHT=146 ALIGN=bottom>
+         </CENTER>
+      </TD><TD width="19%">
+         <P><CENTER><IMG SRC="leds15.gif" WIDTH=66 HEIGHT=131 ALIGN=bottom>
+         </CENTER>
+      </TD></TR>
+</TABLE></P>
+
+<P><IMG SRC="leds16.gif" WIDTH=93 HEIGHT=145 ALIGN=bottom>&nbsp;&nbsp;&nbsp;
+<IMG SRC="leds17.gif" WIDTH=78 HEIGHT=130 ALIGN=bottom>
+</P>
+
+<p>You can use a DB-25 adapter with a passive signal tracer to check the signals
+on RJ-45 signals (left), DB-9 devices (center), and other DB-25 devices (right),
+using the proper adapters. (Make sure that the RJ-45 wiring schema is the same
+for all of the adapters, and for testing the RJ-45 case you must be sure that 
+the adapter on the tracer has the same RJ-45 schema as the device being checked.)</p>
+
+<P><TABLE BORDER=1 width="100%">
+   <TR>
+      <TD width=200>
+         <P><CENTER><IMG SRC="test1.gif" WIDTH=151 HEIGHT=25 ALIGN=bottom>
+         </CENTER>
+      </TD><TD width=200>
+         <P><CENTER><IMG SRC="test2.gif" WIDTH=171 HEIGHT=25 ALIGN=bottom>
+         </CENTER>
+      </TD><TD width=200>
+         <P><CENTER><IMG SRC="test3.gif" WIDTH=172 HEIGHT=26 ALIGN=bottom>
+         </CENTER>
+      </TD></TR>
+</TABLE></P>
+
+<P>&nbsp;</P>
+
+<P>An unconnected tracer (left), and the tracer connected to a DTE device 
+(right)<br><TABLE BORDER=1>
+   <TR>
+      <TD WIDTH=228>
+         <P><CENTER><IMG SRC="tracer1.gif" WIDTH=165 HEIGHT=157 ALIGN=bottom>
+         </CENTER>
+      </TD><TD>
+         <P><CENTER><IMG SRC="tracer2.gif" WIDTH=286 HEIGHT=157 ALIGN=bottom>
+         </CENTER>
+      </TD></TR>
+</TABLE></P>
+
+<P>&nbsp;</P>
+
+<P>A tracer connected to a DCE device<br><TABLE BORDER=1>
+   <TR>
+      <TD WIDTH=319>
+         <P><CENTER><IMG SRC="tracer3.gif" WIDTH=285 HEIGHT=157
+         X-SAS-UseImageWidth X-SAS-UseImageHeight ALIGN=bottom>
+         </CENTER>
+      </TD><TD>
+         <P>
+      </TD></TR>
+</TABLE></P>
+
+<P><CENTER>A tracer between a modem (online, DCD asserted) and a DTE device<br>
+<IMG SRC="tracer4.gif" WIDTH=403 HEIGHT=157 ALIGN=bottom></CENTER></P>
+
+<P>&nbsp;</P>
+
+<P>A tracer connected to another DCE device (left), and a DB-9 DataTran tracer
+(right)<br><TABLE BORDER=1>
+   <TR>
+      <TD WIDTH=331>
+         <P><CENTER><IMG SRC="tracer5.gif" WIDTH=286 HEIGHT=157 ALIGN=bottom>
+         </CENTER>
+      </TD><TD>
+         <P><CENTER><IMG SRC="tracer6.gif" WIDTH=77 HEIGHT=165 ALIGN=bottom>
+         </CENTER>
+      </TD></TR>
+</TABLE></P>
+
+<p>
+<hr align=center width="80%">
+</p>
+
+<P><CENTER><TABLE BORDER=5 bgcolor="ffcc99" width="75%" padding=5>
+   <TR>
+      <TD>
+         <P><FONT COLOR="#663300"><B>NOTICE:</B> Most of the pages, 
+         articles, and tutorials on this website are
+         copyrighted works. You may make 'deep links' to various
+         pages. (If you let me know which page(s) you are linking to,
+         I'll let you know if I move the page(s) during updates.)
+         Please send me email if you wish to republish any material,
+         or use it on your own website.</FONT></P>
+      </TD></TR>
+</TABLE></CENTER></P>
+
+
+<p><center><a href="http://www.nvu.com">
+<img style="border: 0px solid ; width: 80px; height: 15px; float:
+"src="http://www.nvu.com/images/madewithNvu80x15dark.png"
+alt="Made with Nvu"></a></center></p>
+
+<p><center>Copyright 1996-2007,
+<A HREF="http://www.esperanto.org/person/HARRIS_Dacxjo/">David K. Z.
+Harris, N6UOW</A>&nbsp;&nbsp;
+<a href="http://www.linkedin.com/in/consoleteam" >
+<img src="http://www.linkedin.com/img/webpromo/btn_profile_bluetxt_80x15.gif"
+width="80" height="15" border="0" alt="View David K. Z. Harris's profile on
+LinkedIn"></a><br>
+Questions? Comments? Additions? Email <B>consoles</B> at
+<B>conserver.com</B>.<BR>
+
+<FONT COLOR="#cc0000">(Don't harvest my address, I don't want
+SPAM!)</FONT><BR>
+
+<A HREF="../iloj.html">How does he do it</A>? And
+<A HREF="../about.html">Why</A>?</CENTER></P>
+
+
+
+</BODY>
+</HTML>

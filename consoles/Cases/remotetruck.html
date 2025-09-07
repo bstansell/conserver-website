@@ -1,0 +1,268 @@
+<!--This file created 3/14/05 11:17 PM by Claris Home Page version 2.0-->
+<HTML>
+<HEAD>
+   <TITLE>Zonker's Console Cases: Mobile Remote Network</TITLE>
+   <META NAME=GENERATOR CONTENT="Claris Home Page 2.0">
+   <meta name=keyword content="Serial Console, zonker, N6UOW,
+    David K. Z. Harris, conserver">
+</HEAD>
+
+<BODY TEXT="#336600" BGCOLOR="#FFFFFF">
+
+
+<p><center><table border=0 width="98%">
+   <tr>
+      <td width="50%">
+         <P><center><a href="http://www.conserver.com"><img
+         src="../conserver-sm.jpg" alt="Conserver.com logo" width=147
+         height=47 border=0 align=middle></A></center>
+      </td><td width="50%">
+         <p><center>Brought to you by;<br>
+
+         <a href="http://www.conserver.com/">www.conserver.com</a></center>
+      </td>
+   </tr>
+</table></center>
+
+
+<H2 align=CENTER>Zonker's Console Cases: Mobile Remote Network</H2>
+
+<H4 align=CENTER>http://www.conserver.com/consoles/Cases/remotetruck.html<BR>
+
+(updated: 
+Mar 25, 2005, 12:51 pm)</H4>
+
+<P><TABLE BORDER=1 width="90%" align=center>
+   <TR>
+      <TD width="45%">
+         <P><CENTER><B>Case Files Available<BR>
+
+         </B><A HREF="remotetruck.html">Support for a mobile site</A></p>
+      </TD></TR>
+</TABLE></P>
+
+
+
+<P><TABLE BORDER=1 width="90%" align=center>
+   <TR>
+      <TD width="45%">
+         <P><CENTER><B>Table of Contents<BR>
+
+         </B><A HREF="#overview">Case Overview</A><BR>
+
+         <A HREF="SatDemoInfo.html">Original Project Page</A><BR>
+      </TD></TR>
+</TABLE></P>
+
+<A NAME="overview"></A><H3>Case Overview</H3>
+
+<P>This page covers a hypothetical case, based on a real testbed.
+That is, I was on a team, tasked with designing a rolling demo
+truck/trailer, which would need to provide 'dialup' connectivity
+to a home network, for telco-interfaced products (without needing
+the truck to back over a telephone booth to get dialtone).</p>
+
+<p>The testbed was designed, and tested, inside of two weeks.
+During that time, we also brainstormed how this remote site
+might need to be supported, and possibly remotely managed using
+the satellite network connectivity. The images on this page were
+created for the <a href="SatDemoInfo.html">original project</a>
+in 2001.</p>
+
+<p>As a concept, the truck would have GPS on-board, to assist the
+the driver with navigation. While parked, the trailer would use a 
+small-aperture satellite dish, which would automatically acquire it's 
+sattelite.  The GPS would help it get a start, but the dish (with it's
+controlling computer) should be able to find the correct satellite
+without the GPS. Once the satellite was acquired, the modem in the
+truck should be able to synch with the modem at the main data center,
+establish a high-speed data link to the trailer, and connect with
+the dial-up Point-of-Presence gear on the trailer. The demo consisted
+of a dialup device in the trailer 'calling' into the P.O.P. gear
+in the trailer, which would then use the satellite link to pass
+the network traffic as needed.</p>
+
+<P><TABLE BORDER=0 WIDTH="100%">
+   <TR>
+      <TD>
+         <P><B>Physical Communications Overview</B></P>
+         
+         <p>The 'Network' at the top was within the firewall of
+         an ISP, rather than using a VPN from a commercial satellite
+         uplink/downlink providers network.</p>
+
+         <p>The link speed was basically T-1 (1.544 Mbps), and we
+         would not see significant traffic on the ethernet interfaces
+         on the routers on each end of the link, so we pressed a
+         pair of Cisco 2500 routers into service for the link.</p>
+
+         <P>The tesbed used RF up-converters between two satellite 
+         interfaces. These were essentially QPSK modems,
+         and were interfaced to the network routers as though they
+         were a T-1 CSU/DUS-type interface. (In the real world, 
+         the upconverters would be replaced by a pair of satellite 
+         uplink transmitters and downlink receivers.)</P>
+
+         <p>Because the devices being demonstrated in the field had
+         standard <b>POTS</b> (Plain Old Telephone Service) interfaces,
+         we needed to put a phone system and dialup Point of Presence
+         in the remote truck. This was accomplished using a 
+         <a href="http://www.gkinc.com/">Gordon Kapes</a> 
+         <b><a href="http://www.gkinc.com/TelephonySim.htm">System 930</a></b>
+         telephone system simulator, and an <b>Ascend Pipeline NAS 2</b>
+         (later acquired by Lucent Technologies), because these were
+         pieces that we had readily at hand.</p>
+
+         <p>The Ascend NAS was used in an earlier version of the ISP
+         dialup network, so the network was ready to treat the NAS
+         as though it were an older Point Of Presence. The 'network-side'
+         router was connected to the ISP network subnet where the
+         other dialup connections came together.</p>
+
+         <p>The Gordon Kapes device could be provisioned to require
+         'dial 9' access, or need '1+' long-distance dialing, so we
+         could provison the test trunks for various situations, as
+         might be required of the demonstration. (This was a way of
+         future-proofing the telco-side needs in the truck.)</p>
+
+         <p>The dialtone of the Gordon Kapes was contained withing the
+         confines of the truck, so the demo truck 'staff' could not use
+         it for personal calls. This would be handled using cell-phones
+         or land-lines. (The datalink would, however, provide the truck
+         with email capability.)</p>
+      </TD><td width=175>
+         <p><center><img src="satdemo1.gif"></center></p>
+      </td></TR>
+</TABLE></P>
+
+<p>With the network connectivity established, there were issues 'above
+the application layer' that needed to be addressed. We didn't think
+that the truck driver would be a network or systems administrator,
+so we needed to provide on-truck diagnostics and documentation, as
+well as considering how the Networks Operations Center (NOC) staff
+might be able to manage and support the equipment in the truck, once
+the satellite link was established.</p>
+
+<P><TABLE BORDER=0 WIDTH="100%">
+   <TR>
+      <TD>
+         <P><B>Mobile Site Network Management Overview</b></p>
+
+         <p>This image showed the 'Logical View' ow what the NOC
+         might be called upon to manage the equipment in the 
+         remote truck. This is only the equipment on the 'far
+         side' of the satellite link, since the 'near side'
+         components would always be attached to the network,
+         and manageable with the normal means (SNMP, Conserver,
+         Cricket, and specialty tools.)</p>
+
+         <p>This all depended on the satellite link coming up
+         normally, providing a working data path between the
+         remote site and the regular network...</p>
+
+         <p>It was determined that we should have an on-board 
+         PC, with the 'local documentation' as HTML docs on
+         the hard disk, and to host the email program, and
+         any diagnostic tools for the satellite gear. (The
+         platform choice was initially chosen due to the
+         relationship of the ISP network to a large company
+         that provides operating systems for Intel platforms.)</p>
+
+         <p>As a secondary consideration, we discussed having
+         a Diagnostic P.C. as well, likely running some flavor
+         of Linux, to provide a local web server (as a test
+         target for the dial-up set-top boxes, in case the 
+         satellite link could not be established), and also
+         running tools, such as Conserver and PERL, to help
+         monitor and log the on-truck equipment (even if the
+         link was not running). The installation would include
+         upgrading the remote router from the Cisco 2500 series
+         to a Cisco 3620 (or similar, having one ethernet, and 
+         a 16-port async interface, to provide console connections).</p>
+
+         <p>There was an option to use a 'debug' dial-up device, 
+         which would also allow us to capture errors from the 
+         dial-up Set Top Box (STB), in case there was a need to
+         find out what the STB was thinking...</p>
+      </TD><td width=175>
+         <p><center><img src="satdemo2.gif"></center></p>
+      </td></TR>
+</TABLE></P>
+
+<p>Using <a href="http://www.conserver.com/">Conserver</a> in 
+&quot;<b>distributed mode</b>&quot; meant that the Diag PC
+could perform the local logging for all on-board serial ports
+that would be monitored, allowing us to have some forensics 
+to see what the devices might have been complaining about
+while the satellite link was down. <b>Plus</b>, when the
+link was established, the NOC would have been notified (via
+SNMP) that the remote truck was on-line, and then the NOC
+could use their local conserver to access the consoles on
+the truck, should the need arise.</p>
+
+<p>By splitting the serial line from the on-truck GPS unit,
+the router, or the diag PC could use this satellite-based
+time reference to provide a high-stratum NTP time source
+for the equipment on the truck, to improve the accuracy
+of timestamps used in the logging on Conserver. This would
+make it easier to coorelate timestamps from logs on-board
+the truck with logs in the data center, in cases where
+file access audits were needed (perhaps to find out why
+a particular URL was denied, or a STB command was refused).</p>
+
+<p>For troubleshooting the satellite link, we might need
+to wait for the link to be established, but we could then 
+find out what problem(s) had been the cause of the trouble,
+by combing through the logs for the satellite modem, the
+router, and the satellite control PC.</p>
+
+<p>The image below shows the testbed on my desk. The routers 
+and the satellite modems are on the left side of the PC, and
+the Gordon Kapes phone simulator is holding up the Ascend NAS
+on the right side of the PC.</p>
+
+<p><center><img src="../zonkerofc.jpg"></center></p>
+
+<p>
+<hr align=center width="80%">
+</p>
+
+<P><CENTER><TABLE BORDER=5 bgcolor="ffcc99" width="75%" padding=5>
+   <TR>
+      <TD>
+         <P><FONT COLOR="#663300"><B>NOTICE:</B> Most of the pages, 
+         articles, and tutorials on this website are
+         copyrighted works. You may make 'deep links' to various
+         pages. (If you let me know which page(s) you are linking to,
+         I'll let you know if I move the page(s) during updates.)
+         Please send me email if you wish to republish any material,
+         or use it on your own website.</FONT></P>
+      </TD></TR>
+</TABLE></CENTER></P>
+
+
+<p><center><a href="http://www.nvu.com">
+<img style="border: 0px solid ; width: 80px; height: 15px; float:
+"src="http://www.nvu.com/images/madewithNvu80x15dark.png"
+alt="Made with Nvu"></a></center></p>
+
+<p><center>Copyright 1996-2007,
+<A HREF="http://www.esperanto.org/person/HARRIS_Dacxjo/">David K. Z.
+Harris, N6UOW</A>&nbsp;&nbsp;
+<a href="http://www.linkedin.com/in/consoleteam" >
+<img src="http://www.linkedin.com/img/webpromo/btn_profile_bluetxt_80x15.gif"
+width="80" height="15" border="0" alt="View David K. Z. Harris's profile on
+LinkedIn"></a><br>
+Questions? Comments? Additions? Email <B>consoles</B> at
+<B>conserver.com</B>.<BR>
+
+<FONT COLOR="#cc0000">(Don't harvest my address, I don't want
+SPAM!)</FONT><BR>
+
+<A HREF="../iloj.html">How does he do it</A>? And
+<A HREF="../about.html">Why</A>?</CENTER></P>
+
+
+
+</BODY>
+</HTML>

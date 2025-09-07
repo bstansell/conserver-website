@@ -1,0 +1,481 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <title>Zonker's APC UPS Console Clues</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+  <meta name="GENERATOR" content="Nvu">
+  <meta name="keyword" content="APC, UPS, SmartUPS, RS232, RS-232, EIA-232, Cisco, 
+  console server, avocent, cyclades, ACS32, ACS48, Opengear CM, Digi CM, uAnnex, 
+  micro annex, Xylogics, Xyplex, MRV, iTouch, in-reach, apcupsd, how-to, cabling">
+  <BODY TEXT="#336600" BGCOLOR="#FFFFFF">
+<p><center><table border=0 width="98%">
+   <tr>
+      <td width="40%">
+         <P><center><a href="http://www.conserver.com"><img
+         src="../conserver-sm.jpg" alt="Conserver.com logo" width=147
+         height=47 border=0 align=middle></A></center>
+      </td><td width="20%">
+      <center><a href="http://www.conserver.com/consoles/"><img
+         src="../home-marble.gif" alt="link to the Consoles home page" width=47
+         height=50 border=0 align=middle></A></center>
+      </td><td width="40%">
+         <p><center>Brought to you by;<br>
+
+         <a href="http://www.conserver.com/">www.conserver.com</a></center>
+      </td>
+   </tr>
+</table></center>
+
+</head>
+
+<body>
+<h2><center>Zonker's APC UPS Console Clues</center></h2>
+
+<h4>
+<center>http://www.conserver.com/consoles/Clues/cons-apc.html<br>
+
+(updated:
+Jul 14, 2011, 09:26 am)</center>
+
+</h4>
+
+<p>I've been a happy UPS user for many, many years now, both at home
+and at work. I learned from the mistakes of others, and I've got a
+collection of UPSs protecting my home equipment, and the Console Lab.
+While I've worked with a few different vendors, I've got a preference
+for the units from American Power Conversion (APC), because many units
+have serial ports and they can report about the condition of the power
+coming into the UPS. I find this information invaluable, but the APC
+serial interface is NOT directly (i.e. 'pin-for-pin') compatible with
+the 'de-facto' DE-9
+RS-232 serial interface. This page is intended to share information I
+have found about the APC interface, and to explain how to connect this
+useful interface to your console servers. (I've also used the SNMP
+modules for the SmartSlot interfaces on older Matrix series units, but
+this page will not cover the use of SNMP over Ethernet conenctions.)</p>
+
+<p><center><a name="top"></a><b>Table of
+Contents</b><br>
+<a href="#apc-de9">The APC Smart serial interface</a><br>
+<a href="#adapters">RJ-45 Console Server Cable Diagrams</a><br>
+<a href="#urls">Useful off-site URLs</a><br>
+<a href="#speed">Serial Port Settings</a><br>
+<a href="#credits">Author Credits</a></center></p>
+
+<p></p>
+<hr width="90%">
+<p></p>
+
+<a name="/Signals/apc-de9"></a>
+<h3>APC SmartUPS Console Signals</h3>
+
+<p><table style="text-align: left; width: 100%;" border="0" cellpadding="2" cellspacing="2">
+  <tbody>
+    <tr>
+
+      <td><p>The signals for the APC SmartUPS series UPSs is shown at the right. You probably 
+      noticed first that there are no handshaking and flow control leads. You probably 
+      presumed that the ground and data leads were on the 'normal' pins. Surprise!</p>
+
+      <p>Notice the other, non-data pins again... the <span style="font-weight: bold;">Low 
+      Battery</span> and the <span style="font-weight: bold;">No AC Input</span> output 
+      signals could be used to drive an alarm system, and you could wire your own 'Big Red 
+      Switch' if you like, using the <span style="font-weight: bold;">Power Off</span> 
+      command input signal. (Or even a 'Big Green Switch', but that's outside the scope 
+      of this page.)</p>
+
+      <p>In short, you only need a 3-wire connection between the APC UPS
+      console; transmit and receive data and ground only.</p></td>
+
+      <td style="text-align: center;"><img style="width: 97px; height: 171px;" alt="APC UPS 
+      console signals" src="../Signals/sig-apcups.jpg" align="middle"></td>
+
+    </tr>
+  </tbody>
+</table></p>
+
+<p>APC supplies a <a href="http://www.apc.com/products/family/index.cfm?id=59">special
+serial cable</a> with each UPS that has a serial console, because their interface
+doesn't match the de-facto standard initially used on the old IBM PC-AT. 
+<b>I recommend that you mark the cable, and hang onto it.</b></p>
+
+<p><table style="text-align: left; width: 100%;" border="0" cellpadding="2" cellspacing="2">
+  <tbody>
+    <tr>
+
+      <td style="text-align: center;"><img style="width: 123px; height: 149px;" alt="APC UPS to 
+      DE-9 DCE" src="../Signals/apc-to-dce.jpg" align="top"></td>
+
+      <td>
+      <p>If you use either a 'straight-through', or a 'null-modem' DE-9 cable to connect 
+      an APC UPS to a 'normal' DE-9 interface, the UPS will see signals from the attached 
+      device. This is why you need a specialty cable or adapter.</p>
+
+      <p>In the case of the DTE cable (at right), the TD signal from the attached devices 
+      will cause the APC to shut off power to the UPS outlets immediately, and you won't 
+      be able to command it on with the front panel switches, until you disconnect the
+      cable from the UPS or the host.</p>
+
+      </td>
+
+      <td style="text-align: center;"><img style="width: 124px; height: 148px;" alt="APC UPS to 
+      DE-9 DTE" src="../Signals/apc-to-dte.jpg" align="top"></td>
+
+    </tr>
+  </tbody>
+</table></p>
+
+<p></p>
+<hr width="90%">
+<p></p>
+
+<a name="adapters"></a>
+<h3>Specialty adapters for Console Servers</h3>
+
+<p>If you want to connect the UPS to a console server, I'd
+suggest making a special adapter to connect with
+your particular console server RJ-45 wiring scheme.&nbsp;</p>
+
+<p>While you could make a specialty cable to go directly from
+your console server to the UPS, my suggestion is to make an RJ45-to-DE9
+adapter. While you can argue that adding an adapter to the chain will
+add one more possible point of failure (for communications between the UPS 
+and the console server), I'll counter with these points;</p>
+
+<ul>
+  <li> the risk is small, especially if the adapter is screwed
+onto the DE-9 of the UPS</li>
+
+  <li>you can use a stock CAT-3 or CAT-5 cable to conect the
+adapter to your console server</li>
+
+  <li>using an adapter on the UPS will allow you to connect the
+UPS quickly to
+another device for diagnostics, if that becomes necessary. (For
+example; using an APC diagnostic or configurationtool on a laptop, for
+instance, and then reconnecting to the console server for monitoring.)</li>
+</ul>
+
+<p>In the end, the decision is yours. My diagrams show an
+RJ45 female connection for building the adapter. You can use the same
+pinouts and use an RJ45 male if you are going to make a direct cable.
+(If you choose to make a cable, I suggest using an 8-wire cable, so
+that the RJ45 male slug will hold the cable securely, and cut the
+unused leads at the DE-9 end of the cable.)&nbsp;</p>
+
+<p>For a console connection (two-way data), you only need to
+connect the signals shown as <span style="font-weight: bold;">solid
+black lines</span>.
+(And "nc" stands for "No Connection", so no pin number is given.) The
+pink dashed lines on the APC UPS output leads are only needed if you
+are going to try to use the flow control and handshaking inputs of the
+console server to track these signals.</p>
+
+<p><span style="font-weight: bold;">Make Sure You
+LABEL Your Adapter</span> (or cable), so others will know which
+RJ45 wiring scheme is in use! The Brother label maker folks has some
+"strong adhesive" versions of their TZ-style label tapes, and they are
+excelent for this purpose.</p>
+
+<table style="text-align: left; width: 100%;" border="0" cellpadding="2" cellspacing="2">
+  <tbody>
+    <tr>
+
+      <td style="text-align: center;"><img style="width: 94px; height: 215px;" alt="Cisco 
+      Console to APC UPS" src="APC/link-ciscoc-apc.jpg"></td>
+
+      <td style="text-align: center;"><img style="width: 94px; height: 215px;" alt="Cisco 
+      Patch Panel to APC UPS" src="APC/link-ciscop-apc.jpg"></td>
+
+      <td style="text-align: center;"><img style="width: 97px; height: 215px;" 
+      alt="Cyclades/Avocent to APC UPS" src="APC/link-cyclades-apc.jpg"></td>
+
+      <td style="text-align: center;"><img style="width: 97px; height: 215px;" alt="Digi CM 
+      to APC UPS" src="APC/link-digicm-apc.jpg" align="top"></td>
+
+    </tr>
+  </tbody>
+</table>
+<br>
+<table style="text-align: left; width: 100%;" border="0" cellpadding="2" cellspacing="2">
+  <tbody>
+    <tr>
+
+      <td style="text-align: center;"><img style="width: 97px; height: 215px;" alt="Chase IOLAN 
+      Rack Plus to APC UPS" src="APC/link-iolan-apc.jpg" align="top"></td>
+
+      <td style="text-align: center;"><img style="width: 101px; height: 215px;" alt="Opengear CM 
+      to APC UPS" src="APC/link-opengearcm-apc.jpg" align="top"></td>
+
+      <td style="text-align: center;"><img style="width: 100px; height: 215px;" alt="MRV / 
+      iTouch / Xyplex to APC UPS" src="APC/link-xyplex-apc.jpg" align="top"></td>
+
+      <td style="text-align: center;"><img style="width: 94px; height: 215px;" alt="3Com / 
+      USR to APC UPS" src="APC/link-usr-apc.jpg"></td>
+
+    </tr>
+  </tbody>
+</table>
+
+<p></p>
+<hr width="90%">
+<p></p>
+
+<a name="urls"></a>
+<h3>Other sources of APC information</h3>
+
+<p>The Internet is a 'fluid' place, and I don't knnow how long
+each of the URLs below will last. I've included summary information for
+each link, so you can try to search for the pages if the link(s) seem
+broken.</p>
+
+<p>There is an application, for use with Linux OS machines,
+called <a href="http://apcupsd.com/"><span style="font-weight: bold;">apcupsd</span></a>,
+and the project had pointers to some useful How-To pages which have evolved into a good 
+<a href="http://apcupsd.com/manual/index.html">on-line manual</a>, including
+pointers to <a href="http://apcupsd.com/manual/Overview_Serial_Inter_UPSes.html">cabling 
+information</a>, and a useful <a href="http://matou.sibbald.com/cgi-bin/multimon.cgi">demo 
+page</a>. Their <a href="http://www.apcupsd.org/manual/Testing_Apcupsd.html">testing apcupsd 
+page</a> also has some useful colues to make sure your second-hand UPS is configured properly.</p>
+
+<p style="margin-left: 40px;">
+<span style="font-style: italic; color: rgb(204, 0, 0); font-weight: bold;">Remember,
+if you are testing your UPS, you want the computer/device you are
+controlling/monitoring from to be on independent power, so you don't
+shut off your monitor accidentally!</span></p>
+
+<p>The apcupsd on-line manual has a section that explains which 
+<a href="http://apcupsd.com/manual/Supported_UPSes_Cables.html#upstypes">UPS types</a> use the 
+<span style="font-weight: bold;">APC Smart protocol</span>, and the 
+<a href="http://apcupsd.com/manual/APC_smart_protocol.html">APC smart protocol page</a> has 
+clues for the serial communications itself, for the application-side hackers.</p>
+
+<p>The <a href="http://losalamos.redhawk.org/">Redhack.org</a> site has a few older pages 
+that discuss the <a href="http://losalamos.redhawk.org/index.php/content/view/19/9/">APC 
+cabling</a> 
+(<a href="http://losalamos.redhawk.org/index.php/content/view/19/9/index.php?option=com_content&task=view&id=19&Itemid=9">deep
+link</a>)for various APC UPSs, in relation to early versions of apcupsd.</p>
+
+<p>There is also a useful pinouts page in russia 
+(<a href="http://pinouts.ru/pin_Devices.shtml">pinouts.ru</a>)
+with a UPS section that includes APC 
+(<a href="http://pinouts.ru/Devices/smartups_pinout.shtml">Smart</a>
+and <a href="http://pinouts.ru/Devices/apc_backups_office_pinout.shtml">dumb</a>) as 
+well as other vendor's devices. (I was cautious
+about visiting the site, but I've used it a number of times now with no
+malware troubles. Use caution anyway...always practice safe hex.)</p>
+
+<p>Besides searching for apcupsd serial cable, you can also look for
+information under NUT (for 'Network UPS Tools') which are available for
+a few Linux OSs. I found a basic page about 
+<a href="http://www.engadget.com/2006/07/25/how-to-network-your-ups/">using
+ NUT with an APC UPS</a> on engadget</p>
+
+<p></p>
+<hr width="90%">
+<p></p>
+
+<a name="speed">
+<h3>Sperial Port Speeds</h3>
+
+<p>(<i>As a Best Practice, always ensure that your physical link is in place
+before you waste time on serial port settins. </i>)</p>
+
+<p>I've run into a few APC UPS ports. They've responded at <b>2400-8-N-1</b>, but
+not at 9600 bps. I've found articles that say to try 19,200 bps, but I haven't
+found any that respond at that speed. I agree that my sample set is relatively
+small, and my not be representative of the majority of APC serial ports deployed
+to date, but it is my only experience so far.</p>
+
+<p>By all means, if 2400 8N1 doesn't seem to work for you, try other settings.
+(After you have made sure that your physical link is correct and connected!)</p>
+
+<p>Now that you have a <b>User Name:</b> prompt, try the default <b>apc</b> 
+(with the default password of <b>apc</b>.</p>
+
+<p>Jon Steiger has a good web page for the 
+<a href="http://www.jonsteiger.com/WWW/AP9605/index.html">APC SNMP module</a>,
+which mentions some different serial speed possibilities, and also discusses 
+APC's password recovery process.</p>
+
+<p>Jeff Liebermann posted some 
+<a href="http://aplawrence.com/Bofcusm/472.html">ASCII art cable diagrams</a>, 
+and mentions that some APC SNMP adapters will let you change the serial port 
+speed, but the default is 2400 bps.</p>
+
+<p></p>
+<hr width="90%">
+<p></p>
+
+<a name="rpdu-signals"></a>
+<h3>APC Remote PDU Serial Console Signals</h3>
+
+<p><table style="text-align: left; width: 100%;" border="0" cellpadding="2" cellspacing="2">
+  <tbody>
+    <tr>
+      <td style="text-align: center; width: 100;"><img style="width: 68px; height: 137px;" alt="APC 
+      Remote PDU serial interface" src="../Signals/sig-apcrpdu.jpg" align="top"></td>
+
+      <td><p>These signals are derived from my testing of an APC model <b>AP7868</b>
+      smart PDU. I was able to make a 3-wire connection to a <b>Lantronix ETS32PTR</b>
+      terminal server. There is a small voltage present on the RJ-13 pins 1 and 6. I'm not 
+      sure if it is the same voltage bus (maybe just for a pull-up signal?).</p></td>
+    </tr>
+  </tbody>
+</table>
+<br>
+<table>
+  <tbody>
+    <tr>
+      <td>
+      <ul>
+        <li><i>Links that I used to get started;</i></li>
+        <ul>
+          <li><a href"http://www.luxnet.ch/computer/apccable.php">http://www.luxnet.ch/computer/apccable.php</a></li>
+          <li><a href="http://www.opengear.com/APC%207900%20connection.pdf">http://www.opengear.com/APC%207900%20connection.pdf</a></li>
+          <li><a href="http://pinouts.ru/DevicesCables/apc_940-0144a_cable_pinout.shtml">http://pinouts.ru/DevicesCables/apc_940-0144a_cable_pinout.shtml</a></li>
+          <li><a href="http://acentury.info/archives/apc-cable-940-0144">http://acentury.info/archives/apc-cable-940-0144</a></li>
+        </ul>
+      </ul>
+      <p>As you can see, there are tidbits of information, and some of it is conflicting. Unfortunately,
+      this page will only add to the mix. Since I didn't find a single <b>940-0144A</b> cable around
+      a 120-plus PDU installation, I cannot confirm the pinouts shown in these other (offsite) links.
+      However, I will comment on some of the inconsistencies that led me to my experiment;</p>
+      <ul>
+        <li>I've had very good luck using info from <b>pinouts.ru</b>
+        <ul>
+          <li>I was initially cautious about visiting a Russian domain, but have had no troubles with that site</li>
+        </ul>
+        <li>I was really happy to find the PDF at <li><a href="http://www.opengear.com/APC%207900%20connection.pdf">Opengear</a>
+        <ul>
+          <li>The info at the bottom of the page about looping RJ-14 pins 1 and 5 seems to be incorrect.</li>
+          <li>It looks like the original cables connect RJ14 pins 1 and 6 to Chassis Ground on the PC</li>
+          <li>Since this wasn't tying to Signal Ground, I decided to try without any connections...</li>
+        </ul>
+      </ul>
+      <p>Armed with enough examples to have a starting point (yes - it is RS-232, there are two possible Ground pins),
+      I then took out my DVM (digital voltmeter) and my 
+      <a href="http://files.siemon.com/int-download-product-specsheets-us/tt_test-adapters_ss.pdf">Siemon MODAPT</a>,
+      to try to verify signals, and reconcile the differences that I'd read about, using one of our APC model <b>AP7868</b>
+      PDUs. Here's what I found;</p>
+      <ul>
+        <li>Pin1 -2v (in reference to Pin2)</li>
+		<li>Pin2 GND (0v potential to Pin5)</li>
+		<li>Pin3 TxD output (-5.5v in reference to Pin2)</li>
+		<li>Pin4 RxD input (0.2V in reference to Pin2)</li>
+		<li>Pin5 GND (0v potential to Pin2)</li>
+		<li>Pin6 -2v (in reference to Pin2)</li>
+      </ul>
+      <p>I still need to try to determine if the Ground on RJ-14 Pin 2 is the same as Pin 5. (That is, zero-ohm continuity,
+      or some other resistance/impedance.) I also don't know whether tying RJ-14 Pin 1 and Pin 6 together accomplishes
+      any electrical/logical changes. For now, letting both Pin 1 and Pin 6 float (no connection) has not made a measurable
+      difference for an RS-232 connection.<br><i>(Other notes in 
+      <a href="http://consoleteam.blogspot.com/2009/05/look-at-all-pretty-lights.html#links">my blog</a>.)</i></p>
+      
+      <p>This has been tested with the <b>AP7868</b> rPDU, and I'll have an <b>AP7900</b> to test soon.</p></td>
+    </tr>
+  </tbody>
+</table></p>
+
+<a name="rpdu-cables"></a>
+<h3>Specialty cables between the rPDU and Console Servers</h3>
+
+<p>(Lantronix Users can use the Cisco Console adapters. So can Opengear users, if your device 
+uses the Cisco wiring schema.)</p>
+
+<table style="text-align: left; width: 100%;" border="0" cellpadding="2" cellspacing="2">
+  <tbody>
+    <tr>
+
+      <td style="text-align: center;"><img style="width: 92px; height: 135px;" alt="Cisco 
+      Console to APC rPDU" src="APC/link-apcrpdu-ciscoc.jpg"></td>
+
+      <td style="text-align: center;"><img style="width: 92px; height: 135px;" alt="Cisco 
+      Patch Panel to APC rPDU" src="APC/link-apcrpdu-ciscop.jpg"></td>
+
+      <td style="text-align: center;"><img style="width: 92px; height: 135px;" alt="Cyclades/Avocent 
+      Console Server to APC rPDU" src="APC/link-apcrpdu-cyclades.jpg"></td>
+
+      <td style="text-align: center;"><img style="width: 92px; height: 135px;" alt="Digi CM 
+      Console Server to APC rPDU" src="APC/link-apcrpdu-digicm.jpg" align="top"></td>
+
+    </tr>
+  </tbody>
+</table>
+<br>
+<table style="text-align: left; width: 100%;" border="0" cellpadding="2" cellspacing="2">
+  <tbody>
+    <tr>
+
+      <td style="text-align: center;"><img style="width: 92px; height: 135px;" alt="IOLAN 
+      Console Server to APC rPDU" src="APC/link-apcrpdu-iolan.jpg"></td>
+
+      <td style="text-align: center;"><img style="width: 92px; height: 135px;" alt="Opengear CM 
+      Console Server to APC rPDU" src="APC/link-apcrpdu-opengearcm.jpg"></td>
+
+      <td style="text-align: center;"><img style="width: 92px; height: 135px;" 
+      alt="Zylogics microAnnex to APC rPDU" src="APC/link-apcrpdu-uannex.jpg"></td>
+
+      <td style="text-align: center;"><img style="width: 92px; height: 135px;" alt="Digi CM 
+      to APC rPDU" src="APC/link-digicm-apc.jpg" align="top"></td>
+
+    </tr>
+  </tbody>
+</table>
+<br>
+<table style="text-align: left; width: 100%;" border="0" cellpadding="2" cellspacing="2">
+  <tbody>
+    <tr>
+
+      <td style="text-align: center;"><img style="width: 92px; height: 135px;" alt="USR/3Com 
+      Console to APC rPDU" src="APC/link-apcrpdu-usr.jpg"></td>
+
+      <td style="text-align: center;"><img style="width: 92px; height: 135px;" alt="Xyplex/iTouch/MRV
+      Console Server to APC rPDU" src="APC/link-apcrpdu-xyplex.jpg"></td>
+
+      <td style="text-align: center;"><img src="../porj45m.gif" alt="Male rj45 signal pinouts" align="top"><br>
+      <img src="../porj45f.gif" alt="Female rj45 signal pinouts" align="top" width="92"></td>
+
+      <td style="text-align: center;"><img src="../porj13m.jpg" align="top" alt="Male rj13 signal pinouts"><br>
+      <img src="../porj13f.jpg" align="bottom" alt="Female rj13 signal pinouts"></td>
+    </tr>
+  </tbody>
+</table>
+
+<p>
+<hr align=center width="80%">
+</p>
+
+<A NAME="credits"></a>
+<P><CENTER><TABLE BORDER=5 bgcolor="ffcc99" width="75%" padding=5>
+   <TR>
+      <TD>
+         <P><FONT COLOR="#663300"><B>NOTICE:</B> Most of the pages, 
+         articles, and tutorials on this website are
+         copyrighted works. You may make 'deep links' to various
+         pages. (If you let me know which page(s) you are linking to,
+         I'll let you know if I move the page(s) during updates.)
+         Please send me email if you wish to republish any material,
+         or use it on your own website.</FONT></P>
+      </TD></TR>
+</TABLE></CENTER></P>
+
+<p><center>Copyright 1996-2011,
+<A HREF="http://www.esperanto.org/person/HARRIS_Dacxjo/">David K. Z.
+Harris, N6UOW</A>&nbsp;&nbsp;
+<a href="http://www.linkedin.com/in/consoleteam" >
+<img src="http://www.linkedin.com/img/webpromo/btn_profile_bluetxt_80x15.gif"
+width="80" height="15" border="0" alt="View David K. Z. Harris's profile on
+LinkedIn"></a><br>
+Questions? Comments? Additions? Email <B>consoles</B> at
+<B>conserver.com</B>.<BR>
+
+<FONT COLOR="#cc0000">(Don't harvest my address, I don't want
+SPAM!)</FONT><BR>
+
+<A HREF="../iloj.html">How does he do it</A>? And
+<A HREF="../about.html">Why</A>?</CENTER></P>
+
+
+</body>
+</html>

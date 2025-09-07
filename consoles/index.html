@@ -1,0 +1,476 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <title>Zonker's Greater Scroll of Console Knowledge</title>
+  <meta name="keyword" content="Serial Console, Cisco, IOLAN, Xylogics,
+micro annex, micro-annex, async, conserver, RJ-45, rj45 adapter,
+RS-232, TealDoc, Palm Pilot, Xyplex, Americable, console, zonker,
+Chase Research, computone, 1600, 1800, 3600, 2600, NM-32A,
+cyclades, aurora, digi, Bay 2000, Nortel, NorTel, Vacik, N6UOW,
+lantronix, iTouch, MRJ, RAS2000, RCM, TS1000, TS2000, TS3000,
+rex-16rj, ACS48, ACS32, ACS16, ACS1, TS100, TS800, PERLE, 9000,
+passive signal tracer, datatran, MT-11, MT-31, InReach, CM,
+NM-16A, NM-32A, DECServer, uannex, PM-8, Celeste Stokley,
+Cary Roberts, Bryan Stansell, David Stuit, jsmay, Thomas A. Fine,
+Chan Wilson, David S. Lawyer, Paul Vixie, Kevin Braunsdorf,
+Bill Ward, BayView Consulting, Console 101, blueconsole, avocent
+opengear, CM series, CM4116, servertech, server technologies,
+PM-8, Jeff Komori, jeffk, N6UOW, KH6JUZ, Rackable, Roamer, picdog, 
+Adaptec, FS4500,NetApp, Brocade, Avocent, Opengear, Digi CM, ACM,
+ELOM, ALOM, ILOM, iDRAC, Mega RAC, RAC, Service Processor, LOM,
+BayLISA, USENIX, LISA, TDI, Bill Johnson, SANS, SAGE">
+
+<!--#include file="stileto.txt" -->
+</head>
+
+<body>
+<p><center><table border=0 width="98%">
+   <tr>
+      <td width="50%">
+         <P><center><a href="http://www.conserver.com"><img
+         src="conserver-sm.jpg" alt="Conserver.com logo" width=147
+         height=47 border=0 align=middle></A></center>
+      </td><td width="20%">
+      </td><td width="50%">
+         <p><center>Brought to you by;<br>
+         
+         <a href="http://www.conserver.com/">www.conserver.com</a><br></center>
+      </td>
+   </tr>
+</table></center></p>
+
+<h2>
+<center>Zonker's Greater Scroll of Console Knowledge</center>
+</h2>
+
+<h4>
+<center>http://www.conserver.com/consoles/gsock.html<br>
+(updated:<!--#config timefmt="%b %d, %Y, %I:%M %P" -->
+<!--#flastmod virtual="gsock.html" -->)</center>
+</h4>
+
+<p>This document provides links to various pages with information
+regarding serial ports, console servers, and the
+<b><a href="http://www.conserver.com/">Conserver application</a></b>. My
+hope is that these pages will be useful information to people trying to
+connect various devices and hosts to console servers.</p>
+
+<p>If you are managing devices, and those devices have serial ports,
+you can probably benefit from providing a way to talk to those serial
+ports remotely. In some cases, the serial console to a device can be
+your last chance to access the device without a reboot, allowing you
+to restore other services without interrupting active services, or
+impacting your customers (however you define 'customers'). The cost
+for remote access equipment (i.e. console servers) can be high, but
+adding an open-source logging and access server (like Conserver) 
+can greatly increase the value of the remote access equipment, by 
+adding the ability to control accounts and access across multiple 
+console servers, providing the ability for multiple users to 
+simultaneously access any single port (great for mentoring), and 
+logging (very useful for forensics), and more.</p>
+
+<p>My current projects include working with Service Processors 
+(*LOM, *RAC interfaces), principally involving the "how do you set 
+these up?" problems, whether that is through the BIOS, via the system
+serial port, or via some scripts/applications in Windows or Linux.</p>
+
+<p>If you find any errors on these pages, have comments for me,
+or if you have additional information that you feel that I 
+could include, please send email to <b>consoles</b> at 
+<b>conserver.com</b>. Are you curious 
+<a href="about.html">why do I keep up these pages?</a> I've also 
+started a <a href="http://consoleteam.blogspot.com/">ConsoleTeam
+blog</a>, as a place to put ideas for which I'm not ready to
+create a dedicated page (or to post ideas early, until I have time to
+post a more complete page).</p>
+
+<hr>
+<p></p>
+
+<p align="center">What's on this scroll?<br>
+<a href="#BREAK">Console Server hardware, and Serial BREAK testing</a><br>
+<a href="#guides">Console Connection Guides</a>, info, and
+<a href="#matrix">quick links</a><br>
+My <a href="#minor">Minor Scrolls</a> for a variety of topics, including
+<a href="Clues/cons-apc.html">APC UPS serial ports</a><br>
+<a href="#training">Pointers to my Published information</a><br>
+<a href="#conserver">Information about Conserver</a><br>
+<a href="#links">Other Useful URLs</a><br>
+(My <a href="news.html">Updates</a> information has been moved to 
+a <a href="news.html">separate page</a>, and the Blog will probably
+serve the same function.)
+</p>
+
+<hr>
+
+<h3><a name="BREAK"></a>Console Servers and Serial BREAK</h3>
+
+<p>If you are trying to administer Sun servers (and some SGI
+boxes), you understand the importance of being able to send Serial
+BREAK to the serial console when <b>you</b> want to. Unfortunately,
+many older terminal server devices will send BREAK when the power is
+removed from the terminal server, which would stop older attached Sun
+devices at once. The good news is, we've been
+<a href="BREAK-off/breaktest.html">testing</a> many vendors hardware,
+and many newer Console Server devices (a very important distinction
+these days) are "Sun-safe", including the Cisco 3600 series (anything
+using the NM-16A/32A modules), &nbsp;Cisco 3800 series (anything
+using the HWIC interfaces), Cyclades TS and ACS lines, Digi's CM
+series, the Opengear CM series. the Perle
+CS9000, the iTouch (MRV) Communications In-Reach series, the
+Computone (AlturaXL) RAS2000 line, and even the new DECservers! You
+can find out more information on our
+<a href="BREAK-off/breakinfo.html">BREAK-off test result page</a>.
+There are also pages about <a href="BREAK-off/breakoff.html">why
+we do this</a> testing, and thanks for the
+<a href="BREAK-off/breakacks.html">folks that have helped</a>.</p>
+
+<p><font color="brown"><i>The bottom lines with our investigation: 
+<ul>
+  <li>Using multi-voltage power supplies in the device causes BREAK</li>
+  <li>Moving to a single-voltage power supply in the unit seemed to fix it!</li>
+  <li>If a device is labeled as a "Terminal Server" you should beware, and test first!</li>
+  <li>If a device is labeled as a "Console Server", it may be BREAK-safe (still, test it!)</li>
+</ul>
+</i></font></p>
+
+<hr>
+<p></p>
+
+<h3><a name="guides"></a>Console Connection
+Guides</h3>
+
+<p>The guides shown below are the result of a lot of evolution, and
+shared knowledge. They were developed when I needed to do a lot of
+work with a particular brand, or when I've had the chance to learn
+enough about a device and I want to share that info with others. Much
+of what you will find on these pages is common across most of the
+devices, but there is also some vendor- and model-specific
+information as well. I will likely add a few more guides in the
+future, mainly driven by servers that do <b>not</b> send
+<a href="BREAK-off/breakoff.html">serial BREAK</a>
+at inappropriate times.</p>
+
+<p><b>Host-to-Adapter Guides</b> are generated from a PERL script,
+from a database of information about the serial ports on more than
+500 devices. The pages list basic information about the host, as well
+as advising which adapter or cable to use to connect to specific
+console servers. (These refer to the 'best' single adapter to use,
+even if it is NOT an adapter that the Console Server manufacturer
+provides.)</p>
+
+<p><b>Adapter Kits</b> are listed when the cables and
+adapters are readily available from a vendor. Currently, APA Cables
+&amp; Networks provide an easy way to get large quantities
+of reliable, labeled cables and adapters for the product families
+below. If you need smaller amounts, you can check
+my <a href="wheretobuy.html">Where To Buy</a> page
+for more clues.
+</p>
+
+<p>(I have found that most Console Server
+device manufacturers offer a small group of adapters to cover the
+'common' connections, but they do NOT offer a complete assortment of
+adapters and cables for the specialty cases. I am a strong proponent
+of using pre-wired (tested and labeled) adapters and cables. More
+than likely, the value of the amount of your time to make amore than
+a few adapters (plus the cost of the raw materials) is likely to be
+more than the cost of pre-wired adapters.)</p>
+
+<p><b>PalmDoc References</b> are available for some of the pages
+below. (If you see the download arrow icon, you can click on it to
+get the PDB file.) I developed these for use with my old Palm Vx, so
+I would have the information in my pocket anytime. I prefer the
+TealDoc reader from TealPoint software, but you should be able to
+read them with any reader that supports the PalmDoc format.</p>
+
+<p><a name="matrix"></a></p>
+
+<p>
+<table border="1" width="100%">
+  <tbody>
+    <tr>
+      <td width="37%">
+      <p><b>Console Connection Guides</b> </p>
+      </td>
+      <td width="33%">
+      <p><b>Host-to-Adapter Guides</b> </p>
+      </td>
+      <td width="30%">
+      <p><b>Adapter Kits</b> </p>
+      </td>
+    </tr>
+    <tr>
+      <td width="37%">
+      <p><a href="Annex/annexcons.html">Annex &amp; Bay 2000</a></p>
+      </td>
+      <td width="33%">
+      <p><a href="Annex/annex-hosts.html">Annex &amp; Bay 2000</a></p>
+      </td>
+      <td width="30%">
+      <p><a href="Annex/annexkit.html">Annex &amp; Bay 2000</a></p>
+      </td>
+    </tr>
+    <tr>
+      <td width="37%">
+      <p><a href="Cisco/ciscocons.html">Cisco &amp; Lantronix &amp; some Opengear<a></p>
+      </td>
+      <td width="33%">
+      <p><a href="Cisco/cisco-hosts.html">Cisco &amp; Lantronix</a></p>
+      </td>
+      <td width="30%">
+      <p><a href="Cisco/ciscokit.html">Cisco &amp; Lantronix</a></p>
+      </td>
+    </tr>
+    <tr>
+      <td width="37%">
+      <p><a href="Cyclades/cycladescons.html">Cyclades/Avocent</a></p>
+      </td>
+      <td width="33%" bgcolor="ffffcc">
+      <p>(coming soon)</p>
+      </td>
+      <td width="30%" bgcolor="ffccff">
+      <p>(none)</p>
+      </td>
+    </tr>
+    <tr>
+      <td width="37%">
+      <p><a href="IOLAN/iolancons.html">IOLAN (Chase/Perle)</a></p>
+      </td>
+      <td width="33%">
+      <p><a href="IOLAN/iolan-hosts.html">IOLAN (Chase/Perle)</a></p>
+      </td>
+      <td width="30%">
+      <p><a href="IOLAN/iolankit.html">IOLAN (Chase/Perle)</a></p>
+      </td>
+    </tr>
+    <tr>
+      <td width="37%">
+      <p><a href="Xyplex/xyplexcons.html">Xyplex, iTouch, MRV</a></p>
+      </td>
+      <td width="33%">
+      <p><a href="Xyplex/xyplex-hosts.html">Xyplex, iTouch, MRV</a></p>
+      </td>
+      <td width="30%">
+      <p><a href="Xyplex/xyplexkit.html">Xyplex, iTouch, MRV</a></p>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</p>
+
+<p>The Adapter Kits were developed with Americable (which became
+APACN, which is becoming Clearfield Communications), but they don't
+have kits for Cyclades, Digi, or Opengear and others. As a result, I'm
+developing a "<a href="wheretobuy.html">Where to buy
+adapters</a>" page, and I've been posting the schematics for
+various adapters ad cables on the pages the various Console Connection
+Guides. (There will be guides coming for Cyclades, Digi, and Opengear.)
+At some point, I'll remove the specific links to the adapter kits from
+this page.</p>
+
+<h3><a name="minor"></a>Minor Scrolls...</h3>
+
+<p>My old <b>Minor Scroll of Console
+Knowledge</b> had become too big, so I broke it up into smaller
+topics. More pages will be added, based on my time, and peoples
+interest.</p>
+
+<blockquote>
+  <p><b><a href="msock.html">Minor Scroll of Console
+Knowledge</a></b> - taking the mystery out of serial
+connections</p>
+
+  <p><b><a href="Tracers/tracers.html">Passive
+Signal Tracers</a></b> -
+tips and clues about troubleshooting</p>
+
+  <p><b><a href="Clues/cons-apc.html">APC UPS
+Serial Port Clues</a></b> -
+demystifying this non-standard DE-9 interface.</p>
+
+  <p><b><a href="Clues/rs232.html">RS-232 Clues</a></b>
+- references and pointers about this serial protocol</p>
+
+  <p><b><a href="Clues/rs232-hw.html">RS-232
+Hardware Clues</a></b>
+- overview of the hardware inside the serial port</p>
+
+  <p><b><a href="Clues/modems.html">Modem Clues</a></b>
+- important if
+you are adding modem to your serial devices</p>
+
+  <p><b><a href="MyDoctorBag/doctorbag.html">My
+Doctor Bag</a> </b>- my
+mainstay tools, and why I carry them.</p>
+
+  <p><b><a href="Signals/signals.html">Signals</a></b>
+- Signaling
+information for (mainly RJ-type) interfaces</p>
+
+</blockquote>
+
+<p>I also have started to make some minor pages, for some Console
+Servers and other devices, hoping to share some clues about 
+them, until I take the time to make them into full-blown Guide 
+pages. The first one up was my 
+<a href="DEC/index.html">DECServer page</a>. I'm working on a 
+full-blown Console Connection Guide for the Cyclades (now Avocent) 
+TS and ACS series console servers. Other pages for the 
+Opengear CM series and the Digi CM series are also currently 
+in the works. This includes making the cable and adapter schematic 
+art, and  integrating them with the host information database.</p>
+
+<!--#include file="dbinformilo.txt" -->
+
+<h3><a name="training"></a>Training</h3>
+
+<p>Alas, <a href="http://www.sysadminmag.com/">SysAdmin Magazine</a>
+has ceased publication. Thankfully, the articles are still available
+online for your information, and your browsing pleasure. I will not
+be teaching at 
+<a href="http://www.usenix.org/events/lisa08/">USENIX LISA 2008</a>, 
+but I hope to see some of you there as a participant.</p>
+
+<p>I have prepared various articles and presentations, over the
+years, for contract training and formal conferences. I've made 
+some of this information available on the web. As I can
+release more information to the web, I'll post the links on my
+<a href="Training/published.html">Published Info</a>
+page.
+</p>
+
+<h3><a name="conserver"></a>The Conserver application</h3>
+
+<p>Bryan Stansell (<a href="http://www.tellme.com/">TellMe</a>,
+now Microsoft) is the current keeper of the
+<a href="http://www.conserver.com/">Conserver application</a>,
+which
+adds logging, and multi-user access for remote administration of
+serial ports, using locally-installed multi-port serial interfaces,
+and/or "reverse-telnet" to console servers. This adds a mentoring,
+and forensics data collection capability to remote administration of
+network and host devices via their serial console ports. Conserver
+is free, and an open-source project with an international user base,
+and an active user community, a well as being actively developed.
+(<a href="http://www.conserver.com/">Conserver</a>
+is a derivative work of original code by Thomas A. Fine while at 
+Ohio State in 1990. Follow this link to
+<a href="http://hea-www.harvard.edu/%7Efine/Tech/console-server.html">Thomas'
+Console Page</a>. More history is available on Bryan Stansell's
+<a href="http://www.conserver.com/">Conserver</a> pages.)</p>
+
+<h3><a name="links"></a><b>Other Useful Console-related Links</b></h3>
+
+<ul>
+  <li><b><a href="http://www.stokely.com/">Celeste Stokely consulting</a></b>
+  is an excellent sysadmin resource. 
+  <ul>
+    <li>Her <a href="http://www.sunhelp.org/unix-serial-port-resources/">Serial
+    Console information</a> is now hosted at 
+    <a href="http://www.sunhelp.org/">SunHelp</a></li>
+  </ul></li>
+  <li>Thomas A. Fine's original 
+  <a href="http://hea-www.harvard.edu/%7Efine/Tech/console-server.html">Console
+  Server page</a> (father code of <a href="http://www.conserver.com/">Conserver</a>)</li>
+  <li><b><a href="http://www.meadow.net/pinouts.html">Chan Wilson's 
+  Pinouts Page</a></b>, a fairly complete listing of SGI-related console info. </li>
+  <li> Glen Turner and Mark F. Komarinski's compilation of 
+  <a href="http://www.tldp.org/HOWTO/Remote-Serial-Console-HOWTO/">Remote
+  Serial Console HOWTO</a> pages for 
+  <a href="http://www.tldp.org/">The Linux Documentation Project</a>.</li>
+  <li>David S. Lawyer's 
+  <a href="http://www.lafn.org/%7Edave/linux/">Linux How-To pages</a>
+  (including text terminal, modem, and console clues). </li>
+  <li><a href="http://www.tditx.com/">TDI</a> is a commercial provider of a console
+  management suite, as well as an integrated services provider for 
+  <a href="http://www.tditx.com/corporate_companyprofile.asp">Enterprise Monitoring"</a>,
+  and automated Event Management.
+  <li>ASP Technologies also offers a commercial Console Logging Application called 
+  <a href="http://www.asptech.com/">Vantage</a>.
+  <li><a href="http://auroratech.com/">Aurora Technologies</a>,though it appears
+   the hardware was sold to Carlo Gavazzi Computing Solutions. You can still 
+   find information on the <b>
+   <a href="http://www.gavazzi-computing.com/displayproduct.php?TGP=Console%20Management">Control
+   Tower</a></b> application. (A good product to check out, if you want to buy 
+   the product and service from someone else.) </li>
+    <ul>
+      <li>ASP also made <a href="http://www.datacomideas.com/">hardware</a>
+that can help prevent BREAK on Digi, Xyplex, and more, but their
+website has been down for a year... </li>
+    </ul>
+  </li>
+  <li>Doug Hughes' <a href="http://www.eng.auburn.edu/users/doug/console.html">Roll-your-own
+  Console Server</a>, based on the <b>Screen</b> tool, and 
+  <b>Aurora Technologies</b> expansion cards. </li>
+  <li>Paul Vixie's <a href="ftp://ftp.vix.com/pub/vixie/rtty-3.2.tar.gz">(ftp): <b>rtty-3.2</b>.tar.gz</a></li>
+  <li>Kevin Braunsdorf's <a href="ftp://ftp.physics.purdue.edu/pub/pundits/conserver-7.4.tgz">(ftp):
+    <b>Conserver-7.4</b>.tgz</a> </li>
+  <li>Real Weasels <a href="http://www.realweasel.com">PC Weasel</a> cards 
+  are a great way to control an Intel box via serial console, whether it's 
+  got a free PCI bus slot, or an older box with ISA slots. You can even 
+  manipulate the BIOS via console commands! (This is what today's Service 
+  Processors would like to be when they mature.)</li>
+  <li><b>Portmaster</b> terminal server support and files are available from 
+  <a href="http://www.portmasters.com/downloads.html">http://www.portmasters.com/downloads.html</a></li>
+  <li><a href="http://www.ofb.net/~jheiss/">Jason Heiss</a> has a good page about the 
+  <a href="http://www.ofb.net/~jheiss/annex/">Annex</a>/Bay/Nortel series terminal servers
+  <ul>
+    <li><b>Nortel</b> still posts 
+    <a href="">software images and support files</a> on their website for free. (Thank you!)</li>
+  </ul></li>
+  <li><a href="breakoff.html">breakoff.html</a>
+    <a href="http://www.conserver.com/consoles/breakoff.html">Console
+    Server <b>BREAK</b>-off</a> (testing terminal/console servers to see which devices cause the BREAK problem!)
+    <ul>
+      <li><b><a href="http://www.cisco.com/warp/public/cc/pd/rt/3600/index.shtml">Cisco
+      3600 family</a> with NM-32A</b> passed the test with flying colors! </li>
+      <li><b>Lightwave Communication 3200</b> didn't send BREAK, but was 'stand-alone'.
+        <ul>
+          <li>(Lightwave was <a href="http://www.lantronix.com/news/PR_01-06-07B.html">acquired
+          by Lantronix</a> in the Summer of 2001) </li>
+        </ul>
+      </li>
+      <li><b>Cyclades</b>
+        <a href="http://www.cyclades.com/products/2/ts_series">TS</a>
+        and <a href="http://www.cyclades.com/products/products.php?id=3">ACS</a>
+        product lines are strong performers </li>
+        <ul>
+        <li>Cyclades was acquired by <a href="http://www.avocent.com">Avocent Corp</a> in early 2006.</li>
+        <li>Avocent Corp. was acquired by <a href="http://www.emerson.com">Emerson Network Power</a> in late 2009.</li>
+        </ul>
+      <li><b>iTouch Communications</b> <a href="http://www.mrv.com/product/MRV-IR-003/">In-Reach</a>
+        products (now labeled <b><a href="http://www.mrv.com/">MRV
+        Communications</a></b>) are BREAK-safe,
+        RJ45-wiring-compatible replacements for older Xyplex units </li>
+      <li><b>Digi's</b> <a href="http://www.digi.com/products/terminalservers/portserverts816.jsp">PortServer
+       TS</a> line, and the 
+       <a href="http://www.digi.com/products/consoleservers/digicm.jsp">CM line</a> 
+       both passed the testing. I'm very pleased with the CM documentation and manual. </li>
+      <li><b>thinklogical</b> <a href="http://www.thinklogical.com/products/console_servers/console.php">SCS
+       series</a> Secure Console Servers have many features from the
+       Lightwave Communications line (internal logging, 2 users per port), but
+       they have demonstrated the ability to also allow 'reverse-TCP' access
+       to their ports! (I don't know if this will be a feature in newer
+       releases of the SCS code, or if it will be left as an exercise for the
+       buyers, but it was a good sign, IMHO.) </li>
+      <li><b>OpenGear's</b> is a new entrant,
+       claiming to be Sun-safe, and having security features, but with
+       significantly lower prices. They make <a href="" http://www.opengear.com/products.html="">Console Servers</a>
+       as well as software to turn a PC into a console server by using
+       multi-port serial cards, and their software is available on 
+       <a href="http://sourceforge.net/projects/okvm/">SourceForge.Net</a>.
+      <li><b>Perle's</b> <a href="http://www.perle.com/products/prod_family/console_server/cs9000.html">CS9000</a>,
+       and <b>Digital Networks</b> <a href="http://www.dnpg.com/products-decserver.htm">90+M</a>
+       and other hardware have been tested, and the results are posted 
+       <a href="/BREAK-off/breakinfo.html">here</a>. </li>
+      </li>
+    </ul>
+  </li>
+  <li>We maintain the <a href="BlueConsole"><b>BlueConsole</b> Mirror Site</a>, to support the
+  folks who have them, even though the devices are no longer being made. </li>
+</ul>
+
+<!--#include file="piedo.txt" -->
+</body>
+</html>

@@ -1,0 +1,2936 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+  <title>Cisco (Logical Solutions, Lantronix) Console Connection Guide</title>
+  <meta content="text/html; charset=ISO-8859-1" http-equiv="Content-Type">
+  <meta content="Claris Home Page 2.0" name="GENERATOR">
+  <meta content="Serial Console, Cisco, async, conserver, RJ45, rj45 adapter, RS-232, 
+  TealDoc, Palm Pilot, Americable, APACN, console, C2509,C2510, C2511, C2511-RJ, NM-32A, 
+  NM-16A, C2600, C3600, C3620, C3640, C3660, Vacik, Lantronix, 1600, 3200, thinklogical, 
+  logical soultuions, SCS80, SCS160, SCS320, SCS480, SCS00080, SCS000160, SCS000320, 
+  SCS000480, APA Cables and Networks, N6UOW, Zonker, C2800" name="keyword">
+<BODY TEXT="#336600" BGCOLOR="#FFFFFF">
+<p><center><table border=0 width="98%">
+   <tr>
+      <td width="40%">
+         <P><center><a href="http://www.conserver.com"><img
+         src="../conserver-sm.jpg" alt="Conserver.com logo" width=147
+         height=47 border=0 align=middle></A></center>
+      </td><td width="20%">
+      <center><a href="http://www.conserver.com/consoles/"><img
+         src="../home-marble.gif" alt="link to the Consoles home page" width=47
+         height=50 border=0 align=middle></A></center>
+      </td><td width="40%">
+         <p><center>Brought to you by;<br>
+
+         <a href="http://www.conserver.com/">www.conserver.com</a></center>
+      </td>
+   </tr>
+</table></center>
+
+</head>
+<body>
+
+<h2><center>Zonker's Cisco Console Server Connections Guide</center></h2>
+
+<h4><center>http://www.conserver.com/consoles/Cisco/ciscocons.html<br>(updated:
+Jan 01, 2014, 09:26 pm
+)</center></h4>
+
+<p>This document will outline terminal server connections to Cisco terminal server 
+devices (namely the 2509-11 products), as well as any of the Access Products family 
+that use the NM-16A, NM-32A async modules (such as some of the 2600 and 3600 family 
+products), or the HWIC-8A and/or HWIC-16A Async interface cards (such as the 1800, 2800,
+and 3800 series devices, and the 1900 and 2900 ISR families). These connections use 
+the Cisco-defined signal pinouts for the RJ-45 connector. All connections presume that 
+you area using either a Cisco "Hydra" cable (to male RJ-45 connectors), the built-in 
+RJ-45 Console or AUX ports, or you are using a Cisco-wiring-scheme
+<a href="#patch">patch panel</a>, connected to the high-density connectors on the 
+terminal servers (or NMs), with connections configured as shown below. All connections 
+make use of standard Ethernet cables (RJ-45, 8-conductor, 'straight through' cables)
+unless specified otherwise.</p>
+
+<p></p>
+
+<center><a name="top"></a><b>Table of Contents</b><br>
+
+<a href="#rj45">Cisco RJ-45 signaling</a><br>
+<a href="#ethernet">RJ-45 Cable Diagrams</a><br>
+<a href="#null">Making a null modem cable</a><br>
+<a href="#crj45">Cisco devices with female RJ-45 ports</a><br>
+
+<a href="#modem">Connecting modems to Cisco Products</a><br>
+<a href="#orj45">Connecting to non-Cisco RJ-45</a><br>
+
+<a href="#configs">Terminal Server Configuration Tips</a><br>
+<a href="#aux">Reverse TCP to the AUX port?</a><br>
+
+<a href="#c3600">Configuring 2600, 3600 series devices</a><br>
+<a href="#c2800">Configuring 2800, 3800 series devices</a><br>
+<a href="#c2900">Configuring 1900, 2900 series devices</a><br>
+
+<a href="#patch">Patch Panels for Cisco Products</a><br>
+<a href="#cpc">Attaching devices to a PC instead</a><br>
+
+<a href="#rj45schem">RJ-45 adapter schematic diagrams</a><br>
+
+<a href="#cables">Specialty RJ45 cables</a> for
+<a href="#cisco-usr">USR</a>,
+<a href="#cisco-sun-t3">Sun</a>,
+<a href="#cisco-dec">DEC MMJ</a><br>
+
+<a href="#db9">Connecting Cisco RJ-45 to DE-9</a><br>
+<a href="#db25">Connecting Cisco RJ-45 to DB-25</a><br>
+<a href="#usbcons">Connecting to Cisco USB consoles</a><br>
+
+<a href="#credits">Author Credits</a></center>
+<p></p>
+<hr noshade="noshade" width="60%">
+<p>
+<table border="0" width="100%">
+  <tbody>
+    <tr>
+      <td>
+      <p>
+      <table border="0" cellpadding="3" cellspacing="0" width="100%">
+        <tbody>
+          <tr>
+            <td bgcolor="#cccccc" width="70%">
+            <p><b><a name="rj45"></a>Cisco RJ-45 signaling</b> </p>
+            </td>
+            <td bgcolor="#cccccc" width="30%">
+            <p align="right"><b><a href="#top">to Table of Contents</a></b> </p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      </p>
+
+      <p>The older Cisco <b>CS-500</b> was a terminal server with 8-port and 16-port 
+      versions, using an 8-wire RJ-45 female connector. </p>
+
+      <blockquote>
+        <p>Oddly enough, the production CS-500 didn't have adedicated console port. 
+        Only the CS-500 units built for engineering development had a separate "console", 
+        and that port was an <b>RJ-13</b>, 6-wire interface (which shared the same 
+        pinouts as the ports on the older Cisco AGS/CGS/IGS routers and the Cisco ASM 
+        terminal server), while the remaining async ports used what has become the 
+        Cisco RJ-45 console interface.</p>
+      </blockquote>
+
+      <p>On Cisco devices that have an RJ-45 "Console" or "Aux" port, those RJ-45 ports 
+      also use the same wiring pinouts, and so they can also use the same adapters. 
+      The table below shows the signal information for both the Cisco RJ-45 Console 
+      and Aux ports (considered to be wired as DTE), as well as the Cisco Patch Panel 
+      solutions (which are considered to be wired as DCE) </p>
+      <p></p>
+      <center>
+      <table border="0" cellpadding="0" cellspacing="0" width="85%">
+        <tbody>
+          <tr>
+            <td width="86">
+            <p></p>
+            <center><b>Patch Panel</b></center>
+            </td>
+            <td width="83">
+            <p></p>
+            <center><b>Signal Type</b></center>
+            </td>
+            <td width="50">
+            <p></p>
+            <center><b>Pin</b></center>
+            </td>
+            <td width="85">
+            <p></p>
+            <center><b>Console/Aux</b></center>
+            </td>
+            <td width="83">
+            <p></p>
+            <center><b>Signal Type</b></center>
+            </td>
+          </tr>
+          <tr>
+            <td width="86">
+            <p></p>
+            <center>CTS</center>
+            </td>
+            <td width="83">
+            <p></p>
+            <center>Input</center>
+            </td>
+            <td width="50">
+            <p></p>
+            <center>1</center>
+            </td>
+            <td width="85">
+            <p></p>
+            <center>RTS</center>
+            </td>
+            <td width="83">
+            <p></p>
+            <center>Output</center>
+            </td>
+          </tr>
+          <tr>
+            <td width="86">
+            <p></p>
+            <center>DSR</center>
+            </td>
+            <td width="83">
+            <p></p>
+            <center>Input</center>
+            </td>
+            <td width="50">
+            <p></p>
+            <center>2</center>
+            </td>
+            <td width="85">
+            <p></p>
+            <center>DTR</center>
+            </td>
+            <td width="83">
+            <p></p>
+            <center>Output</center>
+            </td>
+          </tr>
+          <tr>
+            <td width="86">
+            <p></p>
+            <center>RD</center>
+            </td>
+            <td width="83">
+            <p></p>
+            <center>Input</center>
+            </td>
+            <td width="50">
+            <p></p>
+            <center>3</center>
+            </td>
+            <td width="85">
+            <p></p>
+            <center>TD</center>
+            </td>
+            <td width="83">
+            <p></p>
+            <center>Output</center>
+            </td>
+          </tr>
+          <tr>
+            <td width="86">
+            <p></p>
+            <center>Sig. Gnd.</center>
+            </td>
+            <td width="83">
+            <p></p>
+            <center>Reference</center>
+            </td>
+            <td width="50">
+            <p></p>
+            <center>4</center>
+            </td>
+            <td width="85">
+            <p></p>
+            <center>Sig. Gnd.</center>
+            </td>
+            <td width="83">
+            <p></p>
+            <center>Reference</center>
+            </td>
+          </tr>
+          <tr>
+            <td width="86">
+            <p></p>
+            <center>Sig. Gnd.</center>
+            </td>
+            <td width="83">
+            <p></p>
+            <center>Reference</center>
+            </td>
+            <td width="50">
+            <p></p>
+            <center>5</center>
+            </td>
+            <td width="85">
+            <p></p>
+            <center>Sig. Gnd.</center>
+            </td>
+            <td width="83">
+            <p></p>
+            <center>Reference</center>
+            </td>
+          </tr>
+          <tr>
+            <td width="86">
+            <p></p>
+            <center>TD</center>
+            </td>
+            <td width="83">
+            <p></p>
+            <center>Output</center>
+            </td>
+            <td width="50">
+            <p></p>
+            <center>6</center>
+            </td>
+            <td width="85">
+            <p></p>
+            <center>RD</center>
+            </td>
+            <td width="83">
+            <p></p>
+            <center>Input</center>
+            </td>
+          </tr>
+          <tr>
+            <td width="86">
+            <p></p>
+            <center>DTR</center>
+            </td>
+            <td width="83">
+            <p></p>
+            <center>Output</center>
+            </td>
+            <td width="50">
+            <p></p>
+            <center>7</center>
+            </td>
+            <td width="85">
+            <p></p>
+            <center>DSR</center>
+            </td>
+            <td width="83">
+            <p></p>
+            <center>Input</center>
+            </td>
+          </tr>
+          <tr>
+            <td width="86">
+            <p></p>
+            <center>RTS</center>
+            </td>
+            <td width="83">
+            <p></p>
+            <center>Output</center>
+            </td>
+            <td width="50">
+            <p></p>
+            <center>8</center>
+            </td>
+            <td width="85">
+            <p></p>
+            <center>CTS</center>
+            </td>
+            <td width="83">
+            <p></p>
+            <center>Input</center>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      </center>
+      <p>Notes:<br>
+      1) <b>Input</b> means a signal <b>from</b> the external device, coming <b>in 
+      to</b> the <b>RJ-45 connection.</b><br>
+      2) <b>Output</b> means a signal source <b>from</b> the <b>RJ-45 connection</b>, 
+      going <b>out to</b> the external device. </p>
+
+      <p>The reference ground, and data signals, are located on the center pairs of 
+      the RJ-45, so you can use a straight-through RJ-11 cable for simple, data-only 
+      connections. (However, you should not use RJ-11 or RJ-12 connectors in your RJ-45
+      jacks for longer than short tests, as these smaller connectors will tend to bend 
+      the outer RJ-45 pins up, and this can lead to intermittent or open connections 
+      on the RJ-45 jack later on, affecting the hardware flow control and hardware
+      handshaking leads.)</p>
+
+      <p>It's also important to note that not ALL Cisco devices with an RJ-45 console 
+      and/or aux jack implement all of the signals. When Cisco acquired various hardware 
+      lines, they made an effort to implement the RJ-45 serial schema. But, for example, 
+      if that hardware platform only implemented the data lines, Cisco wouldn't try to 
+      add the flow control or handshaking signals. (In the case of the Arrowpoint CSS 
+      Load Balancer products, they used an existing RJ-45 wiring schema, not the Cisco 
+      version, so early Cisco versions had this non-Cisco RJ45 pinout. See the Cisco 
+      CS11555 pinouts on my <a href="../Signals/signals.html">Signals page</a>. </p>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</p>
+
+<p></p>
+<center>
+<table border="0">
+  <tbody>
+    <tr>
+      <td width="125">
+      <p></p>
+      <center><img style="width: 83px; height: 167px;" alt="Cisco Console pinouts" 
+      src="../Signals/sig-ciscoc.jpg"><br>
+      </center>
+      </td>
+      <td width="125">
+      <p></p>
+      <center><img style="width: 83px; height: 167px;" alt="Cisco Patch Panel 
+      (lantronix console)" src="../Signals/sig-ciscop.jpg"><br>
+      </center>
+      </td>
+      <td width="80">
+      <p></p>
+      <center><img style="width: 75px; height: 167px;" alt="Cisco loopback cable" 
+      src="loop-cisco.jpg"><br>
+      </center>
+      </td>
+      <td width="130">
+      <p></p>
+      <center><img src="../porj45m.gif" align="middle" height="83" width="110"> </center>
+      </td>
+      <td width="110">
+      <p></p>
+      <center><img src="../porj45f.gif" align="middle" height="83" width="92"> </center>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</center>
+<ul>
+  <i>(The connection between pins 4 and 5 on the loopback, and on the assorted adapters, 
+  is very important, to tell some of the Cisco serial interfaces that the port should 
+  be in RS-232 mode!)</i>
+</ul>
+
+<p><b>Other servers and devices which share this wiring schema</b>;</p>
+<ul>
+  <li><b>Logical Solutions</b> <a href="http://www.thinklogical.com/scs">SCS product line</a>
+    <ul>
+      <li>The SCS port default (DCE mode) looks like the Cisco Patch Panel above</li>
+      <li>Ports can be configured (DTE mode) to match the Console signals. </li>
+      <li>The SCS supplies ground on both pins 4 and 5. </li>
+    </ul>
+  </li>
+  <li><b>Lantronix</b> 
+  <a href="http://www.lantronix.com/it-management/console-servers/">SLC8/16/32/48</a> and more.
+    <ul>
+      <li>Signals match the Cisco Patch Panel above. (Null-modem of Cisco console)</li>
+    </ul>
+  </li>
+  <li><b>SUN Microsystems <i>Netra T1, SunFire series</i></b> (and other) <b>LOM</b> ports</li>
+  <ul>
+    <li>Signals match the Cisco Console above. </li>
+  </ul>
+  <li><b>Juniper Networks</b> 
+  <a href="https://www.juniper.net/us/en/products-services/routing/j-series/">J-series</a>, 
+  <a href="https://www.juniper.net/us/en/products-services/security/ssg-series/">NetScreens</a>
+  and more...</li>
+  <li><b>Enterasys Networks</b>
+  <a href="http://www.enterasys.com/products/advanced-security-apps/dragon-intrusion-detection-protection.aspx">Dragon
+  Sensors</a></li>
+  <li><b>Nokia</b>&nbsp;VPN Gateways, including CC2500</li>
+  <li><b>Server Technologies</b> <a href="http://servertech.com/products/">Remote Power 
+  Distribution and Control</a>.</li>
+</ul>
+
+<p>This means that you could use any of the Cisco-schema
+<a href="#rj45schem">adapters</a> and <a href="#cables">specialty cables</a>
+listed below, using the <a href="cisco-hosts.html">Cisco
+Host-to-Adapter
+page</a> as a guide.
+</p>
+
+<p>You can find and compare other <b>RJ45 wiring signaling</b> on my
+<a href="../Signals/signals.html">Signals page</a>.</p>
+
+<p><span style="font-style: italic;"><span style="font-weight: bold;">Note:</span> 
+The <span style="font-weight: bold;">RJ-45 Console</span> and 
+<span style="font-weight: bold;">Aux</span> ports on many
+Cisco devices will send serial BREAK when the device loses power. If
+you have connected these console/aux ports to a Sun TTY port for
+control of the Cisco, it's probable that the Sun will be halted when
+the power to the Cisco device is lost, leaving you without a good
+method to remotely access the Cisco. It would be better to monitor your
+Cisco RJ45 console and aux ports with some other device, such as a
+console server or access server instead.</span></p>
+
+<hr noshade="noshade" width="60%">
+<p>
+<table border="0" width="100%">
+  <tbody>
+    <tr>
+      <td>
+      <p>
+      <table border="0" cellpadding="3" cellspacing="0" width="100%">
+        <tbody>
+          <tr>
+            <td bgcolor="#cccccc" width="70%">
+            <p><b><a name="tcp"></a>Reverse-TCP ports</b></p>
+            </td>
+            <td bgcolor="#cccccc" width="30%">
+            <p align="right"><b><a href="#top">to Table of Contents</a></b></p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      </p>
+
+      <p>Cisco normally implements three levels of Reverse-TCP connections
+      for remotely connecting to their ports;
+      <ul>
+        <li><b>2000+line number</b> for the normal (7-bit) Telnet-like session
+        <li><b>4000+line number</b> for an 8-bit-escapable session
+        <li><b>6000+line number</b> for an 8-bit non-escapable session
+      </ul></p>
+
+      <p>The TCP-200n range mimics the normal Telnet session, passing
+      7-bit data normally. This is typically what you will use if you
+      are connecting remotely to device consoles for remote control.</p>
+
+      <p>The TCP-400n range is used if you need to pass 8-bit data, 
+      but you still need to be able to define an Escape character so 
+      that you can drop the session when you are ready. You would use
+      this when your sessions use PC-type graphics characters (the
+      128-254 (decimal) character set used on Western keyboards).</p>
+
+      <p>The TCP-600n range is reserved for sessions where you need a
+      complete 8-bit binary path over the serial connection. You would
+      require this if you need to use the console to transfer files
+      using a binary protocol such as XMODEM. The disadvantage to this
+      range is that you lose control of the session once you start it,
+      and the device you are connecting to must then use hardware
+      handshaking to signal the Cisco to disconenct the session.
+      <ul>
+        <li>Because you need EVERY byte in the data path, you can't
+         reserve an in-band character to invoke your escape from
+         the connection.
+        <li>The serially-connected device you are communicating with
+         will need to toggle the state of its DTR output (so that 
+         the Cisco sees the change on its DSR input...so you need
+         to invoke Modem Control).
+        <li>If you cannot get the remote device to send the signal, 
+         your only other option is to <b>clear</b> the line from
+         the Cisco console, at the Enabled prompt.
+      </ul></p>
+
+<hr noshade="noshade" width="60%">
+<p>
+<table border="0" width="100%">
+  <tbody>
+    <tr>
+      <td>
+      <p>
+      <table border="0" cellpadding="3" cellspacing="0" width="100%">
+        <tbody>
+          <tr>
+            <td bgcolor="#cccccc" width="70%">
+            <p><b><a name="ethernet"></a>Cable Diagrams</b></p>
+            </td>
+            <td bgcolor="#cccccc" width="30%">
+            <p align="right"><b><a href="#top">to Table of Contents</a></b></p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      </p>
+
+      <p>Because of the symmetrical wiring schema used by Cisco for their RJ-45 consoles, 
+      the best way to make a null-modem connection between two Cisco-schema RJ-45 
+      consoles is to use a CAB-500 'rolled' 8-wire cable (see the diagram below). Note 
+      that a Crossover Ethernet cable will NOT work. If you don't understand why, follow 
+      the wires, and you'll see how the signals get misconnected... </p>
+
+      <p>
+      <table border="0" width="95%">
+        <tbody>
+          <tr>
+            <td valign="top" width="30%">
+            <p></p>
+            <center><img src="ethern.gif" align="top"><br>APACN part: 
+            <font color="#cc0000">24490-21</font> </center>
+            </td>
+            <td valign="top" width="30%">
+            <p></p>
+            <center><img style="width: 124px; height: 162px;" alt="USOC-rolled cable 
+            schematic" src="cab-500.gif" align="top"><br>APACN part: 
+            <font color="#cc0000">24490-22</font> </center>
+            </td>
+            <td valign="top" width="30%">
+            <p></p>
+            <center><img style="width: 127px; height: 172px;" alt="crossover ethernet 
+            schematic" src="etherx.gif" align="top"></center>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      </p>
+
+      <p>Standard Ethernet cables follow a specific wiring pattern. However, not ALL 
+      Ethernet cables have 8 wires in the cable, since a standard basic Ethernet interface 
+      only uses 4 of the wires. For console connections, you need to make sure that your 
+      cables have <b>all 8 wires</b>, either 'straight through' (as shown to the left) for
+      most connections, or 'rolled' (as shown in the center). The USOC cable used for 
+      CDDI connections will also work as a 'rolled' cable, if you have them in the 
+      appropriate lengths. </p>
+
+      <p></p>
+      <hr noshade="noshade" width="60%"> </td>
+    </tr>
+  </tbody>
+</table>
+</p>
+
+<p>
+<table border="0" width="100%">
+  <tbody>
+    <tr>
+      <td>
+      <p>
+      <table border="0" cellpadding="3" cellspacing="0" width="100%">
+        <tbody>
+          <tr>
+            <td bgcolor="#cccccc" width="70%">
+            <p><b><a name="null"></a>Making a Null Modem Cable with Cisco adapters</b> </p>
+            </td>
+            <td bgcolor="#cccccc" width="30%">
+            <p align="right"><b><a href="#top">to Table of Contents</a></b> </p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      </p>
+
+      <p>If you need to connect devices over a longer distance
+than your CAB-500, you can use standard 8-wire 'straight through'
+(Ethernet) cables and a pair of Cisco-schema DB adapters to make the
+null-modem signal transition. </p>
+
+      <p>The four charts below show you how to use adapters to
+make a Null Modem, using standard Ethernet cables to provide the
+appropriate lengths. Always match vendor-compatible parts when you are
+making null-modem connections! That is, always connect a Cisco-schema
+adapter to another Cisco-schema adapter, MOD-TAP with MOD-TAP, etc., to
+ensure that the wiring is correct from one end to the other. Your
+connection will not work (or, if it works, it will likely not work
+completely) if you mix adapters with different wiring schema.) </p>
+
+      <p></p>
+      <center>
+      <table border="0">
+        <tbody>
+          <tr>
+            <td width="450">
+            <p>Essentially, make sure that you are using a pair of adapters which; </p>
+            <ul>
+              <li>have the same RJ-45 wiring schema
+                <ul>
+                  <li>(it doesn't matter if they are Cisco-schema) </li>
+                </ul>
+              </li>
+              <li>they have complimentary DB connectors
+                <ul>
+                  <li>(the same number of pins; one male, one female) </li>
+                  <li>(it doesn't matter which gender is on which end) </li>
+                </ul>
+              </li>
+              <li>one adapter is DTE, and the other is DCE
+                <ul>
+                  <li>(If they are both DTE, or both DCE, it's not 'Null') </li>
+                </ul>
+                <p>The diagram below shows this concept. </p>
+              </li>
+            </ul>
+            </td>
+          </tr>
+          <tr>
+            <td width="456">
+            <p></p>
+            <center><img style="width: 330px; height: 60px;" alt="using in-line 
+            adapters to create a null modem" src="null-mdm.gif"></center>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      </center>
+      <p></p>
+
+      <center>
+      <table align="center" width="92%">
+        <tbody>
+          <tr>
+            <td valign="top">
+            <p></p>
+            <center><b>Cisco Adapter combinations</b><br>
+            <table border="1" width="45%">
+              <tbody>
+                <tr>
+                  <td width="18%">
+                  <p></p>
+                  <center>Version</center>
+                  </td>
+                  <td width="19%">
+                  <p></p>
+                  <center><b>A</b>-side</center>
+                  </td>
+                  <td width="19%">
+                  <p></p>
+                  <center><b>B</b>-side</center>
+                  </td>
+                </tr>
+                <tr>
+                  <td width="18%">
+                  <p></p>
+                  <center>1</center>
+                  </td>
+                  <td width="19%">
+                  <p></p>
+                  <center>CMDCE</center>
+                  </td>
+                  <td width="19%">
+                  <p></p>
+                  <center>CFDTE</center>
+                  </td>
+                </tr>
+                <tr>
+                  <td width="18%">
+                  <p></p>
+                  <center>2</center>
+                  </td>
+                  <td width="19%">
+                  <p></p>
+                  <center>CMDTE</center>
+                  </td>
+                  <td width="19%">
+                  <p></p>
+                  <center>CFDCE</center>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            </center>
+            </td>
+            <td>
+            <p></p>
+            <center><b>Micro-Annex Adapter combinations</b><br>
+            <table border="1" width="45%">
+              <tbody>
+                <tr>
+                  <td width="16%">
+                  <p></p>
+                  <center>Version</center>
+                  </td>
+                  <td width="22%">
+                  <p></p>
+                  <center><b>A</b>-side</center>
+                  </td>
+                  <td width="22%">
+                  <p></p>
+                  <center><b>B</b>-side</center>
+                  </td>
+                </tr>
+                <tr>
+                  <td width="16%">
+                  <p></p>
+                  <center>1</center>
+                  </td>
+                  <td width="22%">
+                  <p></p>
+                  <center>AMDCE</center>
+                  </td>
+                  <td width="22%">
+                  <p></p>
+                  <center>AFDTE</center>
+                  </td>
+                </tr>
+                <tr>
+                  <td width="16%">
+                  <p></p>
+                  <center>2</center>
+                  </td>
+                  <td width="22%">
+                  <p></p>
+                  <center>AMDTE</center>
+                  </td>
+                  <td width="22%">
+                  <p></p>
+                  <center>AFDCE</center>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            </center>
+            </td>
+          </tr>
+          <tr>
+            <td>
+            <p></p>
+            <center><b>Xyplex Adapter combinations</b><br>
+            <table border="1" width="45%">
+              <tbody>
+                <tr>
+                  <td width="16%">
+                  <p></p>
+                  <center>Version</center>
+                  </td>
+                  <td width="21%">
+                  <p></p>
+                  <center><b>A</b>-side</center>
+                  </td>
+                  <td width="22%">
+                  <p></p>
+                  <center><b>B</b>-side</center>
+                  </td>
+                </tr>
+                <tr>
+                  <td width="16%">
+                  <p></p>
+                  <center>1</center>
+                  </td>
+                  <td width="21%">
+                  <p></p>
+                  <center>XMDCE</center>
+                  </td>
+                  <td width="22%">
+                  <p></p>
+                  <center>XFDTE</center>
+                  </td>
+                </tr>
+                <tr>
+                  <td width="16%">
+                  <p></p>
+                  <center>2</center>
+                  </td>
+                  <td width="21%">
+                  <p></p>
+                  <center>XMDTE</center>
+                  </td>
+                  <td width="22%">
+                  <p></p>
+                  <center>XFDCE</center>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            </center>
+            </td>
+            <td>
+            <p></p>
+            <center><b>IOLAN Adapter combinations</b><br>
+            <table border="1" width="45%">
+              <tbody>
+                <tr>
+                  <td width="21%">
+                  <p></p>
+                  <center>Version</center>
+                  </td>
+                  <td width="22%">
+                  <p></p>
+                  <center><b>A</b>-side</center>
+                  </td>
+                  <td width="17%">
+                  <p></p>
+                  <center><b>B</b>-side</center>
+                  </td>
+                </tr>
+                <tr>
+                  <td width="21%">
+                  <p></p>
+                  <center>1</center>
+                  </td>
+                  <td width="22%">
+                  <p></p>
+                  <center>IMDCE</center>
+                  </td>
+                  <td width="17%">
+                  <p></p>
+                  <center>IFDTE</center>
+                  </td>
+                </tr>
+                <tr>
+                  <td width="21%">
+                  <p></p>
+                  <center>2</center>
+                  </td>
+                  <td width="22%">
+                  <p></p>
+                  <center>IMDTE</center>
+                  </td>
+                  <td width="17%">
+                  <p></p>
+                  <center>IFDCE</center>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            </center>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      </center>
+      <center>
+      <hr noshade="noshade" width="60%"> </center>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</p>
+
+<p>
+<table border="0" width="100%">
+  <tbody>
+    <tr>
+      <td>
+      <p>
+      <table border="0" cellpadding="3" cellspacing="0" width="100%">
+        <tbody>
+          <tr>
+            <td bgcolor="#cccccc" width="70%">
+            <p><b><a name="crj45"></a>Cisco devices with female RJ-45 console ports</b> </p>
+            </td>
+            <td bgcolor="#cccccc" width="30%">
+            <p align="right"><b><a href="#top">to Table of Contents</a></b> </p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      </p>
+
+      <p></p>
+
+      <p><center><img style="width: 345px; height: 49px;" alt="Cisco-wired patch panel 
+      to device" src="patchdv1.gif"></center></p>
+
+      <p>To connect most Cisco console ports to another Cisco console port, use a 
+      '<a href="#ethernet">rolled</a>' (8-wire) cable. </p>
+
+      <p>Due to the nature of Cisco acquiring other companies, there are some devices 
+      with a Cisco brand that use the Cisco RJ-45 wiring schema, but they do NOT use 
+      all of the signals. That is, they may only use the Data leads, or they may not 
+      use Hardware Handshaking. However, if they have converted to the RJ-45 connector, 
+      they have also used the legacy wiring schema. I'm still on the lookout, in case 
+      there is a Cisco product from an acquisition that uses the previous companies
+      RJ-45 pinouts. </p>
+
+      <p>In order to make it easier to connect various devices to Cisco console ports, 
+      or to Cisco-schema patch panels, I've created my <a href="cisco-hosts.html">Cisco 
+      Host-to-Adapters Page</a>, which lists the various devices on which I've checked 
+      the serial interfaces. There are more than 500 devices in my connectivity
+      database, and the adapter pages list the devices, and tells you which adapter (or 
+      cable) you will need to connect each device to either a Cisco console port, or 
+      to a <a href="#patch">patch panel</a>.
+      </p>
+
+      <p>There are a few Cisco devices that have RJ-45 consoles that are wired the 
+      null-modem opposite from the Cisco wiring standard. The three devices listed 
+      below were (I believe) Catalyst products. They are also listed on the 
+      <a href="cisco-hosts.html">Cisco Host-to-Adapters Page</a>, with information 
+      about which cable to use. (The RJ-45 wiring used on the console on these devices 
+      appears to be a patch panel, and not a console port.) </p>
+      <ul>
+        <li>1100 switches </li>
+        <li>1200 switches </li>
+        <li>1400 switches </li>
+      </ul>
+
+      <p>Cisco also sells an 8-cable "Hydra" interface (Cisco part <b>72-0845-01</b>) 
+      from the 68-pin high-density connector to male RJ-45 connectors, having 3-foot 
+      long leads. These can be used with the 68-pin connectors on the Cisco 2500-series 
+      terminal servers, as well as the NM-16A and NM-32A async serial Network Modules.
+      These cables have the same pinouts as an Ethernet cable plugged into the 
+      <a href="#patch">Cisco Patch Panel</a>.</p>
+      <ul>
+        <b><font color="#af0000">BEWARE: The Hydra cable will not work directly with 
+        the 'different' devices listed above, because the consoles on those devices are 
+        wired the 'null-modem' opposite from the regular Cisco RJ-45 console schema. 
+        The Hydra cable was designed to connect to the normal console ports.</font></b>
+      </ul>
+
+      <p>The Cisco-schema <a href="#patch">patch panel</a> from APACN are wired the 
+      null-modem opposite from theCisco console ports, so that a Cisco RJ-45 console 
+      port can attach directly to a Cisco patch panel using an 
+      <a href="#ethernet">Ethernet</a> (8-wire, straight-through) cable. </p>
+
+      <p></p>
+      <hr noshade="noshade" width="60%"> </td>
+    </tr>
+  </tbody>
+</table>
+</p>
+
+<p>
+<table border="0" width="100%">
+  <tbody>
+    <tr>
+      <td>
+      <p>
+      <table border="0" cellpadding="3" cellspacing="0" width="100%">
+        <tbody>
+          <tr>
+            <td bgcolor="#cccccc" width="70%">
+            <p><b><a name="modem"></a>Connecting modems to Cisco Products</b> </p>
+            </td>
+            <td bgcolor="#cccccc" width="30%">
+            <p align="right"><b><a href="#top">to Table of Contents</a></b> </p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      </p>
+
+      <p>You can connect a modem to almost any Cisco device. (Your modem configuration 
+      may be affected by the signals available on the Cisco device, i.e. flow control 
+      and hardware handshaking.) Attach the <a href="#rj45schem">CMMOD</a> adapter to the
+      female DB-25 connector on most modems, and use an appropriate length of Ethernet 
+      cable (and another adapter on the host-side, as needed), as indicated in the 
+      illustrations below. </p>
+
+      <p>Whether you attach your modem to the Console, or to the Aux port will need to 
+      be reflected in your line configurations. (Do you want to enforce a local login 
+      (with a crypt password, stored on the Cisco device), or use a stronger, 
+      centralized authentication service (such as RADIUS or TACACS+)? Your line 
+      configuration will probably need to include the "line in/out modem" parameter. 
+      You also need to configure whether you will need to enable the modem connection 
+      for a "protocol" session, such as PPP, which may need an 8-bit clean data path. 
+      (In the last case, your modem DCD signal needs to be able to tell the Cisco port 
+      when the modem is on-line, so it's more important to get the physical connection 
+      right, so that the Cisco port will log the user/session off when the modem 
+      connection is lost or dropped.) </p>
+      <blockquote>
+        <p><font color="#af0000">This section is, unfortunately, a bit vague, due to a 
+        few problems.</font> </p>
+        <ol>
+          <li><font color="#af0000">The variety of connectors used on console ports on 
+          Cisco gear, mainly due to the acquisitions of other companies by Cisco.</font>
+            <ol>
+              <li type="1"><font color="#af0000">Some consoles may not care if DSR is 
+              toggled, but that's how the modem will signal whether a call is on the 
+              line, in the configurations shown below (since the Cisco RJ-45 schema 
+              doesn't have a separate DCD wire).</font>
+              </li>
+            </ol>
+          </li>
+          <li><font color="#af0000">Settings for the various devices to talk to the modem;</font>
+            <ol>
+              <li type="1"><font color="#af0000">Some consoles may need to be 
+              configured to understand that there is a modem on the console</font></li>
+              <li><font color="#af0000">You should probably put an IDLE timeout 
+              (exec-timeout) on these console (or aux) ports, to hang-up after a period 
+              of inactivity, since these are your consoles!</font>
+              </li>
+              <li><font color="#af0000">While you *may* be able to configure some 
+              ports to allow SLIP or PPP, you probably don't want that in most 
+              instances. You may need to invoke certain commands to prevent that 
+              possibility on some devices.</font>
+              </li>
+            </ol>
+          </li>
+          <li><font color="#af0000">The modem settings required to make whichever 
+          modem you choose work.</font>
+            <ol>
+              <li type="1"><font color="#af0000">I like the USR/3-Com Courier modems 
+              if you are connecting to these ports so you can dial into them. 
+              (Personally, I avoid the USR Sportster for dial-in use, because I cannot 
+              lock-down certain settings!)</font>
+              </li>
+              <li><font color="#af0000">You may need to modify the settings so that 
+              DCD reflects the state of the phone connection, since the MMOD connector 
+              ties the DSR pin of the adapter to the DCD signal of the modem.</font></li>
+            </ol>
+          </li>
+        </ol>
+        <p><font color="#af0000">As a result, configuration of the Cisco line and 
+        interfaces, for the most part, are left as an exercise for the reader. 
+        Sorry! If you have some specific questions, I'm willing to field them via 
+        email, but have your modem manual handy.</font></p>
+      </blockquote>
+
+      <p>Defining what you need the modem connection to do (and deciding what it 
+      shouldn't do, and what it doesn't need to do) should be your first step, then 
+      head for the Cisco configuration command reference for your version of IOS. 
+      Here are some guidelines for configuring the modems; </p>
+      <ul>
+        <li>Determine the highest reliable RS-232 speed, common to the Cisco device and 
+        the modem...
+          <ul>
+            <li>Set the modem port speed to that high speed </li>
+            <li>Do NOT let the modem "auto-detect" the connection speed, or change 
+            the RS-232 port speed! </li>
+          </ul>
+        </li>
+        <li>Set the connection for hardware flow control on the modem and the Cisco port.
+          <ul>
+            <li>Ensure that your cables and adapters are wired correctly for flow control. </li>
+          </ul>
+        </li>
+        <li>I normally turn software flow control off... </li>
+        <li>Configure the modem so that the DSR and DCD line reflect the 'on-line' status </li>
+        <li>Determine the optimum modem config string, and save that to NVRAM on the modem.
+          <ul>
+            <li>Teach the modem to auto-load that config when the modem resets. </li>
+            <li>Teach the modem to reset when the call is disconnected, or DTR is cycled.</li>
+            <li>Teach the Cisco how to also send that config string, if needed. </li>
+          </ul>
+        </li>
+      </ul>
+
+      <p>Devices with a Cisco RJ-45(f) console port can be connected using an 
+      Ethernet Cable to the <font color="#cc0000"><a href="#rj45schem">CMMOD</a></font> 
+      adapter and modem. (You would use a USOC-rolled cable to connect the CMMOD to a
+      Cisco-wired patch panel.) </p>
+
+      <p></p>
+
+      <center><img src="ciscomod1.gif" align="bottom" height="39" width="319"> </center>
+
+      <p>Devices with a DB-9(f) console port can be connected using an appropriate 
+      DB-9 adapter and an Ethernet Cable. You can refer to my 
+      <a href="http://www.conserver.com/consoles/msock.html">Minor Scroll of Console 
+      Knowledge</a> for tips on how to make sure you are using the appropriate adapter.</p>
+
+      <p></p>
+
+      <center><img src="ciscomod2.gif" align="bottom" height="39" width="319"> </center>
+
+      <p>Devices with a DB-25(m) console port can be connected using an appropriate 
+      DB-25(f) adapter and an Ethernet Cable. (Most Cisco devices which have a DB-25(m) 
+      console will also have a DB-25(f) Aux or Modem port, which you can also use.) </p>
+
+      <p></p>
+
+      <center><img src="ciscomod3.gif" align="bottom" height="39" width="319"> </center>
+
+      <p>Finally, realize that the physical connection will be an important starting 
+      point. Get the connection set first, including speed settings, before you go 
+      much further with your testing. Flow control will likely be your biggest hurdle, 
+      since the modem can introduce data latency issues because of speed differences 
+      on the telco link, as well as the serial conenctions to the modems on each end of
+      the link, as seen in the next illustration.</p>
+
+      <div style="text-align: center;"><img style="width: 205px; height: 50px;" 
+      alt="data speeds through a modem connection" src="modem-speeds.jpg"></div>
+
+      <p>If you want to use any compression between the modems, you need to set the 
+      serial speed to at least 2x, and preferably 4x (or more) faster than the modem 
+      link speed. At 2x, the compression will not give you much advantage, because 
+      the modems need time to compress and decompress the data. Using 4x or more will 
+      show you some data throughput improvement. But, the higher your serial speed, 
+      the more likely you will have flow control issues between the modems. And, if 
+      you have a high serial speed trying to send to a slower serial speed, you may 
+      find that you are filling buffers in the mode, and possibly at the slower 
+      serial link. If flow control isn's set up properly, you will see data loss. </p>
+
+      <p>In summary; using modems in a data link will be a challenge, and maybe even 
+      a pain. You will save yourself some grief by spending a bit more, and getting 
+      really good modems, from a manufacturer with a good support staff. You should 
+      also try to download the manual for the candidate modems from the manufacturers 
+      website, and see if you can understand the configuration information about flow
+      control, serial and phone speed controls, and compression. If you can't understand 
+      the manual, try looking at other manufacturers.</p>
+      <center>
+      <hr noshade="noshade" width="60%"> </center>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</p>
+
+<p>
+<table border="0" width="100%">
+  <tbody>
+    <tr>
+      <td>
+      <p>
+      <table border="0" cellpadding="3" cellspacing="0" width="100%">
+        <tbody>
+          <tr>
+            <td bgcolor="#cccccc" width="70%">
+            <p><b><a name="orj45"></a>Connecting to non-Cisco RJ-45(f) console ports</b></p>
+            </td>
+            <td bgcolor="#cccccc" width="30%">
+            <p align="right"><b><a href="#top">to Table of Contents</a></b> </p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      </p>
+
+      <p>When you have a device with a non-Cisco RJ-45 console port, you will either 
+      need to use a combination of a Cisco adapter (connected to the Cisco device), 
+      and another non-Cisco adapter (connected to the non-Cisco device) to create 
+      the interface between the two wiring schemes, buy you will need to buy or make 
+      a <a href="#cables">special cable</a>. The common choices for these connections 
+      are usually DB-25 RS-232 adapters, so you can easily check your work by 
+      connecting a <a href="/Tracers/tracers.html">passive RS-232 signal tracer</a>, 
+      or a breakout box, in between the adapters. </p>
+
+      <p><center><img style="width: 345px; height: 49px;" alt="using adapters to match 
+      different RJ45 wiring schemes" src="patchdv4.gif"> </center>
+      <p>The table below documents such connections, using Ethernet cable (8-wire, 
+      straight-through) cables between the patch panel, the devices and the adapters. 
+      The keys to making this type of connection work are; </p>
+      <ul>
+        <li>Have the proper RJ-45 wiring schema, connected to each device
+          <ul>
+            <li>(attach the Cisco-schema adapter to the Cisco device) </li>
+            <li>(attach an adapter to the 'other' device which is wired for the 
+            appropriate RJ-45 schema) </li>
+          </ul>
+        </li>
+        <li>The adapters must have complimentary DB connectors
+          <ul>
+            <li>(the same number of pins; one male, one female) </li>
+            <li>(it doesn't matter end which is which gender) </li>
+          </ul>
+        </li>
+        <li>One adapter must be DTE, and the other must be DCE
+          <ul>
+            <li>(If both adapters are DTE, or both are DCE, the connection will 
+            not work) </li>
+          </ul>
+        </li>
+        <li>Use your passive signal tracer to make sure that the signals are correct </li>
+      </ul>
+      </p>
+
+      <p>You can find more tips on my <a href="../msock.html">Minor Scroll of 
+      Console Knowledge</a> page. </p>
+
+      <p></p>
+      <center>
+      <table border="0" cellpadding="0" cellspacing="7" width="100%">
+        <tbody>
+          <tr>
+            <td width="30%">
+            <p><b>Non-Cisco device</b> </p>
+            </td>
+            <td width="42%">
+            <p><b>Device-side adapter</b> </p>
+            </td>
+            <td width="23%">
+            <p><b>Cisco-side adapter</b> </p>
+            </td>
+          </tr>
+          <tr>
+            <td width="30%">
+            <p><b>Micro-Annex </b>(preferred)<br>
+            <i>Micro-Annex (alternate)</i> </p>
+            </td>
+            <td width="42%">
+            <p>IMDCE, or MOD-TAP 06-988-401-00<br>
+            <i>IMDTE, or MOD-TAP 06-988-262-20</i> </p>
+            </td>
+            <td width="23%">
+            <p>CMDTE<br>
+            <i>CMDCE</i> </p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      </center>
+      <p> </p>
+      <hr noshade="noshade" width="60%"> </td>
+    </tr>
+  </tbody>
+</table>
+</p>
+
+<p>
+<br>
+<table border="0" width="100%">
+  <tbody>
+    <tr>
+      <td>
+      <p>
+      <table border="0" cellpadding="3" cellspacing="0" width="100%">
+        <tbody>
+          <tr>
+            <td bgcolor="#cccccc" width="70%">
+            <p><b><a name="configs"></a>Terminal Server Configuration Tips</b></p>
+            </td>
+            <td bgcolor="#cccccc" width="30%">
+            <p align="right"><b><a href="#top">to Table of Contents</a></b> </p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      </p>
+
+      <p>Tips for configuring the serial ports on terminal servers for remote access 
+      to attached serial devices. (This is the type of configuration that could be 
+      used with <a href="http://www.conserver.com/consoles/">Conserver</a>, or to 
+      allow someone to use a TCP session to a high-TCP port to the Cisco device, 
+      for connecting across the network to a specific serial port on the Cisco device.)</p>
+      <ul>
+        <li>Choose which line(s) will be used for connecting to serial devices. </li>
+        <li>Don't run an 'exec' session on the port(s)
+          <ul>
+            <li>(if you do, the Cisco login may 'chat' with the attached devices 
+            login session...) </li>
+            <li>(output data from the attached devices would be perceived as 
+            attempts to log in...) </li>
+          </ul>
+        </li>
+        <li>Don't set the port(s) for local login.
+          <ul>
+            <li>(this will cause the Cisco port to issue a login when it sees the 
+            connection. The login will time out, and disconnect the TCP session. 
+            Conserver will reinitialize the connection, but this will fill your 
+            Conserver logs...) </li>
+          </ul>
+        </li>
+        <li>Set the port to allow Reverse Telnet. </li>
+        <li>Set the port speed, data bits, parity, and stop-bits (most folks use 9600-8-N-1)
+          <ul>
+            <li>(there are arguments for setting the port speeds higher.) </li>
+            <li>(make sure that the Cisco port speed matches the attached devices 
+            port speed.) </li>
+          </ul>
+        </li>
+        <li>Decide if you want/need software or hardware flow control. </li>
+      </ul>
+
+      <p>You can use the example below to get started. </p>
+
+      <blockquote>
+        <pre><font color="brown">
+line 1 16 (set individual lines, or 'line ranges'...)<br>  no exec
+  no login local  (local login will fill your logs...)
+  transport input telnet<br>  speed 57600 (pick your speed(s)...)<br>  databits 8
+  parity none<br>  stopbits 1<br>  flow control none  (choices are [none|software|hardware])
+  </font></pre>
+      </blockquote>
+
+      <p>If you are connecting these Console Server ports to the serial consoles of 
+      your network equipment, remember to consider these other points; </p>
+      <ul>
+        <li>Set an idle timeout on the console exec of the network gear (on the 
+        attached devices, <b>not</b> on the terminal server!)
+          <ul>
+            <li>You probably don't want someone to leave a port in the enabled mode, 
+            and then let another user to connect to the port after them to have the 
+            enabled access! </li>
+          </ul>
+        </li>
+        <li>Add a password (or other authentication) to the ports of your attached 
+        devices (just like you would do for read-only access via telnet.)</li>
+      </ul>
+
+      <p><a name="aux"></a><span style="font-weight: bold;">Configuring the AUX 
+      port for Reverse-TCP</span></p>
+
+      <p>Normally, the AUX port of a device can be configured with commands similar 
+      to those shown above, to respond to reverse-TCP connections. The Aux port has
+      typically been assigned as the highest async line in the device, but some AUX 
+      ports may not respond to configuration for reverse-TCP. (For example, configure 
+      <span style="font-weight: bold;">line aux 0</span> as described above, to be 
+      able to enable reverse-TCP to the Aux port.)</p>
+
+      <p style="margin-left: 40px;"><span style="font-style: italic;">
+      <span style="font-weight: bold;">Note:</span> You can NOT set a Cisco console 
+      to respond to reverse-TCP. You can set </span>
+      <span style="font-weight: bold; font-style: italic;">line con 0</span>
+      <span style="font-style: italic;"> for any of the settings above
+      except the transport input telnet, which is the bit that enables
+      reverse-TCP.</span></p>
+
+      <p>On a system that uses NM-nnA async modules, presume that
+      all of the NM slots will have 32-port modules installed, and total the
+      number of ports, and then add one to access the Aux port. (In a C3620,
+      you could have two NM-32A modules, for a total of 64 ports, so the Aux
+      port would be the 129th port, and you would reverse-TCP to port 2129 to
+      reach it, if it has been configurd for transport input telnet. In a
+      fully-loaded 3660, the Aux port would be port 2225.)</p>
+
+      <p>On the 2800 and 3800 devices, it seems that the Aux port was
+      assigned as line 1 (reverse-TCP to port 2001), and then all of the
+      other async ports have line numbers assigned by which slot/port/hwic where
+      they are installed. (See the 3800 Config sestion for more info about
+      line to slot/port mapping.)</p>
+
+      <p>This doesn't match the Cisco legacy, and Cisco folks are looking to see
+      if they can change this in software to match the legacy mentioned here.
+      It may be hard-coded in hardware. I don't know when/if it will match
+      the legacy model in the future. For now, I can only tell you to test
+      one of the lines you have installed, and see which cable responds for you.</p>
+      <hr noshade="noshade" width="60%"> </td>
+    </tr>
+  </tbody>
+</table>
+</p>
+
+<p>
+<table border="0" width="100%">
+  <tbody>
+    <tr>
+      <td>
+      <p>
+      <table border="0" cellpadding="3" cellspacing="0" width="100%">
+        <tbody>
+          <tr>
+            <td bgcolor="#cccccc" width="70%">
+            <p><b><a name="c3600"></a>Configuring 2600, 3600-series as Async Servers</b></p>
+            </td>
+            <td bgcolor="#cccccc" width="30%">
+            <p align="right"><b><a href="#top">to Table of Contents</a></b> </p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      </p>
+
+      <p>When using the 2600 and 3600 family devices for remote access to attached 
+      serial consoles, there are a few things you need to consider. Foremost (in my 
+      opinion) is that the "line numbers" (also async interface numbers) are hard-coded 
+      to the slots of the chassis. This means that wherever you put your async 
+      interface module will determine which line numbers will correspond to those 
+      async serial ports. </p>
+      <ul>
+        Here's the way the async line numbers are assigned;<br>
+        <i>Slot 0: lines 1-32<br>
+        Slot 1: lines 33-64<br>
+        Slot 2: lines 65-96<br>
+        Slot 3: lines 97-128<br>
+        Slot 4: lines 129-160<br>
+        Slot 5: lines 161-192<br>
+        Slot 6: lines 193-224</i>
+      </ul>
+
+      <p>So, my recommendation is to put the network interface module(s) in the 
+      highest-numbered slot(s) when you can, and start loading your NM-xxA cards 
+      starting in Slot 0, working your way up consecutively. </p>
+
+      <p>The slot numbers are stamped in the sheet metal that makes up the rear of 
+      the chassis, but sometimes the stamping was a bit hard to see. The diagrams 
+      showing the slot numbers of the C3620 and C3640 are shown below (looking at 
+      the rear of the chassis). </p>
+
+      <p>
+      <table border="0">
+        <tbody>
+          <tr>
+            <td>
+            <p>Here's the way the <b>c3620</b> line numbers are assigned;<br>
+            <i>Slot 0: lines 1-32<br>Slot 1: lines 33-64 (or network I/O...)</i> </p>
+            </td>
+            <td>
+            <p><img src="Bays-c3620.jpg" align="top" height="29" width="246"> </p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <br>
+      <table border="0">
+        <tbody>
+          <tr>
+            <td>
+            <p>Here's the way the <b>c3640</b> line numbers are assigned<br>
+            <i>Slot 0: lines 1-32<br>
+            Slot 1: lines 33-64<br>
+            Slot 2: lines 65-96<br>
+            Slot 3: lines 97-128 (or network I/O...)</i> </p>
+            </td>
+            <td>
+            <p><img src="Bays-c3640.jpg" align="top" height="50" width="280"> </p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      </p>
+
+      <p>The next issue to consider: the line numbers are assigned in blocks of 32, 
+      but you can also use the <b>NM-16A</b> (with only 16 async ports) in any of the 
+      slots. However, the port numbers will then have gaps in them. (The line numbers 
+      won't shift, due to the smaller number of ports on an NM-16A, to give you a 
+      contiguous range.) This is something to be aware of as you are determining which
+      TCP port to call for remote access. </p>
+      <ul>
+        Here's the way the async line would be assigned for NM-16A modules;<br>
+        <i>Slot 0: lines 1-16<br>
+        Slot 1: lines 33-48<br>
+        Slot 2: lines 65-80<br>
+        Slot 3: lines 97-112<br>
+        Slot 4: lines 129-146<br>
+        Slot 5: lines 161-176<br>
+        Slot 6: lines 193-208</i>
+      </ul>
+
+      <p>Finally, a pet peeve of mine: The designers of the c26xx product family, and 
+      the C3660 product, assigned the built-in network interfaces as "Slot 0". From 
+      a human-user interface standpoint, I think this was a bad move for two reasons;</p>
+      <ul>
+        <p>1.) Since the 3620 and 3640 start the slot numbers on the <b>lower-right</b>
+        (as you look at the slots on the back panel), then the lower-left, and then 
+        the next row up (first the right, then the left), until you run out of slots. 
+        In the case of the C3660, with six slots, I'd presume that these were slots 
+        0-5, and Slot 6 was the built-in (since it's located at the top).
+      </ul>
+    </p>
+    
+      <p>
+      <table border="0">
+        <tbody>
+          <tr>
+            <td>
+            <p>Here's the way the c3660 line number are assigned;<br>
+            <i>Slot 0: Network I/O<br>
+            Slot 1: lines 33-64<br>
+            Slot 2: lines 65-96<br>
+            Slot 3: lines 97-128<br>
+            Slot 4: lines 129-160<br>
+            Slot 5: lines 161-192<br>
+            Slot 6: lines 193-224</i> </p>
+            </td>
+            <td>
+            <p><img src="Bays-c3660.jpg" align="top" height="94" width="270"> </p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      </p>
+
+      <p>What this design decision means is that, in the largest 3600 chassis
+      (the 3660), which you would buy as a 192-port terminal server, that you can 
+      never assign lines 1-32. This only becomes a functional issue when humans 
+      need to map the 'first' serial port to TCP port 2033, instead of 2001. 
+      (Anyone interfacing with these 192 ports needs to keep this 32-port shift in 
+      mind, on every interaction.) Fortunately, if you are using 
+      <a href="http://www.conserver.com/">Conserver</a> to manage these ports, you 
+      only need to worry about this shift once, as you are adding these devices 
+      into the configuration file.
+      <ul>
+        2.) In the case of the c2600 family, I'd have put the NM slot on the right 
+        (as you are looking at the rear of the unit), in the 'slot 0' position, and 
+        put the built-in interfaces on the left.
+      </ul>
+      </p>
+      
+      <p>
+      <table border="0">
+        <tbody>
+          <tr>
+            <td>
+            <p>Here's the way the C26xx line numbers are assigned;<br>
+            <i>Slot 0: Network I/O<br>Slot 1: lines 33-64</i> </p>
+            </td>
+            <td>
+            <p><img src="Bays-c26xx.jpg" align="top" height="29" width="246"> </p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      </p>
+      <hr noshade="noshade" width="60%"> </td>
+    </tr>
+  </tbody>
+</table>
+</p>
+
+<p>
+<table border="0" width="100%">
+  <tbody>
+    <tr>
+      <td>
+      <p>
+      <table border="0" cellpadding="3" cellspacing="0" width="100%">
+        <tbody>
+          <tr>
+            <td bgcolor="#cccccc" width="70%">
+            <p><b><a name="c2800"></a>Configuring 1800, 2800, 3800-series as 
+            Async Servers</b></p>
+            </td>
+            <td bgcolor="#cccccc" width="30%">
+            <p align="right"><b><a href="#top">to Table of Contents</a></b> </p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      </p>
+
+      <p>When using the 1800, 2800, and 3800 family devices for remote
+      access to attached serial consoles, there are a few things you need to
+      consider. Foremost (in my opinion) is that the "line numbers" (also
+      async interface numbers) are hard-coded to the HWIC slots of the chassis.
+      This means that whichever HWIC port you use for your HWIC async
+      interface module will determine which line numbers will correspond to 
+      those async serial ports.</p>
+
+      <p>Async&nbsp;line number 1 is reserved for the 
+      <span style="font-weight: bold;">AUX</span> port, and the line numbers for 
+      the HWIC ports are shifted up accordingly. This is not consistant with Cisco 
+      legacy, where the AUX port is the highest line in the chassis. I found this 
+      curiosity in July of 2006. After I reported this, Cisco was looking for a way 
+      to make the 3800 conform to the legacy sequence. (Testing in September with 
+      the 2800 series found that they also have this anomaly, and there is no word 
+      from Cisco whether this was a hardware mapping, or if they will change the 
+      behavior in a future version of IOS to match the legacy style.) </p>
+      <ul>
+
+      Here's the way the async line numbers are assigned;<i><br>
+      * Even if you only use HWIC-8A modules, there is still the modulo-16
+      offset!<br></i>
+      </ul>
+      <table border="0" cellpadding="5" width="450">
+        <tbody>
+          <tr>
+            <td style="width: 10%;"><p align="center">Slot</p></td>
+            <td style="width: 22%;"><p align="center">HWIC-8A<br>lines</p></td>
+            <td style="width: 22%;"><p align="center">HWIC-8A<br>TCP ports</p></td>
+            <td style="width: 23%;"><p align="center">HWIC-16A<br>lines</p></td>
+            <td style="width: 23%;"><p align="center">HWIC-16A<br>TCP ports</p></td>
+          </tr>
+          <tr>
+            <td><p align="center">0/0</p></td>
+            <td><p align="center">0-7*</p></td>
+            <td><p align="center">2002-2009*</p></td>
+            <td><p align="center">0-15</p></td>
+            <td><p align="center">2002-2017</p></td>
+          </tr>
+          <tr>
+            <td align="center">0/1</td>
+            <td align="center">16-23*</td>
+            <td align="center">2018-2025*</td>
+            <td align="center">16-31</td>
+            <td align="center">2018-2033</td>
+          </tr>
+          <tr>
+            <td align="center">0/2</td>
+            <td align="center">32-39*</td>
+            <td align="center">2034-2041*</td>
+            <td align="center">32-47</td>
+            <td align="center">2034-2049</td>
+          </tr>
+          <tr>
+            <td align="center">0/3</td>
+            <td align="center">48-55*</td>
+            <td align="center">2050-2057*</td>
+            <td align="center">48-63</td>
+            <td align="center">2050-2065</td>
+          </tr>
+          <tr>
+            <td align="center">1/0</td>
+            <td align="center">64-71*</td>
+            <td align="center">2066-2073*</td>
+            <td align="center">64-79</td>
+            <td align="center">2066-2081</td>
+          </tr>
+          <tr>
+            <td align="center">1/1</td>
+            <td align="center">80-87*</td>
+            <td align="center">2082-2089*</td>
+            <td align="center">80-95</td>
+            <td align="center">2082-2097</td>
+          </tr>
+          <tr>
+            <td align="center">1/2</td>
+            <td align="center">96-13*</td>
+            <td align="center">2098-2105*</td>
+            <td align="center">96-111</td>
+            <td align="center">2098-2113</td>
+          </tr>
+          <tr>
+            <td align="center">1/3</td>
+            <td align="center">112-119*</td>
+            <td align="center">2114-2121*</td>
+            <td align="center">112-127</td>
+            <td align="center">2114-2129</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <p>TCP port 2000 should be the chassis itself, and TCP 2001 will be the AUX 
+      port, if you have configured it for reverse-TCP.</p>
+
+      <p>So, my recommendation is to put non-async module(s) in the highest-numbered 
+      slot(s) when you can, and start loading your HWIC-xxA cards starting in 
+      Slot 0/0, working your way up consecutively. In my experience, it's more 
+      intuitive to have the async modules in a sequential order. That said, I also 
+      recommend loading HWIC-16A cards instead of HWIC-8A cards if you're going to 
+      load more than one card, so you have sequential line numbers. (For one thing,
+      sequential numbers make it easier to script configuration settings.)</p>
+
+      <table border="0" cellpadding="5">
+        <tbody>
+          <tr>
+            <td>
+            <p>Here's the way the <b>c2800</b> line numbers are assigned;<br>
+            <i>Slot 0: lines 0-63<br>
+            Slot 1: lines 64-127</i> </p>
+            </td>
+            <td>
+            <p><img src="cisco-1ru.jpg" alt=""></p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      
+      <p></p>
+      
+      <table border="0" cellpadding="5">
+        <tbody>
+          <tr>
+            <td>
+            <p>Here's the way the <b>c3800</b> line numbers are assigned;<br>
+            <i>Slot 0: lines 0-63<br>
+            Slot 1: lines 64-127<br>
+            Slot 2: lines 128-223<br>
+            Slot 3: lines 224-195</i></p>
+            </td>
+            <td><p><img src="cisco-2ru.jpg" alt=""></p></td>
+          </tr>
+        </tbody>
+      </table>
+      
+      <p></p>
+      
+      <table border="0" cellpadding="5">
+        <tbody>
+          <tr>
+            <td>
+            <p>Here's the way the <b>HWIC interfaces</b> are assigned;<br>
+            <font color="green">interface<i> Slot/HWIC/lines (0-7 or 0-15)<br>
+            </i></font></p>
+            <div style="margin-left: 40px;"><i>Interface 0/0/0 0/0/15</i></div>
+            </td>
+            <td>
+            <p><img src="cisco-nm-hwic.jpg" alt=""></p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <p></p>
+      <hr noshade="noshade" width="60%"> </td>
+    </tr>
+  </tbody>
+</table>
+</p>
+
+<p>
+<table border="0" width="100%">
+  <tbody>
+    <tr>
+      <td>
+      <p>
+      <table border="0" cellpadding="3" cellspacing="0" width="100%">
+        <tbody>
+          <tr>
+            <td bgcolor="#cccccc" width="70%">
+            <p><b><a name="c2900"></a>Configuring 1900, 2900-series as Async Servers</b></p>
+            </td>
+            <td bgcolor="#cccccc" width="30%">
+            <p align="right"><b><a href="#top">to Table of Contents</a></b> </p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      </p>
+
+      <p>When using the 1900, 2900 ISR family devices for remote access to attached 
+      serial consoles, there are a few things you need to consider. As with the 
+      2800 and 3800 devices the "line numbers" (also async interface numbers) are 
+      hard-coded to the HWIC slots of the chassis. This means that whichever HWIC 
+      port you use for your HWIC async interface module will determine which line 
+      numbers will correspond to those async serial ports. BUT, they are not quite
+      the same port numbers as with the 2800 and 3800 families!</p>
+
+      <p>Async line number 1 is reserved for the <span style="font-weight: bold;">AUX</span>
+      port, and Async line number 2 is reserved for a built-in 
+      <span style="font-weight: bold;">MODEM</span>. Then the line numbers for 
+      the HWIC ports are shited up accordingly.</p>
+      <ul>
+
+      Here's the way the async line numbers are assigned;<i><br>
+      * Even if you only use HWIC-8A modules, there is still the modulo-16
+      offset!<br></i>
+      </ul>
+      <table border="0" cellpadding="5" width="450">
+        <tbody>
+          <tr>
+            <td style="width: 10%;"><p align="center">Slot</p></td>
+            <td style="width: 22%;"><p align="center">HWIC-8A<br>lines</p></td>
+            <td style="width: 22%;"><p align="center">HWIC-8A<br>TCP ports</p></td>
+            <td style="width: 23%;"><p align="center">HWIC-16A<br>lines</p></td>
+            <td style="width: 23%;"><p align="center">HWIC-16A<br>TCP ports</p></td>
+          </tr>
+          <tr>
+            <td><p align="center">0/0/</p></td>
+            <td><p align="center">0-7*</p></td>
+            <td><p align="center">2003-2010*</p></td>
+            <td><p align="center">0-15</p></td>
+            <td><p align="center">2003-2018</p></td>
+          </tr>
+          <tr>
+            <td align="center">0/1/</td>
+            <td align="center">16-23*</td>
+            <td align="center">2019-2026*</td>
+            <td align="center">16-31</td>
+            <td align="center">2019-2034</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <p>TCP port 2000 should be the chassis itself, and TCP 2001 will be the AUX 
+      port, if you have configured it for reverse-TCP.</p>
+
+      <p>So, my recommendation is to put non-async module(s) in the highest-numbered 
+      slot(s) when you can, and start loading your HWIC-xxA cards starting in 
+      Slot 0/0, working your way up consecutively. In my experience, it's more 
+      intuitive to have the async modules in a sequential order. That said, I also 
+      recommend loading HWIC-16A cards instead of HWIC-8A cards if you're going to 
+      load more than one card, so you have sequential line numbers. (For one thing,
+      sequential numbers make it easier to script configuration settings.)</p>
+      <p></p>
+      <hr noshade="noshade" width="60%"> </td>
+    </tr>
+  </tbody>
+</table>
+</p>
+
+<p>
+<table border="0" width="100%">
+  <tbody>
+    <tr>
+      <td>
+      <p>
+      <table border="0" cellpadding="3" cellspacing="0" width="100%">
+        <tbody>
+          <tr>
+            <td bgcolor="#cccccc" width="70%">
+            <p><b><a name="patch"></a>Patch Panels for Cisco Async Servers</b> </p>
+            </td>
+            <td bgcolor="#cccccc" width="30%">
+            <p align="right"><b><a href="#top">to Table of Contents</a></b> </p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      </p>
+
+      <p>The Cisco 2509-11 Terminal Servers included async ports,
+delivered using 68-pin (SCSI-II) connectors to deliver 8 Async Line
+interfaces on each connector. (The C2511-RJ model had 16 RJ-45 jacks on
+the back panel, instead of the two 68-pin connectors.) </p>
+
+      <p>The <a href="#c3600">Cisco 2600 and 3600
+series</a> Access Devices can use an Async Interface module
+(NM-16A, or NM-32A) which also uses the 68-pin connectors.</p>
+
+      <p>The <a href="#c2800">Cisco 1800, 2800, and
+2800</a> series Access Devices use an HWIC Async Interface
+module, and these use a different connector to deliver 8 Async Line
+interfaces. These patch panels described below will <span style="font-weight: bold;">NOT</span> work with the
+HWIC async modules!</p>
+
+      <p>If your equipment is close to your Terminal/Console
+Server devices, you could use the "Hydra" cable (Cisco part <b>72-0845-01</b>),
+but those cables are only 3 feet long. If you want to connect to
+devices farther away, you can connect these with Cisco-schema patch
+panel options from <a href="http://www.apacn.com">APA
+Cables &amp; Networks</a>. </p>
+
+      <p><b>Option #1</b> is a single rack-unit-high
+patch panel, with 16 ports, and two (2) 1-meter-long cables, with the
+68-pin connectors. Be aware that these are slightly larger than 1-Rack
+Unit tall, which will affect rack mount spacing. </p>
+
+      <ul>
+
+        <li>1) One 16-port Patch Panel for each 2509-11 device
+(APACN part number <b><font color="#cc0000">19309-01</font></b>).
+You can use two of these patch panels for each NM-32A module. </li>
+
+      </ul>
+
+      <p><b>Option #2</b> is a combination of a
+2-Rack Unit-tall, 48-port patch panel, having six (6) AMP 50-pin
+telco-type connectors with 1'-long cables. (Each AMP connector serves 8
+RJ-45 connectors on the patch panel). You will also need an appropriate
+number of adapter cables with 68-pin (SCSI-II connectors) on one end,
+and the 50-pin AMP connectors on the other end. </p>
+
+      <blockquote>
+        <ol>
+
+          <li>48-port patch panel (APACN part number <b><font color="#cc0000">19309-03</font></b>, $475.00 USD
+each) </li>
+
+          <li>8-port 68-pin SCSI-II connector to 50-pin AMP
+(telco) connector (APACN part number <b><font color="#cc0000">19309-02</font></b>,
+$90 USD each), and <b>you need one of these cable assemblies for
+every 8-port async connector</b>. </li>
+
+        </ol>
+
+      </blockquote>
+
+      <p>The port density with Option #2 is much better for
+high-density applications, where you want a lot of ports close to each
+other. I've seen these deployed in instances where the (usually) C3640
+or c3660 are deployed, and the patch panels are mounted close to the
+C3600, and then Ethernet cables are used to connect the patch panel
+connectors to "infrastructure cabling" patch panels, in order to
+connect to devices in other racks in the data center. (A second option
+is to put the patch panel in the rack near all of the devices where you
+need console connections, and use longer Telco-type extension cables to
+connect the patch panels to the Cisco 3600 device in another rack.
+However, there are few instances that I've seen where you need 48
+console ports in a single rack.) </p>
+
+      <p><b>Useful Extras:</b> The threaded nuts that
+retain the serial cable harnesses on the Cisco 2509-2511 communications
+servers, and the async modules for the 3600 series devices, is a wider
+diameter than the screws on the APACN cable harnesses themselves (so
+the screws on the harness cables cannot be tightened to the 68-pin
+connector on the C25xx or NM-xxA). You can get the proper threaded
+standoffs from APA Cables &amp; Networks (<a href="http://www.apacn.com">www.apacn.com</a>) by
+asking for part number <b><font color="#cc0000">25057</font></b>
+("AMP female screw-lock kit", only two pieces/bag), for about $2.50
+(USD) per bag(!). You will need one bag per connector, so you will need
+two bags per 2509-11, and 4 bags for each NM-32A module. </p>
+
+      <p>You can reach <a href="http://www.apacn.com">APA
+Cables &amp; Networks</a> at (voice) 800-422-2537 x-762 or
+(fax) 763-475-8457. Steve Vacik ('svacik' at apacn.com) has been
+helpful in the past. (I received notice in late DEC 2007 that APACN is
+changing thei name. I'll update this contact information once I can
+find out that they are still going to support serial console stuff) </p>
+
+      <p> <b>Option #3</b> is a product from Great
+Lakes Wire &amp; Cable, (Kevin Reber, 888-833-4592,
+sales@greatwire.com). They have a 1 rack-unit panel with <a href="greatlakes-16.pdf">(16) DB25 connectors</a>, and
+another&nbsp;1 rack-unit panel with <a href="greatlakes-32.pdf">(32)
+RJ45 connectors</a>. They have cables from the patch panels to
+either the Cisco NM async interface, or to the HWIC interface. You can
+also specify DTE or DCE interfaces (by choosing the appropriate
+interface cable) which offeres some interesting flexibility.</p>
+
+      <table align="center" border="0" cellpadding="0" cellspacing="0" width="80%">
+
+        <tbody>
+
+          <tr>
+
+            <td>
+            <li><b>20091S-XXX</b> DCE cable for NM
+            </li>
+
+            <li><b>20091-XXX</b> DTE cable for NM
+            </li>
+
+            </td>
+
+            <td>
+            <li><b>20421-XXX</b> DCE cable for HWIC
+            </li>
+
+            <li><b>20413-XXX</b> DTE cable for HWIC
+            </li>
+
+            </td>
+
+          </tr>
+
+        </tbody>
+      </table>
+
+      <hr noshade="noshade" width="60%"> </td>
+
+    </tr>
+
+  </tbody>
+</table>
+
+</p>
+
+<p>
+<table border="0" width="100%">
+
+  <tbody>
+
+    <tr>
+
+      <td>
+      <p>
+      <table border="0" cellpadding="3" cellspacing="0" width="100%">
+
+        <tbody>
+
+          <tr>
+
+            <td bgcolor="#cccccc" width="70%">
+            <p><b><a name="cpc"></a>Attaching
+devices to a PC for configuration</b> </p>
+
+            </td>
+
+            <td bgcolor="#cccccc" width="30%">
+            <p align="right"><b><a href="#top">to
+Table of Contents</a></b> </p>
+
+            </td>
+
+          </tr>
+
+        </tbody>
+      </table>
+
+      </p>
+
+      <p></p>
+
+      <center><img src="pcdv1.gif" align="bottom">
+      </center>
+
+      <p>
+      <table border="0" width="100%">
+
+        <tbody>
+
+          <tr>
+
+            <td>
+            <p>When you are deploying console servers, you may
+still want to have a way to wheel a terminal or a laptop up to a
+machine to check configurations (basically, the practical (or paranoid)
+among us want to have a safety net, in case the console services fail).
+In this case, using <a href="#rj45schem">modular adapters</a>
+actually simplifies our job! </p>
+
+            <p>By connecting all of your remote consoles to the
+patch panels using Ethernet cables, all you need to do is connect an
+adapter to your laptop, and set up a Terminal Emulator package to talk
+to the serial port of the laptop. </p>
+
+            <blockquote>
+              <p><font color="#af0000">If you want
+to set up a "crash cart", I'd also suggest that you set the serial port
+speed on all of your consoles to 9600 bps, 8-N-1 (since is the most
+common setting). Having a common speed removes one more variable to
+have to remember during a crisis.</font> </p>
+
+              <p><font color="#af0000">If you have
+any </font><b><font color="#af0000">Sun</font></b><font color="#af0000"> workstations connected to your console
+services, you should test to make sure that your terminal emulator
+software doesn't send a serial </font><b><font color="#af0000">BREAK</font></b><font color="#af0000"> when you start/stop it, since the BREAK
+signal will likely send your Sun host to the </font><b><font color="#af0000">OK</font></b><font color="#af0000"> prompt. (This has also been reported on
+some SGI and NeXT hosts.)</font> </p>
+
+            </blockquote>
+
+            <p>The standard "terminal" adapter that Cisco
+provides (APACN equiv. is <b><a href="#rj45schem">CFDTE91</a></b>),
+when connected to your laptop, will give you an RJ-45, Cisco-schema
+connection that is wired like a Cisco-wired patch panel port. </p>
+
+            <p>Use the APACN <b><a href="#rj45schem">CFDCE91</a></b>
+adapter, connected to your laptop (and a terminal emulation program)
+will give you an RJ-45, Cisco-schema connection that is wired like a
+Cisco RJ-45 console port. </p>
+
+            <p>When you have successfully configured your
+devices, you can then disconnect the Ethernet cable on the device that
+you want to connect to, and use an Ethernet cable between the connector
+on your PC and the other device. Your physical connection will be in
+place, and you only need to ensure that your logical port settings on
+the PC match those of the other device. </p>
+
+            <p> </p>
+
+            <hr noshade="noshade" width="60%"> </td>
+
+          </tr>
+
+        </tbody>
+      </table>
+
+      </p>
+
+      </td>
+
+    </tr>
+
+  </tbody>
+</table>
+
+</p>
+
+<p>
+<table>
+
+  <tbody>
+
+    <tr>
+
+      <td>
+      <p>
+      <table border="0" cellpadding="3" cellspacing="0" width="100%">
+
+        <tbody>
+
+          <tr>
+
+            <td bgcolor="#cccccc" width="70%">
+            <p><b><a name="rj45schem"></a>RJ-45
+Adapter Schematics</b> </p>
+
+            </td>
+
+            <td bgcolor="#cccccc" width="30%">
+            <p align="right"><b><a href="#top">to
+Table of Contents</a></b> </p>
+
+            </td>
+
+          </tr>
+
+        </tbody>
+      </table>
+
+      </p>
+
+      <p>I've only had three reports of a Cisco NM-xxA interface
+causing a Sun device to halt. In resolving two of the three cases, we
+finally absolved the Cisco port, after the sites used a properly-wired
+serial adapter. (The first site didn't involve me until they had
+abandoned the Cisco solution, so they couldn't be sure, or show me the
+parts they had used.) I'm still hopeful that I may one day get the
+schematic of an adapter that causes such a scenario. </p>
+
+      <p>I am a strong proponent of buying pre-wired, pre-labeled
+adapters and cables. Generally speaking, you probably can't build an
+adapter cheaper, if you consider the value of your time as well as the
+component costs. And, whether or not I can make 100 adapters without a
+mistake isn't being questioned, I'm sure I'd rather not make 100 by
+myself. The best advantages for buying pre-built adapters and pre-wired
+cables include; </p>
+
+      <ul>
+
+        <li>Consistent wiring and labeling of the parts. </li>
+
+        <li>Consistent shell colors and labels aides in
+troubleshooting, by visually identifying the parts. </li>
+
+        <li>Enhances reliability, knowing you can grab any
+adapter and count on it being wired correctly. </li>
+
+        <li>If you need a LOT of adapters or cables for a
+build-out, you probably don't want to build them all yourself! </li>
+
+      </ul>
+
+      <p>You can purchase any of the adapters and cables listed
+on these pages individually (or in bulk) from APA Cables &amp;
+Networks (<a href="http://www.apacn.com/">www.apacn.com</a>).
+You also have the option of buying a <a href="ciscokit.html">Cisco
+Console Kit</a>, which includes a complete set of adapters, and
+some of the specialty <a href="#cables">cables</a>
+listed above, as well as a passive RS-232 Signal Tracer. The default
+shell color is black for Cisco adapters. You can get the shells in
+another color if you want, provided you want one of the colors listed
+below: </p>
+
+      <p>Available colors: <b>BK</b> = black, <b>GN</b>
+= green, <b>RD</b> = red, <b>YL</b> = yellow,
+      <b>BL</b> = blue, <b>GY</b> = grey </p>
+
+      <p>So, the APACN part number <b>CFDTE91-GN</b>
+would denote the DB-9 female DTE adapter, wired for the Cisco RJ-45
+format, but supplied with a green plastic shell (instead of the default
+black shell). </p>
+
+      <p>APA Cables &amp; Networks also sells adapters and
+adapter kits for other RJ-45 schema, including the <a href="../Annex/annexkit.html">Annex/Bay/Nortel</a>, <a href="../IOLAN/iolankit.html">IOLAN Rack+</a> and <a href="../Xyplex/xyplexkit.html">Xyplex</a> terminal
+server families. APA Cables &amp; Networks uses different default
+colors to make it easier to visually identify the different RJ-45
+wiring schema. </p>
+
+      <p>The DB-25 adapters are wired according to the older
+Cisco equivalents (from the CS-500 days). The DB-9 parts are derivative
+works. The signaling for the Cisco RJ-45 consoles is shown <a href="#rj45">at the beginning of this guide</a>. </p>
+
+      <p>With all of this said, I also understand that sometimes
+you just need to make that one cable or adapter, and buying just one
+isn't practical. So, here are the schematics. (The APA Cables &amp;
+Networks part number is shown below each adapter. If there is a Cisco
+equivalent, I've noted the Cisco part number as well.) </p>
+
+      <p>
+      <table border="0" width="100%">
+
+        <tbody>
+
+          <tr>
+
+            <td width="25%">
+            <p></p>
+
+            <center><img src="cfdce.gif" align="top" height="152" width="123"><br>
+
+APACN p/n <font color="#af0000">24490-01</font><br>
+
+Cisco p/n <b>29-0809-01</b></center>
+
+            </td>
+
+            <td width="25%">
+            <p></p>
+
+            <center><img src="cfdte.gif" align="top" height="151" width="124"><br>
+
+APACN p/n <font color="#af0000">24490-02</font><br>
+
+Cisco p/n <b>29-0810-01</b><br>
+
+Logical p/n <b>ADP-000006</b></center>
+
+            </td>
+
+            <td width="25%">
+            <p></p>
+
+            <center><img src="cmdce.gif" align="top" height="151" width="117"><br>
+
+APACN p/n <font color="#af0000">24490-03</font><br>
+
+Cisco p/n <b>29-0808-01</b></center>
+
+            </td>
+
+            <td width="25%">
+            <p></p>
+
+            <center><img src="cmdte.gif" align="top" height="150" width="120"><br>
+
+APACN p/n <font color="#af0000">24490-04</font><br>
+
+Cisco p/n <b>29-0811-01</b><br>
+
+Logical p/n <b>ADP-000005</b></center>
+
+            </td>
+
+          </tr>
+
+        </tbody>
+      </table>
+
+      </p>
+
+      <p>
+      <table border="0" width="100%">
+
+        <tbody>
+
+          <tr>
+
+            <td width="25%">
+            <p></p>
+
+            <center><img src="cfdce91.gif" align="top" height="151" width="112"><br>
+
+APACN p/n <font color="#af0000">24490-14</font> </center>
+
+            </td>
+
+            <td width="25%">
+            <p></p>
+
+            <center><img src="cfdte91.gif" align="top" height="150" width="112"><br>
+
+APACN p/n <font color="#af0000">24490-07</font><br>
+
+Cisco p/n <b>74-0495-01</b><br>
+
+Logical p/n <b>ADP-000008</b></center>
+
+            </td>
+
+            <td width="25%">
+            <p></p>
+
+            <center><img src="cmdce91.gif" align="top" height="149" width="110"><br>
+
+APACN p/n <font color="#af0000">24490-24</font> </center>
+
+            </td>
+
+            <td width="25%">
+            <p></p>
+
+            <center><img src="cmdte91.gif" align="top" height="150" width="111"><br>
+
+APACN p/n <font color="#af0000">24490-23</font><br>
+
+Logical p/n <b>ADP-000007</b></center>
+
+            </td>
+
+          </tr>
+
+        </tbody>
+      </table>
+
+      </p>
+
+      <p>
+      <table border="0" width="100%">
+
+        <tbody>
+
+          <tr>
+
+            <td width="25%">
+            <p></p>
+
+            <center><img src="cfdce92.gif" align="top" height="163" width="111"><br>
+
+APACN p/n <font color="#af0000">24490-60</font> </center>
+
+            </td>
+
+            <td width="25%">
+            <p></p>
+
+            <center><img src="cfdte92.gif" align="top" height="161" width="111"><br>
+
+APACN p/n <font color="#af0000">24490-59</font><br>
+
+Logical p/n <b>ADP-000012</b></center>
+
+            </td>
+
+            <td width="25%">
+            <p></p>
+
+            <center><img src="cmdce92.gif" align="top" height="164" width="120"><br>
+
+APACN p/n <font color="#af0000">24490-24</font> </center>
+
+            </td>
+
+            <td width="25%">
+            <p></p>
+
+            <center><img src="cmdte92.gif" align="top" height="164" width="120"><br>
+
+APACN p/n <font color="#af0000">24490-23</font><br>
+
+Logical p/n <b>ADP-000011</b></center>
+
+            </td>
+
+          </tr>
+
+        </tbody>
+      </table>
+
+      </p>
+
+      <p>
+      <table border="0" width="100%">
+
+        <tbody>
+
+          <tr>
+
+            <td width="25%">
+            <p> </p>
+
+            </td>
+
+            <td width="25%">
+            <p></p>
+
+            <center><img src="cmmod.gif" align="top" height="153" width="117"><br>
+
+APACN p/n <font color="#af0000">24490-05</font><br>
+
+Cisco p/n <b>29-0881-01</b></center>
+
+            </td>
+
+            <td width="25%">
+            <p></p>
+
+            <center><img src="cloopback.gif" align="top" height="157" width="67"></center>
+
+            <p></p>
+
+            <center>&nbsp;</center>
+
+            </td>
+
+            <td width="25%">
+            <p> </p>
+
+            </td>
+
+          </tr>
+
+        </tbody>
+      </table>
+
+      </p>
+
+      <p><i>(The connection between pins 4 and 5 on these
+adapters are very important, to tell some of the Cisco serial
+interfaces that the port should be in RS-232 mode!)</i> </p>
+
+      <p> </p>
+
+      <hr noshade="noshade" width="60%"> </td>
+
+    </tr>
+
+  </tbody>
+</table>
+
+</p>
+
+<p>
+<table border="0" width="100%">
+
+  <tbody>
+
+    <tr>
+
+      <td>
+      <p>
+      <table border="0" cellpadding="3" cellspacing="0" width="100%">
+
+        <tbody>
+
+          <tr>
+
+            <td bgcolor="#cccccc" width="70%">
+            <p><b><a name="cables"></a>Specialty
+Cables for Cisco Console Servers</b> </p>
+
+            </td>
+
+            <td bgcolor="#cccccc" width="30%">
+            <p align="right"><b><a href="#top">to
+Table of Contents</a></b> </p>
+
+            </td>
+
+          </tr>
+
+        </tbody>
+      </table>
+
+      </p>
+
+      <p>As with adapters, I recommend buying pre-built, pre-labeled, tested cables. 
+      APA Cables and Networks sells specialty cables for connecting Cisco consoles 
+      and patch panel ports to other console servers and devices, and these can be 
+      ordered from the descriptions and part numbers shown below. The default length 
+      is 7 feet, but you can order custom lengths as needed. The cables come with
+      black boots on the RJ-45 end, and labels denoting the Cisco end. The MMJ end 
+      does not get a boot, since they can't find anyone who makes a colored MMJ boot.</p>
+
+      <p>
+      <table border="0" width="100%">
+        <tbody>
+          <tr>
+            <td width="25%">
+            <p></p>
+            <center><img src="ciscoc-iolan.gif" align="top" height="171" width="113">
+            <br>APACN p/n <font color="#af0000">24490-71</font> </center>
+            </td>
+            <td width="25%">
+            <p></p>
+            <center><img src="ciscoc-xyplex.gif" align="top"><br>APACN p/n 
+            <font color="#af0000">24490-74</font> </center>
+            </td>
+            <td width="25%">
+            <p></p>
+            <center><img src="ciscoc-annex.gif" align="top" height="172" width="115">
+            <br>APACN p/n <font color="#af0000">24490-72</font> </center>
+            </td>
+            <td width="25%">
+            <p></p>
+            <center><img src="ciscoc-kentrox.gif" align="top" height="178" width="116">
+            <br>APACN p/n <font color="#af0000">24490-69</font> </center>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      </p>
+
+      <p>
+      <table border="0" width="100%">
+        <tbody>
+          <tr>
+            <td width="25%">
+            <p></p>
+            <center><img src="ciscop-iolan.gif" align="top" height="171" width="113">
+            <br>APACN p/n <font color="#af0000">24490-48</font> </center>
+            </td>
+            <td width="25%">
+            <p></p>
+            <center><img src="ciscop-xyplex.jpg" align="top"><br>APACN p/n 
+            <font color="#af0000">24490-75</font> </center>
+            </td>
+            <td width="25%">
+            <p></p>
+            <center><img src="ciscop-annex.gif" align="top" height="172" width="115">
+            <br>APACN p/n <font color="#af0000">24490-52</font> </center>
+            </td>
+            <td width="25%">
+            <p></p>
+            <center><img src="ciscop-kentrox.gif" align="top" height="178" width="115">
+            <br>APACN p/n <font color="#af0000">24490-47</font> </center>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      </p>
+      <p>There are other cables listed on the <a href="ciscokit.html">Cisco Adapter Kit Page</a>. </p>
+      <p></p>
+      <hr noshade="noshade" width="60%"> </td>
+    </tr>
+  </tbody>
+</table>
+
+</p>
+
+<p>
+<table border="0" width="100%">
+  <tbody>
+    <tr>
+      <td valign="top">
+      <p><b><a name="cisco-usr"></a>U.S. Robotics</b> (USR, now 3-Com) <b>digital 
+      modem chassis</b> have a different pinouts than Cisco on the console ports 
+      on their NICs and NACs. </p>
+
+      <p>You can accommodate these devices by combining a Cisco <b>29-0810-01</b>
+      (<a href="#rj45schem">CFDTE</a>) adapter with a USR cable (part number 
+      <b>1.009.691-B</b>) attached to the USR console port, and an Ethernet cable 
+      to connect the <a href="#rj45schem">CFDTE</a> adapter to the Cisco port.</p>
+
+      <p></p>
+
+      <center><img src="c-usr-adapt.gif" align="bottom"></center>
+      <p>You can also make a single cable, with RJ-45 male connectors on each end. 
+      Make sure that you label both ends of the cable, since the wiring is not 
+      symmetrical (it makes a difference which end plugs into the Cisco port!) 
+      APA Cables and Networks sells a couple of cables for this (black boot on 
+      the Cisco end, orange boot on the USR end); </p>
+      <p></p>
+
+      <center>
+      <table align="center" border="0" width="75%">
+        <tbody>
+          <tr>
+            <td width="25%">
+            <p></p>
+            <center><img src="ciscoc-usr.gif" align="top" height="167" width="116">
+            <br>APACN p/n <font color="#af0000">24490</font> </center>
+            </td>
+            <td width="25%">
+            <p></p>
+            <center><img src="ciscop-usr.gif" align="top" height="167" width="116">
+            <br>APACN p/n <font color="#af0000">24490-16</font> </center>
+            </td>
+            <td width="25%">
+            <p></p>
+            <center><img src="../porj45m.gif" align="middle" height="83" width="110"></center>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      </center>
+      <p>There are more cables listed on the <a href="cisco-hosts.html">Cisco Host-to-Adapters Page</a>.
+      </p>
+      <p> </p>
+      <hr noshade="noshade" width="60%"> </td>
+    </tr>
+  </tbody>
+</table>
+
+</p>
+
+<p>
+<table border="0" width="100%">
+  <tbody>
+    <tr>
+      <td valign="top">
+      <p><b><a name="cisco-sun-t3"></a>Sun Netra Hardware</b> </p>
+
+      <p>Most Sun hardware has used a female DB-25 connector for the TTY A and B 
+      ports. (Use a <a href="#rj45schem">CMDCE</a> adapter to connect to a Cisco 
+      console port, or a <a href="#rj45schem">CMDTE</a> adapter to connect them to
+      a Cisco-wired patch panel.) </p>
+
+      <p>The Sun Netra T-1 (model 105) uses an RJ-45 console, and it happens to be 
+      wired identically to the Cisco console port. </p>
+      <ul>
+        <li>To connect a Netra T-1 105 to a Cisco console port, use a 
+        <a href="#ethernet">rolled cable</a>. </li>
+        <li>To connect a Netra T-1 105 to a Cisco patch panel, use an 
+        <a href="#ethernet">Ethernet cable</a>. </li>
+      </ul>
+
+      <p>The DB-25 serial adapter that comes with the Sun Netra T-1 (<b>Sun p/n 
+      530-2889-02</b>) is wired similarly to the APACN CMDCE adapter, with the 
+      addition of adding a 'frame ground'. The plastic DB-25 shell has a metalized 
+      coating, and a drain ground lead is attached from pin 1 of the DB-25(m) 
+      connector to a lead attached to the metalized shell. The schematic on the 
+      <b>Sun p/n 530-2889-03</b> is similar, except they changed the colors of 
+      the wires inside the shell (and the tabs which hold the DB-25 connector 
+      are <i>much</i> more fragile, so take my word on the wiring inside!) </p>
+
+      <p>The Sun Netra T-3 disk arrays use an <b>RJ-13</b> connector for it's 
+      RS-232 console, and you only get data and ground for your connection (no 
+      flow control or handshaking). APA Cables and Networks sells a couple of 
+      cables for connecting these devices (black boot on the Cisco end, no boot 
+      on the RJ-13 end); </p>
+
+      <p>
+      <table border="0" width="100%">
+        <tbody>
+          <tr>
+            <td width="25%">
+            <p></p>
+            <center><img src="../porj13m.jpg" align="middle"></center>
+            </td>
+            <td width="25%">
+            <p></p>
+            <center><img src="ciscoc-netrat3.gif" align="top" height="139" width="100">
+            <br>APACN p/n <font color="#af0000">24490-62</font> </center>
+            </td>
+            <td width="25%">
+            <p></p>
+            <center><img src="ciscop-netrat3.gif" align="top" height="139" width="100">
+            <br>APACN p/n <font color="#af0000">24490-63</font> </center>
+            </td>
+            <td width="25%">
+            <p></p>
+            <center><img src="../porj45m.gif" align="middle"></center>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      </p>
+
+      <p>There are more cables listed on the <a href="cisco-hosts.html">Cisco 
+      Host-to-Adapters Page</a>.</p>
+      <p> </p>
+      <hr noshade="noshade" width="60%"> </td>
+    </tr>
+  </tbody>
+</table>
+</p>
+
+<p>
+<table border="0" width="100%">
+  <tbody>
+    <tr>
+      <td valign="top">
+      <p><b><a name="cisco-dec"></a>Digital Equipment Corp.</b> (DEC, then Compaq, 
+      then H.P.) equipment often used an RJ-13 with an offset locking tab, referred 
+      to as a Modified Modular jack (<b>MMJ</b>). This included their VT-series
+      terminals, VAX equipment, and even newer Alpha series equipment. </p>
+
+      <p>APA Cables and Networks sells a couple of cables for this (black boot on 
+      the Cisco end, and no boot on the DEC end); </p>
+
+      <p>
+      <table border="0" width="100%">
+        <tbody>
+          <tr>
+            <td width="25%">
+            <center><img src="../pommjm.gif" align="middle" height="83" width="102"></center></td>
+            <td width="25%">
+            <center><img src="ciscop-decmmj.gif" align="top" height="138" width="110"><br>
+            APACN p/n <font color="#af0000">24490</font> </center></td>
+            <td width="25%">
+            <center><img src="ciscop-decmmj.gif" align="top" height="138" width="110"><br>
+            APACN p/n <font color="#af0000">24490-17</font> </center></td>
+            <td width="25%">
+            <center><img src="../porj45m.gif" align="middle" height="83" width="110"></center>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      </p>
+
+      <p>There are other cables listed on the <a href="cisco-hosts.html">Cisco Host-to-Adapters Page</a>.
+      </p>
+
+      <hr noshade="noshade" width="60%"> 
+       </td>
+    </tr>
+  </tbody>
+</table>
+</p>
+
+<p>
+<table border="0" width="100%">
+  <tbody>
+    <tr>
+      <td>
+      <p>
+      <table border="0" cellpadding="3" cellspacing="0" width="100%">
+        <tbody>
+          <tr>
+            <td bgcolor="#cccccc" width="70%">
+            <p><b><a name="db9"></a>Devices with DB-9 console ports</b> </p>
+            </td>
+            <td bgcolor="#cccccc" width="30%">
+            <p align="right"><b><a href="#top">to Table of Contents</a></b> </p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      </p>
+
+      <p></p>
+
+      <center><img src="patchdv3.gif" align="bottom" height="49" width="345"> </center>
+
+      <p>Cisco provides one female DB-9 to RJ-45 adapter (Cisco Part Number: 
+      <b>74-0495-01</b>, labeled "terminal"), which is most often used to connect 
+      PC serial (COM) port to the RJ-45 console of a Cisco device, using the CAB-500 
+      (Cisco, rolled) cable. This adapter can also allow you to connect to other 
+      DB-9 or DB-25 console ports on devices made by Cisco and other vendors. 
+      The <a href="http://www.apacn.com/">APA Cables and Networks</a> equivalent 
+      part number is <font color="#cc0000">24490-07</font> (also called "
+      <a href="#rj45schem">CFDTE91</a>"). This adapter does not include wiring for 
+      the DCD signal on the DB-9 connector (pin 1), which many PC-platforms expect 
+      for their "console redirection" functions. </p>
+
+      <p>There are three other compatible DB-9 to Cisco-schema RJ-45 adapters available 
+      from <a href="http://www.apacn.com/">APA Cables and Networks</a> </p>
+      <ul>
+        <li>female adapter, APACN part number: <font color="#cc0000">24490-14</font> 
+        ("<a href="#rj45schem">CFDCE91</a>"). </li>
+        <li>male adapter, APACN part number: <font color="#cc0000">24490-23</font> 
+        ("<a href="#rj45schem">CMDTE91</a>"). </li>
+        <li>male adapter, APACN part number: <font color="#af0000">24490-24</font> 
+        ("<a href="#rj45schem">CMDCE91</a>"). </li>
+      </ul>
+
+      <p>Rather than list all of the connection possibilities on this page, I have 
+      created my <a href="cisco-hosts.html">Cisco Host-to-Adapters Page</a>, which 
+      lists which adapter (or cable) you will need to connect any device on the 
+      list to a Cisco console or aux port, or to a Cisco-schema patch panel port. </p>
+
+      <p>There are currently four additional DB-9 to Cisco-schema RJ-45 adapters 
+      <b>with DSR tied to DCD</b> available from 
+      <a href="http://www.apacn.com/">APACN</a>; </p>
+
+      <ul>
+        <li>female adapter, APACN part number: <font color="#cc0000">24490-59</font> 
+        ("<a href="#rj45schem">CFDTE92</a>"). </li>
+        <li>female adapter, APACN part number: <font color="#cc0000">24490-60</font> 
+        ("<a href="#rj45schem">CFDCE92</a>"). </li>
+        <li>male adapter, APACN part number: <font color="#cc0000">24490-67</font> 
+        ("<a href="#rj45schem">CMDTE92</a>"). </li>
+        <li>male adapter, APACN part number: <font color="#af0000">24490-66</font> 
+        ("<a href="#rj45schem">CMDCE92</a>"). </li>
+      </ul>
+
+      <p>Note: Some Catalyst 1900-series switches use a DB-9 console
+connection, instead of the RJ-45 connector. Some of these devices do
+not like a connection between DB-9 pin 1 and pin 6, connecting DSR to
+DCD on the DB-9, while other versions of the 1900 will <b>require</b>
+this connection. (If the Cisco 1900 you have attached a DB-9 adapter to
+is spewing AT modem commands out the port, you've got the wrong
+adapter...add or remove the loop as needed.) The <b>CFD*E91</b>
+does not have the DCD connection tied to DSR, while the <b>CFD*E92</b>
+series does have the tie connecting DSR to DCD on the DB-9. </p>
+
+      <p>There was a previous <a href="http://www.apacn.com/">APACN</a>
+part number: <font color="#cc0000">24245-DTE-BK</font>,
+which was wired to tie DB-9 pins 1 and 6 together. However, the wire
+was connected directly to pin 1, and then looped to pin 6. (If you
+decided that you didn't need the DCD signal, and cut the loop, you
+would still have DCD, but would have lost DSR...things may not behave
+the way you might expect.) </p>
+
+      <p><a href="http://www.apacn.com/">APACN</a> sells any of these adapters 
+      (individual or bulk), as well as a <a href="ciscokit.html">complete 
+      adapter/cable set</a>. </p>
+
+      <p> </p>
+
+      <hr noshade="noshade" width="60%"> </td>
+
+    </tr>
+
+  </tbody>
+</table>
+
+</p>
+
+<p></p>
+
+<center>
+<table border="0" width="100%">
+  <tbody>
+    <tr>
+      <td>
+      <p>
+      <table border="0" cellpadding="3" cellspacing="0" width="100%">
+        <tbody>
+          <tr>
+            <td bgcolor="#cccccc" width="70%">
+            <p><b><a name="db25"></a>Devices
+with DB-25 console ports</b> </p>
+            </td>
+            <td bgcolor="#cccccc" width="30%">
+            <p align="right"><b><a href="#top">to
+Table of Contents</a></b> </p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      </p>
+      <p><center><img src="patchdv2.gif" align="bottom" height="49" 
+       width="345"></center>
+      <p>Cisco provides either one or two DB-25 to RJ-45 adapters
+with new equipment; </p>
+      <ul>
+        <li>one female adapter (Cisco Part Number: <b>29-0810-01</b>,
+commonly labeled "Terminal" or "CAB-500DTF"), which is most often used
+to connect to male DB-25 AUX ports on many Cisco devices.<br>
+(<a href="http://www.apacn.com/">APACN</a> part
+number: <font color="#af0000">24490-02</font> ("<a href="#rj45schem">CFDTE</a>"), previous part number:
+24245"-DTE-BK) </li>
+        <li>one male adapter (Cisco Part Number: <b>29-0881-01</b>,
+commonly labeled "MODEM" or CAB-500DCM"),<br>
+(<a href="http://www.apacn.com/">APACN</a> part
+number: <font color="#af0000">24490-05</font> ("<a href="#rj45schem">CMMOD</a>"), 
+previous part number: 24238-DTE-BK;<br>
+MOD-TAP part number 06-888-E76-20.) </li>
+      </ul>
+      <p>There are three other DB-25 to RJ-45 adapters that Cisco
+used to provide; </p>
+      <ul>
+        <li>female adapter (old Cisco Part Number: <b>29-0809-01</b>),
+          connect to male DB-25 AUX ports on many Cisco devices.<br>
+          (<a href="http://www.apacn.com/">APACN</a> part number
+          <font color="#af0000">24490-01</font> 
+          ("<a href="#rj45schem">CFDCE</a>"). </li>
+        <li>male adapter (old Cisco Part Number: <b>29-0811-01</b>),<br>
+          <a href="http://www.apacn.com/">APACN</a>
+          part number: <font color="#af0000">24490-04</font>
+          ("<a href="#rj45schem">CMDTE</a>"). </li>
+        <li>male adapter (old Cisco Part Number: <b>29-0808-01</b>),<br>
+          <a href="http://www.apacn.com/">APACN</a>
+           part number: <font color="#af0000">24490-03</font>
+          ("<a href="#rj45schem">CMDCE</a>");<br>
+          MOD-TAP part number 06-888-E76-20. </li>
+      </ul>
+
+      <p>Rather than list all of the possibilities here, I have
+created an <a href="cisco-hosts.html">Cisco
+Host-to-Adapters Page</a>, which lists the various combinations
+of male and female, DTE/DCE, DB-9 and DB-25, with a list of the various
+devices which fall under each connector type. The list also tells you
+which adapter (or cable) you will need to connect each device to either
+a Cisco console port, or to a <a href="#patch">Patch Panel</a>.
+      </p>
+
+      <p><a href="http://www.apacn.com/">APA Cables
+and Networks</a> sells any of these adapters (individual or
+bulk), as well as a <a href="ciscokit.html">complete
+adapter/cable set</a>. </p>
+      <hr noshade="noshade" width="60%"> </td>
+    </tr>
+  </tbody>
+</table>
+</center>
+
+<center>
+<table border="0" width="100%">
+  <tbody>
+    <tr>
+      <td>
+      <p>
+      <table border="0" cellpadding="3" cellspacing="0" width="100%">
+        <tbody>
+          <tr>
+            <td bgcolor="#cccccc" width="70%">
+            <p><b><a name="usbcons"></a>Connecting to Cisco USB console ports</b> </p>
+            </td>
+            <td bgcolor="#cccccc" width="30%">
+            <p align="right"><b><a href="#top">to
+Table of Contents</a></b> </p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      </p>
+      <p>Some Cisco devices devices (mainly the ISR families) have been sporting a
+      USB console port, as well as the traditional, "legacy" RJ45 RS-232 console.</p>
+
+      <p>I posted a couple blog posts about these USB consoles, and the most relevant
+      is likely this one, 
+      <a href="http://consoleteam.blogspot.com/2014/01/more-about-ciscos-usb-console-port.html">this
+      one</a>, but there are a few details that I'll list here as well.</p>
+
+      <p><ul>
+      <li>The USB chip on the cable gets power from the Cisco chassis, but the chip 
+      is initialized by driver software to complete the initialization.</li>
+      <li> When the chip is initialized, and LED near the USB connector illuminates, 
+      indicating that the RJ-45 console is now diverted to USB.</li>
+      <li>The original driver software (for windows systems) is from 2010.</li>
+      <li>You need to get the drivers from the Cisco website.</li>
+      <li>The drivers only support Windows XP, Vista, server 2000.</li>
+      <li> Not all versions of IOS support the command<pre>usb-inactivity-timeout 30</pre></li>
+      </ul></p>
+      <hr noshade="noshade" width="60%"> </td>
+    </tr>
+  </tbody>
+</table>
+</center>
+
+<center>
+<table bggcolor="666666" border="0" cellpadding="3" cellspacing="0" width="85%">
+  <tbody>
+    <tr>
+      <td>
+      <center><b>For basic RS-232 troubleshooting info, view my <a href="../msock.html">
+      Minor Scroll of Console Knowledge</a></b></center>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</center>
+
+<p>
+<hr align=center width="80%">
+</p>
+
+<a name="credits"></a>
+<p><center><table BORDER=5 bgcolor="ffcc99" width="75%" padding=5>
+   <tr>
+      <td>
+         <p><font color="#663300"><b>NOTICE:</b> Most of the pages, 
+         articles, and tutorials on this website are
+         copyrighted works. You may make 'deep links' to various
+         pages. (If you let me know which page(s) you are linking to,
+         I'll let you know if I move the page(s) during updates.)
+         Please send me email if you wish to republish any material,
+         or use it on your own website.</font></p>
+      </td></tr>
+</table></center></p>
+
+<p><center>Copyright 1996-2014,
+<a href="http://www.esperanto.org/person/HARRIS_Dacxjo/">David K. Z.
+Harris, N6UOW</A>&nbsp;&nbsp;<a href="http://www.linkedin.com/in/consoleteam" >
+<img src="/consoles/btn_linkedin_120x30.gif" width="120" height="30" border="0" 
+alt="View David K. Z. Harris's profile on LinkedIn"></a><br>
+Questions? Comments? Additions? Email <b>consoles</b> at <b>conserver.com</b>.<br>
+
+<font color="#cc0000">(Don't harvest my address, I don't want SPAM!)</font><br>
+
+<a href="../iloj.html">How does he do it</A>? And 
+<a href="../about.html">Why</A>?</center><br>
+
+If you liked my pages, please support my hacking, with a gift certificate from 
+<a href="http://www.adafruit.com/category/14">Adafruit Industries</a>, using the
+email address above.</p>
+
+
+</body>
+</html>

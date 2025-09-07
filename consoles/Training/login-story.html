@@ -1,0 +1,706 @@
+<!--This file created 12/30/00 14:02 by Claris Home Page version 2.0-->
+<HTML>
+<HEAD>
+   <TITLE>Serial Console Article for ;login:</TITLE>
+   <META NAME=GENERATOR CONTENT="Claris Home Page 2.0">
+   <X-SAS-WINDOW TOP=68 BOTTOM=495 LEFT=239 RIGHT=769>
+<META KEYWORD = "Cisco, Xylogics, Annex, MicroAnnex, PC Weasel, USENIX,
+	Micro-Annex, Xyplex, Conserver, CS-500, cs-516, MaxServer, Stokley,
+	Thomas A. Fine, Ohio State, Purdue, Synopsys, Certainty Solutions,
+	GNAC, zonker, Bryan Stansell, LISA2000, LISA, console server,
+	terminal server, remote access, sysadmin, mentoring, forensics,
+	BREAK, serial break, K/V/M">
+</HEAD>
+<BODY TEXT="#000099" BGCOLOR="#FFFFFF">
+
+<P ALIGN=CENTER>
+<TABLE BORDER=0 WIDTH="98%">
+<TR>
+<TD WIDTH=225>
+ <P ALIGN=right><A HREF="http://www.conserver.com">
+<IMG SRC="../conserver-sm.jpg" ALT="Conserver.com logo" WIDTH=147 HEIGHT=47 BORDER=0 ALIGN=middle></A>
+</TD><TD>
+ <p align=center>Brought to you by;<BR>
+ <A HREF="http://www.conserver.com/">www.conserver.com</A></p>
+</TD></TR>
+</TABLE></P>
+
+<P><TABLE BORDER=0 WIDTH="100%">
+   <TR>
+      <TD>
+         <H2><CENTER>Article for the USENIX journal ;login:
+         </CENTER></H2>
+         
+         <P><CENTER><B>http://www.conserver.com/consoles/Training/login-story.html</B><BR>
+         
+         version 1.2 - updated 2/21/2005 - dkzh<BR>
+         
+         (updated after publication in October, 2000)<BR>
+         
+         (email to <B>break-off</B> at <B>conserver.com</B>)
+         </CENTER>
+      </TD></TR>
+</TABLE></P>
+
+<P><B>Finding Time To Do It All</B></P>
+
+<P>During the past few years, we have seen an explosive growth in the
+number of companies that depend on the Internet for the success of
+their business. For those of us who work to support the systems and
+networks, we can look forward to stable employment. But the success
+of our companies means more work to do, and it is becoming harder to
+find additional qualified technical people to hire. As a result, we
+need to learn to do more with less. This story will tell you about
+one tool that saves me time, reduces downtime, speeds
+troubleshooting, and aids in the training of new staff. (Oh yeah,
+it's also free!)</P>
+
+<P>Thomas A. Fine and Steven Romig presented a client-server
+application called Conserver at LISA IV (Fall 1990,
+[<A HREF="#footnotes">1</A>]). Conserver allowed administrators
+around the network to have access to serial console ports using the
+telnet protocol between the client and server, and the server would
+log all of the session activity coming from each console. This
+application saved Ohio State University space, power, and cooling by
+removing many of the monitors and keyboards that used to be attached
+to the servers in their data center. It also saved them a great deal
+of running to the server room every time they needed to make a change
+on the physical console! I'm happy to report that Conserver has been
+getting better over time.</P>
+
+<P>During the past decade, the Conserver application has evolved
+[<A HREF="#footnotes">2</A>], based on the needs and feedback of the
+users. Terminal servers, as a product class, have also evolved during
+this decade, and many now allow telnet-like (socket-based) and
+secure-shell (ssh) access from networked hosts to individual serial
+ports. This extends the reach of the administrators to the far
+corners of their network, including control of devices that do not
+have network connections (such as CSU/DSU equipment, test and
+diagnostic devices, to name only a few).</P>
+
+<P>Conserver is distributed freely
+[<A HREF="http://www.conserver.com/">3</A>], but the serial ports you
+use with it, unfortunately, are not. While a terminal server can
+provide remote access to serial console ports, the cost-per-port to
+deploy them has been high, and is currently still higher than the
+cost of a 10/100 switch port. There are many advantages to be gained
+by deploying terminal servers in your network, and I will outline
+some of the best reasons in this article. I have found the benefits
+well worth the cost of deployment, especially in terms of the speed
+of recovery from outages. And in todays e-commerce world, some
+outages can be downright costly, in terms of lost sales, not to
+mention customer perception.</P>
+
+<P>When your hosts won't boot, access to the serial console port
+becomes invaluable, but the serial console can also be useful in your
+change control procedures. Once your hosts are up and running, the
+administrator(s) will have many options for remote access to them to
+control their functions. But those avenues of access can mean that
+multiple administrators (or users with administrative access) will
+have simultaneous ability to the change settings on the host. This
+suggests that you also need to consider good change control
+practices, to prevent many administrators from making changes on top
+of each other. If the administrators all share access to a single
+console of a host, they will know whether they have exclusive access
+to make their changes. Conserver can help whether the host is up or
+down.</P>
+
+<P><B>Considering the alternatives</B></P>
+
+<P>You may have a bunch of hosts, connected to monitors and
+keyboards. The monitors all take up space, use power and create extra
+heat when they are turned on. If you aren't watching all the time,
+you probably rely on the scrollback in some of the GUI windows on
+each host. The cost of each 15" screen and keyboard approaches the
+cost for a terminal server port. In a large data center, add in the
+cost of air conditioning capacity for all those monitors. (You
+probably don't want more than a few display devices in a large data
+center.)</P>
+
+<P>Keyboard/video/mouse (K/V/M) switch systems allow you to connect
+many hosts to a single display device. You'll find the cost of K/V/M
+ports are close to the cost of a terminal server port if you are
+attaching PCs, and the cost is significantly higher to attach UNIX
+workstations (Sun, SGI, etc.) to a K/V/M switch. Don't forget the
+complication of screen resolutions, and scan rates! You can't get
+more than 12-18 devices on a big switch. While you can cascade the
+switches, it still doesn't scale for large data centers. You can find
+more information about K/V/M switches from the Celeste Stokely System
+Administration web site [<A HREF="http://www.stokely.com/">4</A>,
+<A HREF="http://www.stokely.com/unix.serial.port.resources/tutorials.html">5</A>].
+</P>
+
+<P>VT-type terminals (or a terminal emulation window on a host)
+connected to a multi-port switchbox give you text-only (CLI) support
+for much less money than a K/V/M, but you don't get GUI access when
+the host is up. The average cost for switchboxes with 8 ports will
+cost you about the same as one terminal server port. Your limitations
+here include the physical distance for the serial console lines
+between hosts and the switchbox, as well as the number of devices you
+can attach to the switchbox. You can cascade these devices to gain
+more ports per terminal, but the length limitation is still there,
+plus you need to know which switch combinations will connect you to
+the port that you want.</P>
+
+<P>Terminal servers generate less heat than your average monitor,
+take up one network port, and allow you to access any serial port
+that you connect from anywhere on your network via a telnet session.
+Most units only take 1-2 rack units of vertical space to mount. Many
+sessions can be open to different ports at the same time, unlike most
+of the other alternatives above. (There are many websites that show
+how to connect various devices to various vendors terminal servers
+[<A HREF="http://www.stokely.com/unix.serial.port.resources/tutorials.html">5</A>,
+<A HREF="http://www.conserver.com/consoles/">6</A>].) The disadvantages to
+using terminal servers include the price, and the fact that there is
+no logging inherent in the terminal servers. If you were not
+connected to a console and watching, the data coming from each
+connected host is lost.</P>
+
+<P>Adding the (free) Conserver application to a deployment of
+terminal servers adds the logging option, as well as adding a
+mentoring capacity, provides access control (and auditing of access)
+to the console ports, thus increasing the overall value of the
+deployment to the administrators.</P>
+
+<P><B>The value of remote console access</B></P>
+
+<P>If you are one of a few (or the only one) who carries a pager to
+respond to outages around your network, then remote access to your
+consoles should be one of the tools at your disposal. This gives you
+the ability to sit at any workstation (even dialed in from home) and
+be on the physical console of any connected host. This gives you
+faster visibility into your problem, and faster time to resolution,
+than if you needed to return to the data center to get to a terminal
+or keyboard. Do you remember a time when you were less than ten
+minutes from home, your pager went off, and you had to fight traffic
+back to the office to fix some problem? What would it be worth to you
+to keep driving home and get on the console remotely, with your
+dinner at your side?</P>
+
+<P>Let's consider the benefits of deploying terminal servers for
+remote access to consoles, then we'll discuss the extra benefits of
+adding the Conserver software.</P>
+
+<P>Terminal Server-Only Communications Overview</P>
+
+<UL>
+   <LI>Device console ports are attached to terminal servers on the
+   network.
+   
+   <LI>The administrator uses a telnet session to connect to a
+   specific serial port.
+   
+   <UL>
+      <LI>Telnet session is from admin's system to the terminal
+      server.
+      
+      <LI>Only one session at a time can be connected to each serial
+      port.
+      
+      <LI>If no session is connected to a port, data from the
+      attached device is lost.
+   </UL>
+</UL>
+
+<P><CENTER><IMG SRC="../termserver1.gif" WIDTH=224 HEIGHT=112
+X-SAS-UseImageWidth X-SAS-UseImageHeight ALIGN=bottom></CENTER></P>
+
+<P>Imagine that you get home and access the console on the downed
+host. You hit return, and there is no response. If there is someone
+at the office whom you can call, you can ask them to cycle the power
+on your host, while you stay at home and watch the boot cycle. (Even
+if you don't have after-hours staff in the office there are power
+strips with serial ports
+[<A HREF="http://www.baytechdcd.com/products/rpcseries.shtml">7</A>],
+and/or ethernet ports with telnet and/or http interfaces
+[<A HREF="http://www.apcc.com/products/masterswitch/index.cfm">8</A>],
+to let you control power to individual outlets. You can cycle the
+power yourself, from home!)</P>
+
+<P>Do you need to escort administrators into restricted areas, just
+for simple machine reset? We use console access to allow system
+administrators to control their hosts which need to live in a lab
+with restricted physical access. The ability to provide them with
+remote access to power-cycle the device as well as control the
+console has eliminated the need to allow non-essential staff to have
+physical access to security-sensitive areas.</P>
+
+<P>While most UNIX hosts provide a method to use serial consoles
+instead of a video display and keyboard, your average PC platform
+does not have this built into the BIOS. While a UNIX kernel running
+on a PC will eventually allow you to use a serial port for a console,
+it isn't active until the kernel has booted, so you normally cannot
+see the Power-On Self Test information. But PC platform users do have
+some options!</P>
+
+<P>Some PC server makers are modifying the BIOS to provide the
+ability to redirect the results of the Power-On Self Test (POST) to a
+serial port. Network Engines has recently added this, while Compaq
+has had this ability for about a year. Hewlett-Packard has an
+optional system management card that you can add to their servers.
+There are no standards for this type of console access, so the
+features for each vendor are different, and you should ask your
+vendor about the features they offer.</P>
+
+<P>TIP: If your server vendor includes console redirection in BIOS,
+you should understand the limitations of their implementation. For
+example, the Network Engines BIOS hands off the startup to
+intelligent hard disk controllers, and ethernet NICs, and the output
+from those interfaces is NOT redirected. If there are problems posted
+by those controllers, you will not see them through BIOS redirection
+in the current implementation.</P>
+
+<P>If you use a PC that doesn't have console support in the BIOS, but
+it does have a spare ISA slot, you can consider using the PC Weasel
+2000 add-in card [<A HREF="http://www.realweasel.com">9</A>]. This
+appears to the server as a monochrome display adapter, but it
+translates the characters sent to the pseudo-screen into characters
+on a serial port. The PC Weasel also includes hardware that senses
+when your OS tries to use the serial port for its console, and it
+connects the serial port on the card to the operating system. The
+card also monitors the serial stream for a special sequence coming
+into the console, which allows the administrators to talk to the PC
+Weasel again to restart the PC (or the PC Weasel). Their web site has
+an online demo.</P>
+
+<P><B>Added value from free software</B></P>
+
+<P>Let's visit that downed host again. You connected to the console
+port, hit return, and nothing came back. What caused it to stop? If
+nobody was connected and watching, anything the host had sent to the
+console was lost. The logging capability of a console server
+application is one of the best reasons to combine it with your
+terminal servers.</P>
+
+<P>Terminal Servers with Conserver Overview</P>
+
+<UL>
+   <LI>Terminal servers are deployed near the devices you want to
+   monitor.
+   
+   <LI>The Conserver host is configured for the devices you want to
+   monitor.
+   
+   <UL>
+      <LI>Hosts can attach to serial ports on the Conserver host.
+      
+      <LI>Hosts can attach to serial ports on the terminal servers.
+      
+      <LI>Conserver opens a socket-based session to each terminal
+      server port.
+   </UL>
+   
+   <LI>The client application connects to the Conserver via telnet
+   today (optionally by SSL soon).
+   
+   <UL>
+      <LI>The client session requests to be connected to a host
+      logging session.
+      
+      <LI>Many clients can connect to the same device session
+      simultaneously.
+      
+      <LI>Clients can connect to multiple distributed Conserver
+      hosts.
+   </UL>
+</UL>
+
+<P><CENTER><IMG SRC="../Clues/conserver1.gif" WIDTH=304 HEIGHT=112
+X-SAS-UseImageWidth X-SAS-UseImageHeight ALIGN=bottom></CENTER></P>
+
+<P>With Conserver in this equation, you connect to the downed host,
+press return, and get nothing back. Then you use a few meta-keystokes
+to replay the last 20 or 60 lines of the log for that device to your
+session. This will usually tell you why it stopped (bad memory, full
+disk, other problems), and this may affect your decision to just
+cycle the power. You may decide that something needs to be fixed
+before you bring it up again.</P>
+
+<P>You can deploy terminal servers, and distributed console servers,
+across the country, and even internationally. This can be an
+important tool if you have to support smaller, remote offices without
+administrators on-site. Sure, you can pre-configure a new host for a
+remote office, and even set it up in a test lab. You can include
+diagrams and documentation for the remote office staff, directing
+them how to unpack it and plug it in. But when they follow your
+instructions, and you can't connect to it, what do you do? Before you
+can talk someone through fixing the problem, you need to troubleshoot
+it.</P>
+
+<UL>
+   <LI>Is it powered?
+   
+   <LI>Is the network connection plugged into the correct interface?
+   
+   <LI>Is there a duplicate network address in the office?
+   
+   <LI>Did the network switch auto-negotiate to the wrong speed?
+   
+   <LI>Was the disk damaged in shipment?
+   
+   <LI>What will the remote office folks use for a console, in order
+   to be your eyes?
+</UL>
+
+<P>If you had it plugged into a terminal server port in that office,
+you could get most of those answers yourself, rather than talking the
+office staff through the troubleshooting steps. (Now how much is that
+terminal server worth to you?)</P>
+
+<P>You can find links to a number of console server applications on
+the [<A HREF="http://www.conserver.com/consoles/">6</A>], but my favorite
+application is currently Conserver
+[<A HREF="http://www.conserver.com/">3</A>] for a number of reasons;
+</P>
+
+<P>1) Conserver allows you to control devices attached to serial
+ports connected to the Conserver host, as well as to serial ports on
+terminal servers scattered throughout your network.</P>
+
+<P>2) Everything that comes out of a device's console port goes into
+the Conserver log file for that device.</P>
+
+<P>3) Single-user control, but multi-user viewing, makes Conserver an
+excellent mentoring tool. Control can be easily switched between
+users, allowing collaboration between administrators in different
+locations.</P>
+
+<P>We have used Conserver during maintenance downtimes, along with a
+conference call, to allow a standby administrator to hear and watch
+the progress of an upgrade session. This was done because the person
+making the changes was across the country, while the standby person
+was at his desk in the same building as the equipment, in case the
+hardware failed during the changes.</P>
+
+<P>4) The log files for various devices can also be used as a
+teaching tool, as a junior administrator can look through sessions to
+see how a senior administrator performed some tasks, providing that
+your security policies and the file permissions allow this.
+(Conserver logs the data coming in from the attached host, not the
+data going from clients to the host.)</P>
+
+<P>You can also use Conserver logs for training after a failure. If a
+junior-level administrator started the troubleshooting, and a senior
+had to come in later and follow up, both administrators can benefit.
+The senior can look at the logs, and see what was already done
+(including looking to see what happened before the failure). The
+junior can watch the senior, and perhaps learn new methods to use the
+next time.</P>
+
+<P>5) Scripting tools can also sift through the logs, looking for
+problems, as a backup to your other automated device managers. These
+includes SWATCH
+[<A HREF="http://www.stanford.edu/~atkins/swatch/">10</A>], presented
+at LISA in 1993.</P>
+
+<P>6) The logs can also provide additional logging, as a backup to
+your syslog files. (A cracker can find out where you are sending
+syslog messages, but the host doesn't require any special pointers to
+the Conserver host in order to be connected and logged, so a cracker
+would not know there was another log to clean up after an intrusion.)
+</P>
+
+<P>We have found syslog settings misconfigured on some hosts more
+than once using the Conserver logs. While one machine kept quietly
+rebooting at random intervals, the administrators found nothing in
+the syslog files, yet the conserver logs told two stories...first,
+the cause of the rebooting was a failure to write to a full file
+system; second, the fact that syslog wasn't logging the errors led us
+to check the syslog configurations.</P>
+
+<P>7) If a device attached to your Conserver doesn't timestamp it's
+output, Conserver can be set up to put an hourly timestamp in the log
+for that device.</P>
+
+<P>8) Multiple distributed Conserver hosts can be controlled by a
+single configuration file, which specifies which servers are
+connected to the various hosts and devices. This provides easy
+configuration, even when you deploy Conservers in remote offices.
+</P>
+
+<P>TIP: Deploying a Conserver host at each remote office means that
+console data won't be lost if a WAN link fails. If you allow remote
+access to the remote office, you can look at the logs during the link
+failure to see what activity may have happened, and keep an eye on
+your link providers work during the repair.</P>
+
+<P>If the WAN link to a remote office goes down, you can still dial
+into a modem attached to the terminal server in that office, pass the
+authentication challenge, allowing the network administrator to look
+at the CSU/DSU and router on both ends of the failing link at once.
+</P>
+
+<P>9) You can't use grep(1) on a pile of paper on the back end of a
+DECWriter! But you can use it on the log files from Conserver.</P>
+
+<P>TIP: As with syslog and backups, keeping the clocks between all of
+your Conserver-connected systems in sync is very important. We
+recommend a stable NTP infrastructure be in place when you deploy a
+console server. During large problem events (denial of service
+attacks, network outages, cascading failures across multiple
+servers), your troubleshooting will be faster if all of the clocks
+are in sync. This allows you to correlate time stamps between various
+hosts and network devices, and understand what happened first, and
+what happened after that. (Consider using one time zone for all hosts
+if making the time zone conversions for troubleshooting is a concern
+for you.)</P>
+
+<P>The maintainer of Conserver and I will present a half-day tutorial
+about deploying remote serial console access at the LISA conference
+[<A HREF="http://www.usenix.org/events/lisa2000/">11</A>] in
+December. We invite anyone with an interest in the topic to sign up.
+We will be covering several models for deploying Conserver, and we'll
+try to take the mystery out of connecting various serial devices to
+your terminal servers.</P>
+
+<P>There are also options that you can use for added security, but
+architecture also plays a part in that discussion. Deployment models
+vary, depending on the security needs. Bring your questions to LISA,
+and look for the Conserver BoF session!</P>
+
+<P><B>What about the BREAK problem?</B></P>
+
+<P>If you have Sun hosts, you may have been warned away from
+attaching terminal servers for remote access. Let me offer a brief
+explanation, and some information that may help.</P>
+
+<P>There is a serial port equivalent to the telnet BREAK signal,
+where the data lead signal is inverted from its normal state for a
+brief period of time (more than the duration of a single character,
+including start and stop bits) [12]. This is not the same as sending
+control characters. Most terminal servers send a serial BREAK to
+every port when you turn the power off, and some even do it when you
+turn power on, or during their boot sequence. This problem also
+exists on most multi-port add-in cards for PCs.</P>
+
+<P>When Sun machines receive a serial BREAK, they will drop down to
+the "ok&gt;" prompt. This stops the operating system, and all the
+useful services that the machine is doing at the time, until someone
+gets on the console and types "go". This is actually quite useful for
+getting the machine out of a hung state, so you normally don't want
+to block this signal. Newer versions of SunOS either allow a patch
+[13], or include in the OS, the ability to ignore the serial BREAK
+but listen for a specific character sequence instead. Sun customers
+with SunSolve [<A HREF="http://sunsolve.sun.com/">14</A>] support
+access can check SunSolve for more information.</P>
+
+<P>The problem occurs when you have a bunch of Sun hosts connected to
+a terminal server, and then the terminal server sends a BREAK to all
+of the attached hosts...and everything stops until you get on each of
+the consoles and type "go" for each host. (You can infer why it would
+be a bad idea to plug the console of your Conserver host into a
+terminal server that you access through that Conserver.)</P>
+
+<P>Cisco Systems has also posted a Field Notice related to the BREAK
+problem to a web page
+[<A HREF="http://www.cisco.com/warp/public/770/fn-tsbreak.html">15</A>]
+in April of 1998. The basic idea behind the notice was trying to keep
+the BREAK signal from getting to the Sun host, or make the Sun host
+ignore the signal. Unfortunately, the signal is too useful to
+administrators, so we can't advocate methods that block the BREAK
+signal from getting to the host.</P>
+
+<P>Our search for a good answer has led us to try to find terminal
+servers which don't send BREAK at inopportune times. In support of
+Mark Burgess's series of articles (Systems Administration Research)
+in the recent versions of ;login:, I have started a series of tests
+on a variety of terminal server models. We're posting our test
+methods as well as the results, and encouraging other sites with an
+interest to perform similar tests and share their results with us.
+We're trying to determine whether the failures for various vendors
+are related to hardware or software; when you can expect the failure
+to occur; and trying various recommended settings on the terminal
+servers to try to eliminate the problem. You can find more
+information on our results page
+(<A HREF="http://www.conserver.com/consoles/breakoff.html">16</A>).</P>
+
+<P><B>In Summary</B></P>
+
+<P>If you have always worked at a site with remote access to the
+serial consoles, consider yourself lucky. If you don't have some type
+of access now, I hope I've given you some reasons to consider adding
+it soon. If I've managed to interest you in the subject, but you want
+to learn more, I hope to see you in the tutorial in December.</P>
+
+<P>I believe it was Elizabeth Zwicky who wrote a series of articles
+about software that should have been included in our favorite
+operating systems. I think Conserver belongs in that category.</P>
+
+<P><TABLE BORDER=0 WIDTH="100%">
+   <TR>
+      <TD>
+         <P><B><A NAME="footnotes"></A>Bibliography / Reference</B>
+         </P>
+         
+         <P>[1] Thomas A. Fine and Steven M.Romig, The Ohio State
+         University: "A Console Server". Found in hardcopy
+         proceedings of LISA IV, October 17-19, 1990. At the time of
+         this printing, it is not currently online at the USENIX
+         site.</P>
+         
+         <P>[2] Historical notes: Ohio State distributed the original
+         terminal server code. Conserver was the name of the server
+         component. Folks at Purdue University added a "pipe to
+         shell" feature, which some folks used to send sessions
+         through telnet sessions to high TCP ports in order to reach
+         console servers. Later, Robert Olsen at Argonne National
+         Labs (ANL) hacked the OIS code to include the socket-based
+         support. The Synopsys/GNAC/Certainty Solutions versions
+         derived from a Purdue release, with the ANL additions, plus
+         contributions from Arnold de Leon while at Synopsys, Inc.
+         </P>
+         
+         <BLOCKQUOTE><P>Packge, maintainer : URL</P></BLOCKQUOTE>
+         
+         <UL>
+            <LI>Conserver, Thomas A Fine :
+            <A HREF="http://hea-www.harvard.edu/~fine/Tech/console-server.html">http://hea-www.harvard.edu/~fine/Tech/console-server.html</A>
+            
+            <LI>Purdue version, Kevin S. Braunsdorf :
+            <A HREF="ftp://ftp.physics.purdue.edu/pub/pundits/">ftp://ftp.physics.purdue.edu/pub/pundits/</A>
+            
+            <LI>Current Conserver version, Bryan Stansell :
+            <A HREF="http://www.conserver.com/">http://www.conserver.com/</A>
+         
+         </UL>
+         
+         <P>[3] Conserver application
+         (<A HREF="http://www.conserver.com/">http://www.conserver.com/</A>)
+         </P>
+         
+         <P>[4] Celeste Stokley Sysadmin web site
+         (<A HREF="http://www.stokely.com/">http://www.stokely.com/</A>)
+         </P>
+         
+         <P>[5] Celeste Stokley UNIX Serial Port page
+         (<A HREF="http://www.stokely.com/unix.serial.port.resources/tutorials.html">http://www.stokely.com/unix.serial.port.resources/tutorials.html</A>)
+         </P>
+         
+         <P>[6] David K. Z. Harris's Console Connection Guide web
+         pages
+         (<A HREF="http://www.conserver.com/consoles/">http://www.conserver.com/consoles/</A>)
+         </P>
+         
+         <P>[7] BayTech Data Communications Division, Bay Saint
+         Louis, Missouri, USA. RPC series power control devices.
+         (<A HREF="http://www.baytechdcd.com/products/rpcseries.shtml">http://www.baytechdcd.com/products/rpcseries.shtml</A>)
+         </P>
+         
+         <P>[8] American Power Conversion Corp., West Kingston, Rhode
+         Island, USA. Master Switch, and Master Switch Plus units.
+         (<A HREF="http://www.apcc.com/products/masterswitch/index.cfm">http://www.apcc.com/products/masterswitch/index.cfm</A>)
+         </P>
+         
+         <P>[9] Middle Digital, Calgary, Alberta, Canada. PC Weasel
+         2000
+         (<A HREF="http://www.realweasel.com/">http://www.realweasel.com/</A>)
+         They used to do business under the name Canada Connect
+         Corporation.</P>
+         
+         <P>[10] SWATCH
+         (<A HREF="http://www.stanford.edu/~atkins/swatch/">http://www.stanford.edu/~atkins/swatch/</A>)
+         </P>
+         
+         <P>[11] USENIX LISA 2000 conference.
+         (<A HREF="http://www.usenix.org/events/lisa2000/">http://www.usenix.org/events/lisa2000/</A>)
+         </P>
+         
+         <P>[12] "Communications Concepts, An Introduction to Data
+         Communications", Communications Research Group, and Telebit
+         Corp., p. 3-12</P>
+         
+         <P>[13] Sun part number for the Consulting Special to
+         address the serial BREAK problem: <B>"CONSULT-ZSBRK"</B>
+         </P>
+         
+         <P>[14] SunSolve contract support site
+         (<A HREF="http://sunsolve.sun.com">http://sunsolve.sun.com/</A>)
+         </P>
+         
+         <P>[15] Cisco Field Notice about fixing the BREAK problem on
+         Suns
+         (<A HREF="http://www.cisco.com/warp/public/770/fn-tsbreak.html">http://www.cisco.com/warp/public/770/fn-tsbreak.html</A>)
+         </P>
+         
+         <P>[16] Terminal Server BREAK-off pages
+         (<A HREF="http://www.conserver.com/consoles/breakoff.html">http://www.conserver.com/consoles/breakoff.html</A>)
+      
+      </TD></TR>
+</TABLE></P>
+
+<P><TABLE BORDER=0 WIDTH="100%">
+   <TR>
+      <TD>
+         <P><B>About the Authors</B></P>
+         
+         <P>All of the authors and contributors work for
+         <A HREF="http://www.certaintysolutions.com/">Certainty
+         Solutions</A>. (Prior to August 2000, Certainty Solutions
+         was known as <B>GNAC</B>, Global Netwoking and Computing.)
+         </P>
+         
+         <P>David K. Z. Harris has been a network plumber "for more
+         than a decade", and he likes many kinds of puzzles. He's
+         been a member of the Technical Staff for nearly three years.
+         Connecting various devices together (like making networks
+         work, or hooking up serial consoles) is just another
+         interesting puzzle.</P>
+         
+         <P>Bryan Stansell is one of the earliest members of staff,
+         and is the current keeper of the Conserver code, as an
+         extension of his love of computers and programming.</P>
+         
+         <P>David Stuit, and Michael Batchelder also provided
+         substantial material for, and review of, this article.
+      </TD></TR>
+</TABLE></P>
+
+<P><TABLE BORDER=0 WIDTH="100%">
+   <TR>
+      <TD>
+         <P><CENTER><B>This page is -
+         http://www.conserver.com/consoles/Training/login-story.html</B>
+         </CENTER>
+      </TD></TR>
+</TABLE></P>
+
+<p>
+<hr align=center width="80%">
+</p>
+
+<P><CENTER><TABLE BORDER=5 bgcolor="ffcc99" width="75%" padding=5>
+   <TR>
+      <TD>
+         <P><FONT COLOR="#663300"><B>NOTICE:</B> Most of the pages, 
+         articles, and tutorials on this website are
+         copyrighted works. You may make 'deep links' to various
+         pages. (If you let me know which page(s) you are linking to,
+         I'll let you know if I move the page(s) during updates.)
+         Please send me email if you wish to republish any material,
+         or use it on your own website.</FONT></P>
+      </TD></TR>
+</TABLE></CENTER></P>
+
+
+<p><center>Made using <a href="http://www.nvudev.com">Nvu</a></center></p>
+
+<p><center>Copyright 1996-2007,
+<A HREF="http://www.esperanto.org/person/HARRIS_Dacxjo/">David K. Z.
+Harris, N6UOW</A>&nbsp;&nbsp;
+<a href="http://www.linkedin.com/in/consoleteam" >
+<img src="http://www.linkedin.com/img/webpromo/btn_profile_bluetxt_80x15.gif"
+width="80" height="15" border="0" alt="View David K. Z. Harris's profile on
+LinkedIn"></a><br>
+Questions? Comments? Additions? Email <B>consoles</B> at
+<B>conserver.com</B>.<BR>
+
+<FONT COLOR="#cc0000">(Don't harvest my address, I don't want
+SPAM!)</FONT><BR>
+
+<A HREF="../iloj.html">How does he do it</A>? And
+<A HREF="../about.html">Why</A>?</CENTER></P>
+
+
+
+</BODY>
+</HTML>

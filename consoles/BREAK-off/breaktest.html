@@ -1,0 +1,678 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<!--This file created 2/19/01 16:04 by Claris Home Page version 2.0-->
+
+   
+   
+  
+  
+  <title>Console Server BREAK-off Test Methods</title>
+  <meta name="GENERATOR" content="Claris Home Page 2.0">
+
+
+   
+  
+  <meta name="KEYWORD" content="Cisco, Xylogics, Annex, MicroAnnex, Cyclades,
+   Micro-Annex, Xyplex, Conserver, CS-500, cs-516, MaxServer, PR-3000
+   Lightwave 3200, Zonker, conserver, NM-32A, Livingston, iTouch, IMGR,
+   portmaster, Lantronix, IOLAN, computone, RAS2000, console server,
+   N6UOW, TS2000, TS800, ACS-1, ACS-16, CS9000, Perle, ASP Technologies,
+   Vantage, Nu-Data, MAXIM, MAX-232, DALLAS Semi, Digi, CM 8, DNPG,
+   DECserver 90M+">
+<BODY TEXT="#336600" BGCOLOR="#FFFFFF">
+<p><center><table border=0 width="98%">
+   <tr>
+      <td width="50%">
+         <P><center><a href="http://www.conserver.com"><img
+         src="../conserver-sm.jpg" alt="Conserver.com logo" width=147
+         height=47 border=0 align=middle></A></center>
+      </td><td width="50%">
+         <p><center>Brought to you by;<br>
+
+         <a href="http://www.conserver.com/">www.conserver.com</a></center>
+      </td>
+   </tr>
+</table></center>
+
+</head>
+
+
+<body>
+
+<br>
+
+<p>
+<table border="0" width="100%">
+
+
+   <tbody>
+
+    <tr>
+
+
+      <td>
+         
+      
+      <h2 align="center">Console Server BREAK-Off Test Methods</h2>
+
+
+
+         
+      
+      <h4 align="center">http://www.conserver.com/console/BREAK-off/breaktest.html<br>
+
+
+         version 1.2 
+         (updated: Jul 18, 2006, 10:52 am)</h4>
+
+
+
+         
+      
+      <h4 align="center">(Questions about testing? email <b>break-off</b> at 
+         <!-- SPAM harvester killer --><b>conserver.com</b>)</h4>
+
+
+         
+         
+      
+      <p>This testing effort is neither sponsored nor funded by any
+         company or equipent vendor, and has relied on the help of 
+         vendors and individuals for the loan and donation of equipment to be tested.
+         We want to <a href="breakacks.html">acknowledge those that have
+         helped</a> make this project useful and successful.
+
+         </p>
+
+      
+      <p>If you are looking to see which units we have tested, and
+         how they performed, please check our <a href="breakinfo.html">test
+         results</a> page. If you are curious how I arrange to borrow
+         equipment to be tested, you should check the 
+         <a href="breakfaq.html">FAQ page</a>
+
+         </p>
+
+      
+      <p>If you're curious why I'm doing all this work for free, you
+         can read my <a href="../about.html">'about' page</a>.</p>
+
+
+
+         
+      
+      <p>Initially, we are borrowing devices from active service, and
+from spare parts pools in a number of networks. We bring them into a
+lab environment, and apply a bit of scientific method to keep test
+results consistent across a number of devices. (This includes a
+database for keeping and mining test data, physical labeling of the
+devices for tracking, and testing voltages as well as signaling
+parameters.) This gives us a fairly random sample of various hardware,
+including random firmware and hardware revisions. In return, we give
+the hardware vendors feedback on documentation, user interface, and
+support issues. We have
+also approached some vendors, spurred by our own interests, or by
+questions from readers of these pages. More recently, vendors have been
+approaching us to test their newer hardware designs.</p>
+      </td>
+
+    </tr>
+
+
+  
+  </tbody>
+</table>
+
+</p>
+Our lab testbed consists of a small IP subnet, a target host (Sun
+SPARC 5), a Conserver (a Laptop running Linux) which can also be a
+TFTP and applications host, a handful of terminal server units under
+test, and another laptop or two as a Conserver client and running a
+terminal application to use the serial port for additional
+diagnostics, as well as pinging the target host.
+
+
+<p>
+<table border="0" width="100%">
+
+
+   <tbody>
+
+    <tr>
+
+
+      <td>
+         
+      
+      <p><b>Basic Test Topology</b></p>
+
+
+         
+         
+      
+      <p>
+      
+      <table border="0" width="100%">
+
+
+            <tbody>
+
+          <tr>
+
+
+               <td width="190">
+                  
+            
+            <p><img src="breaklab1.gif" x-sas-useimagewidth="" x-sas-useimageheight="" align="left" height="117" width="177">
+               </p>
+
+            </td>
+
+            <td>
+                  
+            
+            <ol>
+
+
+                     <li>Server
+                     
+                     
+                
+                <ul>
+
+
+                        <li type="1">Conserver application
+                        
+                        </li>
+
+                  <li>TFTP Server, to boot DUT
+                        
+                        </li>
+
+                  <li>Ability to ping target
+                        
+                        </li>
+
+                  <li>Tip, or other terminal emulation to
+                        configure DUT, and test the Target
+                     </li>
+
+                
+                </ul>
+
+
+                     
+                     </li>
+
+              <li>Target
+                     
+                     
+                
+                <ul>
+
+
+                        <li type="1">Sun (susceptible to BREAK)
+                     </li>
+
+                
+                </ul>
+
+
+                     
+                     </li>
+
+              <li>Device Under Test (DUT)
+                  </li>
+
+            
+            </ol>
+
+
+               </td>
+
+          </tr>
+
+
+         
+        
+        </tbody>
+      
+      </table>
+
+      </p>
+
+
+         
+         
+      
+      <p>The orange line is the serial console connection between
+         the target Sun host (2) and the terminal server we are
+         testing (3).</p>
+
+
+         
+         
+      
+      <p>The green lines represent TCP Connections over Ethernet
+         from our conserver host (1);</p>
+
+
+         
+         
+      
+      <ul>
+
+
+            <li>(1 &lt;-&gt; 2) are telnet and "ping -s" sessions for
+            control and testing.
+            
+            </li>
+
+        <li>(1 &lt;-&gt; 3) is the conserver TCP session to the
+            serial port under test.
+         </li>
+
+      
+      </ul>
+
+
+      </td>
+
+    </tr>
+
+
+  
+  </tbody>
+</table>
+
+</p>
+
+
+
+<p>
+<table border="0" width="100%">
+
+
+   <tbody>
+
+    <tr>
+
+
+      <td>
+         
+      
+      <p>In our lab, we have divided the duties a bit, so that the
+         Server performs the Conserver and TFTP duties, while another
+         laptop performs most of the terminal emulation duties.</p>
+
+
+         
+         
+      
+      <p>
+      
+      <table border="0" width="98%">
+
+
+            <tbody>
+
+          <tr>
+
+
+               <td width="315">
+                  
+            
+            <p><img src="breaklab2.gif" x-sas-useimagewidth="" x-sas-useimageheight="" align="left" height="117" width="302">
+               </p>
+
+            </td>
+
+            <td>
+                  
+            
+            <ol>
+
+
+                     <li>Server
+                     
+                     </li>
+
+              <li>Target
+                     
+                     </li>
+
+              <li>Laptop
+                     
+                     </li>
+
+              <li>DUT #1
+                     
+                     </li>
+
+              <li>DUT #2
+                     
+                     </li>
+
+              <li>DUT #3
+                  </li>
+
+            
+            </ol>
+
+
+               </td>
+
+          </tr>
+
+
+         
+        
+        </tbody>
+      
+      </table>
+
+      </p>
+
+
+         
+         
+      
+      <p>All of the devices are connected to a common ethernet
+         segment. The Laptop has a serial port (shown as the green
+         lines in the illustration above), which we use to
+         communicate with many of the Devices Under Test (DUT) for
+         their initial configurations. We then connect each DUT in
+         turn, via serial (shown in the illustrations as an orange
+         line) to the target Sun machine, and then perform the
+         various tests, and see if the host is brought to the OK
+         prompt.</p>
+
+
+         
+         
+      
+      <p>We started with units that we use today, and could borrow
+         temporarily. Our test subnet usually has between three and
+         six <b>DUT</b>s at any given time, so we can take
+         measurements and perform testing when we have the time.
+         Paper logs are kept, and the results are rolled into a test
+         results database for storage and mining.
+      </p>
+
+      </td>
+
+    </tr>
+
+
+  
+  </tbody>
+</table>
+
+</p>
+
+
+
+<p>In one case, we shared our test methods with a team at another
+site (Jeff Komori and Jim Dumont at <a href="http://www.synopsys.com/">Synopsys</a>),
+and asked them to test some hardware that they could not loan us.</p>
+
+
+
+<p>I do realize that good science relies on larger sample pools. We
+are continuing to solicit loaner equipment that we can put through
+our tested. As we run out of easy access to equipment, we will begin
+to accept more offers from other teams at universities and other
+large sites to perform this testing on their own gear using our test
+methods. We'll review their test results, and add those results to
+our database as 'external data' submissions, in order to identify
+which testing we have performed personally.</p>
+
+
+
+<p>
+<table border="0" width="100%">
+
+
+   <tbody>
+
+    <tr>
+
+
+      <td>
+         
+      
+      <p><b>Hardware-related failures</b></p>
+
+
+         
+         
+      
+      <p>The BREAK signal is an inversion of the data lead for a
+         specific period of time, exceeding the period of at least one
+         full character, including the start/stop bits, and any parity. 
+         As such, the duration of the BREAK signal is a function of the
+         port speed of the UART sending the data. However, many UARTS
+         will send a BREAK signal that is 4 times as long (some are
+         16-times as long) as a single character. Some DEC manuals
+         state that the period is actually ~250 milliseconds, and
+         many VT-terminals will send a long BREAK signal.</p>
+
+
+         
+         
+      
+      <p>Simple visual observation may be possible with a passive
+         RS-232 signal tracer for most devices (9600 bits-per-second
+         or slower). This can tell us whether the BREAK occurs
+         immediately after Power Off or Power On, or if it occurs
+         later in the boot cycle, during a warm-boot of the device,
+         or a reset of the serial interface, and by invocation from
+         Conserver. (Sun devices are sensitive to short BREAK
+         signals. If your port speed is set to higher than 9600 bps,
+         it can be difficult to see a short BREAK signal. For our
+         testing, we set the port speeds to 9600 whenever possible.)
+      </p>
+
+      </td>
+
+    </tr>
+
+
+  
+  </tbody>
+</table>
+
+</p>
+
+
+
+<p>
+<table border="0" width="100%">
+
+
+   <tbody>
+
+    <tr>
+
+
+      <td>
+         
+      
+      <p>Other testing includes measuring the actual power output
+         of the RS-232 drivers. While the specification calls for up
+         to +/-25VDC for the low/high logic signals, the "no-man's
+         land" range (where "data is invalid") is down at +/-3V. It
+         is possible for devices to output less power, but then they
+         won't drive a signal as far...and we might care about that
+         when we consider large data center installations. Since some
+         devices use newer I.C.s with charge-pump technology, its
+         possible to see levels closer to +/-6V or +/-9V, and still
+         work OK except in some edge cases with long cable runs. Most
+         devices so far have voltages between +/- 13V to +/- 8V.-
+         </p>
+
+
+         
+         
+      
+      <p><img src="cs-volts-2.gif" x-sas-useimagewidth="" x-sas-useimageheight="" align="right" height="165" width="243">
+         In the illustration to the right, the blue "time" illustrates
+         the duration of time needed to be perceived as a BREAK signal.
+         In this example, the logic power fails, (and the input to the 
+         serial driver chip seems to change levels, falling to zero volts)
+         while the power supply continues to supply power to the RS-232
+         power rails into the serial driver. The result is that the
+         single, solid signal from this power failure appears to look
+         like a BREAK signal in duration before the RS-232 levels 
+         also fall to zero volts.
+
+         </p>
+
+      
+      <p>If the
+         power rails are to blame, the signal could last longer than
+         a normal BREAK. If this is the case, it is possible that the
+         Sun CPU is "too sensitive" to BREAK. That is, if the signal
+         doesn't return to normal i(return back to the SPACE logic
+         state) after the prescribed time period, the
+         signal should probably be ignored, rather than acted upon.
+         </p>
+
+
+         
+         
+      
+      <p>If we had access to a digital oscilloscope, or similar
+         device that could trigger on a signal event and capture the
+         waveforms of the TXD and RXD leads (voltage over time), as
+         well as perhaps the logic power rail voltage, and then
+         export that display to a Polaroid photo, a printer, or an
+         image file on a floppy, we could include the images on our
+         pages and write-ups.
+      </p>
+
+      </td>
+
+    </tr>
+
+
+  
+  </tbody>
+</table>
+
+</p>
+
+
+
+<p>
+<table border="0" width="100%">
+
+
+   <tbody>
+
+    <tr>
+
+
+      <td>
+         
+      
+      <p>In this hardware-related failure, the power supplies are
+         only part of the problem. The accomplice in this failure are
+         the actual RS-232 driver chips (Typically the 1488/1489
+         series), which connect to ground, the logic power supply
+         rail, as well as additional power rails for the RS-232
+         voltage levels. As a result, replacing the power supply may
+         not completely solve the problem (Large capacitors on the
+         circuit board, connected to the RS-232 voltage rails, could
+         keep the voltages high enough, long enough to make the
+         failure appear.)
+      </p>
+
+      </td>
+
+    </tr>
+
+
+  
+  </tbody>
+</table>
+
+</p>
+
+
+
+<p><a href="http://dbserv.maxim-ic.com/appnotes.cfm/appnote_number/527/ln/en">Dallas 
+Semiconductor Application Note 083</a> is a good introduction to *-232 async 
+serial, from the folks that developed the single-power-supply transmitter and
+receiver chip sets (long live the <b>MAX-232</b> chips, which simplified many
+of my interface designs!).</p>
+
+
+
+<p>There are a couple other good App Notes on this server about RS-232 topics;
+
+</p>
+
+<ul>
+
+
+  <li><a href="http://dbserv.maxim-ic.com/appnotes.cfm/appnote_number/375/ln/en">#375</a>
+    design and testing considerations, from the interface chipmaker and 
+    the device designers perspective. Some interesting clues for operating
+    at very high bitrates, as well as examining the issues of shutting down
+    (sleeping) the interface chip to save power, which can also affect the
+communications if the devices have both been idle for a short bit.
+  </li>
+
+  <li><a href="http://dbserv.maxim-ic.com/appnotes.cfm/appnote_number/374/ln/en">#374</a>
+    about RS-232 driver chips, working from a variety of voltages. (Consider 
+    what happens to the serial port voltages when you need to work from a 
+    palm-top device with a 3V battery!)
+  </li>
+
+</ul>
+
+<p>
+<hr align=center width="80%">
+</p>
+
+<P><CENTER><TABLE BORDER=5 bgcolor="ffcc99" width="75%" padding=5>
+   <TR>
+      <TD>
+         <P><FONT COLOR="#663300"><B>NOTICE:</B> Most of the pages, 
+         articles, and tutorials on this website are
+         copyrighted works. You may make 'deep links' to various
+         pages. (If you let me know which page(s) you are linking to,
+         I'll let you know if I move the page(s) during updates.)
+         Please send me email if you wish to republish any material,
+         or use it on your own website.</FONT></P>
+      </TD></TR>
+</TABLE></CENTER></P>
+
+
+<p><center><a href="http://www.nvu.com">
+<img style="border: 0px solid ; width: 80px; height: 15px; float:
+"src="http://www.nvu.com/images/madewithNvu80x15dark.png"
+alt="Made with Nvu"></a></center></p>
+
+<p><center>Copyright 1996-2007,
+<A HREF="http://www.esperanto.org/person/HARRIS_Dacxjo/">David K. Z.
+Harris, N6UOW</A>&nbsp;&nbsp;
+<a href="http://www.linkedin.com/in/consoleteam" >
+<img src="http://www.linkedin.com/img/webpromo/btn_profile_bluetxt_80x15.gif"
+width="80" height="15" border="0" alt="View David K. Z. Harris's profile on
+LinkedIn"></a><br>
+Questions? Comments? Additions? Email <B>consoles</B> at
+<B>conserver.com</B>.<BR>
+
+<FONT COLOR="#cc0000">(Don't harvest my address, I don't want
+SPAM!)</FONT><BR>
+
+<A HREF="../iloj.html">How does he do it</A>? And
+<A HREF="../about.html">Why</A>?</CENTER></P>
+
+
+
+</body>
+</html>

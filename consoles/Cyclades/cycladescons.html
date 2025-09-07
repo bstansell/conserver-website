@@ -1,0 +1,1430 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <title>Cyclades, Avocent Console Connection Guide</title>
+  <meta keyword="Serial Console, Cyclades, async, conserver, RJ45, rj45 adapter,
+RS-232, TealDoc, Palm Pilot, console, Avocent, TS800, TS1000, TS2000,
+ACS16, ACS32, ACS48, RPM8, RPM-8, RPM10, RPM-10">
+<BODY TEXT="#336600" BGCOLOR="#FFFFFF">
+<p><center><table border=0 width="98%">
+   <tr>
+      <td width="40%">
+         <P><center><a href="http://www.conserver.com"><img
+         src="../conserver-sm.jpg" alt="Conserver.com logo" width=147
+         height=47 border=0 align=middle></A></center>
+      </td><td width="20%">
+      <center><a href="http://www.conserver.com/consoles/"><img
+         src="../home-marble.gif" alt="link to the Consoles home page" width=47
+         height=50 border=0 align=middle></A></center>
+      </td><td width="40%">
+         <p><center>Brought to you by;<br>
+
+         <a href="http://www.conserver.com/">www.conserver.com</a></center>
+      </td>
+   </tr>
+</table></center>
+
+</head>
+
+<body>
+<h2>
+<center>Zonker's Cyclades/Avocent Console Server Connections Guide</center>
+</h2>
+
+<h4>
+<center>http://www.conserver.com/consoles/Cyclades/cycladescons.html<br>
+(updated:
+Jul 14, 2011, 09:34 am)</center>
+</h4>
+
+<p>This document will outline terminal server connections to
+Cyclades TS and ACS series console servers. Most Cyclades devices have
+a label on the bottom of the case showing the RJ45 signal pinouts, but
+I've also presented them below. All connections shown here make use of
+standard ethernet cables (RJ-45, 8-conductor, 'straight through' cables)
+unless specified otherwise. </p>
+
+<p align="center"><a name="top"></a><b>Table of Contents</b><br>
+<a href="#rj45">Cyclades RJ-45 signaling</a><br>
+<a href="#ethernet">RJ-45 Cable Diagrams</a><br>
+<a href="#rjschem">RJ45 to DB/DE adapter wiring diagrams</a><br>
+<a href="#cables">Specialty cable diagrams</a><br>
+(<a href="#cyclades-usr">U.S. Robotics/3Com</a>,
+<a href="#cyclaes-sun-t3">Sun-T3</a>,
+<a href="#cyclades-dec">DEC MMJ</a>,
+<a href="#cyclades-kentrox">ADC Kentrox</a>)<br>
+<a href="#de9">Devices with DE-9(m) console ports</a><br>
+<a href="#db25">Devices with DB-25(f) console ports</a><br>
+<a href="#crj45">Connecting to Cisco RJ-45 ports</a><br>
+<a href="#cpc">Attaching devices to a PC instead</a><br>
+<a href="#modem">Connecting modems to Cyclades Products</a><br>
+<a href="#configs">Terminal Server Configuration Tips</a><br>
+<a href="#firmware">Firmware Upgrade tips</a><br>
+<a href="#credits">Author Credits</a></p>
+
+<p>
+<table border="0" width="100%">
+  <tbody>
+    <tr>
+      <td>
+      <p>
+      <table border="0" cellpadding="3" cellspacing="0" width="100%">
+        <tbody>
+          <tr>
+            <td bgcolor="#cccccc" width="70%">
+            <p><b><a name="rj45"></a>Cyclades
+RJ-45 signaling</b> </p>
+            </td>
+            <td bgcolor="#cccccc" width="30%">
+            <p align="right"><b><a href="#top">to
+Table of Contents</a></b> </p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      </p>
+      
+      <p>The table below shows the signal information for the
+Cyclades 8-wire RJ45 interface used on th TS and ACS console servers.
+In early 2006, Avocent acquired Cyclades, and Avocent adopted this
+interface to continue in the Avocent ACS product line.</p>
+
+      <center>
+      <table style="text-align: left; width: 588px; height: 192px;" border="1" cellpadding="2" cellspacing="2">
+        <tbody>
+          <tr>
+            <td>
+            <center>
+            <table style="width: 347px; height: 164px;" border="0" cellpadding="0" cellspacing="0">
+              <tbody>
+                <tr>
+                  <td>
+                  <p align="center"><b>Patch Panel</b>
+                  </p>
+                  </td>
+                  <td width="83">
+                  <p align="center"><b>Signal Type</b>
+                  </p>
+                  </td>
+                  <td width="50">
+                  <p align="center"><b>Pin</b>
+                  </p>
+                  </td>
+                </tr>
+                <tr>
+                  <td width="86">
+                  <p align="center">RTS </p>
+                  </td>
+                  <td width="83">
+                  <p align="center">Output </p>
+                  </td>
+                  <td width="50">
+                  <p align="center">1 </p>
+                  </td>
+                </tr>
+                <tr>
+                  <td width="86">
+                  <p align="center">DTR </p>
+                  </td>
+                  <td width="83">
+                  <p align="center">Output </p>
+                  </td>
+                  <td width="50">
+                  <p align="center">2 </p>
+                  </td>
+                </tr>
+                <tr>
+                  <td width="86">
+                  <p align="center">TD </p>
+                  </td>
+                  <td width="83">
+                  <p align="center">Output </p>
+                  </td>
+                  <td width="50">
+                  <p align="center">3 </p>
+                  </td>
+                </tr>
+                <tr>
+                  <td width="86">
+                  <p align="center">Sig. Gnd. </p>
+                  </td>
+                  <td width="83">
+                  <p align="center">Reference </p>
+                  </td>
+                  <td width="50">
+                  <p align="center">4 </p>
+                  </td>
+                </tr>
+                <tr>
+                  <td width="86">
+                  <p align="center">CTS </p>
+                  </td>
+                  <td width="83">
+                  <p align="center">Input </p>
+                  </td>
+                  <td width="50">
+                  <p align="center">5 </p>
+                  </td>
+                </tr>
+                <tr>
+                  <td width="86">
+                  <p align="center">RD </p>
+                  </td>
+                  <td width="83">
+                  <p align="center">Input </p>
+                  </td>
+                  <td width="50">
+                  <p align="center">6 </p>
+                  </td>
+                </tr>
+                <tr>
+                  <td width="86">
+                  <p align="center">DCD </p>
+                  </td>
+                  <td width="83">
+                  <p align="center">Input </p>
+                  </td>
+                  <td width="50">
+                  <p align="center">7 </p>
+                  </td>
+                </tr>
+                <tr>
+                  <td width="86">
+                  <p align="center">DSR </p>
+                  </td>
+                  <td width="83">
+                  <p align="center">Input </p>
+                  </td>
+                  <td width="50">
+                  <p align="center">8 </p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            </center>
+            </td>
+            <td style="width: 150px;">
+            <div style="text-align: center;"><br>
+            </div>
+            <div style="text-align: center;"><img style="width: 68px; height: 165px;" 
+            alt="Cyclades Loopback schematic" src="yloopback.jpg"><br>
+            </div>
+            </td>
+            <td><img style="width: 110px; height: 83px;" alt="Male RJ45 pinouts" 
+            src="../porj45m.gif" x-sas-useimagewidth="" x-sas-useimageheight="" 
+            align="middle"><br>
+            <img style="width: 92px; height: 83px;" alt="Female RJ45 pinouts" 
+            src="../porj45f.gif" x-sas-useimagewidth="" x-sas-useimageheight=""
+            align="middle"></td>
+          </tr>
+        </tbody>
+      </table>
+      </center>
+      <p>Notes:<br>
+      1) <b>Input</b> means a signal <b>from</b> the external device, 
+      coming <b>in to</b> the <b>RJ-45 port</b><br>
+      2) <b>Output</b> means a signal source <b>from</b> the <b>RJ-45 
+      port</b>, going <b>out to</b> the external device </p>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</p>
+
+<p>
+<table border="0" width="100%">
+  <tbody>
+    <tr>
+      <td>
+      <p>
+      <table border="0" cellpadding="3" cellspacing="0" width="100%">
+        <tbody>
+          <tr>
+            <td bgcolor="#cccccc" width="70%">
+            <p><b><a name="ethernet"></a>Cable Diagrams</b></p>
+            </td>
+            <td bgcolor="#cccccc" width="30%">
+            <p align="right"><b><a href="#top">to Table of Contents</a></b></p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      </p>
+
+      <p>
+      <table border="0" width="95%">
+        <tbody>
+          <tr>
+            <td valign="top" width="30%">
+            <p align="center"><img style="width: 121px; height: 160px;" 
+            alt="Ethernet cable schematic" src="../cables/cab-eth.jpg" align="top"><br>
+            <br>
+            Cyclades p/n <b>CAB0018</b><br>
+            APACN part: <font color="#cc0000">24490-21</font>
+            </p>
+            </td>
+            <td valign="top" width="30%">
+            <p align="center"><img style="width: 118px; height: 161px;" 
+            alt="USOC Rolled cable schematic" src="../cables/cab-rolled.jpg" align="top"><br>
+            <br>
+            APACN part: <font color="#cc0000">24490-22</font> </p>
+            </td>
+            <td valign="top" width="30%">
+            <p align="center"><img style="width: 123px; height: 160px;" 
+            alt="Crossover Ethernet schematic" src="../cables/cab-eth-xover.jpg" align="top"> </p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      </p>
+
+      <p>Standard Ethernet cables follow a specific wiring
+pattern. However, not ALL ethernet cables have 8 wires in the cable,
+since a standard Ethernet interface only uses 4 of the wires. For
+console connections, you need to make sure that your cables have <b>all
+8 wires</b>, either 'straight through' (as shown to the left) for
+most connections, or 'rolled' (as shown in the center). The USOC cable
+used for CDDI connections will not work as a "null-modem" cable, since
+the Cyclades/Avocent wiring schema is not symmetrical.</p>
+
+      <p>The Crossover Ethernet cable <b>will not work</b> as a null-modem 
+      cable for Cyclades gear. </p>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</p>
+
+<p>
+<table>
+  <tbody>
+    <tr>
+      <td>
+      <p>
+      <table border="0" cellpadding="3" cellspacing="0" width="100%">
+        <tbody>
+          <tr>
+            <td bgcolor="#cccccc" width="70%">
+            <p><b><a name="rj45schem"></a>Cyclades RJ-45 Adapter Schematics</b></p>
+            </td>
+            <td bgcolor="#cccccc" width="30%">
+            <p align="right"><b><a href="#top">to Table of Contents</a></b></p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      </p>
+
+      <p>Cyclades and Avocent provide a few adapters with each console server.
+Cyclades used to also make some cable diagrams available on their website. Most
+of the diagrams here are my own work, and some were confirmed with the Cyclades 
+site. In keeping with my guide style, I'm providing diagrams for a large
+matrix of adapters and cables. Where there is an existing Cyclades/Avocent part 
+number, it will be noted with the schematic. </td>
+    </tr>
+  </tbody>
+</table>
+</p>
+
+<p>I am a strong proponent of buying pre-wired,
+pre-labeled
+adapters and cables. Generally speaking, you probably can't build an
+adapter cheaper, if you consider the value of your time as well as the
+component costs. Whether or not I can make 100 adapters without a
+mistake isn't being questioned, but I'm sure I'd rather not make, label
+and test 100 adapters by
+myself. The best advantages for buying pre-built adapters and pre-wired
+cables include; </p>
+
+<ul>
+  <li>Consistent wiring and labeling of the parts. </li>
+  <li>Consistent shell colors and labels aides in
+troubleshooting, by visually identifying the parts. </li>
+  <li>Enhances reliability, knowing you can grab any
+adapter and count on it being wired correctly. </li>
+  <li>If you need a LOT of adapters or cables for a
+build-out, you probably don't want to build them all yourself! </li>
+</ul>
+
+<p>Check my "<a href="../wheretobuy.html">where to buy</a>"
+page for vendor information.</p>
+
+<p>With all of this said, I also understand that sometimes
+you just need to make that one cable or adapter, and buying just one
+isn't practical. So, here are the schematics.&nbsp;The Cyclades
+part number, when available is shown below each adapter. (ADB = a
+modular adapter with a female RJ45 connection; CAB = a 3'
+"silver-satin" cable with an RJ45 male connection.) </p>
+
+<p>
+<table border="0" width="100%">
+  <tbody>
+    <tr>
+      <td width="25%">
+      <p></p>
+      <center><img style="width: 108px; height: 164px;" alt="YFDCE schematic" src="yfdce.jpg" align="top"><br>
+      <br>Cyclades p/n&nbsp;<b>ADB0017</b></center>
+      </td>
+      <td width="25%">
+      <p></p>
+      <center><img style="width: 109px; height: 162px;" alt="YFDTE schematic" src="yfdte.jpg" align="top"><br>
+      <br>
+      <br>
+      </center>
+      </td>
+      <td width="25%">
+      <p></p>
+      <center><img style="width: 108px; height: 163px;" alt="YMDCE schematic" src="ymdce.jpg" align="top"><br>
+      <br>Cyclades&nbsp;p/n&nbsp;<b>ADB0025</b></center>
+      </td>
+      <td width="25%">
+      <p></p>
+      <center><img style="width: 108px; height: 163px;" alt="YMDTE schematic" src="ymdte.jpg" align="top"><br>
+      <br>
+      <br>
+      </center>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</p>
+
+<p>
+<table border="0" width="100%">
+  <tbody>
+    <tr>
+      <td width="25%">
+      <p></p>
+      <center><img style="width: 107px; height: 149px;" alt="YFDCE91 schematic" src="yfdce91.jpg" align="top"><br>
+      <br>
+      <br>
+      </center>
+      </td>
+      <td width="25%">
+      <p></p>
+      <center><img style="width: 106px; height: 149px;" alt="YFDTE91 schematic" src="yfdte91.jpg" align="top"><br>
+      <br>
+      <br>
+      </center>
+      </td>
+      <td width="25%">
+      <p></p>
+      <center><img style="width: 101px; height: 149px;" alt="YMDCE91 schematic" src="ymdce91.jpg" align="top"><br>
+      <br>
+      <br>
+      </center>
+      </td>
+      <td width="25%">
+      <p></p>
+      <center><img style="width: 102px; height: 149px;" alt="YMDTE91 schematic" src="ymdte91.jpg" align="top"><br>
+      <br>
+      <br>
+      </center>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</p>
+
+<p>
+<table border="0" width="100%">
+  <tbody>
+    <tr>
+      <td width="25%">
+      <p></p>
+      <center><img style="width: 106px; height: 166px;" alt="YFDCE92 schematic" src="yfdce92.jpg" align="top"><br>
+      <br>Cyclades p/n <b>ADB0036</b> </center>
+      </td>
+      <td width="25%">
+      <p></p>
+      <center><img style="width: 107px; height: 167px;" alt="YFDTE92 schematic" src="yfdte92.jpg" align="top"><br>
+      <br>Cyclades p/n <b>ADB0200</b></center>
+      </td>
+      <td width="25%">
+      <p></p>
+      <center><img style="width: 102px; height: 167px;" alt="YMDCE92" src="ymdce92.jpg" align="top"><br>
+      <br>Cyclades p/n <b>ADB0037</b> </center>
+      </td>
+      <td width="25%">
+      <p></p>
+      <center><img style="width: 103px; height: 168px;" alt="YMDTE92 schematic" src="ymdte92.jpg" align="top"><br>
+      <br>
+      <br>
+      </center>
+      </td>
+    </tr>  
+  </tbody>
+</table>
+</p>
+
+<hr noshade="noshade" width="60%">
+<p><table border="0" width="100%">
+  <tbody>
+    <tr>
+      <td>
+      <p>
+      <table border="0" cellpadding="3" cellspacing="0" width="100%">
+        <tbody>
+          <tr>
+            <td bgcolor="#cccccc" width="70%">
+            <p><b><a name="cables"></a>Specialty Cables for Cyclades 
+            Console Servers</b> </p>
+            </td>
+            <td bgcolor="#cccccc" width="30%">
+            <p align="right"><b><a href="#top">to Table of Contents</a></b></p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      </p>
+      
+      <p>As with adapters, I recommend buying pre-built,
+pre-labeled, tested cables. If you need to make them yourself, make
+sure you label each end, since the cables are NOT symmetrical! It's
+important to get the ends connected to the correct equipment.</p>
+      <p>The cables below will help you connect the
+Cyclades port to other console server devices. </p>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</p>
+<p>
+<table border="0" width="100%">
+  <tbody>
+    <tr>
+      <td width="25%">
+      <center><img alt="Cyclades to Cyclades schematic" src="../cables/xover-cyclades.jpg" align="top"><br>
+      <br>Cyclades p/n <b>CAB0046</b><br>
+      </center>
+      </td>
+      <td width="25%">
+      <center><img alt="Cyclades to Cisco Console schematic" src="../cables/link-cyclades-ciscoc.jpg" align="top"><br>
+      <br>Cyclades p/n&nbsp;<b>ADB0039</b><br>
+      </center>
+      </td>
+      <td width="25%">
+      <center><br>
+      <img style="width: 109px; height: 163px;" alt="Cyclades to Lantronix, Cisco Patch Panel" src="../cables/link-cyclades-ciscop.jpg"><br>
+      <br>
+      <br>
+      </center>
+      </td>
+      <td width="25%">
+      <center><img style="width: 110px; height: 163px;" alt="Cyclades to Cisco CSS11500" src="../cables/link-cyclades-cisco-css11500.jpg" align="top"><br>
+      <br>
+      </center>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</p>
+
+<p>
+<table border="0" width="100%">
+  <tbody>
+    <tr>
+      <td width="25%">
+      <center><img style="width: 110px; height: 162px;" alt="Cyclades to Digi CM schematic" src="../cables/link-cyclades-digi-cm.jpg"><br>
+      <br>
+      </center>
+      </td>
+      <td width="25%">
+      <div style="text-align: center;"><img style="width: 115px; height: 163px;" alt="Cyclades to Opengear CM schematic" src="../cables/link-cyclades-opengearcm.jpg"></div>
+      </td>
+      <td width="25%">
+      <div style="text-align: center;"><img style="width: 110px; height: 162px;" alt="Cyclades to Micro Annex schematic" src="../cables/link-cyclades-uannex.jpg"></div>
+      </td>
+      <td width="25%">
+      <div style="text-align: center;"><img style="width: 113px; height: 171px;" alt="Cyclades to Xyplex, iTouch, MRV schematic" src="../cables/link-cyclades-xyplex.jpg" align="top"></div>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</p>
+
+<p>
+<table border="0" width="100%">
+  <tbody>
+    <tr>
+      <td width="25%">
+      <center><img style="width: 113px; height: 171px;" alt="Cyclades to ServerTech CDU" src="../cables/link-cyclades-servertech-cdu.jpg" align="top"><br>
+      <br>
+      </center>
+      </td>
+      <td width="25%">
+      <center><img style="width: 110px; height: 164px;" alt="Cyclades to Computone RAS" src="../cables/link-cyclades-computone-ras.jpg" align="top"></center>
+      </td>
+      <td width="25%">
+      <center><img style="width: 110px; height: 159px;" alt="Cyclades to EIA-560 schematic" src="../cables/link-cyclades-eia-560.jpg"></center>
+      </td>
+      <td width="25%">
+      <center><img style="width: 109px; height: 159px;" alt="Cyclades to EIA-561 schematic" src="../cables/link-cyclades-eia-561.jpg"><br>
+      </center>
+      </td>
+    </tr>  
+  </tbody>
+</table>
+</p>
+
+<hr noshade="noshade" width="60%">
+<p>
+<table border="0" width="100%">
+  <tbody>
+    <tr>
+      <td valign="top">
+      <p><b><a name="cyclades-usr"></a>U.S. Robotics</b> (USR, 
+      now 3-Com) <b>digital modem chassis</b> have a different 
+      pinouts than Cyclades on the console ports on their NICs
+      and NACs.</p>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</p>
+
+<p>You can also make a single cable, with RJ-45 male
+connectors on each end. Make sure that you label both ends of the
+cable, since the wiring is not symmetrical (it makes a difference which
+end plugs into the Cyclades port!)&nbsp; </p>
+
+<center>
+<table align="center" border="0" width="75%">
+  <tbody>
+    <tr>
+      <td width="25%">
+      <p></p>
+      <center><img style="width: 105px; height: 165px;" alt="Cyclades to 
+      USR schematic" src="../cables/link-usr-cyclades.jpg" align="top"><br>
+      <br>
+      </center>
+      </td>
+      <td width="25%">
+      <p></p>
+      <center><img src="../porj45m.gif" align="middle" height="83" width="110"></center>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</center>
+
+<p>There are more cables listed on the <a href="cyclades-hosts.html">Cyclades 
+Host-to-Adapters Page</a>.</p>
+
+<hr noshade="noshade" width="60%">
+<p>
+<table border="0" width="100%">
+  <tbody>
+    <tr>
+      <td valign="top">
+            <p><b><a name="cyclades-sun-t3"></a>Sun
+T3 ('Dilbert') Storage Shelf Hardware</b> </p>
+
+      <p>The Sun Netra T-3 disk arrays use an <b>RJ-13</b>
+connector for it's RS-232 console, and you only get data and ground for
+your connection (no flow control or handshaking).</p>
+
+      <p>
+      <table border="0" width="100%">
+        <tbody>
+          <tr>
+            <td width="25%">
+            <p></p>
+            <center><img src="../porj13m.jpg" align="middle"></center>
+            </td>
+            <td width="25%">
+            <p></p>
+            <center><img style="width: 100px; height: 135px;" alt="Cyclades to Sun T3 schematic" src="../cables/link-sunt3-cyclades.jpg" align="top"></center>
+            </td>
+            <td width="25%">
+            <center><img style="width: 110px; height: 83px;" alt="Male RJ45 pinouts" src="../porj45m.gif" align="middle"></center>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      </p>
+      
+      <p>There are more cables listed on the <a href="cyclades-hosts.html">Cyclades Host-to-Adapters Page</a>.
+      </p>
+      <hr noshade="noshade" width="60%"> </td>
+    </tr>
+  </tbody>
+</table>
+</p>
+
+<p>
+<table border="0" width="100%">
+  <tbody>
+    <tr>
+      <td valign="top">
+      <p><b><a name="cyclades-dec"></a>Digital
+Equipment Corp.</b> (DEC, then Compaq, then H.P.) equipment often
+used an RJ-13 with an offset locking tab, referred to as a Modified
+Modular jack (<b>MMJ</b>). This included their VT-series
+terminals, VAX equipment, and even newer Alpha series equipment. </p>
+
+      <p>
+      <table border="0" width="100%">
+        <tbody>
+          <tr>
+            <td width="25%">
+            <p></p>
+            <center><img src="../pommjm.gif" align="middle" height="83" width="102"></center>
+            </td>
+            <td width="25%">
+            <p></p>
+            <center><img style="width: 97px; height: 139px;" alt="Cyclades to DEC MMJ" src="../cables/link-decmmj-cyclades.jpg" align="top"><br>
+            <br>
+            </center>
+            </td>
+            <td width="25%">
+            <p></p>
+            <center><img src="../porj45m.gif" align="middle" height="83" width="110"></center>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      </p>
+      <p>There are other cables listed on the <a href="cyclades-hosts.html">Cyclades Host-to-Adapters Page</a>.
+      </p>
+      <hr noshade="noshade" width="60%"> </td>
+    </tr>
+  </tbody>
+</table>
+</p>
+
+<table border="0" width="100%">
+  <tbody>
+    <tr>
+      <td valign="top">      
+      <p><b><a name="cyclades-kentrox"></a>ADC Kentrox</b> Some 
+      ADC Kentrox equipment has a different RJ45 wiring schema on the 
+      console ports on their equipment. Make sure that you label both 
+      ends of the cable, since the wiring is not symmetrical (it makes 
+      a difference which end plugs into the Cyclades port!)&nbsp;</p>
+      <center>
+      <table align="center" border="0" width="75%">
+        <tbody>
+          <tr>
+            <td width="25%">
+            <p></p>
+            <center><img style="width: 105px; height: 165px;" alt="Cyclades to ADC Kentrox schematic" src="../cables/link-kentrox-cyclades.jpg" align="top"><br>
+            <br>
+            </center>
+            </td>
+            <td width="25%">
+            <p></p>
+            <center><img src="../porj45m.gif" align="middle" height="83" width="110"></center>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      </center>
+      </td>
+    </tr>  
+  </tbody>
+</table>
+
+<p></p>
+
+<p>There are more cables listed on the <a href="cyclades-hosts.html">Cyclades Host-to-Adapters Page</a>.<b>
+</b></p>
+
+<p>
+<table border="0" width="100%">
+  <tbody>
+    <tr>
+      <td>
+      <p>
+      <table border="0" cellpadding="3" cellspacing="0" width="100%">
+        <tbody>
+          <tr>
+            <td bgcolor="#cccccc" width="70%">
+            <p><b><a name="de9"></a>Devices with DE-9 console ports</b></p>
+            </td>
+            <td bgcolor="#cccccc" width="30%">
+            <p align="right"><b><a href="#top">to Table of Contents</a></b> </p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      </p>
+
+      <p>Cyclades (now Avocent) makes three DE-9 adapters
+(they call them 'connectors') and one cable, although only two of the
+adapters come with each new ACS unit.</p>
+
+      <ul>
+        <li>(1) ADB0036 - female RJ45 to female DE-9, grey
+hood (I call this <a href="#rj45schem">YFDCE92</a>)</li>
+        <li>(1) ADB0200 - female RJ45 to female DE-9, black
+hood (I call this <a href="#rj45schem">YFDTE92</a>)</li>
+      </ul>
+
+      <p>The grey ADB0036 plugs into a 'normal' 9-pin PC
+serial port, allowing the Cyclades to exchange data with the PC.</p>
+
+      <p style="text-align: center;"><img style="width: 277px; height: 50px;" alt="Cyclades to Device" src="../cables/link-cs-to-dev.jpg"></p>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</p>
+
+<p>In addition to these first two adapters, the other DE9
+offerings from Cyclades have been;</p>
+<ul>
+  <li>(1) ADB0037 - female RJ45 to&nbsp;male DE-9, grey
+hood (I call this <a href="cycladescons.html#rj45schem">YMDCE92</a>)</li>
+  <li>(1) CAB0036 -&nbsp;male RJ45 to female DE-9,
+silver hood, 3-foot cable (<a href="cycladescons.html#rj45schem">YFDCE92</a>)</li>
+</ul>
+
+<p>I use the CAB0036 to connect my laptop to new ACS units
+on my bench, for the pre-configuration process.</p>
+
+<p>Rather than list all of the connection possibilities on
+this page, I have created my <a href="cyclades-hosts.html">Cyclades
+Host-to-Adapters Page</a>, which lists which adapter (or cable)
+you will need to connect any device on the list to a Cyclades/Avocent
+TS or ACS port. </p>
+
+<p>Note: Some Cisco 1900-series switches use a DE-9M DTE console
+connection, instead of the Cisco-wired RJ-45 connector. Some of these
+devices with DE-9M ports do not want to see the
+DCD signal on the connection, while other versions of the 1900 will <b>require</b>
+this signal. (If the Cisco 1900 you have attached a DE-9 adapter to
+is spewing AT modem commands out the port, you've got the wrong
+adapter. If you picked a YFDCE92, then use the YFDCE91.)&nbsp;</p>
+
+<p>The <b>YFD*E91</b>
+series adapters do <span style="font-weight: bold;">not</span>
+have the DCD connection tied to DSR, while the <b>YFD*E92</b>
+series <span style="font-weight: bold;">do</span>
+have the tie connecting DSR to DCD on the DE-9. </p>
+
+<hr noshade="noshade" width="60%">
+<table border="0" width="100%">
+  <tbody>
+    <tr>
+      <td>
+      <p>
+      <table border="0" cellpadding="3" cellspacing="0" width="100%">
+        <tbody>
+          <tr>
+            <td bgcolor="#cccccc" width="70%">
+            <p><b><a name="db25"></a>Devices with DB-25 console ports</b> </p>
+            </td>
+            <td bgcolor="#cccccc" width="30%">
+            <p align="right"><b><a href="#top">to Table of Contents</a></b> </p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      </p>
+
+<p>Cyclades provides a DB-25F cable (CAB0017), a DB-25M adapter (ADB0025)
+and a DB-25F Loopback adapter with all new ACS units. While you can use
+the ADB0025 adapter with the DB-25F loopback adapter, this is a bulky
+and heavy combination. If you have a spare female RJ45 connector, you
+can make a small, lightweight loopback adapter by making three
+connections (pin 1 to pin 5, pin 2 to pin 8, and pin 3 to pin 6).<br>
+
+      <p style="text-align: center;"><img style="width: 277px; height: 50px;" 
+      alt="Cyclades to Device wiring" src="../cables/link-cs-to-dev.jpg"></p>
+
+<p>For many years, Sun used the female DB25 connector for their TTY A and
+B ports. If you have older Sun gear, the CAB0025 (cable) or ADB0025
+(adapter) are what you will need to conenct those TTY ports to a
+Cyclades ACS or TS console server port.</p>
+
+      <p>Rather than list all of the connection possibilities on
+this page, I have created my <a href="cyclades-hosts.html">Cyclades
+Host-to-Adapters Page</a>, which lists which adapter (or cable)
+you will need to connect any device on the list to a Cyclades/Avocent
+TS or ACS port.</p>
+      <hr noshade="noshade" width="60%"> </td>
+    </tr>
+  </tbody>
+</table>
+
+<p style="text-align: center;"><b>For basic RS-232 troubleshooting
+info, view my <a href="../msock.html">Minor Scroll of Console Knowledge</a></b>
+</p>
+
+<hr noshade="noshade" width="60%">
+<p>
+<table border="0" width="100%">
+  <tbody>
+    <tr>
+      <td>
+      <p>
+      <table border="0" cellpadding="3" cellspacing="0" width="100%">
+        <tbody>
+          <tr>
+            <td bgcolor="#cccccc" width="70%">
+            <p><b><a name="crj45"></a>Cisco devices with RJ-45(f) console ports</b> </p>
+            </td>
+            <td bgcolor="#cccccc" width="30%">
+            <p align="right"><b><a href="#top">to Table of Contents</a></b> </p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      </p>
+
+      <p align="center"><img style="width: 277px; height: 52px;" alt="Cyclades to Sun Netra cabling" src="../cables/link-cyclades-netra.jpg">
+      </p>
+      
+Many vendors have adopted the <a href="../Cisco/ciscocons.html#rj45">wiring scheme used by Cisco Systems</a>,
+including Sun (Nertra and SunFire product lines, among others), Juniper
+Networks, and ADC CMTS, Enterasys Dragons, Nokia VPN Gateways, Server
+Technology PC. Logical Solutions console servers also use this wiring
+scheme, but they can set their ports to either DTE or DCE modes. (In
+DTE mode, the Logical Solutions devices look like a Cisco console
+port.) <br>
+<br>
+When connecting a Cycldes terminal server to Cisco-wiring-scheme
+devices, the
+best method is to use a straight-through 8-wire cable, such as a CAT-5
+Ethernet cable between the Cyclades console server port and the female
+end of the ADB0039 "Cyclades to Cisco/Sun" in-line RJ45 adapter. The
+male end of the ADB0039 adapter then plugs into the Cisco-scheme port.
+(Yes, an 8-wire CAT-3 cable would work fine, if you can
+still find them.)<br>
+<br>
+<div style="margin-left: 40px;"><span style="font-style: italic;">Lantronix
+SCS console servers use the null-modem opposite wiring of the Cisco
+port. You would need to put a USOC-rolled cable between the Cyclades
+ADB0039 adapter and the Lantronics ports.<br>
+<br>
+The connection will not work if you put the ADB0039 adapter on the
+Cyclades end of the cable. The adapter needs to go on the Cisco-device
+end of the cable.<br>
+</span></div>
+
+<p>Rather than list all of the possibilities here, I have created a 
+<a href="cyclades-hosts.html">Cyclades Host-to-Adapters Page</a>, which 
+lists the various combinations of devices which use the Cisco RJ45, and 
+other DB25 and DE9 connector types. The list also tells you
+which adapter (or cable) you will need to connect each device to a
+Cyclades console server port.</p>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</p>
+
+<p>
+<table border="0" width="100%">
+  <tbody>
+    <tr>
+      <td>
+      <p>
+      <table border="0" cellpadding="3" cellspacing="0" width="100%">
+        <tbody>
+          <tr>
+            <td bgcolor="#cccccc" width="70%">
+            <p><b><a name="cpc"></a>Attaching devices to a PC for configuration</b> </p>
+            </td>
+            <td bgcolor="#cccccc" width="30%">
+            <p align="right"><b><a href="#top">to Table of Contents</a></b> </p>
+            </td>
+          </tr>
+        </tbody>      
+      </table>
+      </p>
+
+      <p align="center"><img style="width: 264px; height: 69px;" alt="Connecting Cyclades adapters to a Laptop" src="../cables/link-adb0200-adb0036.jpg"><br>
+      </p>
+
+      <p>
+      <table border="0" width="100%">
+        <tbody>
+          <tr>
+            <td>
+            <p>When you are deploying console servers, you may
+still want to have a way to wheel a terminal or a laptop up to a
+machine to check configurations (basically, the practical (or paranoid)
+among us want to have a safety net, in case the console services fail).
+In this case, using <a href="#rj45schem">modular
+adapters</a> actually simplifies our job!</p>
+
+            <p>By connecting all of your remote
+consoles to console server ports using Ethernet cables, all you need to
+do to use your laptop for easy configuration is to connect an <span style="font-weight: bold;">YFDCE91</span> (ADB0200)
+adapter to your laptop, and set up a Terminal Emulator package to talk
+to the serial port of the laptop. (You can use the <a href="cyclades-hosts.html">Cyclades
+Host-to-Adapters Page</a>
+to determine which adapter (or cable)
+you will need to connect any device on the list to a Cyclades/Avocent
+TS or ACS port, if you don't already have the correct adapter or cable
+attached.) Use an Ethernet cable to connect the adapter on the laptop
+to the adapter on the device that you want to configure. </p>
+
+            <blockquote>
+              <p><font color="#af0000">If you want
+to set up a "crash cart", I'd also suggest that you set the serial port
+speed on all of your consoles to 9600 bps, 8-N-1 (since is the most
+common setting). Having a common speed removes one more variable to
+have to remember during a crisis.</font></p>
+
+              <p><font color="#af0000">If you have any </font>
+              <b><font color="#af0000">Sun</font></b>
+              <font color="#af0000"> workstations connected to your 
+              console services, you should test to make sure that 
+              your terminal emulator software doesn't send a serial</font>
+              <b><font color="#af0000">BREAK</font></b>
+              <font color="#af0000"> when you start/stop it, since the BREAK
+              signal will likely send your Sun host to the </font><b>
+              <font color="#af0000">OK</font></b><font color="#af0000"> prompt.
+              (This has also been reported on some SGI and NeXT hosts.)</font></p>
+            </blockquote>
+
+            <p>When you have successfully configured your device(s) with the 
+            laptop, all you need to do is disconnect the cable coming from the 
+            adapter on your PC, and reconnect the cable coming from the console 
+            server to restore the connection to the console server. </p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      </p>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</p>
+
+<p>
+<table border="0" width="100%">
+  <tbody>
+    <tr>
+      <td>
+      <p>
+      <table border="0" cellpadding="3" cellspacing="0" width="100%">
+        <tbody>
+          <tr>
+            <td bgcolor="#cccccc" width="70%">
+            <p><b><a name="modem"></a>Connecting modems to Cyclades Products</b></p>
+            </td>
+            <td bgcolor="#cccccc" width="30%">
+            <p align="right"><b><a href="#top">to Table of Contents</a></b></p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      </p>
+
+      <p>You can connect a "stand-alone" modem to almost any device.
+      (Your modem configuration may be affected by the signals available 
+      on the Cyclades device port, i.e. the state of the flow control 
+      and hardware handshaking signals.) The ACS series units can also 
+      support using PCMCIA modem cards. Attach the 
+      <a href="#rj45schem">YMMOD</a> adapter to the female DB-25 connector 
+      on most modems, and use an appropriate length of ethernet cable 
+      (and another adapter on the host-side, as needed), as indicated in 
+      the illustrations below.</p>
+      <div style="text-align: center;"><img style="width: 278px; height: 53px;" 
+      alt="console server to modem" src="../cables/cs-modem.jpg"></div>
+
+      <blockquote>
+        <p><font color="#af0000">This section is, unfortunately, 
+        a bit vague, due to a few problems related to modem 
+        connections;</font></p>
+        <ol>
+          <li><font color="#af0000">The slim variety of connectors used 
+          on console ports on Cyclades gear (DE9, DB25)</font>
+            <ol>
+              <li type="1"><font color="#af0000">Some console server ports 
+              may not care if DSR is toggled, but that's how the modem will 
+              signal whether a call is on the line, in the configurations 
+              shown below.</font></li>
+            </ol>
+          </li>
+          <li><font color="#af0000">The settings for the various devices, to 
+          talk to the modem</font>
+            <ol>
+              <li type="1"><font color="#af0000">Some consoles may need to be 
+              configured to understand that there is a modem on the console</font></li>
+              <li><font color="#af0000">You should probably put an IDLE timeout 
+              on these console (or aux) ports, to hang-up after a period of inactivity, 
+              since these are your consoles!</font></li>
+              <li><font color="#af0000">While you *may* be able to configure some 
+              ports to allow SLIP or PPP, you probably don't want that in most 
+              instances. You may need to invoke certain commands to prevent that 
+              possibility on some devices.</font></li>
+            </ol>
+          </li>
+          <li><font color="#af0000">The modem settings required to make whichever 
+          modem you choose work.</font>
+            <ol>
+              <li type="1"><font color="#af0000">I like the USR/3-Com Courier modems 
+              if you are connecting to these ports so you can dial into them. 
+              (Personally, I'd avoid the USR Sportster in this case! They are OK for 
+              outbound dialing, but unreliable as in inbound modem, in my opinion. 
+              Feel free to ask me why in email.)</font> </li>
+              <li><font color="#af0000">You may need to modify the settings so that 
+              DCD reflects the state of the phone connection, since the MMOD connector 
+              ties the DSR pin of the adapter to the DCD signal of the modem.</font></li>
+            </ol>
+          </li>
+        </ol>
+        
+        <p><font color="#af0000">As a result, configuration, for the most part, is 
+        left as an exercise for the reader (or it can be a topic for a discussion on 
+        consulting rates ;-).</font></p>
+      </blockquote>
+
+<p>If you use the Cyclades PCMCIA modem, the configuration is pretty
+simple, versus setting up an external modem. This is proably the best
+way to connect a modem to the Cyclades units.<br>
+<br>
+      </td>
+    </tr>  
+  </tbody>
+</table>
+</p>
+
+<p>
+<table border="0" width="100%">
+  <tbody>
+    <tr>
+      <td>
+      <p>
+      <table border="0" cellpadding="3" cellspacing="0" width="100%">
+        <tbody>
+          <tr>
+            <td bgcolor="#cccccc" width="70%">
+            <p><b><a name="configs"></a>Configuration Suggestions for Cyclades Console Servers</b> </p>
+            </td>
+            <td bgcolor="#cccccc" width="30%">
+            <p align="right"><b><a href="#top">to Table of Contents</a></b> </p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      </p>
+
+      <p>Tips for configuring the serial ports on terminal servers for remote access to attached serial devices.</p>
+
+      <ul>
+        <li>Choose which line(s) will be used for connecting devices. </li>
+        <li>Don't run a login session on the port. (it'll only chat with 
+        the attached device) </li>
+        <li>Don't set the port for local login. (this will cause the port 
+        to issue a login when it sees the connection. It will time out, 
+        and disconnect you. Conserver will re-initialize the port, but 
+        this will fill your logs...)</li>
+        <li>Set the port to allow Reverse Telnet. </li>
+        <li>Set the port speed, data bits, parity, and stop-bits (most 
+        folks use 9600-8-N-1)
+          <ul>
+            <li>(there are arguments for setting the port speeds higher.)</li>
+          </ul>
+        </li>
+        <li>Decide if you want/need software or hardware flow control. </li>
+      </ul>
+
+      <p>You can use the example below to get started.</p>
+
+      <blockquote>
+        <pre><font color="#006600">
+        all.protocol socket_server
+        all.socket_port 7001+
+        all.break_sequence ~break
+        all.issue \r\n\
+        Welcome to terminal server %h port S%p \n\
+        \r\n
+        all.prompt %h login:
+        all.term vt100
+        all.speed 9600
+        all.datasize 8
+        all.stopbits 1
+        all.parity none
+        all.lf_suppress 1</font></pre>
+      </blockquote>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</p>
+
+<p style="text-align: left;">If you are connecting your network equipment 
+consoles to your console server, remember to consider;</p>
+<ul>
+  <li style="text-align: left;">Setting an idle timeout on the console 
+  exec of the network gear <br>(on the attached devices, not on the 
+  terminal server!)
+    <ul>
+      <li>You probably don't want someone to leave a port in the enabled mode.</li>
+    </ul>
+  </li>
+  <li style="text-align: left;">Consider adding a password to the ports 
+  (just like you do for read-only access via telnet.)</li>
+</ul>
+The variables used in the configs and scripts are as follows;<br>
+<ul>
+  <li>&nbsp;%l: login name</li>
+  <li>&nbsp;%L: stripped login name</li>
+  <li>&nbsp;%p: NAS port number</li>
+  <li>&nbsp;%P: protocol</li>
+  <li>&nbsp;%b: port speed</li>
+  <li>&nbsp;%i: local IP</li>
+  <li>&nbsp;%j: remote IP</li>
+  <li>&nbsp;%1: first byte (MSB) of remote IP</li>
+  <li>&nbsp;%2: second byte of remote IP</li>
+  <li>&nbsp;%3: third byte of remote IP</li>
+  <li>&nbsp;%4: fourth (LSB) byte of remote IP</li>
+  <li>&nbsp;%c: connect-info</li>
+  <li>&nbsp;%m: netmask</li>
+  <li>&nbsp;%t: MTU</li>
+  <li>&nbsp;%r: MRU</li>
+  <li>&nbsp;%I: idle timeout</li>
+  <li>&nbsp;%T: session timeout</li>
+  <li>&nbsp;%h: hostname</li>
+  <li>&nbsp;%%: %</li>
+</ul>
+
+<p>
+<table width="100%">
+  <tbody>
+    <tr>
+      <td>
+      <p>
+      <table border="0" cellpadding="3" cellspacing="0" width="100%">
+        <tbody>
+          <tr>
+
+
+            <td bgcolor="#cccccc" width="70%">
+            
+            <p><b><a name="firmware"></a>Cyclades Firmware Upgrade tips</b> </p>
+            </td>
+            <td bgcolor="#cccccc" width="30%">
+            <p align="right"><b><a href="#top">to Table of Contents</a></b> </p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      </p>
+      
+      <p>I've upgraded many TS and ACS units. This section will attempt
+      to cover what I've learned along the way, and to point out the
+      important details I've discovered (some of which weren't pointed
+      out in <span style="font-weight: bold;">BOLD ALL-CAPS PRINT</span>, 
+      but probably should have been).</p>
+      <ol>
+        <li><span style="font-weight: bold;">Read the Cyclades upgrade 
+        notes when you can find them!</span> Follow the instructions 
+        you find in the notes to the letter, if you have any trouble 
+        making them work. I've found that the micro-Linux they used 
+        doesn't always allow you to make shortcuts that you might 
+        expect to be able to do in a full-blown Linux.</li>
+        <li><span style="font-weight: bold;">Once you know a process is 
+        working, THEN you can experiment with it.</span>
+        The original Cyclades "README" files have not let me down. 
+        But, the older docs have not been updated. The old notes talk 
+        about using FTP to move files around, but you can also use SCP 
+        on newer versions. I discovered this later on in my experience, 
+        so I don't knw how early you can try SCP (for example)...so, 
+        I'll offer you some tricks to help you, but if the tricks are 
+        not working for you, refer to rule #1 above!</li>
+        <li><span style="font-weight: bold;">You can NOT just upgrade 
+        an old machine to the latest code!</span> Depending on which 
+        old version you are running, you may need to upgrade through 
+        <span style="font-weight: bold;">four</span> seperate versions</li>
+      </ol>
+      
+      <p></p>
+      
+      <p></p>
+      
+      <p align="center"></p>
+      <div style="text-align: left;"> </div>
+      <p align="center">
+      <table border="0" width="100%">
+        <tbody>
+          <tr>
+            <td valign="top">
+            <div style="text-align: left;"> <span style="font-weight: bold;">TS Pre-Upgrade Clues:</span>
+Before you try to upgrade, you should check how much RAM you have
+installed. (Some versions of firmware will require that you have
+certain amounts as a minimum...and you will render your console server
+unusable if you try to load one of those newer version is you have too
+little RAM installed!&nbsp;The Cyclades upgrade notes will remind
+you of this, but I'm putting the clues here as well.)</div>
+
+            <p style="text-align: left;">Login as root, and type 
+            "cat /proc/meminfo"&nbsp;(Look at 
+            <span style="font-weight: bold;">MemTotal</span> entry...).</p>
+            <ul>
+              <li>&nbsp;&nbsp;&nbsp; If you have a <b>TS1000</b>, 
+              MemTotal should be 
+              <span style="font-weight: bold;">32 MB</span> or more</li>
+              <li>&nbsp;&nbsp;&nbsp; If you have a<b>TS2000</b>, 
+              MemTotal should be 
+              <span style="font-weight: bold;">64 MB</span> or more</li>
+              <li>&nbsp;&nbsp;&nbsp; (If MemTotal is LESS than listed for
+              the firmware revision you desire, then DO NOT UPGRADE!)</li>
+            </ul>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      </p>
+
+      <p>If you want to add a Message Of The Day, you can edit
+the <span style="font-weight: bold;">/etc/motd</span> file. However, 
+this is NOT normally saved to flash! If you want
+the message to persist across resets and power failures, you will need
+to add this file in <span style="font-weight: bold;">/etc/config_files.txt</span>.
+I usually add it just below the SSH config file information. (It
+doesn't matter where you put it, but it's easier to check if you put it
+in a consistent place on all of your console servers.)</p>
+
+      <p align="center"></p>
+      <div style="text-align: left;"> </div>
+      <p align="center">
+      <table border="0" width="100%">
+        <tbody>
+          <tr>
+            <td valign="top">
+            <div style="text-align: left;">One possible use of the 
+            MOTD is to display a "private system, authorized users only" 
+            message upon login, similar to the example below;<br>
+            <br>
+            <pre>
+=================================================
+=====     ACCESS TO THIS SYSTEM WITHOUT     =====
+=====        PERMISSION IS PROHIBITED       =====
+=====            AND IS MONITORED           =====
+=====                                       =====
+=====     VIOLATORS WILL BE PROSECUTED      =====
+=====  ***********************************  =====
+=====      [ company name here ]            =====
+=====      [ street address optional ]      =====
+=====      [ city is also optional ]        =====
+=====  ***********************************  =====
+=====      [ device name ] [ location ]     =====
+=================================================</pre>
+            <br>
+Even if the banner doesn't convince an intruder to log off, you can
+convince the jury that you were trying to warn the intruder prior to
+them causing any problems.</div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      </p>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</p>
+
+<p>
+<table border="0" width="100%">
+  <tbody>
+    <tr>
+      <td>
+      <p>
+      <table border="0" cellpadding="3" cellspacing="0" width="100%">
+        <tbody>
+          <tr>
+            <td bgcolor="#cccccc" width="70%">
+            <p><b><a name="backup"></a>Best Practice: Backing up your ACS config</b>
+            </p>
+            </td>
+            <td bgcolor="#cccccc" width="30%">
+            <p align="right"><b><a href="#top">to Table of Contents</a></b> </p>
+            </td>
+          </tr>
+        </tbody>
+       </table>
+      </p>
+
+      <p style="margin-left: 40px; font-weight: bold; color: rgb(255, 102, 0);">This 
+      process will NOT work for the TS units.</p>
+      
+      <p>If you should have a hardware failure, and need to send your
+ACS unit in for repair, you may not get that same unit back. The repair
+department may opt to send you a different machine back, or you may
+need to press a new (replacement) unit into service, and you may ned to
+configure this "new" unit with the same accounts and settings as the
+previous unit.</p>
+
+<p>Fortunately, the ACS makes this task easy, because the 
+<span style="font-style: italic; font-weight: bold;">saveconf</span>
+command collects everything you need into a single G-ZIP'd file. You
+should make an effort to move a copy of this file to another server for
+safekeeping. You can do this manually, or using a cron job under the
+root account (if you have a file server which will alays be waiting for
+the transfer.</p>
+
+      <p>The files in this ZIP file include the password and grup info, 
+      home directories, the pslave.conf file, and many configuration 
+      files. (The entire list is controlled by the 
+      <span style="font-weight: bold;">/etc/config-files</span> file, 
+      which is on the list. You can also add files to the list...I 
+      add a Message of the Day (/etc/motd/) to my devices.)</p>
+
+      <p>If you have a pre-shared SSH key from your console server to 
+      your fileserver, you can use SCP to move the file 
+      <span style="font-weight: bold;">/proc/flash/config.tgz</span>
+      to your fileserver. (Your script should give it a name that relates 
+      to the hostname of the console server, as well as the current 
+      date/time, in case you are backing up more than one units config 
+      file. Your script should also be entered into the 
+      <span style="font-weight: bold;">/etc/config-files</span> file, 
+      along with your pre-shared key, so that you will have them on the 
+      NEW console server, when you configure it by using a copy of this 
+      ZIP file.)</p>
+      
+      <p>When you move the file back into an ACS, you will need to rename 
+      it during the transfer to be 
+      <span style="font-weight: bold;">/proc/flash/config.tgz</span>, so 
+      the unit will recognize it when you boot.</p>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</p>
+
+<p>
+<hr align=center width="80%">
+</p>
+
+<a name="credits"></a>
+<p><center><table BORDER=5 bgcolor="ffcc99" width="75%" padding=5>
+   <tr>
+      <td>
+         <p><font color="#663300"><b>NOTICE:</b> Most of the pages, 
+         articles, and tutorials on this website are
+         copyrighted works. You may make 'deep links' to various
+         pages. (If you let me know which page(s) you are linking to,
+         I'll let you know if I move the page(s) during updates.)
+         Please send me email if you wish to republish any material,
+         or use it on your own website.</font></p>
+      </td></tr>
+</table></center></p>
+
+<p><center>Copyright 1996-2014,
+<a href="http://www.esperanto.org/person/HARRIS_Dacxjo/">David K. Z.
+Harris, N6UOW</A>&nbsp;&nbsp;<a href="http://www.linkedin.com/in/consoleteam" >
+<img src="/consoles/btn_linkedin_120x30.gif" width="120" height="30" border="0" 
+alt="View David K. Z. Harris's profile on LinkedIn"></a><br>
+Questions? Comments? Additions? Email <b>consoles</b> at <b>conserver.com</b>.<br>
+
+<font color="#cc0000">(Don't harvest my address, I don't want SPAM!)</font><br>
+
+<a href="../iloj.html">How does he do it</A>? And 
+<a href="../about.html">Why</A>?</center><br>
+
+If you liked my pages, please support my hacking, with a gift certificate from 
+<a href="http://www.adafruit.com/category/14">Adafruit Industries</a>, using the
+email address above.</p>
+
+
+</body>
+</html>

@@ -1,0 +1,400 @@
+<!--This file created 5/20/04 11:48 PM by Claris Home Page version 2.0-->
+<HTML>
+<HEAD>
+   <TITLE>Zonker's clues about modems and Console Servers</TITLE>
+   <META NAME=GENERATOR CONTENT="Claris Home Page 2.0">
+   <meta name=keyword content="Serial Console, Zonker, modem, AT command,
+   async, USENIX, LISA, Hayes, conserver, APACN, Americable, modem config,
+   Hayes, Intellimodem, ISDN Modem, Courier, USR, QBlazer, Trailblazer,
+   WorldBlazer, Sportster, PEP, V.32, SmartModem, N6UOW">
+</HEAD>
+
+<BODY TEXT="#336600" BGCOLOR="#FFFFFF">
+
+
+<p><center><table border=0 width="98%">
+   <tr>
+      <td width="50%">
+         <P><center><a href="http://www.conserver.com"><img
+         src="../conserver-sm.jpg" alt="Conserver.com logo" width=147
+         height=47 border=0 align=middle></A></center>
+      </td><td width="50%">
+         <p><center>Brought to you by;<br>
+
+         <a href="http://www.conserver.com/">www.conserver.com</a></center>
+      </td>
+   </tr>
+</table></center>
+
+
+<H2><CENTER>Why modems are 'a whole other can of worms'</CENTER></H2>
+
+<H4 align=CENTER>http://www.conserver.com/console/Clues/modems.html<BR>
+
+(updated: 
+Nov 06, 2005, 10:32 pm)</H4>
+
+<P><b>Rule #1: Adding a modem to the mix adds significant complication.</b> 
+Things will get worse before they get better. (But, after some hacking, 
+things <b>can</b> get better!) This document is meant to provide some
+ideas to guide your hacking, so you can get your modems playing nicely 
+with your serial consoles and console servers.</p>
+
+<p><b>Summary for the Advanced Modem Geek</b>; You know modems
+are hard. You need to know that you should set the modem for
+a few critical settings, and you can scan this page for the
+<b><i>CLUE</i></b> summaries, then look for these settings in your
+modem's configuration guide or manual. If it still doesn't work,
+check the modem's firmware version, and make sure that you're
+reading the correct version of that modem configuration guide.</p>
+
+<p>If you're not an A.M.G., or you don't already understand why
+modems are hard, and you want to know more, then read on, and save
+a copy of the manual for all of those modems used in your shop!</p>
+
+<P ALIGN=CENTER><A NAME="top"></A><B>Table of Contents</B><BR>
+
+<a href="#why-hard">Why Modems Are Hard</a><br>
+
+<a href="#ati">AT Command Set Clues</a><br>
+
+<a href="#v.x">Modem Connection Speeds</a><br>
+
+<a href="#modem-in-out">Dial-in versus Dial-out</a><br>
+
+<a href="#speeds">Speed issues</a><br>
+
+<A HREF="#credits">Author Credits</A><p>
+
+<p>(Not covered yet, but planned for later: Security issues and Secure 
+modems, Assorted config examples, including some Modemcap entries to 
+look at as a starting point.)</p>
+
+<P><TABLE BORDER=0 CELLSPACING=0 CELLPADDING=3 WIDTH="100%">
+  <TR>
+    <TD bgcolor="ddffff" WIDTH="70%">
+      <H3><A NAME="why-hard"></A>Why Modems are Hard</H3>
+    </TD><TD bgcolor="ddffff" WIDTH="30%">
+      <H3 ALIGN=RIGHT><A HREF="#top">to Table of Contents</A></H3>
+  </TD></TR>
+</TABLE>
+
+<p><b>Modems are hard, for a few main reasons;</b>
+
+<ul>
+  <li><b>AT compliant</b> is a very small set of the AT commands
+  <li><b>AT compatible</b> is a smaller subset of AT commands
+  <li><b>Vendors can choose what features they want to support</b>
+  <li><b>Vendors can decide what they want <i>&amp;D</i> to mean</b>
+  <li><b>Vendors resell other vendor's products as their own</b>
+  <li><b>There are "Standard" and "Proprietary" modem algorithms</b>
+</ul>
+
+<P><TABLE BORDER=0 CELLSPACING=0 CELLPADDING=3 WIDTH="100%">
+  <TR>
+    <TD bgcolor="ddffff" WIDTH="70%">
+      <H3><A NAME="ati"></A>The AT Command Set</H3>
+    </TD><TD bgcolor="ddffff" WIDTH="30%">
+      <H3 ALIGN=RIGHT><A HREF="#top">to Table of Contents</A></H3>
+  </TD></TR>
+</TABLE>
+
+<p><b>The AT Command Set came from modem maker Hayes.</b> 
+Back in the days of the original <b>SmartModem 300</b> (circa
+1982, per the manual I have), Hayes introduced a method to
+pass data in the data stream to get the &quot;Attention&quot;
+of the modem, so you could send it more commands while the
+modem was still on-line. The <b>AT [command][variable]</b>
+syntax was adopted by many modem makers (after paying a fee
+to Hayes).</p>
+
+<p>The term <b>AT compliant</b> meant that your commands
+matched the set of commands that Hayes recognized. This
+meant the commands <i>and the variables</i> were the same.
+In theory, your modem configuration strings should work across
+all Hayes Compatible modems. <i>In Theory...</i></p>
+
+<p>The term <b>AT compatible</b> meant that the Attention
+method was implemented, but not all of the commands. (Or,
+if the commands were all there, the variables may not invoke
+the same reaction as in a Hayes modem.) If you bought these,
+you were going to need to work on new configuration strings.</p>
+
+<p>In both of these cases, the vendors were not restricted
+from adding <b>more</b> modem commands, or adding extra settings
+for some of the existing commands. And, as you may have guessed,
+the vendors didn't have to coordinate these extra settings
+with each other, in order to provide a uniform interface
+for end-users.</p>
+
+<p><b>Commands are different, between different vendors</b> 
+At first thought, you my think this would be obvious. But modems
+are being made this year, and there is <b>still no standard for
+modem configuration</b>.</p>
+
+<p>There is a classic <i>Good News/Bad News</i> scenario in this. On 
+the <i>Good News</i> side, many vendors have adopted some of the more
+common of the extended &quot;ampersand&quot; (<b>&amp;</b>) commands, such
+as <b>&amp;D</b> for controlling how the modem handles the DSR
+hardware handshaking lead. The <i>Bad News</i> here is that,
+while the vendors use the same command, the <i>variables</i>
+for the command are not always the same. That is, <b>&amp;D0</b>
+for one vendor is invoked as <b>&amp;D3</b> by another vendor.</p>
+
+<p><b>Clue:</b> So, if you had a <b>USR Courier</b> config string,
+it probably wouldn't help you with a <b>Global Village</b> modem.
+In order to make the Global Village modem work properly, you 
+would need to get a USR manual, figure out what each
+command in the USR string was invoking, and then go to your
+Global Village manual, and find out which commands made the
+G.V. modem invoke the same functions, and jot down those
+settings. In some cases, the commands would be different
+(in one modem it is an [amper] command, and in the other 
+modem it is an S-register setting).</p>
+
+<p><b>Some vendors sell the products from another vendor as
+their own.</b> These modes were designed by some other company,
+but then a major modem vendor bought them, and put their own
+label on them. Some cases in point;
+
+<ul>
+  <li><b>Telebit Corp's Q-Blazer</b>
+  <li><b>U.S. Robotics' early Sportster modems</b>
+</ul>
+
+<p>These OEM modems often use a different processor, and were
+certainly coded by programmers at the company who made the original
+modem product. As a result, these OEM products rarely match the
+command arguments of the Vendor (e.g. Telebit or USR), at least
+in their first iterations.</p>
+
+<p>The result is, if you have developed configuration strings
+for <i>Vendor X</i>'s modems, you may buy that vendor's latest
+mini-modem, only to find out that your config doesn't work
+as planned...so, you go through the manual, figure out where
+the changes need to be made, and cobble up a new configuration
+string for the mini-modem...but as you buy more, you find out
+that the newer mini-modems don't seem to work right either.
+(This is because <i>Vendor X</i> has been absorbing the 
+mini-modem, and tried to change the settings to better match
+the settings in the rest of their product line...without
+making this change visible to the end-user.)</p>
+
+<ul>
+  <p><i>Another side to this are companies like the 
+  <a href="http://www.blackbox.com/">Black Box Corp.</a>, who
+  resell equipment, cables, adapters and converters from many
+  other vendors, but they put their own label on them. Usually
+  the original equipment maker will also make these versions
+  in a black case. In regards to modems, it means that you
+  would probably need a different config string for each model 
+  of Black Box modem, since each model probably comes from
+  a different manufacturer.</i></p>
+</ul>
+
+<P><TABLE BORDER=0 CELLSPACING=0 CELLPADDING=3 WIDTH="100%">
+  <TR>
+    <TD bgcolor="ddffff" WIDTH="70%">
+      <H3><A NAME="v.x"></A>Modem Connection Speeds</H3>
+    </TD><TD bgcolor="ddffff" WIDTH="30%">
+      <H3 ALIGN=RIGHT><A HREF="#top">to Table of Contents</A></H3>
+  </TD></TR>
+</TABLE>
+
+<p><b>Connection speeds, and protocol compatibility</b> are
+determined by the communications protocols that govern the modem
+connections. There are the standards (V.32bis) and then there
+are proprietary methods that some vendors implement to make
+their modems talk to each other better (such as US Courier's
+V.Anywhere) line).</p>
+
+<p>Common sense would tell you that you can only connect at the 
+highest connection speed <b>common to both modems</b>, but that
+is only the <i>best case</i> that you can hope for. Usually your
+connections will be slower, for the following reasons:</p>
+
+<p>
+<ul>
+  <li><b>Proprietary protocols may be given preference</b>, so
+    that one modem will prefer a proprietary protocol over the
+    &quot;Standard&quot; protocols. This may mean that the modem
+    will try to negotiate the proprietary protocol(s) first,
+    but the other modem may time out while waiting to hear a
+    protocol that it recognizes.
+  <li><b>One modem may be requiring a higher protocol than the
+    other modem can use</b>, because of a register setting or
+    a switch setting. This can cause the modem to hang up
+    on a call because it cannot connect at the <i>required</i>
+    speed.
+  <li><b>Line noise can cause errors during negotiation</b>,
+    which can cause the modems to negotiate at a lower speed
+    than they might be able to use, if the line had no noise.
+    (This can be a problem, even if the noise is brief, but
+    it occurs during the negotiation phase between the modems.)
+  <li><b>Line delays on long-distance/transcontinental calls</b>
+    are caused by one direction of the call using a satellite
+    connection path. While the path may have no noise, the
+    timing delay may cause the modems to miss negotiating at
+    a higher-speed protocol, due to the delay, and the modems
+    will establish a lower-speed connection. (You <i>could</i>
+    try to require the modems to use a higher speed, but if
+    the modems cannot negotiate the high speed with the delay
+    on the line, the modems will hang up and try again.)
+  <li><b>Line noise during a call can also lower your speed</b>.
+    On older modems, this is a one-way change, meaning that the
+    modems detect the line errors, and renegotiate at a slower
+    speed, hoping for better communication. But, once they slow
+    down, they won't try to test higher speeds again later.
+</ul>
+</p>
+
+<P><TABLE BORDER=0 CELLSPACING=0 CELLPADDING=3 WIDTH="100%">
+  <TR>
+    <TD bgcolor="ddffff" WIDTH="70%">
+      <H3><A NAME="dial-in-out"></A>Dial-in, versus Dial-out</H3>
+    </TD><TD bgcolor="ddffff" WIDTH="30%">
+      <H3 ALIGN=RIGHT><A HREF="#top">to Table of Contents</A></H3>
+  </TD></TR>
+</TABLE>
+
+<p>Modems often <i>default</i> to <b>auto-baud</b>, which is a way
+to automatically determine the communications speed of the attached
+computer. This is usually done by looking at the incoming <b>AT</b>
+commands. (If the modem receives garbage, it changes it's speed,
+and waits for garbage or an AT command.)</p>
+
+<p>If a modem is being used for dial-out, you are sending an AT
+command to make the modem dial, so you are setting the port speed
+whenever you talk to the modem.
+
+<p>Many modems are capable of changing the serial port speed to
+match the speed of the modem connection. However, once you get
+faster than 9600, you can have problems like this, because
+some modem speeds do not have a corresponding serial speed.
+(Example; 14.4 is a valid modem connection speed, but not a
+valid serial port speed.)
+
+<ul>
+  <p>(This is a legacy feature from the <i>Old Days</i>, 
+  because this is how the early BBS could could tell what the 
+  connection speed was...so, the BBS would auto-detect the 
+  modem's serial port speed during login. Why did the BBS care? 
+  So it could estimate how long a file transfer might take.)</p>
+</ul>
+
+<p>The common problem with dial-in modems is that the modem is
+set to change it's port speed to match the incoming connection, 
+and either the attached device cannot auto-detect the new speed,
+or the modem connection has changed the port speed to a modem-only
+speed, and the attached device cannot match it. At that point, the
+modem calling in cannot establish communications, they hang up,
+and they redial...at this point, the attached device should detect the
+call has ended, and it should then try to send the init string.
+Sending the AT commands should reset the modem, but the problem
+is likely to re-occur on the following call.</p>
+
+<p><b><i>CLUE:</i> Disable <i>Serial Port Auto-Speed Detection</i></b></p>
+
+<p><b><i>CLUE:</i> Set/Lock both <i>serial port speeds</i> to the highest speed
+  that is common between the modem and the attached device.</b> (Set
+  <i>both</i> the modem <i>and</i> the attached device to this 
+  same speed!)</p>
+
+<p><b><i>CLUE:</i> Disable <i>Port Speed Matches Connection Speed</i></b></p>
+
+<P><TABLE BORDER=0 CELLSPACING=0 CELLPADDING=3 WIDTH="100%">
+  <TR>
+    <TD bgcolor="ddffff" WIDTH="70%">
+      <H3><A NAME="speeds"></A>Serial Port Speed Issues</H3>
+    </TD><TD bgcolor="ddffff" WIDTH="30%">
+      <H3 ALIGN=RIGHT><A HREF="#top">to Table of Contents</A></H3>
+  </TD></TR>
+</TABLE>
+
+<p><b>Do you need compression on your calls?</b> If you expect to
+use any modem-to-modem compression protocols, you need to enable
+the protocols on both modems, and you need to make sure that your serial
+port speeds are at least 2x (and preferably 4x) faster than the
+expected modem connection speeds. This is because the compression
+and decompression of the data both take a bit of time to process,
+and the modems may not try to use the compression if they can't
+get the data fast enough. </p>
+
+<p><b><i>CLUE:</i> Set your serial port speeds to a workable high bitrate.</b>
+(This includes the modem serial port, as well as the attached computer
+or console port.)</p>
+
+<p><b>Is compression a <i>Must Do</i> or a <i>Want To Do</i>?</b>
+There are usually three setting for the in-modem compression
+protocols...and each modem probably has these options;</p>
+
+<ul>
+  <li><b>I Won't</b> means that you can't make me.
+  <li><b>I Will If You Want To</b> means I'll do it if you ask me.
+  <li><b>I Must</b> means 'If you won't, I'll hang up!'.
+</ul>
+
+<p>As a default, most modems default to 'If You Want To', which
+will allow them to use compression, if one of them thinks to ask
+the other to do it. However, only <i>some</i> vendor's implementations
+will ask the other modem to try compression...but if neither modem
+asks, then they will not use compression.</p>
+
+<p>If you have a central modem core that other modems dial into,
+then these modems should be set for "Must" compress, while all
+of the modems that will dial in should be set for "Will" compress.
+This way, the core will always as the modems calling in, giving
+you the best chance at using modem-to-modem compression.</p>
+
+<ul>
+  <p>One Potential Problem: If the core is set to "Must", 
+  and a remote user's modem cannot (or is set to "Won't"),
+  then the core will hang up, and the remote modem will
+  keep dialing in, only to have the core hang up again.
+  If the core "Must", then <b>all</b> remote modems must
+  be set for "Will" or for "Must".</p>
+</ul>
+
+<p>
+<hr align=center width="80%">
+</p>
+
+<P><CENTER><TABLE BORDER=5 bgcolor="ffcc99" width="75%" padding=5>
+   <TR>
+      <TD>
+         <P><FONT COLOR="#663300"><B>NOTICE:</B> Most of the pages, 
+         articles, and tutorials on this website are
+         copyrighted works. You may make 'deep links' to various
+         pages. (If you let me know which page(s) you are linking to,
+         I'll let you know if I move the page(s) during updates.)
+         Please send me email if you wish to republish any material,
+         or use it on your own website.</FONT></P>
+      </TD></TR>
+</TABLE></CENTER></P>
+
+
+<p><center><a href="http://www.nvu.com">
+<img style="border: 0px solid ; width: 80px; height: 15px; float:
+"src="http://www.nvu.com/images/madewithNvu80x15dark.png"
+alt="Made with Nvu"></a></center></p>
+
+<p><center>Copyright 1996-2007,
+<A HREF="http://www.esperanto.org/person/HARRIS_Dacxjo/">David K. Z.
+Harris, N6UOW</A>&nbsp;&nbsp;
+<a href="http://www.linkedin.com/in/consoleteam" >
+<img src="http://www.linkedin.com/img/webpromo/btn_profile_bluetxt_80x15.gif"
+width="80" height="15" border="0" alt="View David K. Z. Harris's profile on
+LinkedIn"></a><br>
+Questions? Comments? Additions? Email <B>consoles</B> at
+<B>conserver.com</B>.<BR>
+
+<FONT COLOR="#cc0000">(Don't harvest my address, I don't want
+SPAM!)</FONT><BR>
+
+<A HREF="../iloj.html">How does he do it</A>? And
+<A HREF="../about.html">Why</A>?</CENTER></P>
+
+
+
+</BODY>
+</HTML>

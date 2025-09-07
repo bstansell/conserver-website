@@ -1,0 +1,431 @@
+<!--This file created 8/29/99 6:53 PM by Claris Home Page version 2.0-->
+<HTML>
+<HEAD>
+   <TITLE>APA Cables and Networks Cisco and Lantronix Adapter Kit</TITLE>
+   <META NAME=GENERATOR CONTENT="Claris Home Page 2.0">
+   <meta keyword="Serial Console, Cisco, async, conserver, RJ-45, rj45 adapter,
+   RS-232, Americable, c2509, c2510, c2511, console, zonker, c3600, NM-32A,
+   NM-16A, c3620, c3640, c3660, terminal server, CMMOD, CMDTE, CFDTE, CMDCE,
+   CMDTE, APACN, Lantronix, Logical Soultions, SCS160, SCS320, Think Logical,
+   svacik, zonker, N6UOW"
+</HEAD>
+
+<BODY TEXT="#336600" BGCOLOR="#FFFFFF">
+
+
+<p><center><table border=0 width="98%">
+   <tr>
+      <td width="50%">
+         <P><center><a href="http://www.conserver.com"><img
+         src="../conserver-sm.jpg" alt="Conserver.com logo" width=147
+         height=47 border=0 align=middle></A></center>
+      </td><td width="50%">
+         <p><center>Brought to you by;<br>
+
+         <a href="http://www.conserver.com/">www.conserver.com</a></center>
+      </td>
+   </tr>
+</table></center>
+
+
+<H2 ALIGN=CENTER><A HREF="http://www.apacn.com/">APA Cables & Networks</A>
+<br>Cisco, Lantronix, Logical Solutions Console Adapter Kit</H2>
+
+<H4 ALIGN=CENTER>this page: www.conserver.com/consoles/Cisco/ciscokit.html<BR>
+(updated: 
+Nov 07, 2005, 04:56 pm)</h4>
+
+<p>This page is not maintained by APA Cables and Networks. It is provided
+for the benefit of systems and network administrators.</p>
+
+<P><TABLE BORDER=1 CELLPADDING=5>
+   <TR>
+      <TD>
+         <P>When connected to a <b>Cisco device RJ-45 Console/Aux port</b>:</P>
+         
+         <UL>
+            <LI>DB-25 <B>DTE </B>connectors have signal asserted (TD
+            output from RJ-45) at DB-25 pin 2.
+            
+            <LI>DE-9 <B>DTE</B> connectors have signal asserted (TD
+            output from RJ-45) at DE-9 pin 3.
+         </UL>
+         
+         <P>A DTE adapter, connected to a Cisco console port with an
+         Ethernet cable <B>appears to be</B> a DTE device.
+      </TD></TR>
+   <TR>
+      <TD>
+         <P>When connected to an <b>APACN Cisco-schema Patch Panel port</b>:</P>
+
+         <UL>
+            <LI>DB-25 <B>DTE </B>connectors have signal asserted (TD
+            output from patch panel) at DB-25 pin 3.
+
+            <LI>DE-9 <B>DTE</B> connectors have signal asserted (TD
+            output from patch panel) at DE-9 pin 2.
+         </UL>
+
+         <P>A DTE adapter, connected to a Patch Panel port with an
+         Ethernet cable <B>appears to be</B> a DCE device.
+      </TD></TR>
+   <TR>
+      <TD>
+         <P>When connected to a <b>Lantronix console server port</b>:</P>
+
+         <UL>
+            <LI>DB-25 <B>DTE </B>connectors have signal asserted (TD
+            output from RJ-45) at DB-25 pin 3.
+
+            <LI>DE-9 <B>DTE</B> connectors have signal asserted (TD
+            output from RJ-45) at DE-9 pin 2.
+         </UL>
+
+         <P>A DTE adapter, connected to a Lantronix console server port 
+         with an Ethernet cable <B>appears to be</B> a DCE device.
+      </TD></TR>
+   <TR>
+      <TD>
+         <P>When conencted to a <b>Logical Solutions SCS</b>, in the default
+            output mode:
+
+         <UL>
+            <LI>DB-25 <B>DTE </B>connectors have signal asserted (TD
+            output from RJ-45) at DB-25 pin 3.
+
+            <LI>DE-9 <B>DTE</B> connectors have signal asserted (TD
+            output from RJ-45) at DE-9 pin 2.
+         </UL>
+
+</TABLE></P>
+
+<p><ul><b>(NOTE: See info about <A HREF="#patch">patch panels</a> below.
+Patch panels are wired the opposite from Cisco RJ-45 consoles, and the
+ports on Cisco 2511-RJ access servers. This was designed so that you can
+use an 8-wire CAT-5 cable to make the connection between the patch panel
+and the Cisco device RJ-45 ports.)
+</b></ul></p>
+
+<p>Refer to the 
+<a href="cisco-hosts.html">Cisco Hosts-to-Adapter page</a> to determine 
+which adapters to use, to connect 
+devices to Cisco RJ-45 console ports (and Hydra cables), or to Cisco-schema 
+patch panels. <b>Lantronix</b> terminal servers use the same wiring format 
+as the Cisco-schema patch panel (the opposite of the Cisco Console port), 
+so they can use the same adapters, using the 'Patch Panel' column as your 
+guide. 
+
+<p>For more information about the adapters and cables, refer to the
+<a href="ciscocons.html#rj45schem">Cisco Console Connection Guide</a>.
+
+<p>In general, the Cisco <b>2509-11</b> series teminal servers will send 
+Serial Break when they are powered off. The <b>NM-16A</b> and <b>NM-32A</b> 
+Async interface modules have fixed this problem. (In two of only three 
+cases I've been asked to investigate, where a site believed that the 
+NM-32A was sending Serial BREAK, we showed that in incorrectly wired 
+adapter was the cause of the trouble, and not the Cisco hardware.) If 
+you are concerned about Serial BREAK at your site, you may want to 
+refer to our 
+<a href="../BREAK-off/breakoff.html">Serial BREAK hardware testing</a> 
+to find out which hardware devices do or do not send Serial BREAK at 
+inappropriate times.
+
+<P>The entire Cisco Kit (part number: <FONT
+COLOR="#CC0000">24490-Cisco-Kit</FONT>) includes one each of
+everything shown here. The individual APACN part numbers for
+each part of the kit are shown in <FONT COLOR="#CC0000">red</FONT>
+below.
+
+<P><TABLE BORDER=0>
+   <TR>
+      <TD>
+         <P><B>Cisco Console Adapters<BR>
+         
+         </B>(One of each adapter. Default case color is
+         <B>black</B>.)</P>
+
+         <p>When connected to a Cisco console, CFDCE connects to DCE gear<br>
+         When connected to a Cisco-format patch panel, CFDCE connects to 
+         <b>DTE</b> gear<br>
+         (Providing connections are made with straight-through (Ethernet) 
+         cables.)
+
+         <p>Signalling below reflects where the Transmit Data (<b>TD</b>, 
+         signal output from the terminal server) is on the DB connector, 
+         when the RJ-45 is connected to a Cisco-wired patch panel.
+         
+         <P><TABLE BORDER=1>
+            <TR>
+               <TD WIDTH=73>
+                  <P ALIGN=CENTER><IMG SRC="db25-blk.gif" WIDTH=64
+                  HEIGHT=67 X-SAS-UseImageWidth X-SAS-UseImageHeight
+                  ALIGN=bottom>
+               </TD><TD>
+                  <UL>
+                     <LI>CFDCE - <FONT COLOR="#CC0000">24490-01
+                     </FONT>- female DB-25, signal on pin 3
+                     
+                     <LI>CFDTE - <FONT COLOR="#CC0000">24490-02
+                     </FONT>- female DB-25, signal on pin 2
+                     
+                     <LI>CMDCE - <FONT COLOR="#CC0000">24490-03
+                     </FONT>- male DB-25, signal on pin 3
+                     
+                     <LI>CMDTE - <FONT COLOR="#CC0000">24490-04
+                     </FONT>- male DB-25, signal on pin 2
+                     
+                     <LI>CMMOD - <FONT COLOR="#CC0000">24490-05
+                     </FONT>- male DB-25, signal on pin2, DSR on pin
+                     8
+                  </UL>
+               </TD></TR>
+            <TR>
+               <TD WIDTH=73>
+                  <P ALIGN=CENTER><IMG SRC="db9-blk.gif" WIDTH=64
+                  HEIGHT=55 X-SAS-UseImageWidth X-SAS-UseImageHeight
+                  ALIGN=bottom>
+               </TD><TD>
+                  <UL>
+                     <LI>CFDCE91 - <FONT COLOR="#CC0000">24490-14
+                     </FONT>- female DE-9, signal on pin 2
+                     
+                     <LI>CFDTE91 - <FONT COLOR="#CC0000">24490-07
+                     </FONT>- female DE-9, signal on pin 3
+                     
+                     <LI>CMDCE91 - <FONT COLOR="#CC0000">24490-24
+                     </FONT>- male DE-9, signal on pin 2
+                     
+                     <LI>CMDTE91 - <FONT COLOR="#CC0000">24490-23
+                     </FONT>- male DE-9, signal on pin 3
+                  </UL>
+               </TD></TR>
+            <TR>
+               <TD WIDTH=73>
+                  <P ALIGN=CENTER><IMG SRC="db9-blk.gif" WIDTH=64
+                  HEIGHT=55 X-SAS-UseImageWidth X-SAS-UseImageHeight
+                  ALIGN=bottom>
+               </TD><TD>
+                  <p>These DE-9 adapters tie DSR (pin 6 on the DE-9)
+                     to DCD (pin 1), which is often needed for Intel
+                     -based PC console control.
+                  <UL>
+                     <LI>CFDCE92 - <FONT COLOR="#CC0000">24490-60
+                     </FONT>- female DE-9, signal on pin 2
+
+                     <LI>CFDTE92 - <FONT COLOR="#CC0000">24490-59
+                     </FONT>- female DE-9, signal on pin 3
+
+                     <LI>CMDCE92 - <FONT COLOR="#CC0000">24490-66
+                     </FONT>- male DE-9, signal on pin 2
+
+                     <LI>CMDTE92 - <FONT COLOR="#CC0000">24490-67
+                     </FONT>- male DE-9, signal on pin 3
+                  </UL>
+               </TD></TR>
+         </TABLE>
+      </TD></TR>
+</TABLE></P>
+
+<P><TABLE BORDER=0>
+   <TR>
+      <TD>
+         <P><B>Cisco Console Cables</B></P>
+         
+         <UL>
+            <LI>Cisco-end RJ-45 has a black boot
+            
+            <LI>non-Cisco-end RJ-45 has an orange boot
+            
+            <LI>The MMJ doesn't get a boot.
+         </UL>
+         
+         <P><B>Cisco Patch Panel to Kentrox Console</B>
+         (RJ45-to-RJ45) - <FONT COLOR="#CC0000">24490-47</FONT></P>
+         
+         <P><B>Cisco Patch Panel to U.S. Robotics</B> (RJ45-to-RJ45)
+         - <FONT COLOR="#CC0000">24490-16</FONT></P>
+         
+         <P><B>Cisco Patch Panel to DEC console</B> (RJ45-to-MMJ) -
+         <FONT COLOR="#CC0000">24490-17</FONT>
+
+         <ul><P>There are other cables available to connect these devices 
+         directly to Cisco console ports, or to 2511-RJ ports, but they
+         are not included in the Cisco Kit. Please contact APACN
+         for more information about the other cables.</p></ul>
+      </TD></TR>
+</TABLE></P>
+
+<P><TABLE BORDER=0>
+   <TR>
+      <TD>
+         <P><B>Ethernet Cable, 10' long </B>(RJ45-to-RJ45, white
+         cable with black boots.) - <FONT
+         COLOR="#CC0000">24490-21</FONT></P>
+         
+         <P><B>USOC 'Rolled' Cable, 10' long </B>(RJ45-to-RJ45, red
+         cable with red boots.) - <FONT
+         COLOR="#CC0000">24490-22</FONT>
+      </TD></TR>
+</TABLE></P>
+
+<P ALIGN=CENTER><B>This is the end of the components included in the
+Cisco Kit.</B></P>
+
+<P>
+<HR>
+</P>
+
+<P ALIGN=CENTER><CENTER><TABLE BORDER=0 CELLSPACING=3 CELLPADDING=4
+WIDTH="100%">
+   <TR>
+      <TD background="#cccccc">
+         <P><B>The information below is provided for information
+         only.</B>
+      </TD></TR>
+</TABLE></CENTER></P>
+
+<P><B>Adapter Shell Color</B></P>
+
+<P>You can purchase the any of the adapter shown above from
+APA Cables &mp; Networks 
+(<A HREF="http://www.apacn.com/">www.apacn.com</A>), by
+asking for the part number (<FONT COLOR="#CC0000">shown in
+red</FONT>), above. Try contacting Steve Vacik (1-800-422-2537) 
+for a price quote or information.  If you want to specify a 
+different case color than the default, us the 
+APACN part number, followed by an optional shell color suffix. The default
+color for Xyplex-wired adapters is black, unless you specify
+otherwise.</P>
+
+<P>Colors: <B>BK</B> = black, <B>GN</B> = green, <B>RD</B> = red, 
+<B>YL</B> = yellow, <B>BL</B> = blue, <B>GY</B> = grey</P>
+
+<P>So, the part number <B>CFDTE91-GN</B> would be the DE-9 female DTE 
+adapter, with a green plastic shell, wired for Cisco/Lantronix.</P>
+
+<A name="patch"></a>
+<P><TABLE BORDER=0 CELLSPACING=0 CELLPADDING=3 WIDTH="100%">
+   <TR>
+      <TD bgcolor="cccccc" WIDTH="100%">
+         <P><B><A NAME="patch"></A>Patch Panels for Cisco Async Servers</B> 
+          (not included with the Cisco Kit)
+      </TD></TR>
+</TABLE>The Cisco 2509, 2510, and 2511 units includes Async ports,
+delivered using 68-pin (SCSI-2) connectors. (The 2511-RJ has 16 RJ-45
+RS-232 ports, instead of the 68-pin connectors.) The Cisco 3600 series
+also has an Async Interface module (NM-16A for 16 ports, or NM-32A for 
+32 ports) which also uses the 68-pin connectors. Each 68-pin connector
+serves 8 RS-232 serial ports. You can connect these 68-pin connectors
+to RJ-45 patch panels with the patch panel options shown below.</FONT></P>
+
+<P><UL><font color="#cc0000"> 
+The patch panels from APA Cables and Networks are wired the null-modem opposite 
+from the Cisco console ports. More info is available from the
+<A HREF="ciscocons.html#patch">patch panel</A> section of the
+<A HREF="ciscocons.html">Cisco Console Guide</a>. You can also refer
+to the <A HREF="cisco-hosts.html">hosts-to-adapters</a> page to 
+determine which adapters/cables you need to connect various devices
+to either Cisco Console Ports, or the APACN Cisco-wired Patch Panels.
+</font></ul></p>
+
+<P><B>Option #1</B> is a single rack-unit-high patch panel, with 16
+ports, and two cables with the 68-pin connectors. Be aware that these
+are slightly larger than 1-Rack Unit tall, which will affect rack
+mount spacing.</P>
+
+<UL>
+   <LI>1) One 24-port Patch Panel for each 2509-11 device (APACN 
+   part number <font color="#CC0000"><B>19309-05</B></font>). You
+   can use two of these patch panels for each NM-32A server.</FONT>
+</UL>
+
+<P><B>Option #2</B> is a combination of a 48- or 96-port patch panel (with
+50-pin AMP (telco) connectors), and an appropriate number of
+harnesses with 68-pin (SCSI-2 connectors) on one end, and the 50-pin
+AMP connectors on the other end. (This is a better solution for
+high-density applications where you want a lot of ports close to each
+other.)</FONT></P>
+
+<UL>
+   <LI>1) 8-port 68-pin SCSI-2 connector to 50-pin AMP (telco) connector
+   (APACN part number <font color="#CC0000"><B>19309-02</B></font>, 
+   $90 USD each), and <B>you need one of these cable assemblies for 
+    every 8-port async connector</B>.</FONT>
+   
+   <LI>2) 48-port patch panel (APACN part number 
+   <font color="#CC0000"><B>19309-03</B></font>, $475.00 USD each)</FONT>
+
+   <li>3) 96-port patch panel (APACN part number 
+    <font color="#CC0000"><B>19309-40</B></font>, $950.00 USD each)
+</UL>
+
+<P><B>Useful Extras: </B>The threaded nuts that retain the serial cable
+harnesses on the Cisco 2509-2511 communications servers, and the
+async modules for the 3600 series devices, is a wider diameter than
+the screws on the cable harnesses themselves (so the screws cannot be
+tightened). You can get the proper threaded standoffs from APACN
+(<A HREF="http://www.apacn.com">www.apacn.com</A>),
+by asking for part number <font color="#CC0000"><B>25057</B></font> 
+("AMP female screwlock kit", only two pieces/bag), for about $2.50 (USD) per
+bag(!). You will need one bag per connector, so you will need two
+bags per 2509-11, and 4 bags for each NM-32A module.</FONT></P>
+
+<p>You can reach APA Cables and Networks at 1-800-422-2537.</p>
+
+<P>
+<HR WIDTH="60%" NOSHADE>
+</P>
+
+<P><CENTER><TABLE BORDER=0 CELLSPACING=0 CELLPADDING=3 WIDTH="85%"
+bggcolor="666666">
+   <TR>
+      <TD>
+         <P><CENTER><B>For basic RS-232 troubleshooting info, view my
+         <A HREF="../msock.html">Minor Scroll of Console
+         Knowledge</A></B></CENTER>
+      </TD></TR>
+</TABLE></CENTER></P>
+
+<p>
+<hr align=center width="80%">
+</p>
+
+<P><CENTER><TABLE BORDER=5 bgcolor="ffcc99" width="75%" padding=5>
+   <TR>
+      <TD>
+         <P><FONT COLOR="#663300"><B>NOTICE:</B> Most of the pages, 
+         articles, and tutorials on this website are
+         copyrighted works. You may make 'deep links' to various
+         pages. (If you let me know which page(s) you are linking to,
+         I'll let you know if I move the page(s) during updates.)
+         Please send me email if you wish to republish any material,
+         or use it on your own website.</FONT></P>
+      </TD></TR>
+</TABLE></CENTER></P>
+
+
+<p><center><a href="http://www.nvu.com">
+<img style="border: 0px solid ; width: 80px; height: 15px; float:
+"src="http://www.nvu.com/images/madewithNvu80x15dark.png"
+alt="Made with Nvu"></a></center></p>
+
+<p><center>Copyright 1996-2007,
+<A HREF="http://www.esperanto.org/person/HARRIS_Dacxjo/">David K. Z.
+Harris, N6UOW</A>&nbsp;&nbsp;
+<a href="http://www.linkedin.com/in/consoleteam" >
+<img src="http://www.linkedin.com/img/webpromo/btn_profile_bluetxt_80x15.gif"
+width="80" height="15" border="0" alt="View David K. Z. Harris's profile on
+LinkedIn"></a><br>
+Questions? Comments? Additions? Email <B>consoles</B> at
+<B>conserver.com</B>.<BR>
+
+<FONT COLOR="#cc0000">(Don't harvest my address, I don't want
+SPAM!)</FONT><BR>
+
+<A HREF="../iloj.html">How does he do it</A>? And
+<A HREF="../about.html">Why</A>?</CENTER></P>
+
+
+
+</BODY>
+</HTML>

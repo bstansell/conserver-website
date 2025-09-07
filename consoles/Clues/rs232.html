@@ -1,0 +1,632 @@
+<!--This file created 3/14/05 11:18 PM by Claris Home Page version 2.0-->
+<HTML>
+<HEAD>
+   <TITLE>Zonker's RS-232 Clues Page</TITLE>
+   <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1">
+   <META NAME=GENERATOR CONTENT="Claris Home Page 2.0">
+   <meta name=keyword content="Protocol Analyzer, RS232, RS-232, EIA-232, 
+   Serial Signals, BreakOut Box, Break-out Box">
+</HEAD>
+
+<BODY TEXT="#336600" BGCOLOR="#FFFFFF">
+
+
+<p><center><table border=0 width="98%">
+   <tr>
+      <td width="50%">
+         <P><center><a href="http://www.conserver.com"><img
+         src="../conserver-sm.jpg" alt="Conserver.com logo" width=147
+         height=47 border=0 align=middle></A></center>
+      </td><td width="50%">
+         <p><center>Brought to you by;<br>
+
+         <a href="http://www.conserver.com/">www.conserver.com</a></center>
+      </td>
+   </tr>
+</table></center>
+
+
+<H2><CENTER>Zonker's RS-232 Information Page</CENTER></H2>
+
+<H4><CENTER>http://www.conserver.com/consoles/Clues/rs232.html<BR>
+
+(updated: 
+Nov 06, 2005, 10:32 pm)</CENTER></H4>
+
+<P><CENTER><A NAME="top"></A><B>Table of Contents</B><BR>
+
+<A HREF="#basics">Basic Terminology</A><BR>
+
+<A HREF="#dte-dce">DTE and DCE Signals</A><BR>
+
+<A HREF="#eia232">RS-232-C and EIA-232</A><BR>
+
+<A HREF="#cables">Cable Clues</A><BR>
+
+<A HREF="#analyzers">Protocol Analyzer Software & Tools</A><br>
+
+<A HREF="#credits">Author Credits</A></CENTER>
+
+
+<P><TABLE BORDER=0 WIDTH="100%">
+   <TR>
+      <TD>
+         <P><TABLE BORDER=0 CELLSPACING=0 CELLPADDING=3 WIDTH="100%">
+            <TR>
+               <TD bgcolor="ddffff" WIDTH="70%">
+                  <H3><A NAME="basics"></A>Basic Terminology</H3>
+               </TD><TD bgcolor="ddffff" WIDTH="30%">
+                  <H3 ALIGN=RIGHT><A HREF="#top">to Table of
+                  Contents</A></H3>
+               </TD></TR>
+         </TABLE>
+         
+         <P><B>DTE and DCE</B></P>
+         
+         <UL>
+            <LI>Legacy terms, that described the 'type of interface'
+            
+            <LI>These terms also defined which pins could be expected
+            to be "transmitters" (outputs)
+            
+            <UL>
+               <LI><B>Outputs</B> are also called "Transmitters" or
+               "Drivers"
+               
+               <LI><B>Inputs</B> are also called "Receivers"
+            </UL>
+            
+            <LI>Data Terminal Equipment (<B>DTE</B>)
+            
+            <UL>
+               <LI>typically hosts, terminals
+            </UL>
+            
+            <LI>Data Communications Equipment (<B>DCE</B>)
+            
+            <UL>
+               <LI>typically modems, printers
+            </UL>
+         </UL>
+      </TD></TR>
+</TABLE></P>
+
+<P><TABLE BORDER=0 WIDTH="100%">
+   <TR>
+      <TD>
+         <P><B>Data Signals (TD and RD)</B></P>
+         
+         <UL>
+            <LI>These two wires (plus <B>Signal Ground</B>) are
+            needed to pass two-way data between devices
+            
+            <LI>Transmit Data (<B>TD</B>), is an <B><FONT
+            COLOR="#330099">output </FONT></B>on <B>DTE</B> devices,
+            and an <B>input</B> on <B>DCE</B> devices
+            
+            <LI>Receive Data (<B>RD</B>), is an <B>input </B>on
+            <B>DTE</B> devices, and an <B>output</B> on <B>DCE</B>
+            devices
+         </UL>
+         
+         <P>(Rarely, a vendor gets these backwards, so I always use a
+         signal tracer to be sure.)
+      </TD></TR>
+</TABLE></P>
+
+<P><TABLE BORDER=0 WIDTH="100%">
+   <TR>
+      <TD>
+         <P><B>Flow Control Signals (RTS and CTS)</B></P>
+         
+         <UL>
+            <LI>Signal leads used by devices to stop and start data
+            flow on the 'other' device.
+            
+            <LI>Referred to as "<B>Hardware Flow Control</B>", versus
+            Software Flow Control (XON/XOFF).
+            
+            <LI>Request To Send (<B>RTS</B>) is how DTE tells the DCE
+            device to start/stop.
+            
+            <LI>Clear To Send (<B>CTS</B>) is how DCE tells the DTE
+            device to start/stop.
+            
+            <LI>If you plan to use "Protocol Communications" on the
+            serial connection, you will need to turn. Software Flow
+            Control <B>off</B>, and turn Hardware Flow Control
+            <B>on</B>.
+            
+            <UL>
+               <LI>This includes SLIP and PPP, as well as
+               XMODEM/YMODEM/ZMODEM transfers.
+               
+               <LI>This is because packet numbers can look like the
+               XOFF character, and they can freeze your session by
+               stopping communications, with no way to restart it!
+            </UL>
+         </UL>
+      </TD></TR>
+</TABLE></P>
+
+<P><TABLE BORDER=0 WIDTH="100%">
+   <TR>
+      <TD>
+         <P><B>Handshaking Signals (DTR, DSR, DCD)</B></P>
+         
+         <UL>
+            <LI>Signal leads used to the other' device when it is
+            powered and ready (versus flow control)
+            
+            <LI>Data Terminal Ready (<B>DTR</B>) used by DTE device
+            to tell DCE device it is ready
+            
+            <LI>Data Set Ready (<B>DSR</B>) used by DCE device to
+            tell DTE device it is ready
+            
+            <LI>Data Carrier Detect (<B>DCD</B>) used by modems (DTE
+            device) to tell DCE device a call is on-line
+         </UL>
+      </TD></TR>
+</TABLE></P>
+
+<H3><TABLE BORDER=0 WIDTH="100%">
+   <TR>
+      <TD WIDTH="95%">
+         <P><TABLE BORDER=0 CELLSPACING=0 CELLPADDING=3 WIDTH="100%">
+            <TR>
+               <TD bgcolor="ddffff" WIDTH="70%">
+                  <H3><A NAME="dte-dce"></A>DTE and DCE Signals</H3>
+               </TD><TD bgcolor="ddffff" WIDTH="30%">
+                  <H3 ALIGN=RIGHT><A HREF="#top">to Table of
+                  Contents</A></H3>
+               </TD></TR>
+         </TABLE>
+         
+         <P>The <B>RS-232 standards</B> outline certain signal leads,
+         with their common designations, should appear on specific
+         pins of the <B>DB-25</B> connector. These common
+         designations appear below. The normal signals used for
+         asynchronous serial communications are shown in
+         <B>boldface</B> (pins <B>2</B>, <B>3</B>, <B>4</B>,
+         <B>5</B>, <B>6</B>, <B>7</B>, <B>8</B>, and <B>20</B>).</P>
+         
+         <P><TABLE BORDER=0 CELLSPACING=0 WIDTH="100%">
+            <TR>
+               <TD WIDTH=50>
+                  <P><CENTER><B>Pin </B></CENTER>
+               </TD><TD WIDTH=200>
+                  <P><CENTER><B>Signal</B></CENTER>
+               </TD><TD WIDTH=75>
+                  <P><CENTER><B>DTE</B></CENTER>
+               </TD><TD WIDTH=75>
+                  <P><CENTER><B>DCE</B></CENTER>
+               </TD></TR>
+            <TR>
+               <TD WIDTH=50>
+                  <P><CENTER>1</CENTER>
+               </TD><TD WIDTH=200>
+                  <P>Chassis Ground
+               </TD><TD WIDTH=75>
+                  <P><CENTER>-</CENTER>
+               </TD><TD WIDTH=75>
+                  <P><CENTER>-</CENTER>
+               </TD></TR>
+            <TR>
+               <TD WIDTH=50>
+                  <P><CENTER><B>2</B></CENTER>
+               </TD><TD WIDTH=200>
+                  <P>Tx Data (<B>TD</B>)
+               </TD><TD WIDTH=75>
+                  <P><CENTER><B>output</B></CENTER>
+               </TD><TD WIDTH=75>
+                  <P><CENTER><B>input</B></CENTER>
+               </TD></TR>
+            <TR>
+               <TD WIDTH=50>
+                  <P><CENTER><B>3</B></CENTER>
+               </TD><TD WIDTH=200>
+                  <P>Rx Data (<B>RD</B>)
+               </TD><TD WIDTH=75>
+                  <P><CENTER><B>input</B></CENTER>
+               </TD><TD WIDTH=75>
+                  <P><CENTER><B>output</B></CENTER>
+               </TD></TR>
+            <TR>
+               <TD WIDTH=50>
+                  <P><CENTER><B>4</B></CENTER>
+               </TD><TD WIDTH=200>
+                  <P>Request To Send (<B>RTS</B>)
+               </TD><TD WIDTH=75>
+                  <P><CENTER><B>output</B></CENTER>
+               </TD><TD WIDTH=75>
+                  <P><CENTER><B>input</B></CENTER>
+               </TD></TR>
+            <TR>
+               <TD WIDTH=50>
+                  <P><CENTER><B>5</B></CENTER>
+               </TD><TD WIDTH=200>
+                  <P>Clear To Send (<B>CTS</B>)
+               </TD><TD WIDTH=75>
+                  <P><CENTER><B>input</B></CENTER>
+               </TD><TD WIDTH=75>
+                  <P><CENTER><B>output</B></CENTER>
+               </TD></TR>
+            <TR>
+               <TD WIDTH=50>
+                  <P><CENTER><B>6</B></CENTER>
+               </TD><TD WIDTH=200>
+                  <P>Data Set Ready (<B>DSR</B>)
+               </TD><TD WIDTH=75>
+                  <P><CENTER><B>input</B></CENTER>
+               </TD><TD WIDTH=75>
+                  <P><CENTER><B>output</B></CENTER>
+               </TD></TR>
+            <TR>
+               <TD WIDTH=50>
+                  <P><CENTER><B>7</B></CENTER>
+               </TD><TD WIDTH=200>
+                  <P><B>Signal Ground</B>
+               </TD><TD WIDTH=75>
+                  <P><CENTER><B>-</B></CENTER>
+               </TD><TD WIDTH=75>
+                  <P><CENTER>-</CENTER>
+               </TD></TR>
+            <TR>
+               <TD WIDTH=50>
+                  <P><CENTER><B>8</B></CENTER>
+               </TD><TD WIDTH=200>
+                  <P>Carrier Detect (<B>DCD</B>)
+               </TD><TD WIDTH=75>
+                  <P><CENTER><B>input</B></CENTER>
+               </TD><TD WIDTH=75>
+                  <P><CENTER><B>output</B></CENTER>
+               </TD></TR>
+            <TR>
+               <TD WIDTH=50>
+                  <P><CENTER>9</CENTER>
+               </TD><TD WIDTH=200>
+                  <P><I>positive test voltage (loop)</I>
+               </TD><TD WIDTH=75>
+                  <P><CENTER>-</CENTER>
+               </TD><TD WIDTH=75>
+                  <P><CENTER>output</CENTER>
+               </TD></TR>
+            <TR>
+               <TD WIDTH=50>
+                  <P><CENTER>10</CENTER>
+               </TD><TD WIDTH=200>
+                  <P><I>negative test voltage (loop)</I>
+               </TD><TD WIDTH=75>
+                  <P><CENTER>-</CENTER>
+               </TD><TD WIDTH=75>
+                  <P><CENTER>output</CENTER>
+               </TD></TR>
+            <TR>
+               <TD WIDTH=50>
+                  <P><CENTER>11</CENTER>
+               </TD><TD WIDTH=200>
+                  <P><I>not assigned</I>
+               </TD><TD WIDTH=75>
+                  <P><CENTER>x</CENTER>
+               </TD><TD WIDTH=75>
+                  <P><CENTER>x</CENTER>
+               </TD></TR>
+            <TR>
+               <TD WIDTH=50>
+                  <P><CENTER>12</CENTER>
+               </TD><TD WIDTH=200>
+                  <P>Secondary DCD (SDCD)
+               </TD><TD WIDTH=75>
+                  <P><CENTER>input</CENTER>
+               </TD><TD WIDTH=75>
+                  <P><CENTER>output</CENTER>
+               </TD></TR>
+            <TR>
+               <TD WIDTH=50>
+                  <P><CENTER>13</CENTER>
+               </TD><TD WIDTH=200>
+                  <P>Secondary CTS (SCTS)
+               </TD><TD WIDTH=75>
+                  <P><CENTER>input</CENTER>
+               </TD><TD WIDTH=75>
+                  <P><CENTER>output</CENTER>
+               </TD></TR>
+            <TR>
+               <TD WIDTH=50>
+                  <P><CENTER>14</CENTER>
+               </TD><TD WIDTH=200>
+                  <P>Secondary Tx Data (STD)
+               </TD><TD WIDTH=75>
+                  <P><CENTER>output</CENTER>
+               </TD><TD WIDTH=75>
+                  <P><CENTER>input</CENTER>
+               </TD></TR>
+            <TR>
+               <TD WIDTH=50>
+                  <P><CENTER>15</CENTER>
+               </TD><TD WIDTH=200>
+                  <P>Transmitter Clock (TC)
+               </TD><TD WIDTH=75>
+                  <P><CENTER>input</CENTER>
+               </TD><TD WIDTH=75>
+                  <P><CENTER>output</CENTER>
+               </TD></TR>
+            <TR>
+               <TD WIDTH=50>
+                  <P><CENTER>16</CENTER>
+               </TD><TD WIDTH=200>
+                  <P>Secondary RD (SRD)
+               </TD><TD WIDTH=75>
+                  <P><CENTER>input</CENTER>
+               </TD><TD WIDTH=75>
+                  <P><CENTER>output</CENTER>
+               </TD></TR>
+            <TR>
+               <TD WIDTH=50>
+                  <P><CENTER>17</CENTER>
+               </TD><TD WIDTH=200>
+                  <P>Receiver Clock (RC)
+               </TD><TD WIDTH=75>
+                  <P><CENTER>input</CENTER>
+               </TD><TD WIDTH=75>
+                  <P><CENTER>output</CENTER>
+               </TD></TR>
+            <TR>
+               <TD WIDTH=50>
+                  <P><CENTER>18</CENTER>
+               </TD><TD WIDTH=200>
+                  <P>Local Loopback
+               </TD><TD WIDTH=75>
+                  <P><CENTER>output</CENTER>
+               </TD><TD WIDTH=75>
+                  <P><CENTER>input</CENTER>
+               </TD></TR>
+            <TR>
+               <TD WIDTH=50>
+                  <P><CENTER>19</CENTER>
+               </TD><TD WIDTH=200>
+                  <P>Secondary RTS (SRTS)
+               </TD><TD WIDTH=75>
+                  <P><CENTER>output</CENTER>
+               </TD><TD WIDTH=75>
+                  <P><CENTER>input</CENTER>
+               </TD></TR>
+            <TR>
+               <TD WIDTH=50>
+                  <P><CENTER><B>20</B></CENTER>
+               </TD><TD WIDTH=200>
+                  <P>Data Terminal Ready (<B>DTR</B>)
+               </TD><TD WIDTH=75>
+                  <P><CENTER><B>output</B></CENTER>
+               </TD><TD WIDTH=75>
+                  <P><CENTER><B>input</B></CENTER>
+               </TD></TR>
+            <TR>
+               <TD WIDTH=50>
+                  <P><CENTER>21</CENTER>
+               </TD><TD WIDTH=200>
+                  <P>Signal Quality Detect (SQ)
+               </TD><TD WIDTH=75>
+                  <P><CENTER>input</CENTER>
+               </TD><TD WIDTH=75>
+                  <P><CENTER>output</CENTER>
+               </TD></TR>
+            <TR>
+               <TD WIDTH=50>
+                  <P><CENTER>22</CENTER>
+               </TD><TD WIDTH=200>
+                  <P>Ring Indicator (RI)
+               </TD><TD WIDTH=75>
+                  <P><CENTER>input</CENTER>
+               </TD><TD WIDTH=75>
+                  <P><CENTER>output</CENTER>
+               </TD></TR>
+            <TR>
+               <TD WIDTH=50>
+                  <P><CENTER>23</CENTER>
+               </TD><TD WIDTH=200>
+                  <P>Data Rate Selector (DRS)
+               </TD><TD WIDTH=75>
+                  <P><CENTER>either</CENTER>
+               </TD><TD WIDTH=75>
+                  <P><CENTER>either</CENTER>
+               </TD></TR>
+            <TR>
+               <TD WIDTH=50>
+                  <P><CENTER>24</CENTER>
+               </TD><TD WIDTH=200>
+                  <P>External Transmitter Clock (XTC)
+               </TD><TD WIDTH=75>
+                  <P><CENTER>output</CENTER>
+               </TD><TD WIDTH=75>
+                  <P><CENTER>input</CENTER>
+               </TD></TR>
+            <TR>
+               <TD WIDTH=50>
+                  <P><CENTER>25</CENTER>
+               </TD><TD WIDTH=200>
+                  <P>Test Mode (TM)
+               </TD><TD WIDTH=75>
+                  <P><CENTER>input</CENTER>
+               </TD><TD WIDTH=75>
+                  <P><CENTER>output</CENTER>
+               </TD></TR>
+         </TABLE><BR>
+         
+         <B><I>Note 1</I></B><I>: Basic data connections only require
+         three leads: </I><B><I>TD</I></B><I>,
+         </I><B><I>RD</I></B><I>, and </I><B><I>Signal
+         Ground</I></B><I>.<BR>
+         
+         </I><B><I>Note 2</I></B><I>: Modem connections also require:
+         </I><B><I>CTS</I></B><I>, </I><B><I>RTS</I></B><I>,
+         </I><B><I>DSR</I></B><I>, </I><B><I>DTR</I></B><I>,
+         </I><B><I>DCD</I></B><I>.</I>
+      </TD></TR>
+</TABLE></H3>
+
+<P><TABLE BORDER=0 WIDTH="100%">
+   <TR>
+      <TD>
+         <P><TABLE BORDER=0 CELLSPACING=0 CELLPADDING=3 WIDTH="100%">
+            <TR>
+               <TD bgcolor="ddffff" WIDTH="70%">
+                  <H3><A NAME="eia232"></A>RS-232-C and EIA-232</H3>
+               </TD><TD bgcolor="ddffff" WIDTH="30%">
+                  <H3 ALIGN=RIGHT><A HREF="#top">to Table of
+                  Contents</A></H3>
+               </TD></TR>
+         </TABLE>
+         
+         <P>Serial communications standards, both specifying
+         mechanical and electrical information, and both represent
+         one of the most common asynchronous serial standards today.
+         Some of the specifications from these standards are;</P>
+         
+         <UL>
+            <LI>+21V = logic '1', -21V = logic '0'.
+            
+            <LI>Some devices use +5V / -5V signaling .
+            
+            <LI>Between +3V to -3V = "No Man's Land" .
+            
+            <UL>
+               <LI>(long cables deplete the signals, giving
+               unreliable output)
+            </UL>
+            
+            <LI>50' length maximum between devices .
+            
+            <UL>
+               <LI>(though folks often exceed this...successfully)
+               
+               <LI>Devices with +5V / -5V signaling have trouble
+               using long cable runs!
+            </UL>
+            
+            <LI>DB-25 Connector Pinouts .
+            
+            <UL>
+               <LI>(IBM developed the de facto DB-9 standard for the
+               PC-AT)
+            </UL>
+         </UL>
+      </TD></TR>
+</TABLE></P>
+
+<P><TABLE BORDER=0 CELLSPACING=0 CELLPADDING=3 WIDTH="100%">
+  <TR>
+    <TD bgcolor="ddffff" WIDTH="70%">
+      <H3><A NAME="cables"></A>Cable Clues</H3>
+    </TD><TD bgcolor="ddffff" WIDTH="30%">
+      <H3 ALIGN=RIGHT><A HREF="#top">to Table of Contents</A></H3>
+  </TD></TR>
+</TABLE>
+         
+<P>The RS-232 specification called for no more than 50 feet. However,
+I've had success with much greater distances in the past, depending
+on the devices being connected (driver voltages), cable length, cable
+type, shielded or not, etc.</P>
+
+<ul>
+  <li>The higher the speed, the shorter the maximum cable length.
+</ul>
+
+<P>The <A HREF="http://www.digi.com">DigiCorp folks</A> have posted a
+note on their support pages that recommends that the cable length be
+no more than <B>2500 picofarad</B> in capacitance, where each
+connector has a 'cost' of 100 pf, and then you need to find out how
+many picofarads-per-foot your cabling is rated. More info is
+available on their
+<A HREF="http://support.digi.com/support/techsupport/common/cables/reference/cabling_specifications.html">Tech
+Support Specifications Page</A>. Your mileage may vary. Older
+Macintosh computers had lower voltages (~6-9v) than the RS-232
+specification (~25v), and as a result, their range seems shorter to
+me.</P>
+
+<P>Twisted Pair cable can help extend the range (and often has a
+lower capacitance...hmmm...), but the twists don't often help reduce
+line noise, because the various vendors use different RJ-45 wiring
+schemes. As a result, You often have your most susceptible leads
+(data) twisted together, versus twisted with a fairly static signal
+(like ground, or handshaking leads).</P>
+
+<P>Shielded cable can help reduce noise, but the cost is higher than
+for normal CAT-5. You can usually achieve good noise isolation if you
+pay attention to WHERE your cables are placed. Avoid laying data
+cables parallel with AC power cables, or laying on/near transformers
+or fluorescent lighting ballasts (both are strong sources of
+electromagnetic radiation).</P>
+
+<P><TABLE BORDER=0 CELLSPACING=0 CELLPADDING=3 WIDTH="100%">
+  <TR>
+    <TD bgcolor="ddffff" WIDTH="70%">
+      <H3><A NAME="analyzers"></A>Protocol Analyzer Software & Tools</H3>
+    </TD><TD bgcolor="ddffff" WIDTH="30%">
+      <H3 ALIGN=RIGHT><A HREF="#top">to Table of Contents</A></H3>
+  </TD></TR>
+</TABLE>
+<p><b>Serial Protocol Analyzer Programs</b>
+
+<ul>
+  <li><a href="http://www.hhdsoftware.com/sermon.html">HHD Serial Monitor</a>
+  <li><a href="http://www.232analyzer.com/232default.htm">232 Analyzer</a>
+  <li><a href="http://www.fifo.se/">FSA32 program</a>
+  <li><a href="http://www.fte.com/mlt01.asp">Frontline SerialTest</a>
+  <li><a href="http://www.adontec.com/smon_e.htm">SerialMonitor</a>
+</ul>
+
+<p><b>Serial Protocol Analyzer Tools/Devices</b>
+
+<ul>
+  <li><a href="http://www.protocolanalyser.com/">Benedict Communications 
+  Data Line Monitors</a>
+  <li><a href="http://www.fifo.se/">FLL Break-Out Box</a>
+  <li><a href="http://www.lineeye.co.jp/english/html/p_1200.html">Line-Eye 
+  series</a>
+</ul>
+
+<p>
+<hr align=center width="80%">
+</p>
+
+<P><CENTER><TABLE BORDER=5 bgcolor="ffcc99" width="75%" padding=5>
+   <TR>
+      <TD>
+         <P><FONT COLOR="#663300"><B>NOTICE:</B> Most of the pages, 
+         articles, and tutorials on this website are
+         copyrighted works. You may make 'deep links' to various
+         pages. (If you let me know which page(s) you are linking to,
+         I'll let you know if I move the page(s) during updates.)
+         Please send me email if you wish to republish any material,
+         or use it on your own website.</FONT></P>
+      </TD></TR>
+</TABLE></CENTER></P>
+
+
+<p><center><a href="http://www.nvu.com">
+<img style="border: 0px solid ; width: 80px; height: 15px; float:
+"src="http://www.nvu.com/images/madewithNvu80x15dark.png"
+alt="Made with Nvu"></a></center></p>
+
+<p><center>Copyright 1996-2007,
+<A HREF="http://www.esperanto.org/person/HARRIS_Dacxjo/">David K. Z.
+Harris, N6UOW</A>&nbsp;&nbsp;
+<a href="http://www.linkedin.com/in/consoleteam" >
+<img src="http://www.linkedin.com/img/webpromo/btn_profile_bluetxt_80x15.gif"
+width="80" height="15" border="0" alt="View David K. Z. Harris's profile on
+LinkedIn"></a><br>
+Questions? Comments? Additions? Email <B>consoles</B> at
+<B>conserver.com</B>.<BR>
+
+<FONT COLOR="#cc0000">(Don't harvest my address, I don't want
+SPAM!)</FONT><BR>
+
+<A HREF="../iloj.html">How does he do it</A>? And
+<A HREF="../about.html">Why</A>?</CENTER></P>
+
+
+
+</BODY>
+</HTML>

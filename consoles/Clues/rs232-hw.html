@@ -1,0 +1,501 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+
+<!--This file created 3/14/05 11:18 PM by Claris Home Page version 2.0-->
+  <title>Zonker's RS-232 Hardware Clues Page</title>
+
+
+  <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+
+  <meta name="GENERATOR" content="Claris Home Page 2.0">
+
+  <meta name="keyword" content="Serial BREAK, RS232, RS-232, UART, DUART, QUADART, OCTART, MAX-232, Dallas Semiconductor">
+
+<!--#include file="stileto.txt" --><!--#include file="subcapo.txt" -->
+</head>
+
+
+
+
+
+<body>
+
+<h2>
+<center>Zonker's RS-232 Hardware Information Page</center>
+
+</h2>
+
+<h4>
+<center>http://www.conserver.com/consoles/Clues/rs232-hw.html<br>
+
+(updated:<!--#config timefmt="%b %d, %Y, %I:%M %P" --><!--#flastmod virtual="rs232-hw.html" -->
+)</center>
+
+</h4>
+
+<p></p>
+
+<center><a name="top"></a><b>Table of
+Contents</b><br>
+
+<a href="#purpose">Purpose</a><br>
+
+<a href="#art">Async Receiver/Transmitters<br>
+
+</a><a href="#drivers">RS-232 Interfaces</a><br>
+
+<a href="#credits">Author Credits</a></center>
+
+<p>
+<table border="0" width="100%">
+
+  <tbody>
+
+    <tr>
+
+      <td>
+      <p>
+      <table border="0" cellpadding="3" cellspacing="0" width="100%">
+
+        <tbody>
+
+          <tr>
+
+            <td bgcolor="#ddffff" width="70%">
+            <h3><a name="purpose"></a>Purpose</h3>
+
+            </td>
+
+            <td bgcolor="#ddffff" width="30%">
+            <h3 align="right"><a href="#top">to
+Table of Contents</a></h3>
+
+            </td>
+
+          </tr>
+
+        </tbody>
+      </table>
+
+      </p>
+
+      <p>I've learned a lot about the electronic hardware "inside
+the serial port", and I take that knowledge for granted, expecting that
+many of you also have some similar knowledge base. I finally realized
+that many of you may NOT have this knowledge base, at least in very
+basic terms. This page is intended to help fill that knowledge gap.</p>
+
+      <ul>
+
+      </ul>
+
+      </td>
+
+    </tr>
+
+  </tbody>
+</table>
+
+</p>
+
+<p>
+<table border="0" width="100%">
+
+  <tbody>
+
+    <tr>
+
+      <td>There are only a couple of basic parts that make up the
+serial interface, whether you call it TTYS0, COM 1, the Modem Port, or
+whatever label your device has. <br>
+
+      <ul>
+
+        <li>Asyncronous Receiver/Transmitter</li>
+
+        <li>Serial Protocol Interface</li>
+
+      </ul>
+
+This page is meant to be an overview, rather than an in-depth
+programmers reference, or a design thesis. There are plenty of design
+references and memory register maps in the manuals from the various
+chip makers, which should be used if you are going to try any hardware
+hacking.<br>
+
+      </td>
+
+    </tr>
+
+  </tbody>
+</table>
+
+</p>
+
+<table border="0" width="100%">
+
+  <tbody>
+
+    <tr>
+
+      <td width="95%">
+      <p>
+      <table border="0" cellpadding="3" cellspacing="0" width="100%">
+
+        <tbody>
+
+          <tr>
+
+            <td bgcolor="#ddffff" width="70%">
+            <h3><a name="drivers"></a>Asyncronous
+Receiver/Transmitters</h3>
+
+            </td>
+
+            <td bgcolor="#ddffff" width="30%">
+            <h3 align="right"><a href="#top">to
+Table of Contents</a></h3>
+
+            </td>
+
+          </tr>
+
+        </tbody>
+      </table>
+
+      </p>
+
+Serial communications &nbsp;comes ine two forms:
+&nbsp;Synchronous (SYNC)&nbsp; and Asynchronous (ASYNC).
+Sync&nbsp;serial interfaces include a clocking signal in each
+direction, in addition to the other signals, and the data is sent all
+the time, in time with the clocking signals. Async serial interfaces do
+not have these timing signals, and they use the flow control leads to
+signal readiness to receive data. Because the data can start at any
+time from an idle signal state, async adds two 'start bits' at the
+front of each data word, to help the receiver "get in sync" with the
+data flow. There is usually a "stop bit", and sometimes a "parity bit"
+used for checking the integrity of the data word that the receiver
+believes it has received. <span style="font-style: italic;"></span>
+      <p></p>
+
+      </td>
+
+    </tr>
+
+  </tbody>
+</table>
+
+<p>
+<table border="0" width="100%">
+
+  <tbody>
+
+    <tr>
+
+      <td>The data moving around in your computer is, generally
+speaking, moving on a parallel bus. That is, there are 8 data leads in
+parallel, and the computer moves data around a byte at a time. (We're
+going to ignore things like USB, Firewire, and SATA drive interfaces in
+this paper.) When a hardware maker wants to add a serial port, they use
+some form of Async Receiver/Transmitter (<span style="font-weight: bold;">ART</span>) chip, which
+will connect to the computers parallel bus and hardware interrupt
+architecture, and the chip is responsible for being the gatekeeper
+between the computer and the serial world.<br>
+
+      <br>
+
+The first chips were called the Universal Async Receiver/Transmitter (<span style="font-weight: bold;">UART</span>), and you can
+still find these today on some add-in serial cards for PCs. Later, the
+Dual UART (<span style="font-weight: bold;">DUART</span>)
+was developed, putting a pair of UARTs on a single chip, to save space.
+As terminal servers became popular (early 1990's), we saw QuadART and
+even OctART chips, though they are not common for hobbyist use. The
+common abbreviation for this class of hardware is the <span style="font-weight: bold;">*ART</span>, where the
+quantity is defined in the nearby text.<br>
+
+      </td>
+
+    </tr>
+
+  </tbody>
+</table>
+
+</p>
+
+<p>
+<table border="0" width="100%">
+
+  <tbody>
+
+    <tr>
+
+      <td>
+When you set the serial port speed, parity, data bits (the data word),
+and stop bit settings, you are talking to the *ART chip associated with
+the physical port you are trying to use.<br>
+
+      <br>
+
+The ART is responsible for forming the serial characters, including the
+start and stop bits, and for calculating the parity bits for sending
+data. It is also responsible for receiving the incomin data,
+calculating the parity, for buffering some small number of bytes as
+needed while it signals the computer bus that the ART has some received
+data that needs to be examined. </td>
+
+    </tr>
+
+  </tbody>
+</table>
+
+</p>
+
+<p>
+<table border="0" width="100%">
+
+  <tbody>
+
+    <tr>
+
+      <td>Note: the serial output and input signals to the *ART
+chips are at the same levels as that of the computer. This may be TTL
+(+5V and ground), or even less in portable equipment and laptops (+3,3V
+and ground). The ART only makes the data words, and it is up to the I/O
+interfaces to convert the computer levels to the desired I/O levels.</td>
+
+    </tr>
+
+  </tbody>
+</table>
+
+</p>
+
+<p>
+<table border="0" width="100%">
+
+  <tbody>
+
+    <tr>
+
+      <td>
+      <p>
+      <table border="0" cellpadding="3" cellspacing="0" width="100%">
+
+        <tbody>
+
+          <tr>
+
+            <td bgcolor="#ddffff" width="70%">
+            <h3><a name="drivers"></a>RS-232-C
+Interfaces</h3>
+
+            </td>
+
+            <td bgcolor="#ddffff" width="30%">
+            <h3 align="right"><a href="#top">to
+Table of Contents</a></h3>
+
+            </td>
+
+          </tr>
+
+        </tbody>
+      </table>
+
+      </p>
+
+      <p>In the early days, serial communications between devices
+used the computer bus signalling levels. But, due to noise on the
+lines, the distances were limited. As a result, various "line driver"
+interfaces were tried. These interfaces took data (the "ones and
+zeros") from one physical layer, and translated them to another
+physical layer, with no interpretation or changes to the data, in
+efforts to extend the useful length of the data transmission.</p>
+
+      <p>RS-232 is one of many serial communication protocols.
+The *ART chip makes the chain of zeros and ones, and the interface
+chips translate the voltages between the computer bus and the RS-232
+serial port. These chips have no intelligence, they are basically
+voltage level converters.</p>
+
+      </td>
+
+    </tr>
+
+  </tbody>
+</table>
+
+</p>
+
+<p>
+<table border="0" width="100%">
+
+  <tbody>
+
+    <tr>
+
+      <td><span style="font-style: italic;">Serial
+communication meant needing fewer wires than extending a parallel bus,
+and copper was expensive in those days, so if you could save on the
+copper wires, you could afford to spend some of the money on
+electronics.) </span></td>
+
+    </tr>
+
+  </tbody>
+</table>
+
+</p>
+
+<p>
+<table border="0" width="100%">
+
+  <tbody>
+
+    <tr>
+
+      <td>The computer chips used various Digital Logic designs,
+with TTL (transistor-transistor logic) becoming the most common. This
+meant the data wa expressed as +5v for a "high" (or "1"), and 0v (equal
+to signal ground) for the "low" (or "0") signal state.</td>
+
+    </tr>
+
+  </tbody>
+</table>
+
+</p>
+
+<p>
+<table border="0" width="100%">
+
+  <tbody>
+
+    <tr>
+
+      <td>Serial interface chips needed bridge two voltage realms
+while isolating them. In the case of RS-232, the "high" state was
+expressed as being between -3v to -12v, while the "low" state was
+between +3v to +12v. <br>
+
+      <br>
+
+The early driver chips were seperate from the receiver chips, and each
+of them had four connections for power: ground, +5v, +12v, -12v.
+&nbsp;(The early memory also required negative voltages,
+&nbsp;and the disk drive motors required +12v, so most power
+supplies already had these voltages available, which is why they were
+tried.) When an interface chip failed (or a technicians screwdriver
+shorted the wrong pins), an ART chip could be introduced to the ugly
+side of a power supply, and the smoke in the ART chip usually escaped,
+making the ART useless. In later years, the ART chips were often in
+sockets, rather than being soldered to the computer board, beacuse this
+was a common point of failure. </td>
+
+    </tr>
+
+  </tbody>
+</table>
+
+</p>
+
+<p>
+<table border="0" width="100%">
+
+  <tbody>
+
+    <tr>
+
+      <td>The DALLAS Semiconductor company developed a family of
+interface chips (starting with the MAX-232) that used only a single
+supply voltage to the
+driver/receiver set on a single chip, and there was a "charge pump"
+built into the chip. This was a marriage of TTL and Linear technologies
+on the same piece of silicon, and was a revolution at that time. Using
+a
+few external capacitors, these chips created the +/- 12v drive voltages
+needed using just the +5v and ground of the computer. </td>
+
+    </tr>
+
+  </tbody>
+</table>
+
+</p>
+
+<p>
+<table border="0" width="100%">
+
+  <tbody>
+
+    <tr>
+
+      <td>The <span style="font-weight: bold;">Serial
+BREAK</span> signal is used to reset modems, or clear a
+transmission channel. It is defined as asserting the serial signal for
+longer than two complete serial data characters, including the time for
+the start and stop bits. (Early implementations of break sent the
+signal for 500 milliseconds (ms), or just 250 ms. However, as serial
+speeds have become faster, you can see that the length of time needed
+for a Serial BREAK signal becomes shorter.</td>
+
+    </tr>
+
+  </tbody>
+</table>
+
+</p>
+
+<p>
+<table border="0" width="100%">
+
+  <tbody>
+
+    <tr>
+
+      <td> Some devices send a Serial BREAK when they are powered
+off. This is usually because they use the older serial driver chips,
+using many independant voltages. When the power is turned off, the
+computer (+5v) voltage usually falls faster than the drive motor (+12v)
+voltage. This results in the serial driver chips still having I/O power
+when the logic voltage fails, so the driver sees a "logic low" signal
+on the input, and so the driver aserts it's output accordingly. Since
+there are no start or stop bits, the attached host believes it has
+received a valid Serial BREAK.<br>
+
+      <br>
+
+      <span style="font-style: italic;">Using the "single
+supply" interface driver/receiver chips eliminates this trouble,
+because the I/O voltage goes away as soon as the logic voltage goes
+away.</span></td>
+
+    </tr>
+
+  </tbody>
+</table>
+
+</p>
+
+<p>
+<table border="0" width="100%">
+
+  <tbody>
+
+    <tr>
+
+      <td>I hope this page has been a useful foundation from some
+of my readers. </td>
+
+    </tr>
+
+  </tbody>
+</table>
+
+</p>
+
+<!--#include file="subpiedo.txt" -->
+</body>
+</html>

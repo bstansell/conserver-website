@@ -1,0 +1,300 @@
+<!--This file created 3/10/05 11:31 PM by Claris Home Page version 2.0-->
+<HTML>
+<HEAD>
+   <TITLE>Zonker's DNPG DECServer 90M+ Cloes Page</TITLE>
+   <META NAME=GENERATOR CONTENT="Claris Home Page 2.0">
+   <meta keyword="Serial Console, Cisco, conserver, RJ-45, rj45 adapter,
+   RS-232, console, zonker, DNPG, DECServer 90M, LAT, DECServer, N6UOW,
+   VAX">
+</HEAD>
+
+<BODY TEXT="#336600" BGCOLOR="#FFFFFF">
+ <p><center><table border=0 width="98%">
+   <tr>
+      <td width="50%">
+         <P><center><a href="http://www.conserver.com"><img
+         src="../conserver-sm.jpg" alt="Conserver.com logo" width=147
+         height=47 border=0 align=middle></A></center>
+      </td><td width="50%">
+         <p><center>Brought to you by;<br>
+
+         <a href="http://www.conserver.com/">www.conserver.com</a></center>
+      </td>
+   </tr>
+</table></center>
+
+
+<H2><CENTER>Zonker's DNPG DECServer 90M+ Clues page</CENTER>
+</CENTER></H2>
+
+<H4><CENTER>http://www.conserver.com/consoles/DEC/index.html.html<BR>
+
+(updated: 
+Jul 13, 2008, 12:13 am)</CENTER></H4>
+
+<P>This document will provide information and links to various pages 
+with information regarding the DEC Network Products Group
+(<a href="http://www.dnpg.com">DNPG</a>) DECServer products
+(mainly the <a href="http://www.dnpg.com/decserver.asp">90M+</a>).
+My hope is that this page will be useful for connecting these DEC
+devices various server and network gear.
+
+<P>I've had an 8-port unit to test for
+<a href="../BREAK-off/breakinfo.html">Serial BREAK</a>, and it passed
+with flying colors (it only sends BREAK when you tell it to). This was 
+a step back in time for me, because I 'cut my teeth' on older DECServer
+and DELNI gear in the 1980's. I'm glad to see the current line still
+provide LAT and other DEC service protocols as well.
+
+<p><table border="0" width="100%">
+  <tbody>
+    <tr>
+      <td>
+      <p>
+      <table border="0" cellpadding="3" cellspacing="0" width="100%">
+        <tbody>
+          <tr>
+            <td bgcolor="#cccccc" width="100%">
+            <p><b>RDECServer 90M+ Signals and wiring info...</b>
+            </p>
+            </td>
+          </tr>
+        </tbody>
+       </table>
+      </p>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</p>
+
+<p>The legacy DEC products were notable for their use of the <b>Modified 
+Modular Jack</b> (also referred to simply as the MMJ). It is similar in 
+appearance to the RJ-13 (where "RJ" stands for Registered Jack"), but the
+MMJ has an 'offset' locking tab. Look at the images below for a better 
+understanding. While this prevented folks from plugging a phone line into
+a serial port, it is one more special connector for which you need to
+stock parts and termination tools.</p>
+
+<p><table border="0" width="100%">
+  <tbody>
+    <tr>
+      <td width="25%">
+      <center><img src="../pommjm.jpg" x-sas-useimagewidth="" x-sas-useimageheight="" align="bottom" height="83" width="102"><br>
+      <img src="../pommjf.jpg" x-sas-useimagewidth="" x-sas-useimageheight="" align="bottom" height="82" width="91"> </center>
+      </td>
+      <td width="25%">
+      <center><img src="../Signals/sig-dec-mmj.jpg" align="top"></center>
+      </td>
+      <td width="25%">
+      <center><img src="loop-dec-mmj.jpg" align="top"></center>
+      </td>
+      <td width="25%"> </td>
+    </tr>
+  </tbody>
+</table>
+</p>
+
+<p><table border="0" width="100%">
+  <tbody>
+    <tr>
+      <td>
+      <p>
+      <table border="0" cellpadding="3" cellspacing="0" width="100%">
+        <tbody>
+          <tr>
+            <td bgcolor="#cccccc" width="100%">
+            <p><b>Specialty cables for connecting your DEC MMJ ports to other things...</b>
+            </p>
+            </td>
+          </tr>
+        </tbody>
+       </table>
+      </p>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</p>
+
+<p>Since the MMJ is kind of unusual, most other vendors don't make cables to connect
+the the MMJ ports. But, if you have the termination tools, you can use these diagrams
+to make custom cables (and avoid the daisy-chained adapters). These diagrams only
+support data-only connections. You'll need to tell attached devices to ignore the
+Hardware Handshaking and Hardware Flow Control signal inputs.</p>
+
+<p><table border="0" width="100%">
+  <tbody>
+    <tr>
+      <td width="25%">
+      <center><img src="../cables/link-decmmj-ciscoc.jpg" alt="DEC MMJ to Cisco Console cable" align="top"></center>
+      </td>
+      <td width="25%">
+      <center><img src="../cables/link-decmmj-ciscop.jpg" alt="DEC MMJ to Cisco Patch Panel cable" align="top"></center>
+      </td>
+      <td width="25%">
+      <center><img src="../cables/link-decmmj-cyclades.jpg" alt="DEC MMJ to Cyclades Cisco Console Server cable" align="top"></center>
+      </td>
+      <td width="25%">
+      <center><img src="../cables/link-decmmj-digicm.jpg" alt="DEC MMJ to Digi CM Console Server cable" align="top"></center>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</p>
+
+<p><table border="0" width="100%">
+  <tbody>
+    <tr>
+      <td width="25%">
+      <center><img src="../cables/link-decmmj-iolan.jpg" alt="DEC MMJ to IOLAN Console Server cable" align="top"></center>
+      </td>
+      <td width="25%">
+      <center><img src="../cables/link-decmmj-uannex.jpg" alt="DEC MMJ to MicroAnnex Console Server cable" align="top"></center>
+      </td>
+      <td width="25%">
+      <center><img src="../cables/link-decmmj-opengearcm.jpg" alt="DEC MMJ to Opengear CM Console Server cable" align="top"></center>
+      </td>
+      <td width="25%">
+      <center><img src="../cables/link-decmmj-xyplex.jpg" alt="DEC MMJ to Xyplex Console Server cable" align="top"></center>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</p>
+
+<p><table border="0" width="100%">
+  <tbody>
+    <tr>
+      <td width="25%"><center>
+      <img src="../cables/link-decmmj-sunt3.jpg" alt="DEC MMJ to Sun T3 disk array console" align="top"></center>
+      </td>
+      <td width="25%">
+      </td>
+      <td width="25%">
+      </td>
+      <td width="25%"><center>
+      <img src="../porj45m.gif" alt="Male RJ45 signal pinouts" align="top"><br>
+      <img src="../porj45f.gif" alt="Female RJ45 signal pinouts" align="top" width="92"></center>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</p>
+
+<p><table border="0" width="100%">
+  <tbody>
+    <tr>
+      <td>
+      <p>
+      <table border="0" cellpadding="3" cellspacing="0" width="100%">
+        <tbody>
+          <tr>
+            <td bgcolor="#cccccc" width="100%">
+            <p><b>DNPG has changed their name...</b>
+            </p>
+            </td>
+          </tr>
+        </tbody>
+       </table>
+      </p>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</p>
+
+<p>As of January 1, 2008, Digital Networks began operating under the
+name <a href="http://www.vnetek.com/s-137-digital-networks.aspx">Vnetek
+Communications, LLC.</a>. (That's what the 
+<a href="http://www.dnpg.com/">DEC Networks Product Group</a> website 
+says. It appears to me, after reading their website, that Vnetek has 
+been around a long time, and sells solutions hardware from a number 
+of older vendors.) If you still have any VAX gear, or DECnet networks 
+in your shop, the folks at Vnetek have hardware toi help you. I hope
+the old DEC Network Products Group folks are also still around to help 
+you.</p>
+
+<p>Unfortunately, with the overtaking of the DNPG website, we also lost 
+the deep-link to the support documentation for the DECServer 90M+, as 
+well as to the firmware information. I don't see any good support links 
+on the Vnetek site yet.</p>
+
+<p><table border="0" width="100%">
+  <tbody>
+    <tr>
+      <td>
+      <p>
+      <table border="0" cellpadding="3" cellspacing="0" width="100%">
+        <tbody>
+          <tr>
+            <td bgcolor="#cccccc" width="100%">
+            <p><b>I'm interested in feedback...</b>
+            </p>
+            </td>
+          </tr>
+        </tbody>
+       </table>
+      </p>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</p>
+
+<P>If you find any errors, have comments, or if you have additional
+information that you feel that I could include, please send email to
+<B>consoles</B> at <B>conserver.com</B>. Are you curious
+<A HREF="../about.html">why I maintain these pages?</A></P>
+
+<P><CENTER>
+<HR>
+</CENTER></P>
+
+<p>Useful DEC Links(URLs);
+
+<ul>
+  <li><a href="http://www.vnetek.com/s-211-decserver.aspx">The DECServer products</a>
+</ul>
+
+<p>
+<hr align=center width="80%">
+</p>
+
+<A NAME="credits"></a>
+<P><CENTER><TABLE BORDER=5 bgcolor="ffcc99" width="75%" padding=5>
+   <TR>
+      <TD>
+         <P><FONT COLOR="#663300"><B>NOTICE:</B> Most of the pages, 
+         articles, and tutorials on this website are
+         copyrighted works. You may make 'deep links' to various
+         pages. (If you let me know which page(s) you are linking to,
+         I'll let you know if I move the page(s) during updates.)
+         Please send me email if you wish to republish any material,
+         or use it on your own website.</FONT></P>
+      </TD></TR>
+</TABLE></CENTER></P>
+
+
+<p><center>Made using <a href="http://www.nvudev.com">Nvu</a></center></p>
+
+<p><center>Copyright 1996-2008,
+<A HREF="http://www.esperanto.org/person/HARRIS_Dacxjo/">David K. Z.
+Harris, N6UOW</A>&nbsp;&nbsp;
+<a href="http://www.linkedin.com/in/consoleteam" >
+<img src="http://www.linkedin.com/img/webpromo/btn_profile_bluetxt_80x15.gif"
+width="80" height="15" border="0" alt="View David K. Z. Harris's profile on
+LinkedIn"></a><br>
+Questions? Comments? Additions? Email <B>consoles</B> at
+<B>conserver.com</B>.<BR>
+
+<FONT COLOR="#cc0000">(Don't harvest my address, I don't want
+SPAM!)</FONT><BR>
+
+<A HREF="../iloj.html">How does he do it</A>? And
+<A HREF="../about.html">Why</A>?</CENTER></P>
+
+
+
+</BODY>
+</HTML>

@@ -1,0 +1,1481 @@
+<!--This file created 12/26/00 17:22 by Claris Home Page version 2.0-->
+<HTML>
+<HEAD>
+   <TITLE>Xylogics Annex/Bay/Nortel Console Connection Guide</TITLE>
+   <META NAME=GENERATOR CONTENT="Claris Home Page 2.0">
+   <meta keyword="Serial Console, Cisco, conserver, rj45 adapter,
+   RS-232, TealDoc, Palm Pilot, Americable, console, zonker, N6UOW,
+   MOD-TAP. Mod-Tap, Annex, Bay Networks, Xylogics, micro-annex,
+   RA-2000, RA2000, Remote Annex, APACN, RJ-45, async, jheiss,
+   MicroAnnex, 2000, XL">
+</HEAD>
+
+<BODY TEXT="#336600" BGCOLOR="#FFFFFF">
+
+
+<p><center><table border=0 width="98%">
+   <tr>
+      <td width="50%">
+         <P><center><a href="http://www.conserver.com"><img
+         src="../conserver-sm.jpg" alt="Conserver.com logo" width=147
+         height=47 border=0 align=middle></A></center>
+      </td><td width="50%">
+         <p><center>Brought to you by;<br>
+
+         <a href="http://www.conserver.com/">www.conserver.com</a></center>
+      </td>
+   </tr>
+</table></center>
+
+
+<H2 ALIGN=CENTER>Xylogics Annex/Bay Console Server Connections Guide</H2>
+
+<H4 ALIGN=CENTER>http://www.conserver.com/consoles/Annex/annexcons.html<BR>
+(updated: 
+Apr 25, 2005, 02:51 pm)</h4>
+
+<P>This document will outline console server connections to the
+microAnnex products, through its many variations.
+
+<P>This product has had a number of incantations. Originally named
+the Xylogics microAnnex (AN2-16), this device featured 16 RJ-45
+connections, on a device that would sit on a rack-mounted shelf.
+These units <B>did</B> send a Serial BREAK to attached units when
+power to the device was removed. (Serial BREAK, sent at inappropriate
+times, can be a serious problem for most Sun hosts and servers. For more
+information, please refer to our 
+<A HREF="../BREAK-off/breakoff.html">Serial BREAK testing page</A>.)
+
+<P>Later, (late in 1995) Bay Networks bought the Annex product line,
+and renamed the microAnnex as the Bay RA2000. (RA for Remote
+Annex...) After the acquisition, Bay modified the hardware, so the
+Bay units <B>did not</B> send Serial BREAK at inappropriate times.
+</P>
+
+<P>During the fall season of 1998, Nortel Networks bought Bay Networks, 
+and absorbed the RA product line, but decided that the 2000 (and 3000,
+and 4000) products competed with existing Nortel hardware, so they
+discontinued the Annex products, in favor of something called the ACN
+200. (In my opinion, this was a bad decision, and the ACN 200 doesn't
+play well in the console server arena...but I can imagine that the
+terminal server products were a pretty small part of the $9.1M US deal
+for Bay, which seemed to be aimed at the voice/data integration
+opportunities.)
+
+<p><a href="http://jheiss.blogspot.com/">Jason Heiss</a> has posted an
+<a href="http://www.ofb.net/~jheiss/annex/">Annex Servers clues page</a>
+which offered me some vaulable tips. To save myself some typing, I highly
+reccomend that folks give his page a good read!http://www.ofb.net/remail?jheiss
+
+<P>All of the connections discussed in this document make use of standard 
+ethernet cables (CAT-5, RJ-45, 8-conductor, 'straight through' cables) 
+unless specified otherwise.
+
+<P ALIGN=CENTER><A NAME="top"></A><B>Table of Contents</B><BR>
+
+<A HREF="#rj45">Annex RJ-45 signaling</A><BR>
+
+<A HREF="#ethernet">RJ-45 Cable Diagrams</A><BR>
+
+<A HREF="#crj45">Cisco devices with RJ-45(f) ports</A><BR>
+
+<A HREF="#orj45">Connecting to non-Annex RJ-45</A><BR>
+
+<A HREF="#cables">Speciality Cables for non-Cisco RJ-45 ports</A><BR>
+
+<A HREF="#null">Making a null modem cable</A><BR>
+
+<A HREF="#cpc">Attaching devices to a PC instead</A><BR>
+
+<A HREF="#rj45schem">RJ-45 adapter schematics</A><BR>
+
+<A HREF="#db9m">Devices with DB-9(m) console ports</A><BR>
+
+<A HREF="#db25f">Devices with DB-25(f) console ports</A><BR>
+
+<a href="#breakin">Breaking into an Annex</a><br>
+
+<a href="#urls">Useful Links</a><br>
+
+<A HREF="#credits">Author Credits</A>
+
+<P><TABLE BORDER=0 WIDTH="100%">
+   <TR>
+      <TD>
+         <P><TABLE BORDER=0 CELLSPACING=0 CELLPADDING=3 WIDTH="100%">
+            <TR>
+               <TD bgcolor="cccccc" WIDTH="70%">
+                  <P><B><A NAME="rj45"></A>Annex RJ-45 signaling</B>
+               </TD><TD bgcolor="cccccc" WIDTH="30%">
+                  <P ALIGN=RIGHT><B><A HREF="#top">to Table of
+                  Contents</A></B>
+               </TD></TR>
+         </TABLE></P>
+         
+         <P>The table below shows the signal information for both the
+         Cisco RJ-45 Patch Panel solutions (which are considered to
+         be wired as DCE), as well as the Cisco RJ-45 Console and Aux
+         ports (considered to be wired as DTE).</P>
+         
+         <P ALIGN=CENTER><CENTER><TABLE BORDER=0>
+            <TR>
+               <TD WIDTH=308>
+                  <P><TABLE BORDER=0>
+                     <TR>
+                        <TD WIDTH=39>
+                           <P ALIGN=CENTER><B>Pin</B>
+                        </TD><TD WIDTH=103>
+                           <P ALIGN=CENTER><B>Signal Type</B>
+                        </TD><TD WIDTH=85>
+                           <P ALIGN=CENTER><B>Signal</B>
+                        </TD></TR>
+                     <TR>
+                        <TD WIDTH=39>
+                           <P ALIGN=CENTER>1
+                        </TD><TD WIDTH=103>
+                           <P ALIGN=CENTER>Output
+                        </TD><TD WIDTH=85>
+                           <P ALIGN=CENTER>RTS
+                        </TD></TR>
+                     <TR>
+                        <TD WIDTH=39>
+                           <P ALIGN=CENTER>2
+                        </TD><TD WIDTH=103>
+                           <P ALIGN=CENTER>Output
+                        </TD><TD WIDTH=85>
+                           <P ALIGN=CENTER>DTR
+                        </TD></TR>
+                     <TR>
+                        <TD WIDTH=39>
+                           <P ALIGN=CENTER>3
+                        </TD><TD WIDTH=103>
+                           <P ALIGN=CENTER>Output
+                        </TD><TD WIDTH=85>
+                           <P ALIGN=CENTER>TD
+                        </TD></TR>
+                     <TR>
+                        <TD WIDTH=39>
+                           <P ALIGN=CENTER>4
+                        </TD><TD WIDTH=103>
+                           <P ALIGN=CENTER>Input
+                        </TD><TD WIDTH=85>
+                           <P ALIGN=CENTER>DCD
+                        </TD></TR>
+                     <TR>
+                        <TD WIDTH=39>
+                           <P ALIGN=CENTER>5
+                        </TD><TD WIDTH=103>
+                           <P ALIGN=CENTER>Input
+                        </TD><TD WIDTH=85>
+                           <P ALIGN=CENTER>RD
+                        </TD></TR>
+                     <TR>
+                        <TD WIDTH=39>
+                           <P ALIGN=CENTER>6
+                        </TD><TD WIDTH=103>
+                           <P ALIGN=CENTER>Reference
+                        </TD><TD WIDTH=85>
+                           <P ALIGN=CENTER>Sig. Gnd.
+                        </TD></TR>
+                     <TR>
+                        <TD WIDTH=39>
+                           <P ALIGN=CENTER>7
+                        </TD><TD WIDTH=103>
+                           <P ALIGN=CENTER>Input
+                        </TD><TD WIDTH=85>
+                           <P ALIGN=CENTER>DSR
+                        </TD></TR>
+                     <TR>
+                        <TD WIDTH=39>
+                           <P ALIGN=CENTER>8
+                        </TD><TD WIDTH=103>
+                           <P ALIGN=CENTER>Input
+                        </TD><TD WIDTH=85>
+                           <P ALIGN=CENTER>CTS
+                        </TD></TR>
+                  </TABLE>
+               </TD><TD width="20%">
+                  <P ALIGN=left><IMG SRC="uasignals.gif" ALIGN=bottom>
+               </TD><TD width="20%">
+                  <P><center><IMG SRC="../porj45m.gif" ALIGN=middle><BR>
+                  
+                  <IMG SRC="../porj45f.gif" ALIGN=middle>
+               </TD></TR>
+         </TABLE></CENTER></P>
+         
+         <P>Notes:<BR>
+         
+         1) <B>Input</B> means a signal <B>from</B> the external
+         device, coming <B>in to</B> the <B>RJ-45 port</B><BR>
+         
+         2) <B>Output</B> means a signal source <B>from</B> the
+         <B>RJ-45 port</B>, going <B>out to</B> the external device
+         </P>
+         
+         <P>The reference ground, and data signals, are located on
+         the center pairs of the RJ-45, so you can use a
+         straight-through RJ-11 cable for simple, data-only
+         connections. (However, you should not use RJ-11 or RJ-12
+         connectors in your RJ-45 jacks for longer than quick tests,
+         as these smaller connectors will tend to bend the outer
+         RJ-45 pins up, and this can lead to intermittent or open
+         connections on the RJ-45 jack later on.)</P>
+         
+         <P>The Annex signals are not symmetrical, so you cannot use
+         <A HREF="#ethernet">USOC-rolled cables</A> to create a
+         null-modem connection. <A HREF="#ethernet">Crossover
+         Ethernet cables</A> will not help you either.
+      </TD></TR>
+</TABLE></P>
+
+<P><TABLE BORDER=0 WIDTH="100%">
+   <TR>
+      <TD>
+         <P><TABLE BORDER=0 CELLSPACING=0 CELLPADDING=3 WIDTH="100%">
+            <TR>
+               <TD bgcolor="cccccc" WIDTH="70%">
+                  <P><B><A NAME="ethernet"></A>Cable Diagrams</B>
+               </TD><TD bgcolor="cccccc" WIDTH="30%">
+                  <P ALIGN=RIGHT><B><A HREF="#top">to Table of
+                  Contents</A></B>
+               </TD></TR>
+         </TABLE></P>
+         
+         <P>The best way to make a connection between Annex console
+         server ports and adapters is to use an 8-wire 'straight
+         through' Ethernet cable. (Using a Crossover Ethernet cable
+         or CDDI cables (also referred to as 'USOC-rolled' cables)
+         will not work for connecting adapters to the Annex ports.)
+         </P>
+         
+         <P><TABLE BORDER=0 width="90%">
+            <TR>
+               <TD VALIGN=top width="29%">
+                  <P ALIGN=CENTER><IMG SRC="../ethern.gif" ALIGN=top><BR>
+                  
+                  APACN part: <FONT
+                  COLOR="#CC0000">24490-21</FONT>
+               </TD><TD VALIGN=top width="29%">
+                  <P ALIGN=CENTER><IMG SRC="../cab-500.gif" ALIGN=top><BR>
+                  
+                  APACN part: <FONT
+                  COLOR="#CC0000">24490-22</FONT>
+               </TD><TD VALIGN=top width="29%">
+                  <P ALIGN=CENTER><IMG SRC="../etherx.gif"  ALIGN=top>
+               </TD></TR>
+         </TABLE></P>
+         
+         <P>Standard Ethernet cables follow a specific wiring
+         pattern. However, not ALL ethernet cables have 8 wires in
+         the cable, since a standard Ethernet interface only uses 4
+         of the wires. For console connections, you need to make sure
+         that your cables have <B>all 8 wires</B>, wired 'straight
+         through' (as shown to the left) for your connections.
+      </TD></TR>
+</TABLE></P>
+
+<P><TABLE BORDER=0 WIDTH="100%">
+   <TR>
+      <TD>
+         <P><TABLE BORDER=0 CELLSPACING=0 CELLPADDING=3 WIDTH="100%">
+            <TR>
+               <TD bgcolor="cccccc" WIDTH="70%">
+                  <P><B><A NAME="crj45"></A>Cisco devices with
+                  RJ-45(f) console ports</B>
+               </TD><TD bgcolor="cccccc" WIDTH="30%">
+                  <P ALIGN=RIGHT><B><A HREF="#top">to Table of
+                  Contents</A></B>
+               </TD></TR>
+         </TABLE></P>
+         
+         <P ALIGN=CENTER><IMG SRC="../patchdv1.gif" ALIGN=bottom></P>
+         
+         <P>The Cisco-wired <A HREF="#patch">patch panel</A> from
+         APA Cables and Netowrks are wired the null-modem opposite from the Cisco
+         console ports, so that Cisco RJ-45 console ports can attach
+         directly to a Cisco patch panel, using an
+         <A HREF="#ethernet">Ethernet</A> (8-wire, straight-through)
+         cable.</P>
+         
+         <UL>
+            <LI>The cable (CiscoC-Annex) that will connect the
+            [Xylogics/Bay/NorTel] Annex hardware to your Cisco
+            console port is APACN part: <FONT
+            COLOR="#CC0000">24490-72</FONT>.
+            
+            <LI>The cable (CiscoP-Annex) that will connect the
+            [Xylogics/Bay/NorTel] Annex hardware to your Cisco patch
+            panel is APACN part: <FONT
+            COLOR="#CC0000">24490-52</FONT>.
+         </UL>
+         
+         <P>Rather than list all of the possibilities here, I have
+         created an <A HREF="annex-hosts.html">Annex Host-to-Adapters
+         Page</A>, which lists the various combinations of male and
+         female, DTE/DCE, DB-9 and DB-25, with a list of the various
+         devices which fall under each connector type. The list also
+         tells you which adapter (or cable) you will need to connect
+         each device to an Annex console server port.</P>
+         
+         <P>There are a few Cisco devices that have RJ-45 consoles
+         that are wired the null-modem opposite from the Cisco wiring
+         standard. The three devices listed below were (I believe)
+         Catalyst products. They are also listed on the
+         <A HREF="annex-hosts.html">Annex Host-to-Adapters Page</A>,
+         with information about which cable to use. (The RJ-45
+         console on these devices appears to be a patch panel, and
+         not a console port.)</P>
+         
+         <UL>
+            <LI>1100 switches
+            
+            <LI>1200 switches
+            
+            <LI>1400 switches
+         </UL>
+      </TD></TR>
+</TABLE></P>
+
+<P><TABLE BORDER=0 WIDTH="100%">
+   <TR>
+      <TD>
+         <P><TABLE BORDER=0 CELLSPACING=0 CELLPADDING=3 WIDTH="100%">
+            <TR>
+               <TD bgcolor="cccccc" WIDTH="70%">
+                  <P><B><A NAME="orj45"></A>Connecting to non-Annex
+                  RJ-45(f) console ports</B>
+               </TD><TD bgcolor="cccccc" WIDTH="30%">
+                  <P ALIGN=RIGHT><B><A HREF="#top">to Table of
+                  Contents</A></B>
+               </TD></TR>
+         </TABLE></P>
+         
+         <P>When you have a device with a non-Annex RJ-45 console
+         port, you will either need to buy or make a
+         <A HREF="#cables">special cable</A>, or use a combination of
+         an Annex adapter (connected to the Annex console server),
+         and another non-Annex adapter (connected to the non-Annex
+         device) to create the interface between the two wiring
+         schemes. The common choice for these connections are DB-25
+         RS-232 adapters, so you can check your work by putting a
+         passive RS-232 signal tracer, or a breakout box, in between
+         the adapters.</P>
+         
+         <P ALIGN=CENTER><IMG SRC="../patchdv4.gif" ALIGN=bottom></P>
+         
+         <P>The table below documents such connections, using
+         ethernet cable (8-wire, straight-through) cables between the
+         patch panel, the devices and the adapters. You can find more
+         tips on my
+         <A HREF="http://www.conserver.com/consoles/msock.html">Minor
+         Scroll of Console Knowledge</A> page.
+      </TD></TR>
+</TABLE></P>
+
+<P><TABLE BORDER=0 WIDTH="100%">
+   <TR>
+      <TD>
+         <P><TABLE BORDER=0 CELLSPACING=0 CELLPADDING=3 WIDTH="100%">
+            <TR>
+               <TD bgcolor="cccccc" WIDTH="70%">
+                  <P><B><A NAME="null"></A>Making a Null Modem Cable
+                  with Cisco adapters</B>
+               </TD><TD bgcolor="cccccc" WIDTH="30%">
+                  <P ALIGN=RIGHT><B><A HREF="#top">to Table of
+                  Contents</A></B>
+               </TD></TR>
+         </TABLE></P>
+         
+         <P>The four charts below show you how to use adapters to
+         make a Null Modem, using standard ethernet cables to provide
+         the appropriate lengths. (Always match vendor-compatible
+         parts! Connect Annex format with Annex format adapters,
+         Cisco with Cisco, etc. Your connection will not work if you
+         mix different vendors models.)</P>
+         
+         <P ALIGN=CENTER><IMG SRC="../null-mdm.gif" ALIGN=bottom></P>
+         
+         <P><TABLE >
+            <TR>
+               <TD VALIGN=top>
+                  <P><B>Cisco Adapter combinations</B><BR>
+                  
+                  <TABLE BORDER=1 WIDTH="100%">
+                     <TR>
+                        <TD WIDTH="15%">
+                           <P ALIGN=CENTER>Version
+                        </TD><TD WIDTH="35%">
+                           <P ALIGN=CENTER><B>A</B>-side
+                        </TD><TD WIDTH="35%">
+                           <P ALIGN=CENTER><B>B</B>-side
+                        </TD></TR>
+                     <TR>
+                        <TD WIDTH="15%">
+                           <P ALIGN=CENTER>1
+                        </TD><TD WIDTH="35%">
+                           <P ALIGN=CENTER>CMDCE
+                        </TD><TD WIDTH="35%">
+                           <P ALIGN=CENTER>CFDTE
+                        </TD></TR>
+                     <TR>
+                        <TD WIDTH="15%">
+                           <P ALIGN=CENTER>2
+                        </TD><TD WIDTH="35%">
+                           <P ALIGN=CENTER>CMDTE
+                        </TD><TD WIDTH="35%">
+                           <P ALIGN=CENTER>CFDCE
+                        </TD></TR>
+                  </TABLE>(If you connect <B>both DTE</B> adapters,
+                  or <B>both DCE</B> adapters together, you get a
+                  straight-through cable.)
+               </TD><TD>
+                  <P><B>Micro-Annex Adapter combinations</B><BR>
+                  
+                  <TABLE BORDER=1 WIDTH="100%">
+                     <TR>
+                        <TD WIDTH="15%">
+                           <P ALIGN=CENTER>Version
+                        </TD><TD WIDTH="35%">
+                           <P ALIGN=CENTER><B>A</B>-side
+                        </TD><TD WIDTH="35%">
+                           <P ALIGN=CENTER><B>B</B>-side
+                        </TD></TR>
+                     <TR>
+                        <TD WIDTH="15%">
+                           <P ALIGN=CENTER>1
+                        </TD><TD WIDTH="35%">
+                           <P ALIGN=CENTER>AMDCE
+                        </TD><TD WIDTH="35%">
+                           <P ALIGN=CENTER>AFDTE
+                        </TD></TR>
+                     <TR>
+                        <TD WIDTH="15%">
+                           <P ALIGN=CENTER>2
+                        </TD><TD WIDTH="35%">
+                           <P ALIGN=CENTER>AMDTE
+                        </TD><TD WIDTH="35%">
+                           <P ALIGN=CENTER>AFDCE
+                        </TD></TR>
+                  </TABLE>(If you connect <B>both DTE</B> adapters,
+                  or <B>both DCE</B> adapters together, you get a
+                  straight-through cable.)
+               </TD></TR>
+            <TR>
+               <TD>
+                  <P><B>Xylogics Adapter combinations</B><BR>
+                  
+                  <TABLE BORDER=1 WIDTH="100%">
+                     <TR>
+                        <TD WIDTH="15%">
+                           <P ALIGN=CENTER>Version
+                        </TD><TD WIDTH="35%">
+                           <P ALIGN=CENTER><B>A</B>-side
+                        </TD><TD WIDTH="35%">
+                           <P ALIGN=CENTER><B>B</B>-side
+                        </TD></TR>
+                     <TR>
+                        <TD WIDTH="15%">
+                           <P ALIGN=CENTER>1
+                        </TD><TD WIDTH="35%">
+                           <P ALIGN=CENTER>XMDCE
+                        </TD><TD WIDTH="35%">
+                           <P ALIGN=CENTER>XFDTE
+                        </TD></TR>
+                     <TR>
+                        <TD WIDTH="15%">
+                           <P ALIGN=CENTER>2
+                        </TD><TD WIDTH="35%">
+                           <P ALIGN=CENTER>XMDTE
+                        </TD><TD WIDTH="35%">
+                           <P ALIGN=CENTER>XFDCE
+                        </TD></TR>
+                  </TABLE>(If you connect <B>both DTE</B> adapters,
+                  or <B>both DCE</B> adapters together, you get a
+                  straight-through cable.)
+               </TD><TD>
+                  <P><B>IOLAN Adapter combinations</B><BR>
+                  
+                  <TABLE BORDER=1 WIDTH="100%">
+                     <TR>
+                        <TD WIDTH="15%">
+                           <P ALIGN=CENTER>Version
+                        </TD><TD WIDTH="35%">
+                           <P ALIGN=CENTER><B>A</B>-side
+                        </TD><TD WIDTH="35%">
+                           <P ALIGN=CENTER><B>B</B>-side
+                        </TD></TR>
+                     <TR>
+                        <TD WIDTH="15%">
+                           <P ALIGN=CENTER>1
+                        </TD><TD WIDTH="35%">
+                           <P ALIGN=CENTER>IMDCE
+                        </TD><TD WIDTH="35%">
+                           <P ALIGN=CENTER>IFDTE
+                        </TD></TR>
+                     <TR>
+                        <TD WIDTH="15%">
+                           <P ALIGN=CENTER>2
+                        </TD><TD WIDTH="35%">
+                           <P ALIGN=CENTER>IMDTE
+                        </TD><TD WIDTH="35%">
+                           <P ALIGN=CENTER>IFDCE
+                        </TD></TR>
+                  </TABLE>(If you connect <B>both DTE</B> adapters,
+                  or <B>both DCE</B> adapters together, you get a
+                  straight-through cable.)
+               </TD></TR>
+         </TABLE></P>
+         
+         <P>You can also use the 'straight-through' cables shown in
+         the tables above to allow you to insert an RS-232 passive
+         signal tracer or a breakout-box in-line between the RJ-45
+         devices, so that you can monitor the signal states on the
+         various leads, as a troubleshooting aid.
+      </TD></TR>
+</TABLE></P>
+
+<P><TABLE >
+   <TR>
+      <TD>
+         <P><TABLE BORDER=0 CELLSPACING=0 CELLPADDING=3 WIDTH="100%">
+            <TR>
+               <TD bgcolor="cccccc" WIDTH="70%">
+                  <P><B><A NAME="rj45schem"></A>RJ-45 Adapter
+                  Schematics</B>
+               </TD><TD bgcolor="cccccc" WIDTH="30%">
+                  <P ALIGN=RIGHT><B><A HREF="#top">to Table of
+                  Contents</A></B>
+               </TD></TR>
+         </TABLE>
+         
+         <P>My introduction to the Xylogics MicroAnnex and Remote Annex
+         products came in the late 1990's, working at 
+         <a href="http://www.synopsys.com/">Synopsys</a>, in the NCS
+         group. I was introduced to the lore surrounding Serial BREAK
+         and Sun computers, and I managed to halt 16 Sun boxen when
+         I accidentally, and only briefly, cycled the power to one
+         MicroAnnex. After seeing the mess and drama that accident
+         caused, I started researching what caused the trouble, and
+         I began my &quot;Console Server 
+         <a href="../BREAK-off/breakoff.html">BREAK-off testing</a>&quot;,
+         to try to determine which products were safe to use with Sun
+         computer consoles, and to encourage Console Server vendors
+         to make their newer producs BREAK-safe.
+
+         <p><b>NOTE:</b> An incorrectly wired RJ45-to-DBx adapter can
+         also cause a Sun server to think it has seen a BREAK! Make sure
+         you are connecting a properly-wired adapter to all live Sun
+         servers!
+         
+         <P>I am a strong proponent of buying pre-wired, pre-labeled
+         adapters and cables. Generally speaking, you probably can't
+         build an adapter cheaper, if you consider the value of your
+         time as well as the component costs. And, whether or not I
+         can make 100 adapters without a mistake isn't being
+         questioned, I'm sure I'd rather not make 100 by myself. The
+         best advantages for buying pre-built adapters and pre-wired
+         cables include;
+         
+         <UL>
+            <LI>Consistent wiring and labeling of the parts.
+            
+            <LI>Consistent shell colors and labels aides in
+            troubleshooting, by visually identifying the parts.
+            
+            <LI>Enhances reliability, knowing you can grab any
+            adapter and count on it being wired correctly.
+            
+            <LI>If you need a LOT of adapters or cables for a
+            build-out, you probably don't want to build them all
+            yourself!
+         </UL>
+         
+         <P>You can purchase any of the adapters and cables listed on
+         these pages individually (or in bulk) from APA Cables &amp;
+         Networks
+         (<A HREF="http://www.apacn.com/">www.apacn.com</A>). You
+
+         also have the option of buying a
+         <A HREF="annexkit.html">Annex Console Kit</A>, which
+         includes a complete set of adapters, and some of the
+         specialty <A HREF="#cables">cables</A> listed above, as well
+         as a passive RS-232 Signal Tracer. The default shell color
+         is black for Cisco adapters. You can get the shells in
+         another color if you want, provided you want one of the
+         colors listed below:
+         
+         <P>Available colors: <B>BK</B> = black, <B>GN</B> = green,
+         <B>RD</B> = red, <B>YL</B> = yellow, <B>BL</B> = blue,
+         <B>GY</B> = grey
+         
+         <P>So, the APACN part number <B>CFDTE91-GN</B> would denote
+         the DB-9 female DTE adapter, wired for the Cisco RJ-45
+         format, but supplied with a green plastic shell (instead of
+         the default black shell).
+         
+         <P>APA Cables &amp; Networks also sells adapters and adapter
+         kits for other RJ-45 schema, including the
+         <A HREF="../Cisco/ciscokit.html">Cisco/Lantronix</A>,
+         <A HREF="../IOLAN/iolankit.html">IOLAN Rack+</A> and
+         <A HREF="../Xyplex/xyplexkit.html">Xyplex/iTouch/MRV</A> console
+         server families. APA Cables &amp; Networks uses different
+         default colors to make it easier to visually identify the
+         different RJ-45 wiring schema.
+         
+         <P>The DB-25 adapters are wired according to the older Cisco
+         equivalents (from the CS-500 days). The DB-9 parts are
+         derivative works. The signaling for the Cisco RJ-45 consoles
+         is shown <A HREF="#rj45">at the beginning of this guide</A>.
+         
+         <P>With all of this said, I also understand that sometimes
+         you just need to make that one cable or adapter, and buying
+         just one isn't practical. So, here are the schematics. (The
+         APA Cables &amp; Networks part number is shown below each
+         adapter. If there is a Cisco equivalent, I've noted the
+         Cisco part number as well.)
+         
+         <P><TABLE BORDER=0 WIDTH="100%">
+            <TR>
+               <TD WIDTH="25%">
+                  <P><CENTER><IMG SRC="afdce.gif" ALIGN=top><BR>
+                  
+                  APACN p/n <FONT COLOR="#AF0000">24490-38<BR>
+                  
+                  </FONT>Cisco p/n <B>29-0809-01</B></CENTER>
+               </TD><TD WIDTH="25%">
+                  <P><CENTER><IMG SRC="afdte.gif" ALIGN=top><BR>
+                  
+                  APACN p/n <FONT COLOR="#AF0000">24490-35<BR>
+                  
+                  </FONT>Cisco p/n <B>29-0810-01</B></CENTER>
+               </TD><TD WIDTH="25%">
+                  <P><CENTER><IMG SRC="amdce.gif" ALIGN=top><BR>
+                  
+                  APACN p/n <FONT COLOR="#AF0000">24490-39<BR>
+                  
+                  </FONT>Cisco p/n <B>29-0808-01</B></CENTER>
+               </TD><TD WIDTH="25%">
+                  <P><CENTER><IMG SRC="amdte.gif" ALIGN=top><BR>
+                  
+                  APACN p/n <FONT COLOR="#AF0000">24490-36<BR>
+                  
+                  </FONT>Cisco p/n <B>29-0811-01</B></CENTER>
+               </TD></TR>
+         </TABLE>
+         
+         <P><TABLE BORDER=0 WIDTH="100%">
+            <TR>
+               <TD WIDTH="25%">
+                  <P><CENTER><IMG SRC="afdce91.gif" ALIGN=top><BR>
+                  
+                  APACN p/n <FONT COLOR="#AF0000">24490-44</FONT>
+                  </CENTER>
+               </TD><TD WIDTH="25%">
+                  <P><CENTER><IMG SRC="afdte91.gif" ALIGN=top><BR>
+                  
+                  APACN p/n <FONT COLOR="#AF0000">24490-43<BR>
+                  
+                  </FONT>Cisco p/n <B>74-0495-01</B></CENTER>
+               </TD><TD WIDTH="25%">
+                  <P><CENTER><IMG SRC="amdce91.gif" ALIGN=top><BR>
+                  
+                  APACN p/n <FONT COLOR="#AF0000">24490-42</FONT>
+                  </CENTER>
+               </TD><TD WIDTH="25%">
+                  <P><CENTER><IMG SRC="amdte91.gif" ALIGN=top><BR>
+                  
+                  APACN p/n <FONT COLOR="#AF0000">24490-41</FONT>
+                  </CENTER>
+               </TD></TR>
+         </TABLE>
+         
+         <P><TABLE BORDER=0 WIDTH="100%">
+            <TR>
+               <TD WIDTH="25%">
+                  <P><CENTER><IMG SRC="afdce92.gif" ALIGN=top><BR>
+                  
+                  APACN p/n <FONT COLOR="#AF0000">24490-45</FONT>
+                  </CENTER>
+               </TD><TD WIDTH="25%">
+                  <P><CENTER><IMG SRC="afdce93.gif" ALIGN=top><BR>
+                  
+                  APACN p/n <FONT COLOR="#AF0000">24490-46</FONT>
+                  </CENTER>
+               </TD><TD WIDTH="25%">
+                  <P><CENTER><IMG SRC="afmod.gif" ALIGN=top><BR>
+                  
+                  APACN p/n <FONT COLOR="#AF0000">24490-37</FONT>
+                  </CENTER>
+               </TD><TD WIDTH="25%">
+                  <P><CENTER><IMG SRC="ammod.gif" ALIGN=top><BR>
+                  
+                  APACN p/n <FONT COLOR="#AF0000">24490-40</FONT>
+                  </CENTER>
+               </TD></TR>
+
+         </TABLE>
+         
+         <P><TABLE BORDER=0 WIDTH="100%">
+            <TR>
+               <TD WIDTH="33%">
+                  <P><CENTER><IMG SRC="../porj45f.gif" ALIGN=top></CENTER>
+               </TD><TD WIDTH="33%">
+                  <P><CENTER><IMG SRC="aloopback.gif" ALIGN=top></CENTER>
+               </TD><TD WIDTH="33%">
+                  <P><CENTER><IMG SRC="../porj45m.gif" ALIGN=top></CENTER>
+               </TD></TR>
+         </TABLE>
+      </TD></TR>
+</TABLE>
+
+<P><TABLE BORDER=0 WIDTH="100%">
+   <TR>
+      <TD>
+         <P><TABLE BORDER=0 CELLSPACING=0 CELLPADDING=3 WIDTH="100%">
+            <TR>
+               <TD bgcolor="cccccc" WIDTH="70%">
+                  <P><B><A NAME="cables"></A>Specialty Cables for
+                  Cisco Console Servers</B>
+               </TD><TD bgcolor="cccccc" WIDTH="30%">
+
+                  <P ALIGN=RIGHT><B><A HREF="#top">to Table of
+                  Contents</A></B>
+               </TD></TR>
+         </TABLE>
+         
+         <P>As with adapters, I recommend buying pre-built,
+         pre-labeled, tested cables. APA Cables and Networks sells
+         specialty cables for connecting Annex console server
+         ports to other console servers and devices, and these
+         can be ordered from the descriptions and part numbers shown
+         below. The default length is 7 feet, but you can order
+         custom lengths as needed. The cables come with black boots
+         on the RJ-45 end, and labels denoting the Annex end. The MMJ
+         end does not get a boot, since they can't find anyone who
+         makes a colored MMJ boot.
+         
+         <P><TABLE BORDER=0 WIDTH="100%">
+            <TR>
+               <TD WIDTH="25%">
+                  <P><CENTER><IMG SRC="iolan-annex.jpg" ALIGN=top><BR>
+                  
+                  &npsp;</CENTER>
+               </TD><TD WIDTH="25%">
+                  <P><CENTER><IMG SRC="xyplex-annex.jpg" ALIGN=top><BR>
+                  
+                  &nbsp</CENTER>
+               </TD><TD WIDTH="25%">
+                  <P><CENTER><IMG SRC="ciscoc-annex.gif" ALIGN=top><BR>
+                  
+                  APACN p/n <FONT COLOR="#AF0000">24490-52</FONT>
+                  </CENTER>
+               </TD><TD WIDTH="25%">
+                  <P><CENTER><IMG SRC="ciscop-annex.gif" ALIGN=top><BR>
+                  
+                  &nbsp;</CENTER>
+               </TD></TR>
+         </TABLE>
+                  
+         <P>There are other cables listed on the
+         <A HREF="annexkit.html">Annex Adapter Kit Page</A>.
+         
+         <P>
+         <HR WIDTH="60%" NOSHADE>
+      
+      </TD></TR>
+</TABLE>
+
+<P><TABLE BORDER=0 WIDTH="100%">
+   <TR>
+      <TD VALIGN=top>
+         <P><B><A NAME="annex-usr"></A>U.S. Robotics</B> (USR, now
+         3-Com) <B>digital modem chassis</B> have a different pinouts
+         than Cisco on the console ports on their NICs and NACs.
+         
+         <P>You can accommodate these devices by combining a Cisco
+         <B>29-0810-01</B> (<A HREF="#rj45schem">CFDTE</A>) adapter
+         with a USR cable (part number <B>1.009.691-B</B>) attached
+         to the USR console port, and an ethernet cable to connect
+         the <A HREF="#rj45schem">AFDTE</A> adapter to the Cisco
+         port.
+         
+         <P><CENTER><IMG SRC="../usr-cab2.gif" WIDTH=171 HEIGHT=63
+         ALIGN=bottom> </CENTER>
+         
+         <P>You can also make a single cable, with RJ-45 male
+         connectors on each end. Make sure that you label both ends
+         of the cable, since the wiring is not symmetrical (it makes
+         a difference which end plugs into the Cisco port!) APA
+         Cables and Networks sells a cable for this (black
+         boot on the Annex end, orange boot on the USR end);
+         
+         <P><CENTER><TABLE BORDER=0 WIDTH="75%" align=center>
+            <TR>
+               <TD WIDTH="25%">
+                  <P>
+               </TD><TD WIDTH="25%">
+                  <P><CENTER><IMG SRC="annex-usr.gif" WIDTH=116
+                  HEIGHT=167 ALIGN=top><BR>
+                  
+                  APACN p/n <FONT COLOR="#AF0000">24490-51</FONT>
+                  </CENTER>
+               </TD><TD WIDTH="25%">
+                  <P><CENTER><IMG SRC="../porj45m.gif" ALIGN=middle></CENTER>
+               </TD><TD WIDTH="25%">
+                  <P>
+               </TD></TR>
+         </TABLE></CENTER>
+         
+         <P>There are more cables listed on the
+         <A HREF="annex-hosts.html">Annex Host-to-Adapters Page</A>.
+         
+      </TD></TR>
+</TABLE>
+
+<P>
+<HR WIDTH="60%" NOSHADE>
+      
+<P><TABLE BORDER=0 WIDTH="100%">
+   <TR>
+      <TD VALIGN=top>
+         <P><B><A NAME="annex-sun-t3"></A>Sun Netra Hardware</B>
+         
+         <P>Most Sun hardware has used a female DB-25 connector for
+         the TTY A and B ports. You can use a <A HREF="#rj45schem">AMDCE</A>
+         adapter and an Ethernet cable to connect to an Annex serial port.
+         Check the <a href="annex-hosts.html">Annex Host-to-Adapter guide
+         to be certain which adapter to use for various Sun gear)
+
+         <P>The Sun Netra T-1 (model 105) uses an RJ-45 console, and
+         it happens to be wired identically to the Cisco console
+         port. You can use the ciscoc-annex cable to connect a Sun
+         Netra-T1 series &quot;LOM&quot; (Lights-Out Management) port
+         to an Annex port.
+         
+         <P><CENTER><TABLE BORDER=0 WIDTH="100%" align=center>
+            <TR>
+               <TD WIDTH="25%">
+                  <P>
+               </TD><TD WIDTH="25%">
+                  <P><CENTER><IMG SRC="ciscoc-annex.gif" WIDTH=116
+                  HEIGHT=167 ALIGN=top><BR>
+                  
+                  APACN p/n <FONT COLOR="#AF0000">24490-52</FONT>
+                  </CENTER>
+               </TD><TD WIDTH="25%">
+                  <P><CENTER><IMG SRC="../porj45m.gif" ALIGN=middle></CENTER>
+               </TD><TD WIDTH="25%">
+                  <P>
+               </TD></TR>
+         </TABLE></CENTER>
+                  
+         <P>The DB-25 serial adapter that comes with the Sun Netra
+         T-1 (<B>Sun p/n 530-2889-02</B>) is wired similarly to the
+         APACN (Cisco) <a href="../Cisco/ciscocons.html#rj45schem">CMDCE</a>
+         adapter, with the addition of adding a 'frame
+         ground'. The plastic DB-25 shell has a metalized coating,
+         and a drain ground lead is attached from pin 1 of the
+         DB-25(m) connector to a lead attached to the metalized
+         shell. The schematic on the <B>Sun p/n 530-2889-03</B> is
+         similar, except they changed the colors of the wires inside
+         the shell (and the tabs which hold the DB-25 connector are
+         <I>much</I> more fragile, so take my word on the wiring
+         inside!)
+         
+         <P>The Sun Netra T-3 disk arrays use an <B>RJ-13</B>
+         connector for it's RS-232 console, and you only get data and
+         ground for your connection (no flow control or handshaking).
+         APA Cables and Networks sells a cable for
+         connecting these devices (black boot on the Annex end, no
+         boot on the RJ-13 end);
+         
+         <P><TABLE BORDER=0 WIDTH="100%">
+            <TR>
+               <TD WIDTH="33%">
+                  <P><CENTER><IMG SRC="../porj13m.jpg" ALIGN=middle></CENTER>
+               </TD><TD WIDTH="33%">
+                  <P><CENTER><IMG SRC="annex-netrat3.gif" ALIGN=top><BR>
+                  
+                  &nbsp;</CENTER>
+               </TD><TD WIDTH="33%">
+                  <P><CENTER><IMG SRC="../porj45m.gif" ALIGN=middle></CENTER>
+               </TD></TR>
+         </TABLE>
+         
+         <P>There are more cables listed on the
+         <A HREF="annex-hosts.html">Annex Host-to-Adapters Page</A>.
+         
+      </TD></TR>
+</TABLE>
+
+<P>
+<HR WIDTH="60%" NOSHADE>
+      
+<P><TABLE BORDER=0 WIDTH="100%">
+   <TR>
+      <TD VALIGN=top>
+         <P><B><A NAME="annex-dec"></A>Digital Equipment Corp.</B>
+         (DEC, then Compaq, then H.P.) equipment often used an RJ-13
+         with an offset locking tab, referred to as a Modified
+         Modular jack (<B>MMJ</B>). This included their VT-series
+         terminals, VAX equipment, and even newer Alpha series
+         equipment.
+         
+         <P>APA Cables and Networks sells a cable for connecting
+         DEC MMJ-equipped gear to an Annex port
+         (black boot on the Annex end, and no boot on the DEC end);
+         
+         <P><TABLE BORDER=0 WIDTH="100%">
+            <TR>
+               <TD WIDTH="33%">
+                  <P><CENTER><IMG SRC="../pommjm.gif" ALIGN=middle></CENTER>
+               </TD><TD WIDTH="33%">
+                  <P><CENTER><IMG SRC="annex-decmmj.gif" ALIGN=top><BR>
+                  
+                  APACN p/n <FONT COLOR="#AF0000">24490-53</FONT>
+                  </CENTER>
+               </TD><TD WIDTH="33%">
+                  <P><CENTER><IMG SRC="../porj45m.gif" ALIGN=middle></CENTER>
+               </TD></TR>
+         </TABLE>
+         
+         <P>There are other cables listed on the
+         <A HREF="annex-hosts.html">Annex Host-to-Adapters Page</A>.
+         
+      </TD></TR>
+</TABLE>
+
+<P>
+<HR WIDTH="60%" NOSHADE>
+      
+<P><TABLE BORDER=0>
+   <TR>
+      <TD>
+         <P><A NAME="kentrox"></A><B>Kentrox RJ-45 Devices</B></P>
+         
+         <P>APA Cables and Networks sells cables for connecting Kentrox consoles
+         to Annex console servers (black boot on the Annex end,
+         orange boot on the Kentrox end);</P>
+         
+         <P><CENTER><TABLE BORDER=0 WIDTH="100%" align=center>
+            <TR>
+               <TD WIDTH="25%">
+                  <P>
+               </TD><TD WIDTH="25%">
+                  <P><CENTER><IMG SRC="annex-kentrox.gif" WIDTH=116
+                  HEIGHT=167 ALIGN=top><BR>
+                  
+                  APACN p/n <FONT COLOR="#AF0000">24490-89</FONT>
+                  </CENTER>
+               </TD><TD WIDTH="25%">
+                  <P><CENTER><IMG SRC="../porj45m.gif" ALIGN=middle></CENTER>
+               </TD><TD WIDTH="25%">
+                  <P>
+               </TD></TR>
+         </TABLE></CENTER>
+
+         <P>There are more cables listed on the
+         <A HREF="annex-hosts.html">Annex Host-to-Adapters Page</A>.
+      </TD></TR>
+</TABLE></P>
+
+<P><TABLE BORDER=0 WIDTH="100%">
+   <TR>
+      <TD>
+         <P><TABLE BORDER=0 CELLSPACING=0 CELLPADDING=3 WIDTH="100%">
+            <TR>
+               <TD bgcolor="cccccc" WIDTH="70%">
+                  <P><B><A NAME="db9m"></A>Devices with DB-9(m)
+                  console ports</B>
+               </TD><TD bgcolor="cccccc" WIDTH="30%">
+                  <P ALIGN=RIGHT><B><A HREF="#top">to Table of
+                  Contents</A></B>
+               </TD></TR>
+         </TABLE></P>
+         
+         <P ALIGN=CENTER><IMG SRC="../patchdv3.gif" ALIGN=bottom></P>
+         
+         <P>The Annex console server is rare in one way; it has a
+         distinct lead for the DCD signal.
+         
+         <UL>
+            <LI>female adapter,
+            <A HREF="http://www.apacn.com/">APACN</A> part
+            number: <FONT COLOR="#CC0000">24490-43</FONT>
+            ("<A HREF="annexkit.html">AFDTE91</A>").
+            
+            <LI>female adapter,
+            <A HREF="http://www.apacn.com/">APACN</A> part
+            number: <FONT COLOR="#CC0000">24490-44</FONT>
+            ("<A HREF="annexkit.html">AFDCE91</A>").
+            
+            <LI>male adapter,
+            <A HREF="http://www.apacn.com/">APACN</A> part
+            number: <FONT COLOR="#CC0000">24490-41</FONT>
+            ("<A HREF="annexkit.html">AMDTE91</A>").
+            
+            <LI>male adapter,
+            <A HREF="http://www.apacn.com/">APACN</A> part
+            number: <FONT COLOR="#AF0000">24490-42</FONT>
+            ("<A HREF="annexkit.html">AMDCE91</A>").
+         </UL>
+         
+         <P>Rather than list all of the possibilities here, I have
+         created an <A HREF="annex-hosts.html">Annex Host-to-Adapters
+         Page</A>, which lists the various combinations of male and
+         female, DTE/DCE, DB-9 and DB-25, with a list of the various
+         devices which fall under each connector type. The list also
+         tells you which adapter (or cable) you will need to connect
+         each device to a Annex console server port.</P>
+         
+         <P>There are currently two other DB-9 to RJ-45 adapters
+         available from
+         <A HREF="http://www.apacn.com/">APACN</A>;</P>
+         
+         <UL>
+            <LI>female adapter,
+            <A HREF="http://www.apacn.com/">APACN</A> part
+            number: <FONT COLOR="#CC0000">24490-45</FONT>
+            ("<A HREF="annexkit.html">AFDCE92</A>").
+            
+            <UL>
+               <LI>The DB-9 Pin 1 is tied to DSR, instead of DCD from
+               the Annex
+               
+               <LI>DSR from DB-9 tied to DCD on the Annex.
+               
+               <LI>No DSR input to the Annex.
+            </UL>
+            
+            <LI>female adapter,
+            <A HREF="http://www.apacn.com/">APACN</A> part
+            number: <FONT COLOR="#CC0000">24490-46</FONT>
+            ("<A HREF="annexkit.html">AFDCE93</A>").
+            
+            <UL>
+               <LI>DSR from DB-9 tied to DCD on the Annex.
+               
+               <LI>No DSR input to the Annex.
+            </UL>
+         </UL>
+         
+         <P>Note: Some Cisco 1900-series switches use a DB-9 console
+         connection, instead of the RJ-45 connector. Some of these
+         devices do not like a signal on DB-9 pin 1, while other
+         versions of the 1900 will require this signal. (If the Cisco
+         1900 you have attached to is spewing AT modem commands out
+         the port, you've got the wrong adapter.) The <B>AFDCE91</B>
+         does have DCD connected to DB-9 pin 1, while the
+         <B>AFDCE93</B> does not have a signal on DB-9 pin 1.</P>
+         
+         <P><A HREF="http://www.apacn.com/">APACN</A> sells
+         any of these adapters (individual or bulk), as well as a
+         <A HREF="annexkit.html">complete adapter/cable set</A>.
+      </TD></TR>
+</TABLE>
+
+<P><CENTER><TABLE BORDER=0 WIDTH="100%">
+   <TR>
+      <TD>
+         <P><TABLE BORDER=0 CELLSPACING=0 CELLPADDING=3 WIDTH="100%">
+            <TR>
+               <TD bgcolor="cccccc" WIDTH="70%">
+                  <P><B><A NAME="db25"></A>Devices with DB-25 console
+                  ports</B>
+               </TD><TD bgcolor="cccccc" WIDTH="30%">
+                  <P ALIGN=RIGHT><B><A HREF="#top">to Table of
+                  Contents</A></B>
+               </TD></TR>
+         </TABLE>
+         
+         <P><CENTER><IMG SRC="../patchdv2.gif" ALIGN=bottom></CENTER>
+                  
+         <P>Rather than list all of the possibilities here, I have
+         created an <A HREF="annex-hosts.html">Annex Host-to-Adapters
+         Page</A>, which lists the various combinations of male and
+         female, DTE/DCE, DB-9 and DB-25, with a list of the various
+         devices which fall under each connector type. The list also
+         tells you which adapter (or cable) you will need to connect
+         each device to an Annex serial port.
+         
+         <P><A HREF="http://www.apacn.com/">APA Cables and
+         Networks</A> sells any of these adapters (individual or
+         bulk), as well as a <A HREF="annexkit.html">complete
+         adapter/cable set</A>.
+         
+         <P>
+         <HR WIDTH="60%" NOSHADE>
+      
+      </TD></TR>
+</TABLE></CENTER>
+
+<P><TABLE BORDER=0 WIDTH="100%">
+   <TR>
+      <TD>
+         <P><TABLE BORDER=0 CELLSPACING=0 CELLPADDING=3 WIDTH="100%">
+            <TR>
+               <TD bgcolor="cccccc" WIDTH="70%">
+                  <P><B><A NAME="cpc"></A>Attaching devices to a PC
+                  for configuration</B>
+               </TD><TD bgcolor="cccccc" WIDTH="30%">
+                  <P ALIGN=RIGHT><B><A HREF="#top">to Table of
+                  Contents</A></B>
+               </TD></TR>
+         </TABLE></P>
+         
+         <P ALIGN=CENTER><IMG SRC="../pcdv1.gif" ALIGN=bottom></P>
+         
+         <P><TABLE BORDER=0 WIDTH="100%">
+            <TR>
+               <TD>
+                  <P>When you are deploying console servers, you may
+                  still want to have a way to wheel a terminal or a
+                  laptop up to a machine to check configurations
+                  (basically, the practical (or paranoid) among us
+                  want to have a safety net, in case the console
+                  services fail). In this case, using
+                  <A HREF="#rj45schem">modular adapters</A>
+                  actually simplifies our job!</P>
+                  
+                  <P>By connecting all of your remote consoles to the
+                  patch panels using Ethernet cables, all you need to
+                  do is connect an adapter to your laptop, and set up
+                  a Terminal Emulator package to talk to the serial
+                  port of the laptop.</P>
+                  
+                  <BLOCKQUOTE><P><FONT COLOR="#AF0000">If you want to
+                  set up a "crash cart", I'd also suggest that you
+                  set the serial port speed on all of your consoles
+                  to 9600 bps, 8-N-1 (since is the most common
+                  setting). Having a common speed removes one more
+                  variable to have to remember during a
+                  crisis.</FONT></P>
+                  
+                  <P><FONT COLOR="#AF0000">If you have any
+                  </FONT><B><FONT COLOR="#AF0000">Sun</FONT></B><FONT
+                  COLOR="#AF0000"> workstations connected to your
+                  console services, you should test to make sure that
+                  your terminal emulator software doesn't send a
+                  serial </FONT><B><FONT
+                  COLOR="#AF0000">BREAK</FONT></B><FONT
+                  COLOR="#AF0000"> when you start/stop it, since the
+                  BREAK signal will likely send your Sun host to the
+                  </FONT><B><FONT COLOR="#AF0000">OK</FONT></B><FONT
+                  COLOR="#AF0000"> prompt. (This has also been
+                  reported on some SGI and NeXT hosts.)</FONT></P>
+                  </BLOCKQUOTE>
+                  
+                  <P>Use the APACN
+                  <B><A HREF="annexkit.html">AFDCE91</A></B> adapter
+                  connected to your laptop (and a terminal emulation
+                  program) look like an Annex RJ-45 console server
+                  port.</P>
+                  
+                  <P>When you have successfully configured your
+                  devices, all you need to do is disconnect the cable
+                  from the adapter on your PC, and connect the cable
+                  to a port on an Annex console server.
+               </TD></TR>
+         </TABLE>
+      </TD></TR>
+</TABLE></P>
+
+<P><TABLE BORDER=0 WIDTH="100%">
+   <TR>
+      <TD>
+         <P><TABLE BORDER=0 CELLSPACING=0 CELLPADDING=3 WIDTH="100%">
+            <TR>
+               <TD bgcolor="cccccc" WIDTH="70%">
+                  <P><B><A NAME="configs"></A>Configuration
+                  Suggestions for Cisco Console Servers</B>
+               </TD><TD bgcolor="cccccc" WIDTH="30%">
+                  <P ALIGN=RIGHT><B><A HREF="#top">to Table of
+                  Contents</A></B>
+               </TD></TR>
+         </TABLE></P>
+         
+         <P>Tips for configuring the serial ports on terminal servers
+         for remote access to attached serial devices.</P>
+         
+         <UL>
+            <LI>Choose which lines will be used for connecting
+            devices.
+            
+            <LI>Don't run a login session on the port. (it'll only
+            chat with the attached device)
+            
+            <LI>Set the port to allow Reverse Telnet.
+            
+            <LI>Set the port speed, data bits, parity, and stop-bits
+            (most folks use 9600-8-N-1)
+            
+            <UL>
+               <LI>(there are arguments for setting the port speeds
+               higher.)
+            </UL>
+            
+            <LI>Decide if you want/need software or hardware flow
+            control.
+         </UL>
+         
+         <P>If you are connecting your network equipment consoles to
+         your console server, remember to consider;</P>
+         
+         <UL>
+            <LI>Setting an idle timeout on the console exec of the
+            network gear
+            
+            <UL>
+               <LI>You probably don't want someone to leave a port in
+               the enabled mode...
+            </UL>
+            
+            <LI>Consider adding a password to the ports (just like
+            you do for read-only access via telnet.)
+         </UL>
+      </TD></TR>
+</TABLE></P>
+
+<P><TABLE >
+   <TR>
+      <TD>
+         <P><TABLE BORDER=0 CELLSPACING=0 CELLPADDING=3 WIDTH="100%">
+            <TR>
+               <TD bgcolor="cccccc" WIDTH="70%">
+                  <P><B><A NAME="breakin"></A>Breaking Into A Used Annex</B>
+               </TD><TD bgcolor="cccccc" WIDTH="30%">
+                  <P ALIGN=RIGHT><B><A HREF="#top">to Table of
+                  Contents</A></B>
+               </TD></TR>
+         </TABLE>
+
+         <p>To start, you'll need a terminal or serial connection to talk to
+         the Annex box on serial port 1. This means that you will need some
+         type of <a href="#rj45schem">RJ-45-DBx adapter</a> or a 
+         <a href="#cables">specialty cable</a> as well. Use a
+         <a href="../Tracers/tracers.html">passive RS232 signal tracer</a>
+         to ensure your serial connection is good.
+
+         <p>By default, the Annex port will be comunicating at 9600 bps, 8-N-1.
+         (However, this may have been changed by the previous owner, or your
+          site may use higher speeds. Bottom line: if 9600 8N1 doesn't work
+          for you, try other settings.)
+
+          <p>Unless the serial port is configured as a Console port, the 
+          Annex expects to see the hardware flow control lead! If your cable,
+          adapter, or terminal device don't send that signal to the Annex,
+          you may not see a prompt. (If the flow control lead is connected 
+          physically, a PC serial port will normally supply the signal,
+          even when flow control is disabled, so I recommend using No 
+          Flow Control on your terminal configuration.)
+
+          <p>In the default configuration, the Annex usually uses it's IP address 
+          for the &quot;su&quot; password. There are two ways to get to the
+          Annex via a serial port for initial configuration, easy and hard...
+
+          <p><b>Easy:</b> Connect your terminal to RJ45 serial port 1, 9600 8N1,
+          and turn the power off. Then, perform the next three steps about one
+          second apart;
+
+          <ul>
+            <li>turn the power on  (fans spin, LEDs light...)
+            <li>press the &quot;Test&quot: button on the front panel (TEST LED lights...)
+            <li>press the &quot;Test&quot: button <b>again</b> (Test LED starts blinking)
+          </ul>
+
+          <p>Wait a few more seconds, then press the [enter] (or [return]) key on 
+          your keyboard. The Annex should respond with the &quot;monitor::&quot;
+          prompt on your terminal. Type &quot;help&quot: to get a list of available
+          comands. Typing &quot;config&quot; should show you the current IP address.
+
+          <p><b>Hard:</b> Jason Heiss did it the hard way, and he documented it on 
+          his <a href="http://www.ofb.net/~jheiss/annex/">Annex page</a>.
+      </TD></TR>
+</TABLE></P>
+
+<P><TABLE >
+   <TR>
+      <TD>
+         <P><TABLE BORDER=0 CELLSPACING=0 CELLPADDING=3 WIDTH="100%">
+            <TR>
+               <TD bgcolor="cccccc" WIDTH="70%">
+                  <P><B><A NAME="urls"></A>Useful Links and References</B>
+               </TD><TD bgcolor="cccccc" WIDTH="30%">
+                  <P ALIGN=RIGHT><B><A HREF="#top">to Table of
+                  Contents</A></B>
+               </TD></TR>
+         </TABLE>
+
+         <p>Here are some other web pages and files that I've found, which
+         may be helpful to you if you're hacking with an old Annex device.
+         The first is
+         <a href="http://jheiss.blogspot.com/">Jason Heiss'</a> great
+         <a href="http://www.ofb.net/~jheiss/annex/">Annex Servers page</a>.
+         (Many of the links below came from his page, but there are other
+          valuable bits on his page that I didn't copy.)
+
+         <p>Nortel Networks repository of Annex knowledge<br>
+         <a href="http://www25.nortelnetworks.com/library/tpubs/nav/remote/ra51.htm">http://www25.nortelnetworks.com/library/tpubs/nav/remote/ra51.htm</a>
+
+         <p>FTP the Bay Networks tarball of the R.10 code for Micro Annex XL<br>
+         (Includes oper.42.enet and oper52.enet files for the Micro Annex)<br>
+         <a href="ftp://ftp-support.baynetworks.com/pub/swcode/remacc/microannex_xl/R10.0B-R2.3.tar.Z">ftp://ftp-support.baynetworks.com/pub/swcode/remacc/microannex_xl/R10.0B-R2.3.tar.Z</a>
+
+         <p>FTP the Bay Networks tarball of the R.7 code for Micro Annex ELS<br>
+         (Includes oper55.ent file for the Micro Annex ELS)<br>
+         <a href="ftp://ftp-support.baynetworks.com/pub/swcode/remacc/microannex_els/R7.1B-R1.1.tar.Z">ftp://ftp-support.baynetworks.com/pub/swcode/remacc/microannex_els/R7.1B-R1.1.tar.Z</a>
+
+          <p>Go to <a href="http://www.nortelnetworks.com/">www.nortelnetworks.com</a>,
+          roll your mouse over the <b>Support &mp; Training</b> menu bar, and
+          support, to get to the <b>Browse product support</b> tool. In the first
+          section, select <b>Other</b>, and you'll find the MicroAnnex and Remote 
+          Annex families listed in the second section...select the product that you
+          want, and then choose your topic from section three...then click <b>Go</b>!
+
+          <p>Browse the <b>Bay Networks</b> 
+          <a href="ftp://ftp-support.baynetworks.com/pub/swcode/remacc/">Remote
+          Annex s/w directories</a>.<br>
+          (Mac OS X will mount this as a remote network, but then it can't see the
+          tarballs, saying many of the subdirs are empty...use an FTP application
+          like <a href="http://www.panic.com/">Panic Software</a>'s Transmit to
+          grab them, or use the R.10 link above.)
+
+          <p>If you have a <b>SunSolve</b> account, you can try this
+          <a href="http://sunsolve.sun.com/handbook_pub/Devices/Communication/COMM_Term_Concentr.html">tech note (http://sunsolve.sun.com/handbook_pub/Devices/Communication/COMM_Term_Concentr.html)</a> 
+          about loading the Annex OS into flash. 
+          Of course, your Annex needs to have flash built-in for this to
+          work...you'll &quot;boot -l&quot;, get the code, and (in the 
+          Monitor mode) type &quot;seq&quot;, and select &quot;self&quot;
+          instead of &quot;net&quot; to boot from the flash from now on.
+      </TD></TR>
+</TABLE></P>
+
+<P><TABLE >
+   <TR>
+      <TD>
+         <P><TABLE BORDER=0 CELLSPACING=0 CELLPADDING=3 WIDTH="100%">
+            <TR>
+               <TD bgcolor="cccccc" WIDTH="70%">
+                  <P><B><A NAME="rj45schem"></A>RJ-45 Adapter
+                  Schematics</B>
+               </TD><TD bgcolor="cccccc" WIDTH="30%">
+                  <P ALIGN=RIGHT><B><A HREF="#top">to Table of
+                  Contents</A></B>
+               </TD></TR>
+         </TABLE></P>
+         
+         <P>I am a strong proponent of buying pre-wired, pre-labeled
+         adapters and cables. Generally speaking, you probably can't
+         build an adapter cheaper, if you consider the value of your
+         time as well as the component costs. And, whether or not I
+         can make 100 adapters without a mistake isn't being
+         questioned, I'm sure I'd rather not make 100 by myself. The
+         best advantages for buying pre-built adapters and pre-wired
+         cables include;</P>
+         
+         <UL>
+            <LI>Consistent wiring and labeling of the parts.
+            
+            <LI>Colors and labels aides in troubleshooting, and
+            visually identifying the parts.
+            
+            <LI>Enhances reliability, knowing you can grab any
+            adapter and count on it being wired correctly.
+            
+            <LI>If you need a LOT of adapters or cables for a
+            build-out, you probably don't want to build them all
+            yourself!
+         </UL>
+         
+         <P>You can purchase any of the adapters and cables listed on
+         these pages individually (or in bulk) from APA Cables and Networks
+         (<A HREF="http://www.apacn.com/">www.apacn.com</A>).
+         You also have the option of buying an
+         <A HREF="annexkit.html">Annex Console Kit</A>, which
+         includes a complete set of adapters, and some of the
+         specialty <A HREF="#cables">cables</A> listed above, as well
+         as a DB-9 and a DB-25 passive RS-232 Signal Tracer. The
+         default color is grey for Annex adapters. You can get the
+         shells in another color if you want, provided you want one
+         of the colors listed below.</P>
+         
+         <P>Available colors: <B>BK</B> = black, <B>GN</B> = green,
+         <B>RD</B> = red, <B>YL</B> = yellow, <B>BL</B> = blue,
+         <B>GY</B> = grey</P>
+         
+         <P>So, the part number <B>AFDTE91-GN</B> would denote the
+         DB-9 female DTE adapter, wired for the Annex RJ-45 format,
+         with a green plastic shell.</P>
+         
+         <P>APACN also sells adapters and adapter kits for other
+         RJ-45 formats, including the
+         <A HREF="../Cisco/ciscokit.html">Cisco/Lantronix</A>,
+         <A HREF="../IOLAN/iolankit.html">IOLAN Rack+</A> and
+         <A HREF="../Xyplex/xyplexkit.html">Xyplex/iTouch/MRV</A> console
+         server families. APACN uses different default colors to make
+         it easier to visually identify the different RJ-45 wiring
+         formats.</P>
+         
+         <P>The adapters are wired according to be compatible with
+         some existing MOD-TAP adapters, and some of the adapters are
+         derivative works.
+      </TD></TR>
+</TABLE></P>
+
+<P>
+<HR WIDTH="60%" NOSHADE>
+</P>
+
+<P><CENTER><TABLE BORDER=0 CELLSPACING=0 CELLPADDING=3 WIDTH="85%"
+bggcolor="666666">
+   <TR>
+      <TD>
+         <P><CENTER><B>For basic RS-232 troubleshooting info, view my
+         <A HREF="../msock.html">Minor Scroll of Console
+         Knowledge</A></B></CENTER>
+      </TD></TR>
+</TABLE></CENTER></P>
+
+<p>
+<hr align=center width="80%">
+</p>
+
+<P><CENTER><TABLE BORDER=5 bgcolor="ffcc99" width="75%" padding=5>
+   <TR>
+      <TD>
+         <P><FONT COLOR="#663300"><B>NOTICE:</B> Most of the pages, 
+         articles, and tutorials on this website are
+         copyrighted works. You may make 'deep links' to various
+         pages. (If you let me know which page(s) you are linking to,
+         I'll let you know if I move the page(s) during updates.)
+         Please send me email if you wish to republish any material,
+         or use it on your own website.</FONT></P>
+      </TD></TR>
+</TABLE></CENTER></P>
+
+
+<p><center><a href="http://www.nvu.com">
+<img style="border: 0px solid ; width: 80px; height: 15px; float:
+"src="http://www.nvu.com/images/madewithNvu80x15dark.png"
+alt="Made with Nvu"></a></center></p>
+
+<p><center>Copyright 1996-2007,
+<A HREF="http://www.esperanto.org/person/HARRIS_Dacxjo/">David K. Z.
+Harris, N6UOW</A>&nbsp;&nbsp;
+<a href="http://www.linkedin.com/in/consoleteam" >
+<img src="http://www.linkedin.com/img/webpromo/btn_profile_bluetxt_80x15.gif"
+width="80" height="15" border="0" alt="View David K. Z. Harris's profile on
+LinkedIn"></a><br>
+Questions? Comments? Additions? Email <B>consoles</B> at
+<B>conserver.com</B>.<BR>
+
+<FONT COLOR="#cc0000">(Don't harvest my address, I don't want
+SPAM!)</FONT><BR>
+
+<A HREF="../iloj.html">How does he do it</A>? And
+<A HREF="../about.html">Why</A>?</CENTER></P>
+
+
+
+</BODY>
+</HTML>

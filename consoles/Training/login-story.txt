@@ -1,0 +1,74 @@
+Ten Reasons to Deploy a Console Server
+
+In 1990, a paper was presented at the LISA conference, detailing a serial-port server application that used multi-port serial cards, and allowed a client program to gain access from across the network. The design was simple; the serial ports on the server would attach to the serial console ports of many servers in a data center, and then the administrators could use a small client program to access the individual consoles across the network, without needing to go to the data center. Additional features included logging the data received each port into separate log files.
+
+From those humble beginnings, the code has had a few other maintainers, and a few variants have been found. In the years that followed, hardware Terminal Servers as a product matured, and many allowed telnet access across the network to individual serial ports on the Terminal Server. Some clever coders at the University of New Mexico and Los Alamos Labs added the ability to specify some of the sessions on 'local' physical ports, and others attached to Terminal Servers scattered around the network.
+
+The original code evolved to become Conserver, and is currently maintained by Bryan Stansell of GNAC. Conserver is distributed freely, though it is currently only ported to UNIX OSs, including Linux.
+
+A paper was presented at the LISA conference in October 1990, which described a client-server method for allowing administrators around the network to have access to serial console ports using the telnet protocol, and the server would log all of the console activity. This application saved Ohio State University space, power, and cooling by removing many of the monitors and keyboards that used to be attached to the servers in their data center. I'm happy to report that this idea has been getting better over time.
+
+During the past decade, the application has evolved, based on the needs and feedback of the users. One of the current derivatives from the Ohio State code is called Conserver, and it is distributed freely. Terminal Server devices have also evolved during this decade, and many now allow telnet and SSH access from your network to individual serial ports. This extends the reach of the administrator to the far reaches of their network, including to control of devices that do not have network connections (such as CSU/DSU gear, test equipment, and diagnostic devices, to name only some).
+
+When your hosts are up and running, you have many options for remote access to them, and control of their functions. But it often means that multiple administrators (or users with administrative access) have simultaneous access, which suggests that you also need to consider good change control practices. When your hosts won't boot, the serial console port becomes invaluable.
+
+While a terminal server can provide remote access to serial console ports, the cost-per-port to deploy them has been high, and is currently still higher than the cost of a 10/100 switch port. However, there are many advantages to using them in your network, and I will outline some of the best reasons in this article. I have found the benefits well worth the cost of deployment, especially in terms of the speed of recovery from outages.
+
+If you are one of a few (or the only one) who carries a pager to respond to outages around your network, then remote access to your consoles should be one of your tools. This gives you the ability to sit at any workstation (even dialed in from home) and be on the physical console of any connected host, which gives you faster visibility into your problem than if you needed to run to the data center. Remember the time you were less than ten minutes from home, and your pager went off, and you had to fight traffic back to the office to fix it? What would it be worth to keep driving home, and get on the console while you were warming up dinner?
+
+Imagine that you get home, and access the console on the downed host. You hit return, and there is no response. If you can call the office, and get someone to cycle the power on your host, you can stay at home and watch the boot cycle. (There are even power strips with serial ports, some even have ethernet ports and telnet and/or http interfaces to control power to individual outlets...you can cycle the power yourself, from home!)
+
+We use console access to allow administrators to control hosts that need to live in a lab with restricted access. The ability to power-cycle the device as well as control the console eliminated the need to allow extra users to have physical access to the lab.
+
+While most UNIX hosts provide a method to use serial consoles instead of a video display and keyboard, your average PC platform does not have this built into the BIOS. While a UNIX kernel will eventually allow you to use a serial port for a console, it isn't active until the kernel has booted. But PC users do have options too!
+
+Some PC server makers are modifying the BIOS to provide the ability to redirect the reults of the Power-On Self Test (POST) to a serial port. Network Engines has recently added this, while Compaq has had this ability for about a year. H.P. has a management card that you can add to their servers. There are no standards for this type of console access, so the features for each vendor are different, and you should ask your vendor about the features they offer.
+
+If you have a PC that doesn't have console support in the BIOS, but you have a spare ISA slot available, you should consider the PC Weasel 2000 add-in card (http://www.realweasel.com). This appears to the server as a monochorme display adapter, but then it translates the characters sent to the psuedo-screen into characters on a serial port. The card also includes a UART, which senses when your OS tries to use the serial port for a console, and it then connects the serial port on the card to the UART. The card also monitors the serial stream for an special key sequence from the console, which allows the administrator to talk to the card again. Their website has an online demo.
+
+Let's revisit that downed host again. You connected to the console port, hit return, and nothing came back. What happened to stop it? If nobody was connected and watching, anything the host had sent to the console was lost. This is one of the best reasons to combine your terminal servers with a logging console server application. (Everything that comes out of a device's console port goes into the console log file for that device. When the device doesn't respond to the console, Conserver allows you replay the last 20 or 60 lines of the log, which allows you to see what happened just before the device stopped responding.)
+
+You can find links to a number of Console Server applications and resources at http://www.gnac.com/consoles/, but my favorite applications is currently Conserver (http://conserver.com/) for a number of reasons;
+
+1) Think of it like Sudo for consoles. It allows you to specify which hosts can send the client connections, and which users can access which ports.
+
+2) Single-user control, but multi-user viewing makes Conserver an excellent mentoring tool.
+
+3) The log files for various devices can also be a teaching tool, as a junior administrator can look through sessions to see how a senior administrator performed some tasks (providing that the file permissions allow this).
+
+4) Scripting tools can also sift through the logs, looking for problems, as a backup to your other automated device managers.
+
+5) The logs can also provide a backup to your SYSLOG files for security, since the host doesn't have any pointers to the Conserver host, so a cracker would not know there was another log to clean up after a violation.
+
+(There will be a half-day tutorial about Deploying Remote Serial Console Access at the LISA conference in December, presented by the maintainer of Conserver and myself. We invite anyone with an interest in the topic to sign-up.)
+
+We have used Conserver during maintanance downtimes, along with a conference call, to allow a standby administrator to hear and watch the progress of an upgrade session. This was done because the person making the changes was in another state, while the standby person was at his desk in the same building as the equipment, in case the hardware failed during the changes.
+
+We have found syslog misconfigured more than once using Conserver. While a machine kept quietly rebooting randomly, the administrators found nothing in /var/adm, yet the conserver logs told two stories...why the system was rebooting, and the fact that there was a story led us to check the syslog configurations.
+
+As with syslog, keeping the clocks between all of your connected systems in sync is very important. We recommend a stable NTP infrastructure be in place as well when you deploy a console server. During large problem events (Denial of Service attacks, network outages, cascading failures across multiple servers), your troubleshooting will be speeded up if all of the clocks are in sync, and preferably using one time zone. This allows you to corelate timestamps between various hosts and network devices, and understand what happened first, and what happened after that.
+
+You can deploy terminal servers and console servers across the country, and even internationally. This can be an important tool if you have to support smaller, remote offices without administrators on-site. Sure, you can pre-configure the new host, and even set it up in a test lab. You include diagrams and documentation for the office staff to unpack it and plug it in. And when they do, you can't connect to it. 
+
+Is it powered? Was the disk damaged in shipment? 
+Is the network connection plugged into the correct interface? 
+Is there a duplicate network address in the office?
+Did the network switch auto-negotiate to the wrong speed?
+
+If you had it plugged into a terminal server port in that office, you could get most of those answers yourself, rather than talking the office staff through the troubleshooting steps. (Now how much is it worth to you?)
+
+If the WAN link to that remote office goes down, you can still call into a modem in that office, and look at the CSU/DSU and router, to allow you to be on both ends of the failing link at once.
+
+There are also options that you can use for added security, but you architecture also plays a part in that discussion. Deployment models vary, depending on the security needs. Bring your questions to LISA, and look for the Conserver BoF session!
+
+What about the BREAK problem?
+
+There is a serial port equivalent to the telnet BREAK signal, which is to invert the data lead signal from it's normal state for a brief period of time. Most terminal servers send a serial BREAK to every port when you turn the power off, and some even do it when you turn power on, or during their boot sequence.
+
+When older (2.5.1 and earlier) SunOS machines receive a serial BREAK, they will drop down to the ok> prompt. This stops all the useful services that the machine is doing at the time, until someone gets on the console and types "go". This is actually quite useful for getting the machine down into single-user mode for changes, so you normally don't want to block this signal. Newer versions of SunOS either allow a patch, or include in the OS, the ability to ignore the serial BREAK but listen for a specific character sequence instead.
+
+The problem occurs when you have a bunch of SunOS hosts connected to a terminal server, and then it sends a BREAK to all of the attached hosts...and everything stops until you get on the consoles and type "go" for each host. (You can infer why it would be a bad idea to plug the console of your Conserver host into a terminal server that you access through that Conserver.)
+
+As a result of searching for a Terminal Server that doesn't send BREAK, I have started a series of tests. We're trying to determine whether the failures for various vendors are related to hardware or software, when you can expect the failure to occur, as well as trying various recommended settings on the terminal servers to see if that eliminated the problem. In support of Mark Burgess' recent series of articles (Systems Admin Research), we're posting our test methods and results, and encouraging other sites with an interest to perform similar tests and share their results. You can find more information on our results page (http://www.gnac.com/breakoff.html).
+
+If you have always worked at a site with remote access to the serial consoles, consider yourself lucky. If you don't have some type of access now, I hope I've given you some reasons to consider adding it soon. If I've managed to interest you in the subject, but you want to learn more, I hope to see you in the tutorial in December.

@@ -1,0 +1,827 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<!--This file created 3/14/05 11:17 PM by Claris Home Page version 2.0-->
+  <title>Zonker's Minor Scroll of Console Knowledge</title>
+  <meta name="GENERATOR" content="Claris Home Page 2.0">
+  <meta name="keyword" content="Serial Console, Cisco, IOLAN, Xylogics,
+micro annex, micro-annex, async, conserver, RJ-45, rj45 adapter,
+uannex, RS-232, terminal, server, DTE, DCE, zonker, Zonker, cisco,
+iolan, xyplex, Xyplex, xylogics, conserver, svacik, N6UOW, EIA-232, 
+RS232, IEEE-232, training, passive signal tracer, N6UOW">
+<BODY TEXT="#336600" BGCOLOR="#FFFFFF">
+<p><center><table border=0 width="98%">
+   <tr>
+      <td width="50%">
+         <P><center><a href="http://www.conserver.com"><img
+         src="conserver-sm.jpg" alt="Conserver.com logo" width=147
+         height=47 border=0 align=middle></A></center>
+      </td><td width="50%">
+         <p><center>Brought to you by;<br>
+         
+         <a href="http://www.conserver.com/">www.conserver.com</a><br></center>
+      </td>
+   </tr>
+</table></center></p>
+
+</head>
+<body>
+<h2 align="center">Minor Scroll of Console Knowledge</h2>
+<h4 align="center">http://www.conserver.com/consoles/msock.html<br>
+(updated:Aug 03, 2008, 09:13 pm)</h4>
+
+<p>This document is meant to provide 'the basics' of connecting
+asynchronous serial devices together. It starts with my two favorite
+secrets, and then tries to take the mystery out of the 'magic' of the
+physical layer async serial connection. There are also definitions of
+terms, for the newer folks, as well as troubleshooting and testing
+techniques.</p>
+
+<p>There is one other source to check for ideas, suggestions, and
+maybe some console-related news tidbits; 
+the <a href="http://consoleteam.blogspot.com/">ConsoleTeam blog</a>.</p>
+
+<p>If you find any errors, or if you have some additional
+information that I can include, please email me at <b>consoles</b> at
+<b>conserver.com</b>.</p>
+
+<p>
+<table align="center" border="1" width="90%">
+  <tbody>
+    <tr>
+      <td width="45%">
+      <p><center><b>Table of Contents<br>
+      </b><a href="#simple">How Simple Is It?</a><br>
+      <a href="#trouble">Basic Troubleshooting</a><br>
+      Hacking <a href="#speed">Speed</a> and <a href="#parity">Parity</a><br>
+      <a href="#length">Cable Length issues</a><br>
+      <a href="#apacn">Pre-wired adapters &amp; cables</a>
+      </center>
+      </td><td width="45%">
+      <p><center><b>Clues on my other pages</b><br>
+      <a href="Tracers/tracers.html">Passive Signal
+Tracers page</a><br>
+      <a href="Clues/rs232.html">RS-232 info and tips</a><br>
+      <a href="Clues/rs232-hw.html">Serial port hardware
+info</a><br>
+      <a href="Signals/signals.html">RJ-45 Signals Pinouts
+Page</a><br>
+      <a href="MyDoctorBag/doctorbag.html">What's in my
+Doctor Bag</a><br>
+      <a href="Clues/modems.html">Modem Tips</a><br>
+      <a href="Training/published.html">Tutorials,
+Presentations, Articles</a></center></p>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</p>
+
+<a name="simple"></a>
+<h3>How Simple Is It?</h3>
+
+<p>Sometimes, folks look at serial communications and think it's
+a Black Magic, with so many different connectors and all of those
+different wires...there is just too much to know!</p>
+
+<p>While I'll admit that modems, and even some serial hookups, can
+be more like a Black Art, it's certainly not magic. But, after many
+years of hacking with RS-232 serial devices, I'm here to tell you
+that the basics are pretty simple. With just a bit of knowledge, you
+can look like a serial magician, and amaze your friends and
+co-workers. Here's <b>my first secret:</b></p>
+
+<p>
+<table border="0" width="100%">
+
+
+  <tbody>
+
+
+    <tr>
+
+
+      <td>
+      
+      <p><b>Pre-built RJ-45 serial adapters make serial
+hookups easy, consistently</b></p>
+
+
+      
+      <p>Let's consider the task of connecting a serial device to
+a console server or patch panel. To make our lives easier, we will use
+pre-wired adapters that match the RJ-45 signaling pinouts for our
+terminal server. (You can find more information about these on any of
+my <a href="http://www.conserver.com/consoles/#guides">Console
+Connection Guides</a>.)</p>
+      
+      <p><img src="2x2.gif" align="left" height="173" width="206">If 
+      you think that there are dozens of connectors and adapters to choose 
+      from, the number of possible combinations is huge, right? But, 
+      consider these factoids;</p>
+
+      <ul>
+        <li>the DB-25 connector is probably the most common
+connector for async serial. </li>
+        <li>the DB-25 connector comes in two basic wiring formats
+(DTE and DCE) </li>
+        <li>the DB-25 connector comes in only two genders (male
+and female) </li>      
+      </ul>
+      
+      <p>When you consider that more than half of serial ports
+that you will need to deal with use the DB-25 adapter, then you really
+only have four possibilities for that one connector format, and four is
+not too many to deal with, is it?</p>
+
+      <p>"But" I hear you say, "there are lots of connector
+types, so there's still many more possible combinations." </p>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</p>
+
+<p>
+<table border="0" width="100%">
+  <tbody>
+    <tr>
+      <td>
+      
+      <p><img src="2x2x2.gif" x-sas-useimagewidth="" x-sas-useimageheight="" align="left" height="193" width="226">Well, when you also consider that the majority
+of async serial devices (80+ percent, based on common hardware in use
+during the last 10 years inclusive) use either the <b>DB-9</b>
+or the <b>DB-25</b> connector for serial connections, you
+simply add another 2x2 matrix. That is, when you have to work with both
+DB-25 and DB-9 connections together, you now have eight choices that
+cover most cases, and that's still not too many possibilities, is it?</p>
+
+      <p>For each type of connector you have to work with, you
+add four more adapter possibilities. (Male/female, DTE/DCE.) For DB-25
+and DB-9, you'll need to stock 8 different adapters wired for your
+brand of terminal server.</p>
+
+      <p>When you are connecting two devices together, you won't
+have more than eight possible combinations! (In fact, you'll usually
+have fewer than that! Keep reading!) </p>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</p>
+
+<p>
+<table border="0" width="100%">
+  <tbody>
+    <tr>
+      <td>      
+      <p><img src="2x2x2-2.gif" x-sas-useimagewidth="" x-sas-useimageheight="" align="left" height="193" width="226">Now, consider that when you are trying to
+connect a device to your console server, you already know which
+connector type the device is using, and you already know which gender
+the connector is, right? When you already know two of the three sides
+of our cube, you are left with just two possible choices, either DTE or
+DCE. How simple is that?</p>
+
+      <p>Now, you could just take one of each adapter with you,
+and try them one at a time, and test the connection through some
+application(s) to see if the connection is working. But that still
+leaves some question if the connection doesn't work. So, here's <b>my
+second secret:</b> </p>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</p>
+
+<p>
+<table border="0" width="100%">
+  <tbody>
+    <tr>
+      <td>
+      <p><b>Passive RS-232 <a href="Tracers/tracers.html">Signal Tracers</a> are
+your friend!</b></p>
+
+      <p>Passive Signal Tracers do not require batteries, and
+simply show you the 'logic state' (positive or negative voltage, or no
+voltage at all) on each of the important signal leads. The animation
+below illustrates how to use a passive signal tracer to make sure you
+are using the correct (DCE/DTE) adapter for your application. (The
+number in the corner of the animation indicates the step number from
+the instructions below.)</p>
+      
+      <p>For this example, I will presume two thing;</p>
+
+      <ul>
+        <li>The RJ-45 cable is already connected to some other device<br>
+(Either a console server, or a compatible adapter and device) </li>
+        <li>The RJ-45 adapter is wired to work with the RJ-45 cable<br>
+(Read the section <a href="#RJ-45ports">Connecting
+Devices with RJ-45</a> Ports below.) </li>
+      </ul>
+
+      <p><b>First thing:</b> Determine what gender
+and type of connector you need on your adapters. When you pick up the
+two adapters you need to choose between (one DCE and one DTE), you
+should also pick up the appropriate passive Signal Tracer (DB-9 or
+DB-25) as well!</p>
+
+      <p>
+      <table border="0" width="100%">
+        <tbody>
+          <tr>
+            <td>            
+            <p><img src="step2.gif" x-sas-useimagewidth="" x-sas-useimageheight="" align="left" height="96" width="180"><b>Step
+1:</b> Take your Signal Tracer, and attach it to the serial
+connection on the device you want to connect...don't plug in the RJ-45
+adapter yet!</p>
+
+            <p>See whether the device is putting a signal on pin
+2, or pin 3, and remember that number! </p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      </p>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</p>
+
+<p>
+<table border="0" width="100%">
+  <tbody>
+    <tr>
+      <td>
+      <p><img src="step3.gif" x-sas-useimagewidth="" x-sas-useimageheight="" align="left" height="96" width="180"><b>Step 2:</b> Pick one of the two
+adapters, and attach it to the cable to your patch panel...it doesn't
+matter which one. Next, take the Signal Tracer off the device, and move
+it to adapter you have attached to the cable, and see which pin the
+device is putting a signal on (pin 2, or pin 3).</p>
+      
+      <p>If the pin with the signal (2 or 3) is <b>different</b>
+from the pin with the signal (2 or 3) from the device, you are ready to
+plug the adapter onto the device (step 3).</p>
+      
+      <p><b>Step 2a:</b> If the pin with the signal
+on your RJ-45 adapter is the <b>same</b> number as the pin
+with the signal on your device, then you need to use the other RJ-45
+adapter. Swap the adapter, and check your signals again. If you have
+different signals (pin 2 on one side, and pin 3 on the other), you're
+ready for Step 3 (Connection).</p>
+
+      <p><b>Step 3:</b> That's it. You've just
+connected your serial device. You may still need to fuss with the
+communications settings (speed, maybe parity), but you will know that
+the physical connection is now ready! </p>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</p>
+
+<p></p>
+
+<center><img src="Tracers/tracer-howto.gif" alt="signal tracer use animation" x-sas-useimagewidth="" x-sas-useimageheight="" align="bottom" height="237" width="474"></center>
+
+<p></p>
+
+<p>James Newton points out another benefit of the Passive Signal Tracer,
+because it can show you when a signal is truly an RS-232 signal (with
+positive and negative signalling in reference to the signal ground),
+or a DC-biased signal, such as a TTL interface. (For TTL info, you
+can check the <a href="http://techref.massmind.org/techref/io/serial/ttl-rs232.htm">TTL
+to RS232 info page</a> on James' i
+<a href="http://techref.massmind.org/">MassMind</a>
+website.
+</p>
+
+
+<p>
+<table border="0">
+  <tbody>
+    <tr>
+      <td>
+      <p><b>Make sure you connect the physical layer first</b></p>
+      
+      <p>If you are only connecting two devices that are close
+together, you may not think about this. You should get in the habit of
+making sure the physical connection is in place before you start trying
+to test the software settings.</p>
+      
+      <p>Most devices will talk to each other with async settings
+of <b>9600</b> bps, <b>8</b> data bits, <b>N</b>o
+parity, and <b>1</b> stop bit...often referred to as <b>9600
+8-N-1</b>. But sometimes you will find that one of the devices is
+at a different speed. Less often, you may find that one device is using
+a different number of data bit, or a different parity than normal.
+Rarely, you will find that the settings for Flow Control or Handshaking
+are not compatible, and will need to be changed. But what this really
+means to you is; when you connect two devices together, and they don't
+"just work", you usually start to fuss with these different settings.
+You can spend a lot of time, going through all sorts of changes (and
+this takes time) before you decide to check if the wires are connected
+properly.</p>
+      
+      <p>The lessons here are;</p>
+
+      <ol>
+        <li>Using a passive signal tracer will help you get the
+physical link established. </li>
+        <li>Using pre-wired, labeled adapters will ensure you get
+all of the wires where you expect them. </li>
+        <li>Steps 1 &amp; 2 will let you tackle the software
+settings with confidence that the physical link is connected properly. </li>
+      </ol>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</p>
+
+<p><hr></p>
+
+<p>
+<table border="0" width="100%">
+  <tbody>
+    <tr>
+      <td>
+      <p><b>Connecting two devices together</b></p>
+      
+      <p>We've already seen how connecting one device to a patch
+panel boils down to two choices of adapters. So, how many choices do
+you have when you are connecting two devices? No, not four...just two!
+Here's why:</p>
+      
+      <p><img src="Tracers/test2.gif" alt="DB-9/RJ-45/Signal Monitor" x-sas-useimagewidth="" x-sas-useimageheight="" align="right" height="25" width="171">Each device technically <b>does</b>
+have two choices, which does give you a total of four possibilities, <b>but</b>
+two of the four will work, and two will not. (For the technical nerds
+in the audience, the simple Boolean equation for this would be a basic
+Exclusive-OR function.)</p>
+
+      <p>The simple explanation is this: for device number one,
+you already know connector type and gender...just pick one of the two
+possible adapters, and connect that to the device, knowing that this
+will work out just fine. (No matter which of the two adapters you have
+chosen, you <b>will</b> be able to communicate with the
+other device!) </p>
+      
+      <p>Now, for device number two, take both of the possible
+adapters, trusting that one of the two will give you the correct
+signals. You only need to worry about testing your two choices on one
+end of the cable. Take your trusty <a href="#leds">signal
+tracer</a> with you, and all will be well. If you don't have a <a href="#leds">signal tracer</a>, buy one. If you local
+computer stores don't have one, you can buy them from <a href="http://www.apacn.com/">APA 
+Cables &amp; Networks</a>.)</p>
+
+      <p>If this *still* doesn't make sense to you, all I can ask
+is that you either;</p>
+
+      <ul>
+        <li>trust me on this, try it, and see if it seems to be
+        true. </li>
+        <li>get out your paper and pencil, and start to
+        brainstorm a bunch of different cases. </li>
+        <li>catch me at a BayLISA meeting, or a BoF sometime, and
+        we'll go over it. :-) </li>
+      </ul>
+
+      <p>Once you have your physical connection in place, you are
+ready to start testing the connections, confident that the your
+connections are correct. </p>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</p>
+
+<p><hr></p>
+
+<p><table border="0" width="100%">
+  <tbody>
+    <tr>
+      <td>
+      <h3><a name="trouble"></a>Basic Troubleshooting</h3>
+
+      <p>
+      <table border="0">
+        <tbody>
+          <tr>
+            <td width="95%">
+            <p><b>Establishing the physical link</b>
+for an async serial connection means connecting two devices together,
+using some data cables, and maybe some adapters. You need to match the
+genders (male to female) of the cables/adapters, and you ultimately
+need to match the output leads from one device to the input leads on
+another device (connecting <b>complimentary</b> signals
+between both of the devices). It's basically that simple. Until you
+have done this, the communications settings on the devices do not
+matter.</p>
+
+            <p>To perform this task with a DB-25 serial port, I
+begin by connecting the signal monitor only to the serial port of one
+device, and see which signals that device is sending. This will tell me
+if the port is configured as a DTE or a DCE device.)</p>
+
+            <p>The signals of a <b>Sun DB-25 TTY</b>
+port (female conector) are shown in the illustration at right, and
+with pin 2 lit, this indicates that this port is a DTE device. Now, we
+just need to find a DCE cable or adapter, with a male connector. </p>
+
+            </td><td width="150">
+            
+            <p><center><img src="Tracers/leds1.gif" alt="full DTE signals" 
+            align="bottom" height="146" width="63"></center>
+            </td>
+          </tr>
+        </tbody>
+      </table></p>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</p>
+
+<p><table border="0" width="100%">
+  <tbody>
+    <tr>
+      <td>
+      <p><b>Testing Cable Connections</b></p>
+
+      <p>By connecting the signal monitor to one end of a male
+cable, or adapter, you can check to see if the signals are
+complimentary to the other port or not.</p>
+
+      <p>In the illustration at the right, we find another DTE
+device. (Pin 2 is lit.) Connecting this connector to the Sun TTY port
+would connect inputs to inputs, so the devices would not be able to
+communicate with each other. </p>
+      </td><td width="295">
+      <p><img src="Tracers/tracer2.gif" alt="Signal Monitor full DTE cable" x-sas-useimagewidth="" x-sas-useimageheight="" bgcolor="333333" align="bottom" height="157" width="286"> </p>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</p>
+
+<p><a name="complimentary"></a>
+<table border="0" width="100%">
+  <tbody>
+    <tr>
+      <td>
+      <p><b>Complimentary Signals</b></p>
+
+      <p>In this illustration at the right, we find DCE signals
+on the cable (pin 3 is lit). Connecting this connector to the Sun TTY
+port would connect inputs of one device to the outputs of the other
+device (hence the term "complimentary signals"). These devices would
+now be able to communicate with each other.</p>
+
+      <p>With appropriate (matching) genders, and complimentary
+signals, you can connect the devices, and start checking the port speed
+and communications setting (data bits, parity, stop bits). </p>
+
+      </td><td align="center" width="295">
+      
+      <p><center><img src="Tracers/tracer5.gif" alt="Signal Monitor full DCE cable" 
+      bgcolor="333333" align="bottom" height="157" width="286"></center></p>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</p>
+
+<p><a name="RJ-45ports"></a>
+<table border="0" cellspacing="5" width="100%">
+  <tbody>
+    <tr>
+      <td>
+      <p><b>Connecting Devices with RJ-45 Ports</b></p>
+
+      <p>Some devices have RJ-45 connectors for their serial
+ports. In larger environments, you may also use a console server. In
+order to provide higher port density, and to make connecting easier,
+many of these console servers use RJ-45 connectors. (All 8 wires will
+be used!)</p>
+
+      <p>My basic test fixture for checking the signals of
+devices in an RJ-45 environment is to connect a signal monitor to a
+DB-25 to RJ-45 adapter that is wired to work with the console devices
+in use. In a Cisco server environment, I'll use a <a href="Cisco/ciscokit.html">CFDTE</a> (Female DTE,
+Cisco part 29-0810-01 ) adapter, and then I use an ethernet cable to
+connect to the RJ-45 connectors that I want to check. The signals are
+then displayed on the signal tracer. The test cable, and the adapter
+schematic, are shown at the right.</p>
+
+      <p>You can test the signals at your patch panel or console
+server, or console ports on devices, to determine which signals are
+outputs, and then you can find the appropriate adapter to use on the
+other devices that you wish to attach to these ports. </p>
+
+      </td><td width="160">
+      <p><center><img src="Tracers/test1.gif" alt="RJ-45/DB-25 Signal Monitor" 
+      align="bottom" height="25" width="151"> </center></p>
+
+      <p><center><img src="Cisco/cfdte.gif" alt="Cisco RJ-45/DB-25 FDTE adapter"
+      align="bottom" height="151" width="124"> </center></p>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</p>
+
+<p>Many RJ-45/DB-25 and RJ-45/DB-9 adapters are designed to help
+connect RS-232 devices to a proprietary RJ-45 wiring scheme. There
+are many wiring schemes to choose from. (Since you cannot tell from
+the case of most adapters what wiring schema was used inside, if you
+build your own adapters, you should always label your adapters well,
+so you can tell them apart.) I prefer buying pre-built adapters, and
+I like my adapters to be fully wired for hardware handshaking and
+hardware (RTS/CTS) flow control. I find that the consistency means I
+don't have to wonder if an adapter wiring problem is to blame if a
+connection won't work.</p>
+
+<p>If you use pre-built RJ-45 adapters to connect your devices to
+your terminal servers, and a signal tracer to confirm that the
+signals are matched properly, then when you pick the right adapters
+(DTE and DCE, with the correct connector type and gender), you can be
+fairly certain that when you get 2 &amp; 3 matched (inputs to
+outputs), you will also have all of the other pins straightened out
+as well.</p>
+
+<table align="center" width="100%">
+  <tbody>
+    <tr>
+      <td> <img src="headbanger.gif" alt="banging his head on computer"> </td>
+
+      <td>
+      
+      <p><b>TIMESAVING TIP</b>: Swapping adapters and
+cables, and then testing the connection with software after each swap
+is inefficient, since a mismatched software setting could make the
+right adapter combinations look wrong. If you use a signal tracer to
+get the connection correct, you will have more confidence to check the
+software settings if the connection doesn't work immediately. This is
+especially true if you need to take more than ten steps between
+connecting the adapters, and testing the connection!</p>
+      </td>
+    </tr>  
+  </tbody>
+</table>
+</p>
+
+<p>When both lights (2 &amp; 3) are lit when the signal
+monitor is
+connected between the devices, you are ready to try the connection,
+or start working with the software settings. Until you get pins 2
+&amp; 3 connected properly, don't waste your time with software
+settings! If you only have pin 2, or pin 3 lit when you join both
+devices with a signal monitor in the middle, chances are pretty slim
+that you will see anything on the display when you try to type.</p>
+
+<p><table border="0" width="100%">
+  <tbody>
+    <tr>
+      <td>
+      <p><b><a name="speed"></a>Finding the right speed</b></p>
+
+      <p>The best way to determine the serial port speed to a
+device (read: fastest way to find the correct answer the first time) is
+to read the manual for the device. If the settings are fixed, the
+manual will often tell you. If the settings are programmable by
+hardware (switches or jumpers), the manual will show you where to look
+and how to tell what settings are being used. If the setting is
+programmable in software, the manual can usually tell you what command
+to send to the device to see the current settings. </p>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<p>If you can't find the manual, you'll be glad to read that most
+console ports, and terminal server ports, will use <b>9600 bps</b> as
+a default setting. If you make a point of using the default settings,
+most things that you connect to the terminal server will work without
+extra fuss.</p>
+
+<p><table border="0" width="100%">
+  <tbody>
+    <tr>
+      <td>      
+      <p>If you are using a terminal emulation program to test
+your connection, try sending a carriage return (press the [<b>enter</b>]
+key) a couple of times. This will 'wake-up' most devices, and the
+device will send some characters back to you, like a log in prompt. If
+that doesn't work, try pressing the [<b>space</b>] key, or
+the [<b>*</b>] (asterisk) key a few times.</p>
+
+      <blockquote>        
+        <p><b>Modem Tip #1:</b> Modems may not echo
+the characters you type, or return a prompt if you just type [<b>enter</b>].
+To test a connection to a modem, you should send a basic AT command to
+the modem (just type <b>AT</b> and press [<b>enter</b>]),
+and the modem should respond by sending you "OK" .</p>
+      </blockquote>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</p>
+
+<p>If you are getting unreadable characters back in response to your
+typing, you probably have a speed, or a parity mismatch. Try changing
+the speed on your terminal package, and try testing again. Keep
+testing different speeds until you find one that works. (If you have
+tried them all, and none seemed to work, you may have a
+<a href="#parity">parity mismatch</a>.</p>
+
+<p><table border="0" width="100%">
+  <tbody>
+    <tr>
+      <td>
+      <p>Most modems will auto-configure their serial port speed
+to match whatever device is connected to their data ports. (The secret
+here is to have the attached device send some characters to the modem <b>before</b>
+the modem accepts a call.) While this 'feature' makes most modems "Plug
+and Play", it will also restrict a modem to use very slow connection
+speeds.</p>
+
+      <blockquote>
+        <p><b>Modem Tip #2:</b> If you are connecting
+a modem to a console port, you should find out how fast the modem's
+serial port can go. Then find out how fast the console port can go.
+Then choose the highest speed <b>common to both devices!</b>
+Set the modem and the serial port to that highest speed. This increases
+the chances of connecting at higher modem speeds, as well as giving
+your modem the chance to use modem-to-modem compression, if your modems
+are configured to use it.</p>
+      </blockquote>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</p>
+
+<p><table border="0" width="100%">
+  <tbody>
+    <tr>
+      <td>
+      <p><b><a name="parity"></a>Hacking parity, data bits, stop bits </b></p>
+
+      <p>Most devices use <b>8-N-1</b> (<b>8</b>
+data bits, <b>N</b>o Parity, and <b>1</b>
+Stop bit) as their default setting. Normally, you don't want to change
+these settings on the devices that you are connecting.</p>
+
+      <p>The second most common setting is <b>7-E-1</b>
+(<b>7</b> data bits, <b>E</b>ven Parity, and <b>1</b>
+Stop bit), and is popular with devices dealing with on-line
+communications services, or using X-25 packet switching for
+communications. </p>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</p>
+
+<p>If you have tried all of the serial speeds, and still only see
+'garbage' characters, set the speed back to 9600, and try a different
+parity setting...and then try the different speeds again if 9600
+didn't work. (Of course, you <b>could try</b> reading the manual for
+the device you are attaching, or check the settings on that device,
+and then set your terminal server port settings to match. ;-)</p>
+
+<p><hr></p>
+<a name="length"></a>
+<p><b>Cable Lengths</b></p>
+
+<p>The RS-232 specification called for no more than 50 feet. However,
+I've had success with much greater distances in the past, depending
+on the devices being connected (driver voltages), cable length, cable
+type, shielded or not, etc.</p>
+
+<p>The <a href="http://www.digi.com">DigiCorp folks</a> have posted a
+note on their support pages that recommends that the cable length be
+no more than <b>2500 picofarad</b> in capacitance, where each
+connector has a 'cost' of 100 pf, and then you need to find out how
+many picofarads-per-foot your cabling is rated. More info is
+available on their
+<a href="http://support.digi.com/support/techsupport/common/cables/reference/cabling_specifications.html">Tech
+Support Specifications Page</a>. Your mileage may vary. Older
+Macintosh computers had lower voltages (~6-9v) than the RS-232
+specification (~25v), and as a result, their range seems shorter to
+me.</p>
+
+<p>Twisted Pair cable can help extend the range (and often has a
+lower capacitance...hmmm...), but the twists don't often help reduce
+line noise, because the various vendors use different RJ-45 wiring
+schemes. As a result, You often have your most susceptible leads
+(data) twisted together, versus twisted with a fairly static signal
+(like ground, or handshaking leads).</p>
+
+<p>Shielded cable can help reduce noise, but the cost is higher than
+for normal CAT-5. You can usually achieve good noise isolation if you
+pay attention to WHERE your cables are placed. Avoid laying data
+cables parallel with AC power cables, or laying on/near transformers
+or fluorescent lighting ballasts (both are strong sources of
+electromagnetic radiation).</p>
+
+<p><hr></p>
+
+<p><b><a name="apacn"></a>Pre-wired
+cabled and adapters</b></p>
+
+<p>Some of the Console Server equipment manufacturers also sell
+some adapters or
+cables, but you cannot get the full matrix from any of the
+manufacturers. My preference is to stock a complete set of adapters
+for the hardware that I need to support, and to buy them pre-built
+instead of building them myself. I try to keep enough stock on hand
+to ensure that I can support any surprise machine deliveries.&nbsp;Part
+of the clean-up steps after a maintenance window should be to make sure you
+have enough adapters on-hand...if you used a bunch during the
+downtime, it's probably time to order more. I keep a minimum of 5 of
+everything, with 10-15 of each adapter that we use the most
+often. (Check my <a href="wheretobuy.html">where to buy
+page</a> for more information.)</p>
+
+<p>Between the cost of the adapter components, and my time to build
+and label them, I save money buying pre-built adapters in bulk. (And
+at my billing rates, you probably don't want me building adapters for
+you! ;-)</p>
+
+<p><a href="http://www.americable.com/">Americable</a> made a
+conscious effort to build up a series of console adapter kits, and to
+find the DataTran signal tracers. You can buy specific adapters (and
+custom RJ-45 to RJ-45 cables) in any quantities, as well as the kits
+themselves. In the summer of 2003, Americable merged with another
+company to become <a href="http://www.apacn.com/">APA
+Cables &amp; Networks</a>,
+and APACN continued to make these parts and kits, though you would need 
+to purchase in large quantites. (This is still a
+great option if you are running a large site, or buying for many sites
+or offices.) In the end of 2007, APACN became Clearfield Communications
+and it's not clear if they will continue to provide the serial console
+parts. When I determine for sure, I'll update this page.</p>
+
+<p>Kits, adapters, and cables are available for:
+<a href="Cisco/ciscokit.html">Cisco and Lantronix</a>,
+<a href="IOLAN/iolankit.html">IOLAN Rack+</a>,
+<a href="Xyplex/xyplexkit.html">Xyplex 1600 and iTouch
+In-Reach</a>,
+and <a href="Annex/annexkit.html">Xylogics Annex - Bay
+Networks - Nortel</a></p>
+
+<p>By default, the adapters for each of the different RJ-45 wiring
+schemes are shipped with different case colors, so that they will be
+easier to identify in larger installations which support multiple
+vendors devices. But, you can specify a case color when you order, if
+you desire.</p>
+
+<p><a href="http://www.apacn.com/">APACN</a> also adopted a labeling
+scheme that includes a reference to the wiring scheme, as well as
+gender and DCE/DTE wiring, so that colorblind individuals can tell
+which RJ-45 wiring scheme is used on any given cable or adapter. (You
+can get more information, or order parts, by contacting
+1-800-422-2537. Steve Vacik has been helpful in the past, but any of
+the sales folks should be able to help if you give them the part
+number(s) from the adapter kit pages listed above.)</p>
+
+<p><hr></p>
+
+<A NAME="credits"></a>
+<P><CENTER><TABLE BORDER=5 bgcolor="ffcc99" padding=5>
+   <TR>
+      <TD WIDTH="75%">
+         <P><FONT COLOR="#663300"><B>NOTICE:</B> Most of the pages, 
+         articles, and tutorials on this website are
+         copyrighted works. You may make 'deep links' to various
+         pages. (If you let me know which page(s) you are linking to,
+         I'll let you know if I move the page(s) during updates.)
+         Please send me email if you wish to republish any material,
+         or use it on your own website.</FONT></P>
+      </TD></TR>
+</TABLE></CENTER></P>
+
+<p><center>Made using <a href="http://www.nvudev.com">Nvu</a></center></p>
+
+<P><CENTER>Copyright 1996-2008,
+<A HREF="http://www.esperanto.org/person/HARRIS_Dacxjo/">David K. Z.
+Harris, N6UOW</A>&nbsp;&nbsp;
+<a href="http://www.linkedin.com/in/consoleteam">
+<img src="http://www.linkedin.com/img/webpromo/btn_profile_bluetxt_80x15.gif"
+width="80" height="15" border="0" alt="View David K. Z. Harris's 
+profile on LinkedIn"></a><BR>
+
+Questions? Comments? Additions? Email <B>consoles</B> at
+<B>conserver.com</B>.<BR>
+
+<FONT COLOR="#cc0000">(Don't harvest my address, I don't want
+SPAM!)</FONT><BR>
+
+<A HREF="iloj.html">How does he do it</A>? And
+<A HREF="about.html">Why</A>?</CENTER></P>
+
+
+</body>
+</html>

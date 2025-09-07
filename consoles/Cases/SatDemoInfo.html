@@ -1,0 +1,332 @@
+<!--This file created 6/19/00 5:38 PM by Claris Home Page version 2.0-->
+<HTML>
+<HEAD>
+   <TITLE>WNI Demo Truck Satellite Info</TITLE>
+   <META NAME=GENERATOR CONTENT="Claris Home Page 2.0">
+   <X-SAS-WINDOW TOP=42 BOTTOM=613 LEFT=4 RIGHT=534>
+</HEAD>
+<BODY>
+
+<P><TABLE BORDER=0 WIDTH="100%">
+   <TR>
+      <TD>
+         <H2 ALIGN=CENTER>Web-TV Demo Truck with Satellite Link</H2>
+         
+         <H5 ALIGN=CENTER>ver 0.1 - 2000.06.19 - dkzh </H5>
+      </TD></TR>
+</TABLE></P>
+
+<P><TABLE BORDER=0 WIDTH="100%">
+   <TR>
+      <TD>
+         <P><B>Project Summary</B></P>
+         
+         <P>The concept is to provide a mobile demo platform that can
+         be driven to venues, to show off Web-TV products. The
+         satellite link is suggested to free us from the problem of
+         scheduling appearances far enough in advance as to allow the
+         temporary installation (and testing, etc.) of high-capacity
+         network links to connect the demo units with the Web-TV
+         Service Network.</P>
+         
+         <BLOCKQUOTE><P><I>(This paper is put together from
+         conversations and thoughts based on those conversations. It
+         should not be interpreted as a project plan, although the
+         contents may be used as a straw man for future
+         discussions.)</I></BLOCKQUOTE>
+      </TD></TR>
+</TABLE></P>
+
+<P><TABLE BORDER=0 WIDTH="100%">
+   <TR>
+      <TD>
+         <P><B>Trailer Remote Operations</B></P>
+         
+         <P>In the case that the truck is ordered, and the equipment
+         is deployed, I can see a need for the capability to remotely
+         configure the equipment in the truck. In the 'normal'
+         configuration, the satellite link would be the primary
+         network path, and with the judicious use of some network
+         gear, we can add a great deal of remote configuration
+         support to the trailer.</P>
+         
+         <P><B>Presumptions:</B></P>
+         
+         <OL>
+            <LI>Transport staff may only have junior-level
+            system/network skills.
+            
+            <LI>The trailer will have GPS and electronic compass (for
+            satellite pointing).
+            
+            <LI>Demo staff would travel to meet the trailer
+            separately.
+            
+            <LI>Technical staff would be on-call to help support the
+            trailer activities.
+            
+            <LI>Being related to the ISP service, SOC/NSG could
+            possibly monitor the trailer gear.
+         </OL>
+      </TD></TR>
+</TABLE></P>
+
+<P><TABLE BORDER=0 WIDTH="100%">
+   <TR>
+      <TD>
+         <P><B>Electronic Program Guides</B></P>
+         
+         <P>The truck will appear in different time zones, from time
+         to time. Do we want to consider using a ZIP code from a
+         low-population-density area from each of the time zones, so
+         that the hour-to-hour programming maps correctly?</P>
+         
+         <P>Using a small, RV-style TV antenna, it's possible that we
+         could pick up one or more 'local' off-air channels wherever
+         the trailer is, and use Channel Processors to put them onto
+         specific channels.</P>
+         
+         <P>Some canned content could come from DVD players on-board
+         the trailer.</P>
+         
+         <P>Once the satellites are acquired, we might be able to
+         derive channels and turn them into analog channels on the
+         trailer, to highlight partner networks (MSNBC, etc.) 
+      </TD></TR>
+</TABLE></P>
+
+<P><TABLE BORDER=0 WIDTH="100%">
+   <TR>
+      <TD>
+         <P><B>Network and Head End</B></P>
+         
+         <P>It is likely that the network equipment (including
+         satellite modems) will need to share the operations area
+         with the video head-end equipment. Advantages to this
+         arrangement include;</P>
+         
+         <UL>
+            <LI>Connecting serial consoles of video gear to the
+            terminal server.
+            
+            <LI>Operator has access to diagnostics PC and can watch
+            LEDs to see changes take affect.
+            
+            <LI>Leverage the cooling system for the trailer.
+         </UL>
+      </TD></TR>
+</TABLE></P>
+
+<P><TABLE BORDER=0 WIDTH="100%">
+   <TR>
+      <TD>
+         <P><B>Bench Demo Network</B></P>
+         
+         <P><IMG SRC="satdemo1.gif" WIDTH=173 HEIGHT=653
+         X-SAS-UseImageWidth X-SAS-UseImageHeight ALIGN=left>The
+         Network portion is provided by the WNI network connections
+         at Silicon Valley Campus, where a 10 Mbps connection is made
+         to the "Network" router  (router 2 in this diagram).</P>
+         
+         <P>The EIA-530 serial cable link connects the router to the
+         "Network" satellite modem, an SPL/ACT SkyLane SL-512 modem.
+         The output of the modem is a 70 MHz IF stream. The input is
+         adjustable, in the 950-1200 MHz ("L-Band") range.</P>
+         
+         <P>On the test bench, the 70 MHz IF goes into a Cross
+         Technologies model 2005 Test Upconverter, which allows us to
+         set the frequency for the carrier that will be sent to the
+         receiver on the "Trailer" modem.</P>
+         
+         <BLOCKQUOTE><P><I>These Test Upconverters limit our test
+         link bandwidth to 64 Kbps, which is marginally more than a
+         56 Kbps modem call, with no delay on the link. In actual
+         use, the modem would be fed into a high-speed uplink,
+         providing 500 Mbps bandwidth for the link, with 1/2-3/4
+         second link latency.</I></P></BLOCKQUOTE>
+         
+         <P>The "Trailer" end of the link has a matching modem,
+         connected to another router. On the test bench, this is
+         connected directly to the Ascend NAS via a CAT-5 crossover
+         ethernet cable.</P>
+         
+         <P>The connection between the Ascend NAS and the Gordon
+         Kapes System 930 Telephony Simulator is a standard CAT-5
+         ethernet cable, but the signaling is actually an ISDN PRI
+         (1.5 Mbps) link. The G.K. box is basically a very small
+         Central Office in this configuration.</P>
+         
+         <P>We will attach up to four set-top boxes directly to the
+         G.K., using RJ-11 phone cables. The device can support 48
+         lines, but the additional lines would need to come from
+         24-port patch panels (connected via 50-pin AMP/Cinch
+         connectors).
+      </TD></TR>
+</TABLE></P>
+
+<P><TABLE BORDER=0 WIDTH="100%">
+   <TR>
+      <TD>
+         <P><B>Satellite Truck Considerations</B></P>
+         
+         <P><IMG SRC="satdemo2.gif" WIDTH=162 HEIGHT=524
+         X-SAS-UseImageWidth X-SAS-UseImageHeight ALIGN=left>Much of
+         the network equipment in the network diagram (shown at left)
+         has asynchronous serial console ports to aid in
+         configuration. (In the case of network gear, the serial port
+         might be the only way to configure the equipment if the
+         network interface is misconfigured.)</P>
+         
+         <P>One suggestion is to use a router with multiple async
+         serial ports, which are capable of supporting Reverse Telnet
+         access. (A Cisco 2511 provides 16 async ports, in addition
+         to the high-speed serial link for the satellite modem.) You
+         could also consider a stand-alone terminal server, instead
+         of a router-and-terminal server combination.</P>
+         
+         <P>There should be a PC on-board, configured to perform
+         diagnostics on the network and equipment. This device should
+         have a scriptable application environment, so that custom
+         scripting can be built to perform high- and low-level
+         diagnostics of the equipment. This could include a built-in
+         modem, that could test-dial in through the telephony
+         simulator, and test connections to the Ascend NAS.</P>
+         
+         <P>If the link back to the network fails, there are a number
+         of tests that could be performed. Do you want a human to do
+         that testing, or do you want a computer to do the testing,
+         and report the results (maybe even suggesting possible
+         resolutions to the problems)?</P>
+         
+         <P>The serial data output from the GPS receiver can be
+         <B>split</B>, so that it goes to both the device controlling
+         the pointing of the satellite dish(es), as well as to a
+         terminal server port. This way, once the link is up, the
+         network operations center can get access to the Lat./Long.
+         data, if that information would be useful for plotting the
+         location of the trailer in a mapping application. (It's
+         conceivable that the same GPS could be used for
+         computer-aided navigation for the truck driver.)</P>
+         
+         <P>If any of the set-top boxes have diagnostic ports on
+         them, it's possible that they can be connected to the
+         terminal server, allowing on-site developers to use the
+         diagnostics machine to monitor the output. (Developers back
+         at SVC might also be able to watch the output of those
+         ports.)</P>
+         
+         <P>The diagnostics PC could also be the documentation
+         repository (HTML pages for text and images), using Front
+         Page to remotely update the documentation as needed, or
+         simply bringing a floppy and/or CD media for physically
+         updating the machine.</P>
+         
+         <P>What about adding a web-cam capability, so we can see the
+         lights on the equipment?
+      </TD></TR>
+</TABLE></P>
+
+<P><TABLE BORDER=0 WIDTH="100%">
+   <TR>
+      <TD>
+         <P><B>On-board Diagnostics PC</B></P>
+         
+         <P>This is just some brainstorming...what could we do,
+         hypothetically speaking, with the diagnostics PC on the
+         trailer.</P>
+         
+         <UL>
+            <LI>GPS-based navigation software, so the driver can
+            locate his next stop, print route maps, etc.
+            
+            <UL>
+               <LI>Requires an ink-jet printer, and
+               consumables...taps into GPS used for satellite
+               targeting.
+               
+               <LI>An alternative would be to browse the web for
+               mapping/navigation sites, but this would only work
+               while the satellite antennas were up, during
+               transponder windows. This would require a bunch of
+               power, and would be hard to access when on the road
+               for sudden venue changes.
+               
+               <LI>Another option would be to have a cab-mounted
+               laptop, tied to the GPS, but that might be distracting
+               to the driver, or get in the way.
+            </UL>
+            
+            <LI>Serial Console access, using Telnet application (for
+            many windows at once).
+            
+            <UL>
+               <LI>Logging console application on-board?
+            </UL>
+            
+            <LI>Web-based system documentation;
+            
+            <UL>
+               <LI>Links Page (URLs for vendor's pages related to
+               equipment on-board)
+               
+               <LI>Contacts Page (How to reach "the Right People"
+               when you need them)
+               
+               <LI>Troubleshooting Page(s)
+               
+               <UL>
+                  <LI>How to tell what's wrong; How to fix it.
+                  
+                  <LI>Who to call if you can't fix it.
+               </UL>
+               
+               <LI>Instruction (Process) Pages
+               
+               <UL>
+                  <LI>Deploying steps, awnings, satellite dishes,
+                  etc.
+                  
+                  <LI>Pre-trip checklist (check generator fuel, kick
+                  tires, etc.)
+                  
+                  <LI>On-site Set-Up checklist.
+               </UL>
+            </UL>
+            
+            <LI>Web-based reports and logging (web forms), and demo
+            support.
+            
+            <UL>
+               <LI>Logging who showed up to present demos that day.
+               
+               <LI>Demo statistics  (how many visitors, referrals,
+               sales?)
+            </UL>
+            
+            <LI>Network/Systems management.
+            
+            <UL>
+               <LI>Scripted utility to try to touch each network
+               device.
+               
+               <LI>SNMP management applet?
+               
+               <LI>Computer setup/control for decoders, etc.
+            </UL>
+            
+            <LI>Web-cam capability.
+            
+            <UL>
+               <LI>Remotely triggerable, so SOC can trigger the
+               snapshot.
+               
+               <LI>View of the front panel lights on gear?
+               
+               <LI>Second camera to look at the demo area(s) to see
+               guests?
+            </UL>
+         </UL>
+      </TD></TR>
+</TABLE></P>
+</BODY>
+</HTML>
