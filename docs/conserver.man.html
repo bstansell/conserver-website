@@ -1,0 +1,839 @@
+<!-- Creator     : groff version 1.21 -->
+<!-- CreationDate: Wed Mar 22 17:55:22 2017 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>CONSERVER</title>
+
+</head>
+<body>
+
+<h1 align="center">CONSERVER</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#PROTOCOL">PROTOCOL</a><br>
+<a href="#FILES">FILES</a><br>
+<a href="#BUGS">BUGS</a><br>
+<a href="#AUTHORS">AUTHORS</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:11%; margin-top: 1em">conserver
+&minus; console server daemon</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+
+<p style="margin-left:11%; margin-top: 1em"><b>conserver</b>
+[<b>&minus;7dDEFhinoRSuvV</b>] [<b>&minus;a</b> <i>type</i>]
+[<b>&minus;m</b> <i>max</i>] [<b>&minus;M</b> <i>master</i>]
+[<b>&minus;p</b> <i>port</i>] [<b>&minus;b</b> <i>port</i>]
+[<b>&minus;c</b> <i>cred</i>] [<b>&minus;C</b>
+<i>config</i>] [<b>&minus;P</b> <i>passwd</i>]
+[<b>&minus;L</b> <i>logfile</i>] [<b>&minus;O</b>
+<i>min</i>] [<b>&minus;U</b> <i>logfile</i>]</p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+
+<p style="margin-left:11%; margin-top: 1em"><b>Conserver</b>
+is the daemon that manages remote access to system consoles
+by multiple users via the <b>console</b>(1) client program
+and (optionally) log the console output. It can connect to
+consoles via local serial ports, Unix domain sockets, TCP
+sockets (for terminal servers and the like), or any external
+program.</p>
+
+<p style="margin-left:11%; margin-top: 1em">When started,
+<b>conserver</b> reads the <b>conserver.cf</b>(5) file for
+details of each console. The console type, logging options,
+serial or network parameters, and user access levels are
+just a few of the things that can be specified. Command-line
+options are then applied, possibly overriding
+<b>conserver.cf</b>(5) settings. <b>Conserver</b>
+categorizes consoles into two types: those it should
+actively manage, and those it should just know about, so it
+can refer clients to other <b>conserver</b> instances. If
+the <b>master</b> value of a console matches the hostname or
+ip address of the local machine, <b>conserver</b> will
+actively manage the console. Otherwise, it&rsquo;s
+considered a &lsquo;&lsquo;remote&rsquo;&rsquo; console and
+managed by a different server. <b>Conserver</b> forks a
+child for each group of consoles it must manage and assigns
+each process a port number to listen on. The maximum number
+of consoles managed by each child process is set using the
+<b>&minus;m</b> option. The <b>console</b>(1) client program
+communicates with the master console server process to find
+the port (and host, in a multi-server configuration) on
+which the appropriate child is listening. <b>Conserver</b>
+restricts connections from clients based on the host access
+section of its <b>conserver.cf</b>(5) file, restricts users
+based on the console access lists of the
+<b>conserver.cf</b>(5) file, and authenticates users against
+its <b>conserver.passwd</b>(5) file. <b>Conserver</b> can
+also restrict clients using the tcp-wrappers package
+(enabled using <b>--with-libwrap</b>). This authentication
+is done before consulting the <b>conserver.cf</b>(5) access
+list.</p>
+
+<p style="margin-left:11%; margin-top: 1em">When Unix
+domain sockets are used between the client and server
+(enabled using <b>--with-uds</b>), authentication checks are
+done on the hardcoded address
+&lsquo;&lsquo;127.0.0.1&rsquo;&rsquo;. Automatic client
+redirection is also disabled (as if the <b>&minus;R</b>
+option was used) since the client cannot communicate with
+remote servers. The directory used to hold the sockets is
+checked to make sure it&rsquo;s empty when the server
+starts. The server will <b>not</b> remove any files in the
+directory itself, just in case the directory is accidentally
+specified as &lsquo;&lsquo;/etc&rsquo;&rsquo; or some other
+critical location. The server will do its best to remove all
+the sockets when it shuts down, but it could stop
+ungracefully (crash, &lsquo;&lsquo;kill -9&rsquo;&rsquo;,
+etc) and leave files behind. It would then be up to the
+admin (or a creative startup script) to clean up the
+directory before the server will start again.</p>
+
+
+<p style="margin-left:11%; margin-top: 1em"><b>Conserver</b>
+completely controls any connection to a console. All escape
+sequences given by the user to <b>console</b> are passed to
+the server without interpretation. The server recognizes and
+processes all escape sequences.</p>
+
+<p style="margin-left:11%; margin-top: 1em">The
+<b>conserver</b> parent process will automatically respawn
+any child process that dies. The following signals are
+propagated by the parent process to its children.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="11%"></td>
+<td width="11%">
+
+
+<p>SIGTERM</p></td>
+<td width="4%"></td>
+<td width="74%">
+
+
+<p>Close all connections and exit.</p></td></tr>
+<tr valign="top" align="left">
+<td width="11%"></td>
+<td width="11%">
+
+
+<p>SIGHUP</p></td>
+<td width="4%"></td>
+<td width="74%">
+
+
+<p>Reread the configuration file. New consoles are managed
+by forking off new children, deleted consoles (and their
+clients) are dropped, and changes to consoles are done
+&quot;in place&quot;, resetting the console port (bringing
+it down and up) only when necessary. The console name is
+used to determine when consoles have been
+added/removed/changed. All actions performed by SIGUSR2 are
+also performed.</p></td></tr>
+<tr valign="top" align="left">
+<td width="11%"></td>
+<td width="11%">
+
+
+<p>SIGUSR1</p></td>
+<td width="4%"></td>
+<td width="74%">
+
+
+<p>Try to connect to any consoles marked as down. This can
+come in handy if you had a terminal server (or more) that
+wasn&rsquo;t accepting connections at startup and you want
+<b>conserver</b> to try to reconnect to all those downed
+ports.</p> </td></tr>
+<tr valign="top" align="left">
+<td width="11%"></td>
+<td width="11%">
+
+
+<p>SIGUSR2</p></td>
+<td width="4%"></td>
+<td width="74%">
+
+
+<p>Close and reopen all console logfiles and, if in daemon
+mode (<b>&minus;d</b> option), the error logfile (see the
+<b>&minus;L</b> option). All actions performed by SIGUSR1
+are also performed.</p></td></tr>
+</table>
+
+<p style="margin-left:11%; margin-top: 1em">Consoles which
+have no current client connection might produce important
+error messages. With the <b>&minus;u</b> option, these
+&lsquo;&lsquo;unloved&rsquo;&rsquo; errors are labeled with
+a machine name and output on stdout (or, in daemon mode, to
+the logfile). This allows a live operator or an automated
+log scanner to find otherwise unseen errors by watching in a
+single location.</p>
+
+
+<p style="margin-left:11%; margin-top: 1em"><b>Conserver</b>
+must be run as root if it is to bind to a port under 1024 or
+if it must read protected password files (like shadow
+passwords) for authentication (see
+<b>conserver.passwd</b>(5)). Otherwise, it may be run by any
+user, with <b>&minus;p</b> used to specify a port above
+1024.</p>
+
+<p style="margin-left:11%; margin-top: 1em">If encryption
+has been built into the code (<b>--with-openssl</b>),
+encrypted client connections (without certificate exchanges)
+happen by default. To add certificate exchanges, use the
+<b>&minus;c</b> option with the client and server. For
+authentication of the certificates to work, the signing
+certificate must be properly trusted, which usually means
+the public portion is in
+<i>OPENSSL_ROOT</i><b>/ssl/certs</b> (on both the client and
+server sides). See the sample self-signing certificate
+making script <b>contrib/maketestcerts</b> for further
+clues. To allow non-encrypted client connections (in
+addition to encrypted client connections), use the
+<b>&minus;E</b> option.</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+<p style="margin-left:11%; margin-top: 1em">Options may be
+given as separate arguments (e.g., <b>&minus;n &minus;d</b>)
+or clustered (e.g., <b>&minus;nd</b>). Options and their
+arguments may be separated by optional white space. Option
+arguments containing spaces or other characters special to
+the shell must be quoted.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="11%"></td>
+<td width="14%">
+
+
+<p style="margin-top: 1em"><b>&minus;7</b></p></td>
+<td width="4%"></td>
+<td width="71%">
+
+
+<p style="margin-top: 1em">Strip the high bit off of all
+data received, whether from the <b>console</b> client or
+from the console device, before any processing occurs.</p></td></tr>
+<tr valign="top" align="left">
+<td width="11%"></td>
+<td width="14%">
+
+
+<p><b>&minus;a</b><i>type</i></p></td>
+<td width="4%"></td>
+<td width="71%">
+
+
+<p>Set the default access type for incoming connections
+from <b>console</b> clients: &lsquo;<b>r</b>&rsquo; for
+refused (the default), &lsquo;<b>a</b>&rsquo; for allowed,
+or &lsquo;<b>t</b>&rsquo; for trusted. This applies to hosts
+for which no matching entry is found in the access section
+of <b>conserver.cf</b>(5).</p></td></tr>
+<tr valign="top" align="left">
+<td width="11%"></td>
+<td width="14%">
+
+
+<p><b>&minus;b</b><i>port</i></p></td>
+<td width="4%"></td>
+<td width="71%">
+
+
+<p>Set the base port for children to listen on. Each child
+starts looking for free ports at <i>port</i> and working
+upward, trying a maximum number of ports equal to twice the
+maximum number of groups. If no free ports are available in
+that range, <b>conserver</b> exits. By default,
+<b>conserver</b> lets the operating system choose a free
+port.</p> </td></tr>
+<tr valign="top" align="left">
+<td width="11%"></td>
+<td width="14%">
+
+
+<p><b>&minus;c</b><i>cred</i></p></td>
+<td width="4%"></td>
+<td width="71%">
+
+
+<p>Load an SSL certificate and key from the PEM encoded
+file <i>cred</i>.</p></td></tr>
+<tr valign="top" align="left">
+<td width="11%"></td>
+<td width="14%">
+
+
+<p><b>&minus;C</b><i>config</i></p></td>
+<td width="4%"></td>
+<td width="71%">
+
+
+<p>Read configuration information from the file
+<i>config</i>. The default <i>config</i> may be changed at
+compile time using the <b>--with-cffile</b> option.</p></td></tr>
+<tr valign="top" align="left">
+<td width="11%"></td>
+<td width="14%">
+
+
+<p><b>&minus;d</b></p></td>
+<td width="4%"></td>
+<td width="71%">
+
+
+<p>Become a daemon. Disconnects from the controlling
+terminal and sends all output (including any debug output)
+to the logfile (see <b>&minus;L</b>).</p></td></tr>
+<tr valign="top" align="left">
+<td width="11%"></td>
+<td width="14%">
+
+
+<p><b>&minus;D</b></p></td>
+<td width="4%"></td>
+<td width="71%">
+
+
+<p>Enable debugging output, sent to stderr. Multiple
+<b>&minus;D</b> options increases debug output.</p></td></tr>
+<tr valign="top" align="left">
+<td width="11%"></td>
+<td width="14%">
+
+
+<p><b>&minus;E</b></p></td>
+<td width="4%"></td>
+<td width="71%">
+
+
+<p>If encryption has been built into the code
+(<b>--with-openssl</b>), encrypted client connections are a
+requirement. This option allows non-encrypted clients (as
+well as encrypted clients) to connect to consoles.</p></td></tr>
+<tr valign="top" align="left">
+<td width="11%"></td>
+<td width="14%">
+
+
+<p><b>&minus;F</b></p></td>
+<td width="4%"></td>
+<td width="71%">
+
+
+<p>Do not automatically reinitialize failed (unexpectedly
+closed) consoles. If the console is a program
+(&lsquo;|&rsquo; syntax) and it closes with a zero exit
+status, the console is reinitialized regardless of this
+option. Without this option, a console is immediately
+reopened, and if that fails, retried every minute until
+successful. This option has no effect on the <b>&minus;o</b>
+and <b>&minus;O</b> options.</p></td></tr>
+<tr valign="top" align="left">
+<td width="11%"></td>
+<td width="14%">
+
+
+<p><b>&minus;h</b></p></td>
+<td width="4%"></td>
+<td width="71%">
+
+
+<p>Output a brief help message.</p></td></tr>
+<tr valign="top" align="left">
+<td width="11%"></td>
+<td width="14%">
+
+
+<p><b>&minus;i</b></p></td>
+<td width="4%"></td>
+<td width="71%">
+
+
+<p>Initiate console connections on demand (and close them
+when not used).</p></td></tr>
+<tr valign="top" align="left">
+<td width="11%"></td>
+<td width="14%">
+
+
+<p><b>&minus;L</b><i>logfile</i></p></td>
+<td width="4%"></td>
+<td width="71%">
+
+
+<p>Log errors and informational messages to <i>logfile</i>
+after startup in daemon mode (<b>&minus;d</b>). This option
+does not apply when not running in daemon mode. The default
+<i>logfile</i> may be changed at compile time using the
+<b>--with-logfile</b> option.</p></td></tr>
+<tr valign="top" align="left">
+<td width="11%"></td>
+<td width="14%">
+
+
+<p><b>&minus;m</b><i>max</i></p></td>
+<td width="4%"></td>
+<td width="71%">
+
+
+<p>Set the maximum consoles managed per process. The
+default <i>max</i> may be changed at compile time using the
+<b>--with-maxmemb</b> option.</p></td></tr>
+<tr valign="top" align="left">
+<td width="11%"></td>
+<td width="14%">
+
+
+<p><b>&minus;M</b><i>master</i></p></td>
+<td width="4%"></td>
+<td width="71%">
+
+
+<p>Normally, this allows conserver to bind to a particular
+IP address (like &lsquo;127.0.0.1&rsquo;) instead of all
+interfaces. The default is to bind to all addresses.
+However, if <b>--with-uds</b> was used to enable Unix domain
+sockets for client/server communication, this points
+conserver to the directory where it should store the
+sockets. The default <i>master</i> directory
+(&lsquo;&lsquo;<b>/tmp/conserver</b>&rsquo;&rsquo;) may be
+changed at compile time using the <b>--with-uds</b>
+option.</p> </td></tr>
+<tr valign="top" align="left">
+<td width="11%"></td>
+<td width="14%">
+
+
+<p><b>&minus;n</b></p></td>
+<td width="4%"></td>
+<td width="71%">
+
+
+<p>Obsolete (now a no-op); see <b>&minus;u</b>.</p></td></tr>
+<tr valign="top" align="left">
+<td width="11%"></td>
+<td width="14%">
+
+
+<p><b>&minus;o</b></p></td>
+<td width="4%"></td>
+<td width="71%">
+
+
+<p>Normally, a client connecting to a
+&lsquo;&lsquo;downed&rsquo;&rsquo; console does just that.
+Using this option, the server will automatically attempt to
+open (&lsquo;&lsquo;bring up&rsquo;&rsquo;) the console when
+the client connects.</p></td></tr>
+<tr valign="top" align="left">
+<td width="11%"></td>
+<td width="14%">
+
+
+<p><b>&minus;O</b><i>min</i></p></td>
+<td width="4%"></td>
+<td width="71%">
+
+
+<p>Enable periodic attempts (every <i>min</i> minutes) to
+open (&lsquo;&lsquo;bring up&rsquo;&rsquo;) all downed
+consoles (similar to sending a SIGUSR1). Without this
+option, or if <i>min</i> is zero, no periodic attempts
+occur.</p> </td></tr>
+<tr valign="top" align="left">
+<td width="11%"></td>
+<td width="14%">
+
+
+<p><b>&minus;p</b><i>port</i></p></td>
+<td width="4%"></td>
+<td width="71%">
+
+
+<p>Set the TCP port for the master process to listen on.
+This may be either a port number or a service name. The
+default <i>port</i>, &lsquo;&lsquo;conserver&rsquo;&rsquo;
+(typically 782), may be changed at compile time using the
+<b>--with-port</b> option. If the <b>--with-uds</b> option
+was used, this option is ignored.</p></td></tr>
+<tr valign="top" align="left">
+<td width="11%"></td>
+<td width="14%">
+
+
+<p><b>&minus;P</b><i>passwd</i></p></td>
+<td width="4%"></td>
+<td width="71%">
+
+
+<p>Read the table of authorized user data from the file
+<i>passwd</i>. The default <i>passwd</i> may be changed at
+compile time using the <b>--with-pwdfile</b> option.</p></td></tr>
+<tr valign="top" align="left">
+<td width="11%"></td>
+<td width="14%">
+
+
+<p><b>&minus;R</b></p></td>
+<td width="4%"></td>
+<td width="71%">
+
+
+<p>Disable automatic client redirection to other conserver
+hosts. This means informational commands like
+<b>&minus;w</b> and <b>&minus;i</b> will only show the
+status of the local conserver host and attempts to connect
+to remote consoles will result in an informative message to
+the user.</p></td></tr>
+<tr valign="top" align="left">
+<td width="11%"></td>
+<td width="14%">
+
+
+<p><b>&minus;S</b></p></td>
+<td width="4%"></td>
+<td width="71%">
+
+
+<p>Do not run the server, just perform a syntax check of
+configuration file and exit with a non-zero value if there
+is an error. Using more than one <b>&minus;S</b> will cause
+conserver to output various information about each console
+in 5 colon-separated fields, enclosed in curly-braces. The
+philosophy behind the output is to provide information to
+allow external detection of multiple consoles access the
+same physical port. Since this is <i>highly</i>
+environment-specific, conserver cannot do the check
+internally.</p> </td></tr>
+</table>
+
+<p style="margin-left:29%;"><i>name</i></p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="11%"></td>
+<td width="29%"></td>
+<td width="3%"></td>
+<td width="57%">
+
+
+<p style="margin-top: 1em">The name of the console.</p></td></tr>
+<tr valign="top" align="left">
+<td width="11%"></td>
+<td width="29%">
+
+
+<p><i>master</i></p></td>
+<td width="3%"></td>
+<td width="57%">
+
+
+<p>The hostname of the master conserver host for the
+console.</p> </td></tr>
+<tr valign="top" align="left">
+<td width="11%"></td>
+<td width="29%">
+
+
+<p><i>aliases</i></p></td>
+<td width="3%"></td>
+<td width="57%">
+
+
+<p>The console aliases in a comma-separated list.</p></td></tr>
+<tr valign="top" align="left">
+<td width="11%"></td>
+<td width="29%">
+
+
+<p><i>type</i></p></td>
+<td width="3%"></td>
+<td width="57%">
+
+
+<p>The type of console. Values will be a &lsquo;/&rsquo;
+for a local device, &lsquo;|&rsquo; for a command,
+&lsquo;!&rsquo; for a remote port, &lsquo;%&rsquo; for a
+Unix domain socket, and &lsquo;#&rsquo; for a noop
+console.</p> </td></tr>
+<tr valign="top" align="left">
+<td width="11%"></td>
+<td width="29%">
+
+
+<p><i>details</i></p></td>
+<td width="3%"></td>
+<td width="57%">
+
+
+<p>Multiple values are comma-separated and depend on the
+type of the console. Local devices will have the values of
+the device file and baud rate/parity. Commands will have
+string to invoke. Remote ports will have the values of the
+remote hostname and port number. Unix domain sockets will
+have the path to the socket. Noop consoles will have
+nothing.</p> </td></tr>
+<tr valign="top" align="left">
+<td width="11%"></td>
+<td width="29%">
+
+
+<p><b>&minus;u</b></p></td>
+<td width="3%"></td>
+<td width="57%">
+</td></tr>
+</table>
+
+<p style="margin-left:29%; margin-top: 1em">Send unloved
+console output to <b>conserver</b>&rsquo;s stdout (which, in
+daemon mode, is redirected to the logfile). This applies to
+all consoles to which no user is attached, independent of
+whether logging of individual consoles is enabled via
+<b>conserver.cf</b> entries.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="11%"></td>
+<td width="14%">
+
+
+
+<p style="margin-top: 1em"><b>&minus;U</b><i>logfile</i></p> </td>
+<td width="4%"></td>
+<td width="71%">
+
+
+<p style="margin-top: 1em">Copy all console data to the
+&lsquo;&lsquo;unified&rsquo;&rsquo; <i>logfile</i>. The
+output is the same as the <b>&minus;u</b> output, but all
+consoles, not just those without a user, are logged. Each
+line of output is prefixed with the console name. If a user
+is attached read/write, a &lsquo;*&rsquo; is appended to the
+console name, to allow log watching utilites to ignore
+potential user-introduced alarms.</p></td></tr>
+<tr valign="top" align="left">
+<td width="11%"></td>
+<td width="14%">
+
+
+<p><b>&minus;v</b></p></td>
+<td width="4%"></td>
+<td width="71%">
+
+
+<p>Echo the configuration as it is being read (be
+verbose).</p> </td></tr>
+<tr valign="top" align="left">
+<td width="11%"></td>
+<td width="14%">
+
+
+<p><b>&minus;V</b></p></td>
+<td width="4%"></td>
+<td width="71%">
+
+
+<p>Output the version number and settings of the
+<b>conserver</b> program and then exit.</p></td></tr>
+</table>
+
+<h2>PROTOCOL
+<a name="PROTOCOL"></a>
+</h2>
+
+
+<p style="margin-left:11%; margin-top: 1em">The protocol
+used to interact with the <b>conserver</b> daemon has two
+basic styles. The first style is the initial line-based
+mode, which occurs before connecting to a console. The
+second style is the character-based, escape-sequence mode,
+while connected to a console.</p>
+
+<p style="margin-left:11%; margin-top: 1em">The initial
+line-based mode begins the same for both the master process
+and its children. Upon a successful (non-rejected) client
+connection, an &lsquo;&lsquo;ok&rsquo;&rsquo; is sent. The
+client then issues a command and the server responds to it
+with a result string (&lsquo;&lsquo;ok&rsquo;&rsquo; being
+the sign of success for most commands). The commands
+available are &lsquo;&lsquo;help&rsquo;&rsquo;,
+&lsquo;&lsquo;ssl&rsquo;&rsquo; (if SSL was built into the
+code), &lsquo;&lsquo;login&rsquo;&rsquo;, and
+&lsquo;&lsquo;exit&rsquo;&rsquo;. Using the
+&lsquo;&lsquo;login&rsquo;&rsquo; command, the client
+authenticates and gains access to the extended command set.
+This is where the master process and its children differ.
+The master process gives the client access to global
+commands, and the child provides commands for interacting
+with the consoles it manages. The
+&lsquo;&lsquo;help&rsquo;&rsquo; command, in both cases,
+will provide a complete list of commands and a short
+description of what they do.</p>
+
+<p style="margin-left:11%; margin-top: 1em">The second,
+character-based, style of interaction occurs when the client
+issues the &lsquo;&lsquo;call&rsquo;&rsquo; command with a
+child process. This command connects the client to a console
+and, at that point, relays all traffic between the client
+and the console. There is no more command-based interaction
+between the client and the server, any interaction with the
+server is done with the default escape sequence.</p>
+
+<p style="margin-left:11%; margin-top: 1em">This is, by no
+means, a complete description of the entire client/server
+interaction. It is, however, a brief explanation in order to
+give a idea of what the program does. See the
+<b><small>PROTOCOL</small></b> file in the distribution for
+further details.</p>
+
+<h2>FILES
+<a name="FILES"></a>
+</h2>
+
+
+<p style="margin-left:11%; margin-top: 1em">The following
+default file locations may be overridden at compile time or
+by the command-line options described above. Run
+<b>conserver &minus;V</b> to see the defaults set at compile
+time.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="11%"></td>
+<td width="34%">
+
+
+<p style="margin-top: 1em"><b>/etc/conserver.cf</b></p></td>
+<td width="4%"></td>
+<td width="51%">
+
+
+<p style="margin-top: 1em">description of console terminal
+lines and client host access levels; see
+<b>conserver.cf</b>(5).</p> </td></tr>
+<tr valign="top" align="left">
+<td width="11%"></td>
+<td width="34%">
+
+
+<p><b>/etc/conserver.passwd</b></p></td>
+<td width="4%"></td>
+<td width="51%">
+
+
+<p>users allowed to access consoles; see
+<b>conserver.passwd</b>(5).</p> </td></tr>
+<tr valign="top" align="left">
+<td width="11%"></td>
+<td width="34%">
+
+
+<p><b>/var/run/conserver.pid</b></p></td>
+<td width="4%"></td>
+<td width="51%">
+
+
+<p>the master conserver process ID</p></td></tr>
+<tr valign="top" align="left">
+<td width="11%"></td>
+<td width="34%">
+
+
+<p><b>/var/log/conserver</b></p></td>
+<td width="4%"></td>
+<td width="51%">
+
+
+<p>log of errors and informational messages</p></td></tr>
+<tr valign="top" align="left">
+<td width="11%"></td>
+<td width="34%">
+
+
+<p><b>/tmp/conserver</b></p></td>
+<td width="4%"></td>
+<td width="51%">
+
+
+<p>directory to hold Unix domain sockets (if enabled)</p></td></tr>
+</table>
+
+<p style="margin-left:11%; margin-top: 1em">Additionally,
+output from individual consoles may be logged to separate
+files specified in <b>conserver.cf</b>(5).</p>
+
+<h2>BUGS
+<a name="BUGS"></a>
+</h2>
+
+
+<p style="margin-left:11%; margin-top: 1em">I&rsquo;m sure
+there are bugs, I just don&rsquo;t know where they are.
+Please let me know if you find any.</p>
+
+<h2>AUTHORS
+<a name="AUTHORS"></a>
+</h2>
+
+
+<p style="margin-left:11%; margin-top: 1em">Thomas A. Fine,
+Ohio State Computer Science <br>
+Kevin S Braunsdorf, Purdue University Computing Center <br>
+Bryan Stansell, conserver.com</p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+
+<p style="margin-left:11%; margin-top: 1em"><b>console</b>(1),
+<b>conserver.cf</b>(5), <b>conserver.passwd</b>(5)</p>
+<hr>
+</body>
+</html>

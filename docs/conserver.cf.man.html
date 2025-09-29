@@ -1,0 +1,1709 @@
+<!-- Creator     : groff version 1.21 -->
+<!-- CreationDate: Wed Mar 22 17:55:22 2017 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>CONSERVER.CF</title>
+
+</head>
+<body>
+
+<h1 align="center">CONSERVER.CF</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#PARSER">PARSER</a><br>
+<a href="#BLOCKS">BLOCKS</a><br>
+<a href="#AUTHORS">AUTHORS</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:11%; margin-top: 1em">conserver.cf
+&minus; console configuration file for
+<b>conserver</b>(8)</p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:11%; margin-top: 1em">The format of
+the conserver.cf file is made up of named blocks of
+keyword/value pairs, comments, and optional whitespace for
+formatting flexibility. The block types as well as the
+keywords are pre-defined and explained in the
+<b><small>BLOCKS</small></b> section. A comment is an
+unquoted pound-sign to a newline. See the
+<b><small>PARSER</small></b> section for full details on
+whitespace and quoting.</p>
+
+<p style="margin-left:11%; margin-top: 1em">Let me first
+show you a sample block with a couple of keyword/value pairs
+to make the description a bit simpler to understand.</p>
+
+<p style="margin-left:22%; margin-top: 1em">console simple
+{ master localhost; type exec; rw *; }</p>
+
+<p style="margin-left:11%; margin-top: 1em">This is
+actually a fully functional conserver.cf file (if certain
+conditions are met...and if you can list those conditions,
+you can probably can skip to the
+<b><small>BLOCKS</small></b> section).</p>
+
+<p style="margin-left:11%; margin-top: 1em">Our example is
+made of up of a console-block named
+&lsquo;&lsquo;simple&rsquo;&rsquo; with three keyword/value
+pairs. What this does is define a console named
+&lsquo;&lsquo;simple&rsquo;&rsquo;, makes the master of that
+console the host &lsquo;&lsquo;localhost&rsquo;&rsquo;,
+makes the type an exec-style console, and gives every user
+read/write permission. This is the generic format of the
+file:</p>
+
+<p style="margin-left:22%; margin-top: 1em">block-type
+block-name { keyword value; ... }</p>
+
+<p style="margin-left:11%; margin-top: 1em">To show the
+addition of comments and whitespace, here is the example
+reformatted (but functionally equivalent):</p>
+
+<p style="margin-left:22%; margin-top: 1em"># define a
+console named &quot;simple&quot; <br>
+console simple { <br>
+# setting all required values... <br>
+master localhost; <br>
+type exec; # exec-style console <br>
+rw *; # allow any username <br>
+}</p>
+
+<h2>PARSER
+<a name="PARSER"></a>
+</h2>
+
+
+<p style="margin-left:11%; margin-top: 1em">The parser has
+six characters that it considers special. These are:
+&lsquo;&lsquo;{&rsquo;&rsquo;,
+&lsquo;&lsquo;}&rsquo;&rsquo;,
+&lsquo;&lsquo;;&rsquo;&rsquo;,
+&lsquo;&lsquo;#&rsquo;&rsquo;,
+&lsquo;&lsquo;\&rsquo;&rsquo;, and
+&lsquo;&lsquo;&quot;&rsquo;&rsquo;. The first three (hereby
+called tokens) define the format of the configuration blocks
+and are used as word separators, the next is the comment
+character, and the last two are quoting characters.</p>
+
+<p style="margin-left:11%; margin-top: 1em">Word separation
+occurs when the parser encounters an unquoted token and, in
+certain cases, whitespace. Whitespace is only used as a word
+separator when the parser is looking for a block-type or
+keyword. When it&rsquo;s looking for a block-name or value,
+whitespace is like any other character, which allows you to
+embed whitespace in a block-name or value without having to
+quote it. Here is an example:</p>
+
+<p style="margin-left:22%; margin-top: 1em">default my defs
+{ rw *; include other defs ; }</p>
+
+<p style="margin-left:11%; margin-top: 1em">The block-type
+is &lsquo;&lsquo;default&rsquo;&rsquo;, the block-name is
+&lsquo;&lsquo;my defs&rsquo;&rsquo;, and the value for the
+keyword &lsquo;&lsquo;include&rsquo;&rsquo; is
+&lsquo;&lsquo;other defs&rsquo;&rsquo;. Whitespace around
+tokens are ignored so you get &lsquo;&lsquo;other
+defs&rsquo;&rsquo; instead of &lsquo;&lsquo;other defs
+&rsquo;&rsquo; as the value.</p>
+
+<p style="margin-left:11%; margin-top: 1em">The only way to
+use one of the special characters as part of a block-name or
+value is to quote it.</p>
+
+<p style="margin-left:11%; margin-top: 1em">Quoting is a
+simple matter of prefixing a character with a backslash or
+surrounding a group of characters with double-quotes. If a
+character is prefixed by a backslash, the next character is
+a literal (so &lsquo;&lsquo;\\&rsquo;&rsquo; produces a
+&lsquo;&lsquo;\&rsquo;&rsquo;,
+&lsquo;&lsquo;\&quot;&rsquo;&rsquo; produces
+&lsquo;&lsquo;&quot;&rsquo;&rsquo;,
+&lsquo;&lsquo;\{&rsquo;&rsquo; produces a
+&lsquo;&lsquo;{&rsquo;&rsquo;, etc.). For double-quoted
+strings, all characters are literal except for
+&lsquo;&lsquo;\&quot;&rsquo;&rsquo;, which embeds a
+double-quote.</p>
+
+<p style="margin-left:11%; margin-top: 1em">Adding a
+variety of quotes to our example without changing the
+meaning of things, we have:</p>
+
+
+<p style="margin-left:22%; margin-top: 1em">&quot;defa&quot;ult
+my\ defs { rw *; in\clude &quot;other defs&quot; ; }</p>
+
+<p style="margin-left:11%; margin-top: 1em">There is one
+special line the parser recognizes: a
+&lsquo;&lsquo;#include&rsquo;&rsquo; statement. It is of the
+form:</p>
+
+
+<p style="margin-left:22%; margin-top: 1em"><b>#include</b>
+<i>filename</i></p>
+
+<p style="margin-left:11%; margin-top: 1em">Any whitespace
+around <i>filename</i> is ignored, but whitespace embedded
+inside is preserved. Everything in <i>filename</i> is taken
+literally, so none of the normal parser quoting applies. The
+<b>#include</b> must begin in &lsquo;&lsquo;column
+0&rsquo;&rsquo; - no whitespace is allowed between it and
+the start of the physical line. There is an include file
+depth limit of 10 to prevent infinite recursion.</p>
+
+<h2>BLOCKS
+<a name="BLOCKS"></a>
+</h2>
+
+
+<p style="margin-left:11%; margin-top: 1em"><b>access</b>
+<i>hostname</i>|<i>ipaddr</i></p>
+
+<p style="margin-left:22%;">Define an access block for the
+host named <i>hostname</i> or using the address
+<i>ipaddr</i>. If the value of &lsquo;&lsquo;*&rsquo;&rsquo;
+is used, the access block will be applied to all conserver
+hosts. Access lists are used in a first match fashion (top
+down), so order is important. <b><br>
+admin</b>
+[<b>!</b>]<i>username</i>[<b>,</b>...]|<b>&quot;&quot;</b></p>
+
+<p style="margin-left:32%;">Define a list of users making
+up the admin list for the console server. If <i>username</i>
+matches a previously defined group name, all members of the
+previous group are applied to the admin list (with access
+reversed if prefixed with a &lsquo;!&rsquo;). If
+<i>username</i> doesn&rsquo;t match a previously defined
+group and <i>username</i> begins with &lsquo;@&rsquo;, the
+name (minus the &lsquo;@&rsquo;) is checked against the
+host&rsquo;s group database. All users found in the group
+will be granted (or denied, if prefixed with
+&lsquo;!&rsquo;) access. If <i>username</i> doesn&rsquo;t
+match a previous group and doesn&rsquo;t begin with
+&lsquo;@&rsquo;, the users will be granted (or denied, if
+prefixed with &lsquo;!&rsquo;) access. If the null string
+(&lsquo;&lsquo;<b>&quot;&quot;</b>&rsquo;&rsquo;) is used,
+any users previously defined for the console servers&rsquo;s
+admin list are removed.</p>
+
+<p style="margin-left:22%;"><b>allowed</b>
+<i>hostname</i>[<b>,</b>...]</p>
+
+<p style="margin-left:32%;">The list of hostnames are added
+to the &lsquo;&lsquo;allowed&rsquo;&rsquo; list, which
+grants connections from the hosts but requires username
+authentication.</p>
+
+<p style="margin-left:22%;"><b>include</b>
+<i>accessgroup</i></p>
+
+<p style="margin-left:32%;">The access lists defined using
+the name <i>accessgroup</i> are applied to the current
+access block. The included access block must be previously
+defined.</p>
+
+<p style="margin-left:22%;"><b>limited</b>
+[<b>!</b>]<i>username</i>[<b>,</b>...]|<b>&quot;&quot;</b></p>
+
+<p style="margin-left:32%;">Define a list of users with
+limited functionality on the console server. These users
+will not be allowed to suspend their connection, shift to
+another console, or attach to a local command. If
+<i>username</i> matches a previously defined group name, all
+members of the previous group are applied to the admin list
+(with access reversed if prefixed with a &lsquo;!&rsquo;).
+If <i>username</i> doesn&rsquo;t match a previously defined
+group and <i>username</i> begins with &lsquo;@&rsquo;, the
+name (minus the &lsquo;@&rsquo;) is checked against the
+host&rsquo;s group database. All users found in the group
+will be granted (or denied, if prefixed with
+&lsquo;!&rsquo;) access. If <i>username</i> doesn&rsquo;t
+match a previous group and doesn&rsquo;t begin with
+&lsquo;@&rsquo;, the users will be granted (or denied, if
+prefixed with &lsquo;!&rsquo;) access. If the null string
+(&lsquo;&lsquo;<b>&quot;&quot;</b>&rsquo;&rsquo;) is used,
+any users previously defined for the console server&rsquo;s
+limited list are removed.</p>
+
+<p style="margin-left:22%;"><b>rejected</b>
+<i>hostname</i>[<b>,</b>...]</p>
+
+<p style="margin-left:32%;">The list of hostnames are added
+to the &lsquo;&lsquo;rejected&rsquo;&rsquo; list, which
+rejects connections from the hosts.</p>
+
+<p style="margin-left:22%;"><b>trusted</b>
+<i>hostname</i>[<b>,</b>...]</p>
+
+<p style="margin-left:32%;">The list of hostnames are added
+to the &lsquo;&lsquo;trusted&rsquo;&rsquo; list, which
+grants connections from the hosts without username
+authentication.</p>
+
+<p style="margin-left:11%;"><b>break</b> <i>n</i></p>
+
+<p style="margin-left:22%;">Define a break sequence where
+(1 &lt;= <i>n</i> &lt;= 9) or (a &lt;= <i>n</i> &lt;= z).
+Break sequences are accessed via the
+&lsquo;&lsquo;^Ecl<i>n</i>&rsquo;&rsquo; client escape
+sequence. <b><br>
+confirm
+yes</b>|<b>true</b>|<b>on</b>|<b>no</b>|<b>false</b>|<b>off</b></p>
+
+<p style="margin-left:32%;">Set whether or not to ask the
+client for confirmation before sending the break sequence.
+The default is &lsquo;&lsquo;no&rsquo;&rsquo;.</p>
+
+<p style="margin-left:22%;"><b>delay</b> <i>n</i></p>
+
+<p style="margin-left:32%;">Set the time delay for the
+<b>\d</b> sequence to <i>n</i> milliseconds. The default
+time delay is 250ms.</p>
+
+<p style="margin-left:22%;"><b>string</b>
+<i>breakseq</i></p>
+
+<p style="margin-left:32%;">Assign the string
+<i>breakseq</i> to the specified slot <i>n</i>. A break
+sequence is a simple character string with the exception of
+&lsquo;\&rsquo; and &lsquo;^&rsquo;:</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="43%"></td>
+<td width="6%">
+
+
+<p><b>\a</b></p></td>
+<td width="3%"></td>
+<td width="48%">
+
+
+<p>alert</p></td></tr>
+<tr valign="top" align="left">
+<td width="43%"></td>
+<td width="6%">
+
+
+<p><b>\b</b></p></td>
+<td width="3%"></td>
+<td width="48%">
+
+
+<p>backspace</p></td></tr>
+<tr valign="top" align="left">
+<td width="43%"></td>
+<td width="6%">
+
+
+<p><b>\d</b></p></td>
+<td width="3%"></td>
+<td width="48%">
+
+
+<p>delay specified by the <b>delay</b> option.</p></td></tr>
+<tr valign="top" align="left">
+<td width="43%"></td>
+<td width="6%">
+
+
+<p><b>\f</b></p></td>
+<td width="3%"></td>
+<td width="48%">
+
+
+<p>form-feed</p></td></tr>
+<tr valign="top" align="left">
+<td width="43%"></td>
+<td width="6%">
+
+
+<p><b>\n</b></p></td>
+<td width="3%"></td>
+<td width="48%">
+
+
+<p>newline</p></td></tr>
+<tr valign="top" align="left">
+<td width="43%"></td>
+<td width="6%">
+
+
+<p><b>\r</b></p></td>
+<td width="3%"></td>
+<td width="48%">
+
+
+<p>carriage-return</p></td></tr>
+<tr valign="top" align="left">
+<td width="43%"></td>
+<td width="6%">
+
+
+<p><b>\t</b></p></td>
+<td width="3%"></td>
+<td width="48%">
+
+
+<p>tab</p></td></tr>
+<tr valign="top" align="left">
+<td width="43%"></td>
+<td width="6%">
+
+
+<p><b>\v</b></p></td>
+<td width="3%"></td>
+<td width="48%">
+
+
+<p>vertical-tab</p></td></tr>
+<tr valign="top" align="left">
+<td width="43%"></td>
+<td width="6%">
+
+
+<p><b>\z</b></p></td>
+<td width="3%"></td>
+<td width="48%">
+
+
+<p>serial break</p></td></tr>
+<tr valign="top" align="left">
+<td width="43%"></td>
+<td width="6%">
+
+
+<p><b>\\</b></p></td>
+<td width="3%"></td>
+<td width="48%">
+
+
+<p>backslash</p></td></tr>
+<tr valign="top" align="left">
+<td width="43%"></td>
+<td width="6%">
+
+
+<p><b>\^</b></p></td>
+<td width="3%"></td>
+<td width="48%">
+
+
+<p>circumflex</p></td></tr>
+<tr valign="top" align="left">
+<td width="43%"></td>
+<td width="6%">
+
+
+<p><b>\</b><i>ooo</i></p></td>
+<td width="3%"></td>
+<td width="48%">
+
+
+<p>octal representation of a character (where <i>ooo</i> is
+one to three octal digits)</p></td></tr>
+<tr valign="top" align="left">
+<td width="43%"></td>
+<td width="6%">
+
+
+<p><b>\</b><i>c</i></p></td>
+<td width="3%"></td>
+<td width="48%">
+
+
+<p>character <i>c</i></p></td></tr>
+<tr valign="top" align="left">
+<td width="43%"></td>
+<td width="6%">
+
+
+<p><b>^?</b></p></td>
+<td width="3%"></td>
+<td width="48%">
+
+
+<p>delete</p></td></tr>
+<tr valign="top" align="left">
+<td width="43%"></td>
+<td width="6%">
+
+
+<p><b>^</b><i>c</i></p></td>
+<td width="3%"></td>
+<td width="48%">
+
+
+<p>control character (<i>c</i> is
+&lsquo;&lsquo;and&rsquo;&rsquo;ed with 0x1f)</p></td></tr>
+</table>
+
+<p style="margin-left:11%;"><b>config</b>
+<i>hostname</i>|<i>ipaddr</i></p>
+
+<p style="margin-left:22%;">Define a configuration block
+for the host named <i>hostname</i> or using the address
+<i>ipaddr</i>. If the value of &lsquo;&lsquo;*&rsquo;&rsquo;
+is used, the configuration block will be applied to all
+conserver hosts. <b><br>
+autocomplete
+yes</b>|<b>true</b>|<b>on</b>|<b>no</b>|<b>false</b>|<b>off</b></p>
+
+<p style="margin-left:32%;">Turn the console name
+autocompletion feature on or off. If autocompletion is on, a
+client can use any unique leading portion of a console name
+when connecting to a console. Autocompletion is on by
+default.</p>
+
+<p style="margin-left:22%;"><b>defaultaccess
+rejected</b>|<b>trusted</b>|<b>allowed</b></p>
+
+<p style="margin-left:32%;">Set the default access
+permission for all hosts not matched by an access list (see
+the <b>&minus;a</b> command-line flag).</p>
+
+<p style="margin-left:22%;"><b>daemonmode
+yes</b>|<b>true</b>|<b>on</b>|<b>no</b>|<b>false</b>|<b>off</b></p>
+
+<p style="margin-left:32%;">Set whether or not to become a
+daemon when run (see the <b>&minus;d</b> command-line
+flag).</p>
+
+<p style="margin-left:22%;"><b>initdelay</b>
+<i>number</i></p>
+
+<p style="margin-left:32%;">Set the number of seconds
+between console initializations. All consoles with the same
+<b>host</b> value will be throttled as a group (those
+without a <b>host</b> value are their own group). In other
+words, each console within a group will only be initialized
+after <i>number</i> seconds passes from the previous
+initialization of a console in that group. Different
+throttle groups are initialized simultaneously. One warning:
+since consoles are split up and managed by seperate
+conserver processes, it&rsquo;s possible for more than one
+conserver process to have a throttle group based on a
+particular <b>host</b> value. If this happens, each
+conserver process will throttle their groups independently
+of the other conserver processes, which results in a more
+rapid initialization (per <b>host</b> value) than one might
+otherwise expect. If <i>number</i> is zero, all consoles are
+initialized without delay.</p>
+
+<p style="margin-left:22%;"><b>logfile</b>
+<i>filename</i></p>
+
+<p style="margin-left:32%;">Set the logfile to write to
+when in daemon mode (see the <b>&minus;L</b> command-line
+flag).</p>
+
+<p style="margin-left:22%;"><b>passwdfile</b>
+<i>filename</i></p>
+
+<p style="margin-left:32%;">Set the password file location
+used for authentication (see the <b>&minus;P</b>
+command-line flag).</p>
+
+<p style="margin-left:22%;"><b>primaryport</b>
+<i>number</i>|<i>name</i></p>
+
+<p style="margin-left:32%;">Set the port used by the master
+conserver process (see the <b>&minus;p</b> command-line
+flag).</p>
+
+<p style="margin-left:22%;"><b>redirect
+yes</b>|<b>true</b>|<b>on</b>|<b>no</b>|<b>false</b>|<b>off</b></p>
+
+<p style="margin-left:32%;">Turn redirection on or off (see
+the <b>&minus;R</b> command-line flag).</p>
+
+<p style="margin-left:22%;"><b>reinitcheck</b>
+<i>number</i></p>
+
+<p style="margin-left:32%;">Set the number of minutes used
+between reinitialization checks (see the <b>&minus;O</b>
+command-line flag).</p>
+
+<p style="margin-left:22%;"><b>secondaryport</b>
+<i>number</i>|<i>name</i></p>
+
+<p style="margin-left:32%;">Set the base port number used
+by child processes (see the <b>&minus;b</b> command-line
+flag).</p>
+
+<p style="margin-left:22%;"><b>setproctitle
+yes</b>|<b>true</b>|<b>on</b>|<b>no</b>|<b>false</b>|<b>off</b></p>
+
+<p style="margin-left:32%;">Set whether or not the process
+title shows master/group functionality as well as the port
+number the process is listening on and how many consoles it
+is managing. The operating system must support the
+<b>setproctitle</b>() call.</p>
+
+<p style="margin-left:22%;"><b>sslcredentials</b>
+<i>filename</i></p>
+
+<p style="margin-left:32%;">Set the <small>SSL</small>
+credentials file location (see the <b>&minus;c</b>
+command-line flag).</p>
+
+<p style="margin-left:22%;"><b>sslcacertificatefile</b>
+<i>filename</i></p>
+
+<p style="margin-left:32%;">Load the valid CA certificates
+for the <small>SSL</small> connection from the PEM encoded
+file. This option overrides the global CA list.</p>
+
+<p style="margin-left:22%;"><b>sslreqclientcert
+yes</b>|<b>true</b>|<b>on</b>|<b>no</b>|<b>false</b>|<b>off</b></p>
+
+<p style="margin-left:32%;">Set whether or not a
+certificate is required by the client to connect. The
+default is &lsquo;&lsquo;no&rsquo;&rsquo;.</p>
+
+<p style="margin-left:22%;"><b>sslrequired
+yes</b>|<b>true</b>|<b>on</b>|<b>no</b>|<b>false</b>|<b>off</b></p>
+
+<p style="margin-left:32%;">Set whether or not encryption
+is required when talking to clients (see the <b>&minus;E</b>
+command-line flag).</p>
+
+<p style="margin-left:22%;"><b>unifiedlog</b>
+<i>filename</i></p>
+
+<p style="margin-left:32%;">Set the location of the unified
+log to <i>filename</i>. See the <b>&minus;U</b> command-line
+flag for details.</p>
+
+<p style="margin-left:11%;"><b>console</b> <i>name</i></p>
+
+<p style="margin-left:22%;">Define a console identified as
+<i>name</i>. The keywords are the same as the <b>default</b>
+block with the following addition. <b><br>
+aliases</b> <i>name</i>[<b>,</b>...]|<b>&quot;&quot;</b></p>
+
+<p style="margin-left:32%;">Define a list of console
+aliases. If the null string
+(&lsquo;&lsquo;<b>&quot;&quot;</b>&rsquo;&rsquo;) is used,
+any aliases previously defined for the console are
+removed.</p>
+
+<p style="margin-left:11%;"><b>default</b> <i>name</i></p>
+
+<p style="margin-left:22%;">Define a block of defaults
+identified as <i>name</i>. If <i>name</i> is
+&lsquo;&lsquo;*&rsquo;&rsquo;, the automatically applied
+default block is defined (basically all consoles have an
+implicit &lsquo;&lsquo;include &quot;*&quot;;&rsquo;&rsquo;
+at the beginning of their definition). <b><br>
+baud
+300</b>|<b>600</b>|<b>1800</b>|<b>2400</b>|<b>4800</b>|<b>9600</b>|<b>19200</b>|<b>38400</b>|<b>57600</b>|<b>115200</b></p>
+
+<p style="margin-left:32%;">Assign the baud rate to the
+console. Only consoles of type
+&lsquo;&lsquo;device&rsquo;&rsquo; will use this value.</p>
+
+<p style="margin-left:22%;"><b>break</b> <i>n</i></p>
+
+<p style="margin-left:32%;">Assign the break sequence
+<i>n</i> as the default for the console, which is used by
+the &lsquo;&lsquo;^Ecl0&rsquo;&rsquo; client escape
+sequence.</p>
+
+<p style="margin-left:22%;"><b>breaklist</b>
+<i>n</i>[<b>,</b>...]|<b>&quot;&quot;</b></p>
+
+<p style="margin-left:32%;">Associate a list of break
+sequences referenced by <i>n</i> with the console. If
+&lsquo;&lsquo;*&rsquo;&rsquo; is used (the default), all
+defined break sequences will be available. If the null
+string (&lsquo;&lsquo;<b>&quot;&quot;</b>&rsquo;&rsquo;) is
+used, no sequences will be available.</p>
+
+<p style="margin-left:22%;"><b>device</b>
+<i>filename</i></p>
+
+<p style="margin-left:32%;">Assign the serial device
+<i>filename</i> as the path to the console. Only consoles of
+type &lsquo;&lsquo;device&rsquo;&rsquo; will use this
+value.</p>
+
+<p style="margin-left:22%;"><b>devicesubst</b>
+<i>c</i><b>=</b><i>t</i>[<i>n</i>]<i>f</i>[<b>,</b>...]|<b>&quot;&quot;</b></p>
+
+<p style="margin-left:32%;">Perform character substitutions
+on the <b>device</b> value. A series of replacements can be
+defined by specifying a comma-separated list of
+<i>c</i>=<i>t</i>[<i>n</i>]<i>f</i> sequences where <i>c</i>
+is any printable character, <i>t</i> specifies the
+replacement value, <i>n</i> is a field length (optional),
+and <i>f</i> is the format string. <i>t</i> can be one of
+the characters below, catagorized as a string replacement or
+a numeric replacement, which dictates the use of the
+<i>n</i> and <i>f</i> fields.</p>
+
+<p style="margin-left:43%;">String Replacement</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="43%"></td>
+<td width="2%">
+
+
+<p><b>c</b></p></td>
+<td width="9%"></td>
+<td width="24%">
+
+
+<p>console name</p></td>
+<td width="22%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="43%"></td>
+<td width="2%">
+
+
+<p><b>h</b></p></td>
+<td width="9%"></td>
+<td width="24%">
+
+
+<p><b>host</b> value</p></td>
+<td width="22%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="43%"></td>
+<td width="2%">
+
+
+<p><b>r</b></p></td>
+<td width="9%"></td>
+<td width="24%">
+
+
+<p><b>replstring</b> value</p></td>
+<td width="22%">
+</td></tr>
+</table>
+
+<p style="margin-left:43%; margin-top: 1em">Numeric
+Replacement</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="43%"></td>
+<td width="2%">
+
+
+<p style="margin-top: 1em"><b>p</b></p></td>
+<td width="9%"></td>
+<td width="32%">
+
+
+<p style="margin-top: 1em">config <b>port</b> value</p></td>
+<td width="14%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="43%"></td>
+<td width="2%">
+
+
+<p><b>P</b></p></td>
+<td width="9%"></td>
+<td width="32%">
+
+
+<p>calculated port value</p></td>
+<td width="14%">
+</td></tr>
+</table>
+
+<p style="margin-left:32%; margin-top: 1em">For string
+replacements, if the replacement isn&rsquo;t at least
+<i>n</i> characters, it will be padded with space characters
+on the left. <i>f</i> must be &lsquo;s&rsquo;. For numeric
+replacements, the value will be formatted to at least
+<i>n</i> characters, padded with 0s if <i>n</i> begins with
+a 0, and space characters otherwise. <i>f</i> must be either
+&lsquo;d&rsquo;, &lsquo;x&rsquo;, &lsquo;X&rsquo;,
+&lsquo;a&rsquo;, or &lsquo;A&rsquo;, specifying a decimal,
+lowercase hexadecimal (0-9a-f), uppercase hexadecimal
+(0-9A-F), lowercase alphanumeric (0-9a-z), or uppercase
+alphanumeric (0-9A-Z) conversion. If the null string
+(&lsquo;&lsquo;<b>&quot;&quot;</b>&rsquo;&rsquo;) is used,
+no replacements will be done.</p>
+
+<p style="margin-left:22%;"><b>exec</b>
+<i>command|</i><b>&quot;&quot;</b></p>
+
+<p style="margin-left:32%;">Assign the string
+<i>command</i> as the command to access the console.
+Conserver will run the command by invoking
+&lsquo;&lsquo;/bin/sh -ce
+&quot;<i>command</i>&quot;&rsquo;&rsquo;. If the null string
+(&lsquo;&lsquo;<b>&quot;&quot;</b>&rsquo;&rsquo;) is used or
+no <b>exec</b> keyword is specified, conserver will use the
+command &lsquo;&lsquo;/bin/sh -i&rsquo;&rsquo;. Only
+consoles of type &lsquo;&lsquo;exec&rsquo;&rsquo; will use
+this value.</p>
+
+<p style="margin-left:22%;"><b>execrunas</b>
+[<i>user</i>][:<i>group</i>]|<b>&quot;&quot;</b></p>
+
+<p style="margin-left:32%;">By default, the command invoked
+by <b>exec</b> is run with the same privileges as the
+server. If the server is running with root privileges, this
+option resets the user and/or group of the invoked process
+to <i>user</i> and <i>group</i> respectively. <i>user</i>
+may be a username or numeric uid and <i>group</i> may be a
+group name or numeric gid. Either one is optional. If the
+server is not running with root privileges, these values are
+not used. If the null string
+(&lsquo;&lsquo;<b>&quot;&quot;</b>&rsquo;&rsquo;) is
+specified, the default of running with the same privileges
+as the server is restored.</p>
+
+<p style="margin-left:22%;"><b>execsubst</b>
+<i>c</i><b>=</b><i>t</i>[<i>n</i>]<i>f</i>[<b>,</b>...]|<b>&quot;&quot;</b></p>
+
+<p style="margin-left:32%;">Perform character substitutions
+on the <b>exec</b> value. See the <b>devicesubst</b> option
+for an explanation of the format string. If the null string
+(&lsquo;&lsquo;<b>&quot;&quot;</b>&rsquo;&rsquo;) is used,
+no replacements will be done.</p>
+
+<p style="margin-left:22%;"><b>host</b> <i>hostname</i></p>
+
+<p style="margin-left:32%;">Assign <i>hostname</i> as the
+host to connect to for accessing the console. You must also
+set the <b>port</b> option for consoles of type
+&lsquo;&lsquo;host&rsquo;&rsquo;. Normally, only consoles of
+type &lsquo;&lsquo;host&rsquo;&rsquo; and
+&lsquo;&lsquo;ipmi&rsquo;&rsquo; will use this value,
+however if the <b>devicesubst</b>, <b>execsubst</b>, or
+<b>initsubst</b> keywords are used in any console type, this
+value is used.</p>
+
+<p style="margin-left:22%;"><b>idlestring</b>
+<i>string</i>|<b>&quot;&quot;</b></p>
+
+<p style="margin-left:32%;">Assign the <i>string</i> that
+is sent to the console once the console is idle for an
+<i>idletimeout</i> amount of time. If the null string
+(&lsquo;&lsquo;<b>&quot;&quot;</b>&rsquo;&rsquo;) is used,
+the string is unset and the default is used. The string is
+interpreted just as a <b>break</b> string is interpreted
+(see the <b>break</b> configuration items for details) where
+all delays specified (via &lsquo;&lsquo;\d&rsquo;&rsquo;)
+use the default delay time. The default string is
+&lsquo;&lsquo;\n&rsquo;&rsquo;.</p>
+
+<p style="margin-left:22%;"><b>idletimeout</b>
+<i>number</i>[<b>s</b>|<b>m</b>|<b>h</b>]</p>
+
+<p style="margin-left:32%;">Set the idle timeout of the
+console to <i>number</i> seconds. If an &lsquo;s&rsquo;,
+&lsquo;m&rsquo;, or &lsquo;h&rsquo; is used after
+<i>number</i>, the specified time is interpreted as seconds,
+minutes, or hours. Set the timeout to zero to disable the
+idle timeout (the default).</p>
+
+<p style="margin-left:22%;"><b>ipmiciphersuite</b>
+<i>number</i></p>
+
+<p style="margin-left:32%;">Set the IPMI cipher suite.
+Syntactically valid values are -1 (the default) and greater.
+Check the FreeIPMI documentation for usable values.</p>
+
+<p style="margin-left:22%;"><b>ipmikg</b>
+<i>string</i>|<b>&quot;&quot;</b></p>
+
+<p style="margin-left:32%;">Set the BMC authentication key
+K_g to <i>string</i>. A K_g value is a simple character
+string with the exception of &lsquo;\&rsquo;:</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="43%"></td>
+<td width="6%">
+
+
+<p><b>\\</b></p></td>
+<td width="3%"></td>
+<td width="48%">
+
+
+<p>backslash</p></td></tr>
+<tr valign="top" align="left">
+<td width="43%"></td>
+<td width="6%">
+
+
+<p><b>\</b><i>ooo</i></p></td>
+<td width="3%"></td>
+<td width="48%">
+
+
+<p>octal representation of a character (where <i>ooo</i> is
+one to three octal digits)</p></td></tr>
+<tr valign="top" align="left">
+<td width="43%"></td>
+<td width="6%">
+
+
+<p><b>\</b><i>c</i></p></td>
+<td width="3%"></td>
+<td width="48%">
+
+
+<p>character <i>c</i></p></td></tr>
+</table>
+
+<p style="margin-left:32%; margin-top: 1em">The resulting
+value must be no more than 20 characters. The null string
+(&lsquo;&lsquo;<b>&quot;&quot;</b>&rsquo;&rsquo;) is the
+default.</p>
+
+<p style="margin-left:22%;"><b>impiworkaround</b>
+[<b>!</b>]option[<b>,</b>...]|<b>&quot;&quot;</b></p>
+
+<p style="margin-left:32%;">You can turn off a workaround
+by prefixing it with a &lsquo;&lsquo;<b>!</b>&rsquo;&rsquo;
+character. So, to turn off the <b>integrity</b> workaround,
+you would use <b>!integrity</b>. The following are valid
+<i>option</i>s and their mapping to FreeIPMI settings:</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="32%"></td>
+<td width="30%">
+
+
+<p><b>activation-status</b></p></td>
+<td width="3%"></td>
+<td width="35%">
+
+
+<p><small>SKIP_SOL_ACTIVATION_STATUS</small></p></td></tr>
+<tr valign="top" align="left">
+<td width="32%"></td>
+<td width="30%">
+
+
+<p><b>auth-capabilites</b></p></td>
+<td width="3%"></td>
+<td width="35%">
+
+
+<p><small>AUTHENTICATION_CAPABILITIES</small></p></td></tr>
+<tr valign="top" align="left">
+<td width="32%"></td>
+<td width="30%">
+
+
+<p><b>channel-payload</b></p></td>
+<td width="3%"></td>
+<td width="35%">
+
+
+<p><small>SKIP_CHANNEL_PAYLOAD_SUPPORT</small></p></td></tr>
+<tr valign="top" align="left">
+<td width="32%"></td>
+<td width="30%">
+
+
+<p><b>checksum</b></p></td>
+<td width="3%"></td>
+<td width="35%">
+
+
+<p><small>NO_CHECKSUM_CHECK</small></p></td></tr>
+<tr valign="top" align="left">
+<td width="32%"></td>
+<td width="30%">
+
+
+<p><b>default</b></p></td>
+<td width="3%"></td>
+<td width="35%">
+
+
+<p><small>DEFAULT</small></p></td></tr>
+<tr valign="top" align="left">
+<td width="32%"></td>
+<td width="30%">
+
+
+<p><b>ignore-payload-size</b></p></td>
+<td width="3%"></td>
+<td width="35%">
+
+
+<p><small>IGNORE_SOL_PAYLOAD_SIZE</small></p></td></tr>
+<tr valign="top" align="left">
+<td width="32%"></td>
+<td width="30%">
+
+
+<p><b>ignore-port</b></p></td>
+<td width="3%"></td>
+<td width="35%">
+
+
+<p><small>IGNORE_SOL_PORT</small></p></td></tr>
+<tr valign="top" align="left">
+<td width="32%"></td>
+<td width="30%">
+
+
+<p><b>integrity</b></p></td>
+<td width="3%"></td>
+<td width="35%">
+
+
+<p><small>NON_EMPTY_INTEGRITY_CHECK_VALUE</small></p></td></tr>
+<tr valign="top" align="left">
+<td width="32%"></td>
+<td width="30%">
+
+
+<p><b>intel-session</b></p></td>
+<td width="3%"></td>
+<td width="35%">
+
+
+<p><small>INTEL_2_0_SESSION</small></p></td></tr>
+<tr valign="top" align="left">
+<td width="32%"></td>
+<td width="30%">
+
+
+<p><b>packet-sequence</b></p></td>
+<td width="3%"></td>
+<td width="35%">
+
+
+<p><small>INCREMENT_SOL_PACKET_SEQUENCE</small></p></td></tr>
+<tr valign="top" align="left">
+<td width="32%"></td>
+<td width="30%">
+
+
+<p><b>privilege</b></p></td>
+<td width="3%"></td>
+<td width="35%">
+
+
+<p><small>OPEN_SESSION_PRIVILEGE</small></p></td></tr>
+<tr valign="top" align="left">
+<td width="32%"></td>
+<td width="30%">
+
+
+<p><b>serial-alerts</b></p></td>
+<td width="3%"></td>
+<td width="35%">
+
+
+<p><small>SERIAL_ALERTS_DEFERRED</small></p></td></tr>
+<tr valign="top" align="left">
+<td width="32%"></td>
+<td width="30%">
+
+
+<p><b>sun-session</b></p></td>
+<td width="3%"></td>
+<td width="35%">
+
+
+<p><small>SUN_2_0_SESSION</small></p></td></tr>
+<tr valign="top" align="left">
+<td width="32%"></td>
+<td width="30%">
+
+
+<p><b>supermicro-session</b></p></td>
+<td width="3%"></td>
+<td width="35%">
+
+
+<p><small>SUPERMICRO_2_0_SESSION</small></p></td></tr>
+</table>
+
+<p style="margin-left:32%; margin-top: 1em">If no
+<b>ipmiworkaround</b> is specified, the
+&lsquo;&lsquo;<b>default</b>&rsquo;&rsquo; workaround will
+be used. The null string
+(&lsquo;&lsquo;<b>&quot;&quot;</b>&rsquo;&rsquo;) unsets all
+workarounds, including
+&lsquo;&lsquo;<b>default</b>&rsquo;&rsquo;. See the FreeIPMI
+documentation for details on what workarounds affect.</p>
+
+<p style="margin-left:22%;"><b>ipmiprivlevel</b>
+<i>user</i>|<i>operator</i>|<i>admin</i></p>
+
+<p style="margin-left:32%;">Set the privilege level for the
+username used during IPMI authentication. The default
+privilege level is
+&lsquo;&lsquo;<i>admin</i>&rsquo;&rsquo;.</p>
+
+<p style="margin-left:22%;"><b>include</b>
+<i>default</i></p>
+
+<p style="margin-left:32%;">The default block defined using
+the name <i>default</i> is applied to the current console or
+default block. The included default block must be previously
+defined.</p>
+
+<p style="margin-left:22%;"><b>initcmd</b>
+<i>command</i>|<b>&quot;&quot;</b></p>
+
+<p style="margin-left:32%;">Invoke <i>command</i> as soon
+as the console is brought up, redirecting the console to
+stdin, stdout, and stderr of <i>command</i>. The
+<i>command</i> is passed as an argument to
+&lsquo;&lsquo;/bin/sh -ce&rsquo;&rsquo;. If the null string
+(&lsquo;&lsquo;<b>&quot;&quot;</b>&rsquo;&rsquo;) is used,
+the command is unset and nothing is invoked.</p>
+
+<p style="margin-left:22%;"><b>initrunas</b>
+[<i>user</i>][:<i>group</i>]|<b>&quot;&quot;</b></p>
+
+<p style="margin-left:32%;">By default, the command invoked
+by <b>initcmd</b> is run with the same privileges as the
+server. If the server is running with root privileges, this
+option resets the user and/or group of the invoked process
+to <i>user</i> and <i>group</i> respectively. <i>user</i>
+may be a username or numeric uid and <i>group</i> may be a
+group name or numeric gid. Either one is optional. If the
+server is not running with root privileges, these values are
+not used. If the null string
+(&lsquo;&lsquo;<b>&quot;&quot;</b>&rsquo;&rsquo;) is
+specified, the default of running with the same privileges
+as the server is restored.</p>
+
+<p style="margin-left:22%;"><b>initspinmax</b>
+<i>n</i>|<b>&quot;&quot;</b></p>
+
+<p style="margin-left:32%;">Set the maximum number of
+&lsquo;&lsquo;spins&rsquo;&rsquo; allowed for the console to
+<i>n</i>, where 0 &lt;= <i>n</i> &lt;= 254. A console is
+determined to be &lsquo;&lsquo;spinning&rsquo;&rsquo; if an
+attempt to initialize the console occurs in under
+<b>initspintimer</b> seconds from its previous
+initialization and this quick initialization occurs
+<b>initspinmax</b> times in a row. If, at any point, the
+time between initializations is greater than
+<b>initspintimer</b>, the counter for reaching
+<b>initspinmax</b> resets to zero. When a console is
+determined to be &lsquo;&lsquo;spinning&rsquo;&rsquo; it is
+forced down. If the null string
+(&lsquo;&lsquo;<b>&quot;&quot;</b>&rsquo;&rsquo;) is
+specified, the default of <b>5</b> is used.</p>
+
+<p style="margin-left:22%;"><b>initspintimer</b>
+<i>t</i>|<b>&quot;&quot;</b></p>
+
+<p style="margin-left:32%;">Set the number of seconds a
+console must be &lsquo;&lsquo;up&rsquo;&rsquo; to not be
+considered &lsquo;&lsquo;spinning&rsquo;&rsquo; to <i>t</i>,
+where 0 &lt;= <i>t</i> &lt;= 254. See <b>initspinmax</b> for
+a full description of console
+&lsquo;&lsquo;spinning.&rsquo;&rsquo; If the null string
+(&lsquo;&lsquo;<b>&quot;&quot;</b>&rsquo;&rsquo;) is
+specified, the default of <b>1</b> is used.</p>
+
+<p style="margin-left:22%;"><b>initsubst</b>
+<i>c</i><b>=</b><i>t</i>[<i>n</i>]<i>f</i>[<b>,</b>...]|<b>&quot;&quot;</b></p>
+
+<p style="margin-left:32%;">Perform character substitutions
+on the <b>initcmd</b> value. See the <b>devicesubst</b>
+option for an explanation of the format string. If the null
+string (&lsquo;&lsquo;<b>&quot;&quot;</b>&rsquo;&rsquo;) is
+used, no replacements will be done.</p>
+
+<p style="margin-left:22%;"><b>logfile</b>
+<i>filename</i>|<b>&quot;&quot;</b></p>
+
+<p style="margin-left:32%;">Assign the logfile specified by
+<i>filename</i> to the console. Any occurrence of
+&lsquo;&lsquo;&amp;&rsquo;&rsquo; in <i>filename</i> will be
+replaced with the name of the console. If the null string
+(&lsquo;&lsquo;<b>&quot;&quot;</b>&rsquo;&rsquo;) is used,
+the logfile name is unset and no logging will occur.</p>
+
+<p style="margin-left:22%;"><b>logfilemax</b>
+<i>number</i>[<b>k</b>|<b>m</b>]</p>
+
+<p style="margin-left:32%;">Enable automatic rotation of
+<b>logfile</b> once its size exceeds <i>number</i> bytes.
+Specifying <b>k</b> or <b>m</b> interpret <i>number</i> as
+kilobytes and megabytes. <i>number</i> must be at least 2048
+bytes. A value of zero will turn off automatic rotation of
+<b>logfile</b>. The <b>logfile</b> <i>filename</i> will be
+renamed <i>filename</i>- <small>YYYYMMDD</small> -
+<small>HHMMSS</small> , where the extension is the current
+GMT year, month, day, hour, minute, and second (to prevent
+issues with clock rollbacks). File sizes are checked every 5
+minutes with an additional initial pseudo-random delay of up
+to one minute (to help prevent all processes checking all
+consoles simultaneously). 2.5% (minimum 100 bytes, maximum
+4000 bytes) of the old logfile is read from the end of the
+file. All data past the first newline is moved (not copied)
+to the new logfile so that a replay of the console works and
+starts on a line boundary.</p>
+
+<p style="margin-left:22%;"><b>master</b>
+<i>hostname</i>|<i>ipaddr</i></p>
+
+<p style="margin-left:32%;">Define which conserver host
+manages the console. The host may be specified by
+<i>hostname</i> or using the address <i>ipaddr</i>.</p>
+
+<p style="margin-left:22%;"><b>motd</b>
+<i>message</i>|<b>&quot;&quot;</b></p>
+
+<p style="margin-left:32%;">Set the &quot;message of the
+day&quot; for the console to <i>message</i>, which gets
+displayed when a client attaches to the console. If the null
+string (&lsquo;&lsquo;<b>&quot;&quot;</b>&rsquo;&rsquo;) is
+used, the MOTD is unset and no message will occur.</p>
+
+<p style="margin-left:22%;"><b>options</b>
+[<b>!</b>]option[<b>,</b>...]|<b>&quot;&quot;</b></p>
+
+<p style="margin-left:32%;">You can negate the option by
+prefixing it with a &lsquo;&lsquo;<b>!</b>&rsquo;&rsquo;
+character. So, to turn off the <b>hupcl</b> flag, you would
+use <b>!hupcl</b>. The following are valid
+<i>option</i>s:</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="32%"></td>
+<td width="16%">
+
+
+<p><b>ixon</b></p></td>
+<td width="3%"></td>
+<td width="49%">
+
+
+<p>Enable <small>XON/XOFF</small> flow control on output.
+Only consoles of type &lsquo;&lsquo;device&rsquo;&rsquo; or
+&lsquo;&lsquo;exec&rsquo;&rsquo; will use this value.
+Default is <b>ixon</b>.</p></td></tr>
+<tr valign="top" align="left">
+<td width="32%"></td>
+<td width="16%">
+
+
+<p><b>ixany</b></p></td>
+<td width="3%"></td>
+<td width="49%">
+
+
+<p>Enable any character to restart output. Only consoles of
+type &lsquo;&lsquo;device&rsquo;&rsquo; or
+&lsquo;&lsquo;exec&rsquo;&rsquo; will use this value.
+Default is <b>!ixany</b>.</p></td></tr>
+<tr valign="top" align="left">
+<td width="32%"></td>
+<td width="16%">
+
+
+<p><b>ixoff</b></p></td>
+<td width="3%"></td>
+<td width="49%">
+
+
+<p>Enable <small>XON/XOFF</small> flow control on input.
+Only consoles of type &lsquo;&lsquo;device&rsquo;&rsquo; or
+&lsquo;&lsquo;exec&rsquo;&rsquo; will use this value.
+Default is <b>ixoff</b> for consoles of type
+&lsquo;&lsquo;device&rsquo;&rsquo; and <b>!ixoff</b> for
+consoles of type &lsquo;&lsquo;exec&rsquo;&rsquo;.</p></td></tr>
+<tr valign="top" align="left">
+<td width="32%"></td>
+<td width="16%">
+
+
+<p><b>crtscts</b></p></td>
+<td width="3%"></td>
+<td width="49%">
+
+
+<p>Enable <small>RTS/CTS</small> (hardware) flow control.
+Only consoles of type &lsquo;&lsquo;device&rsquo;&rsquo;
+will use this value. Default is <b>!crtscts</b>.</p></td></tr>
+<tr valign="top" align="left">
+<td width="32%"></td>
+<td width="16%">
+
+
+<p><b>cstopb</b></p></td>
+<td width="3%"></td>
+<td width="49%">
+
+
+<p>Set two stop bits, rather than one. Only consoles of
+type &lsquo;&lsquo;device&rsquo;&rsquo; will use this value.
+Default is <b>!cstopb</b>.</p></td></tr>
+<tr valign="top" align="left">
+<td width="32%"></td>
+<td width="16%">
+
+
+<p><b>hupcl</b></p></td>
+<td width="3%"></td>
+<td width="49%">
+
+
+<p>Lower modem control lines after last process closes the
+device (hang up). Only consoles of type
+&lsquo;&lsquo;device&rsquo;&rsquo; will use this value.
+Default is <b>!hupcl</b>.</p></td></tr>
+<tr valign="top" align="left">
+<td width="32%"></td>
+<td width="16%">
+
+
+<p><b>ondemand</b></p></td>
+<td width="3%"></td>
+<td width="49%">
+
+
+<p>Initialize the console when a client requests a
+connection to the console. When no clients are connected,
+bring the console down. The conserver option <b>&minus;i</b>
+will set this flag for all consoles. Default is
+<b>!ondemand</b>.</p> </td></tr>
+<tr valign="top" align="left">
+<td width="32%"></td>
+<td width="16%">
+
+
+<p><b>striphigh</b></p></td>
+<td width="3%"></td>
+<td width="49%">
+
+
+<p>Strip the high bit off all data coming from this console
+and all clients connected to this console before processing
+occurs. The conserver option <b>&minus;7</b> will set this
+flag for all consoles. Default is <b>!striphigh</b>.</p></td></tr>
+<tr valign="top" align="left">
+<td width="32%"></td>
+<td width="16%">
+
+
+<p><b>reinitoncc</b></p></td>
+<td width="3%"></td>
+<td width="49%">
+
+
+<p>Automatically reinitialize (&lsquo;&lsquo;bring
+up&rsquo;&rsquo;) a downed console when a client connects.
+Without this option, a client will be attached to the downed
+console and will need to manually reinitialize the console
+with an escape sequence. The conserver option
+<b>&minus;o</b> will set this flag for all consoles. Default
+is <b>!reinitoncc</b>.</p></td></tr>
+<tr valign="top" align="left">
+<td width="32%"></td>
+<td width="16%">
+
+
+<p><b>autoreinit</b></p></td>
+<td width="3%"></td>
+<td width="49%">
+
+
+<p>Allow this console to be automatically reinitialized if
+it unexpectedly goes down. If the console doesn&rsquo;t come
+back up, it is retried every minute. A console of type
+&lsquo;&lsquo;exec&rsquo;&rsquo; that exits with a zero exit
+status is automatically reinitialized regardless of this
+setting. The conserver option <b>&minus;F</b> will
+<b>unset</b> this flag for all consoles. Default is
+<b>autoreinit</b>.</p> </td></tr>
+<tr valign="top" align="left">
+<td width="32%"></td>
+<td width="16%">
+
+
+<p><b>unloved</b></p></td>
+<td width="3%"></td>
+<td width="49%">
+
+
+<p>Enable the sending of this console&rsquo;s output
+(prefixed with its name) to the daemon&rsquo;s stdout (or
+the logfile if in daemon mode) when no clients are connected
+to the console. The conserver option <b>&minus;u</b> will
+set this flag for all consoles. Default is
+<b>!unloved</b>.</p> </td></tr>
+<tr valign="top" align="left">
+<td width="32%"></td>
+<td width="16%">
+
+
+<p><b>login</b></p></td>
+<td width="3%"></td>
+<td width="49%">
+
+
+<p>Allow users to log into this console. If logins are not
+allowed, conserver will send a generic message to the client
+saying so and terminate the connection. You can override the
+generic message by setting the <b>motd</b> message. Default
+is <b>login</b>.</p></td></tr>
+</table>
+
+<p style="margin-left:22%;"><b>parity
+even</b>|<b>mark</b>|<b>none</b>|<b>odd</b>|<b>space</b></p>
+
+<p style="margin-left:32%;">Set the parity option for the
+console. Only consoles of type
+&lsquo;&lsquo;device&rsquo;&rsquo; will use this value.</p>
+
+<p style="margin-left:22%;"><b>password</b>
+<i>password</i>|<b>&quot;&quot;</b></p>
+
+<p style="margin-left:32%;">Use <i>password</i> during IPMI
+authentication. If the null string
+(&lsquo;&lsquo;<b>&quot;&quot;</b>&rsquo;&rsquo;) is used
+(the default), no password will be used.</p>
+
+<p style="margin-left:22%;"><b>port</b>
+<i>number</i>|<i>name</i></p>
+
+<p style="margin-left:32%;">Set the port used to access the
+console. The port may be specified as a <i>number</i> or a
+<i>name</i>. A <i>name</i> will cause a
+<b>getservbyname</b>(3) call to look up the port number. The
+<b>port</b>, <b>portbase</b>, and <b>portinc</b> values are
+all used to calculate the final port number to connect to.
+The formula used is <i>finalport</i> = <b>portbase</b> +
+<b>portinc</b> * <b>port</b>. By using proper values in the
+formula, you can reference ports on a terminal server by
+their physical numbering of 0..<i>n</i> or 1..<i>n</i>
+(depending on if you like zero-based or one-based
+numbering). Warning: you can generate a -1 value with this
+formula, which will become a very high numbered positive
+value (since things are stored unsigned). You must also set
+the <b>host</b> option as well. Normally, only consoles of
+type &lsquo;&lsquo;host&rsquo;&rsquo; will use this value,
+however if the <b>devicesubst</b>, <b>execsubst</b>, or
+<b>initsubst</b> keywords are used in any console type, this
+value is used.</p>
+
+<p style="margin-left:22%;"><b>portbase</b>
+<i>number</i></p>
+
+<p style="margin-left:32%;">Set the base value for the port
+calculation formula. <i>number</i> must be 0 or greater. The
+default is zero. See <b>port</b> for the details of the
+formula.</p>
+
+<p style="margin-left:22%;"><b>portinc</b>
+<i>number</i></p>
+
+<p style="margin-left:32%;">Set the increment value for the
+port calculation formula. <i>number</i> must be 0 or
+greater. The default is one. See <b>port</b> for the details
+of the formula.</p>
+
+<p style="margin-left:22%;"><b>protocol
+telnet</b>|<b>raw</b></p>
+
+<p style="margin-left:32%;">Set the protocol used to send
+and receive data from the console. If <b>raw</b> is used,
+all data is sent &lsquo;&lsquo;as is&rsquo;&rsquo;,
+unprotected by any protocol specification. If <b>telnet</b>
+is used (which is the default), data is encapsulated in the
+telnet protocol. The <b>striphigh</b> console option still
+applies when data is read by the server, and if enabled, can
+impact the encapsulation process.</p>
+
+<p style="margin-left:22%;"><b>replstring</b>
+<i>string</i></p>
+
+<p style="margin-left:32%;">A generic replacement string
+that can be used by the <b>devicesubst</b>,
+<b>execsubst</b>, and <b>initsubst</b> keywords.</p>
+
+<p style="margin-left:22%;"><b>ro</b>
+[<b>!</b>]<i>username</i>[<b>,</b>...]|<b>&quot;&quot;</b></p>
+
+<p style="margin-left:32%;">Define a list of users making
+up the read-only access list for the console. If
+<i>username</i> matches a previously defined group name, all
+members of the previous group are applied to the read-only
+access list (with access reversed if prefixed with a
+&lsquo;!&rsquo;). If <i>username</i> doesn&rsquo;t match a
+previously defined group and <i>username</i> begins with
+&lsquo;@&rsquo;, the name (minus the &lsquo;@&rsquo;) is
+checked against the host&rsquo;s group database. All users
+found in the group will be granted (or denied, if prefixed
+with &lsquo;!&rsquo;) read-only access. If <i>username</i>
+doesn&rsquo;t match a previous group and doesn&rsquo;t begin
+with &lsquo;@&rsquo;, the users will be granted (or denied,
+if prefixed with &lsquo;!&rsquo;) read-only access. If the
+null string
+(&lsquo;&lsquo;<b>&quot;&quot;</b>&rsquo;&rsquo;) is used,
+any users previously defined for the console&rsquo;s
+read-only list are removed.</p>
+
+<p style="margin-left:22%;"><b>rw</b>
+[<b>!</b>]<i>username</i>[<b>,</b>...]|<b>&quot;&quot;</b></p>
+
+<p style="margin-left:32%;">Define a list of users making
+up the read-write access list for the console. If
+<i>username</i> matches a previously defined group name, all
+members of the previous group are applied to the read-write
+access list (with access reversed if prefixed with a
+&lsquo;!&rsquo;). If <i>username</i> doesn&rsquo;t match a
+previously defined group and <i>username</i> begins with
+&lsquo;@&rsquo;, the name (minus the &lsquo;@&rsquo;) is
+checked against the host&rsquo;s group database. All users
+found in the group will be granted (or denied, if prefixed
+with &lsquo;!&rsquo;) read-write access. If <i>username</i>
+doesn&rsquo;t match a previous group and doesn&rsquo;t begin
+with &lsquo;@&rsquo;, the users will be granted (or denied,
+if prefixed with &lsquo;!&rsquo;) read-write access. If the
+null string
+(&lsquo;&lsquo;<b>&quot;&quot;</b>&rsquo;&rsquo;) is used,
+any users previously defined for the console&rsquo;s
+read-write list are removed.</p>
+
+<p style="margin-left:22%;"><b>tasklist</b>
+<i>c</i>[<b>,</b>...]|<b>&quot;&quot;</b></p>
+
+<p style="margin-left:32%;">Associate a list of tasks
+referenced by <i>c</i> with the console. If
+&lsquo;&lsquo;*&rsquo;&rsquo; is used (the default), all
+defined tasks will be available. If the null string
+(&lsquo;&lsquo;<b>&quot;&quot;</b>&rsquo;&rsquo;) is used,
+no tasks will be available.</p>
+
+<p style="margin-left:22%;"><b>timestamp</b>
+[<i>number</i>[<b>m</b>|<b>h</b>|<b>d</b>|<b>l</b>]][<b>a</b>][<b>b</b>]|<b>&quot;&quot;</b></p>
+
+<p style="margin-left:32%;">Specifies the time between
+timestamps applied to the console log file and whether to
+log read/write connection actions. The timestamps look like
+&lsquo;&lsquo;[-- MARK -- Mon Jan 25 14:46:56
+1999]&rsquo;&rsquo;. The &lsquo;<b>m</b>&rsquo;,
+&lsquo;<b>h</b>&rsquo;, and &lsquo;<b>d</b>&rsquo; tags
+specify &lsquo;&lsquo;minutes&rsquo;&rsquo; (the default),
+&lsquo;&lsquo;hours&rsquo;&rsquo;, and
+&lsquo;&lsquo;days&rsquo;&rsquo;. The &lsquo;<b>l</b>&rsquo;
+tag specifies &lsquo;&lsquo;lines&rsquo;&rsquo; and will
+cause timestamps of the form &lsquo;&lsquo;[Mon Jan 25
+14:46:56 PST 1999]&rsquo;&rsquo; to be placed every
+<i>number</i> lines (a newline character signifies a new
+line). So, &lsquo;&lsquo;5h&rsquo;&rsquo; specifies every
+five hours and &lsquo;&lsquo;2l&rsquo;&rsquo; specifies
+every two lines. An &lsquo;<b>a</b>&rsquo; can be specified
+to add logs of &lsquo;&lsquo;attached&rsquo;&rsquo;,
+&lsquo;&lsquo;detached&rsquo;&rsquo;, and
+&lsquo;&lsquo;bumped&rsquo;&rsquo; actions, including the
+user&rsquo;s name and the host from which the client
+connection was made. A &lsquo;<b>b</b>&rsquo; can be
+specified to add logging of break sequences sent to the
+console.</p>
+
+<p style="margin-left:22%;"><b>type
+device</b>|<b>ipmi</b>|<b>exec</b>|<b>host</b>|<b>noop</b>|<b>uds</b></p>
+
+<p style="margin-left:32%;">Set the type of console. A type
+of &lsquo;&lsquo;<b>device</b>&rsquo;&rsquo; should be used
+for local serial ports (also set the <b>device</b> value). A
+type of &lsquo;&lsquo;<b>ipmi</b>&rsquo;&rsquo; should be
+used for IPMI serial over LAN consoles (also set the
+<b>host</b> value and possibly the <b>username</b>,
+<b>password</b>, and <b>ipmi</b>* values). A type of
+&lsquo;&lsquo;<b>exec</b>&rsquo;&rsquo; should be used for
+command invocations (perhaps also set the <b>exec</b>
+value). A type of &lsquo;&lsquo;<b>host</b>&rsquo;&rsquo;
+should be used for terminal servers and other TCP
+socket-based interaction (also set the <b>host</b> and
+<b>port</b> values). A type of
+&lsquo;&lsquo;<b>noop</b>&rsquo;&rsquo; should be used as a
+placeholder - it does nothing, ignores any <b>logfile</b>
+value and forces the <b>!nologin</b> option (so you might
+want to set the <b>motd</b> value). A type of
+&lsquo;&lsquo;<b>uds</b>&rsquo;&rsquo; should be used for
+Unix domain sockets (also set the <b>uds</b> option).</p>
+
+<p style="margin-left:22%;"><b>uds</b> <i>filename</i></p>
+
+<p style="margin-left:32%;">Assign the Unix domain socket
+<i>filename</i> as the path to the console. Only consoles of
+type &lsquo;&lsquo;uds&rsquo;&rsquo; will use this
+value.</p>
+
+<p style="margin-left:22%;"><b>udssubst</b>
+<i>c</i><b>=</b><i>t</i>[<i>n</i>]<i>f</i>[<b>,</b>...]|<b>&quot;&quot;</b></p>
+
+<p style="margin-left:32%;">Perform character substitutions
+on the <b>uds</b> value. See the <b>devicesubst</b> option
+for an explanation of the format string. If the null string
+(&lsquo;&lsquo;<b>&quot;&quot;</b>&rsquo;&rsquo;) is used,
+no replacements will be done.</p>
+
+<p style="margin-left:22%;"><b>username</b>
+<i>username</i>|<b>&quot;&quot;</b></p>
+
+<p style="margin-left:32%;">Use <i>username</i> during IPMI
+authentication. If the null string
+(&lsquo;&lsquo;<b>&quot;&quot;</b>&rsquo;&rsquo;) is used
+(the default), the &lsquo;&lsquo;null&rsquo;&rsquo; user
+will be used.</p>
+
+<p style="margin-left:11%;"><b>group</b> <i>name</i></p>
+
+<p style="margin-left:22%;">Define a user group identified
+as <i>name</i>. <b><br>
+users</b>
+[<b>!</b>]<i>username</i>[<b>,</b>...]|<b>&quot;&quot;</b></p>
+
+<p style="margin-left:32%;">Define a list of users making
+up the group <i>name</i>. If <i>username</i> matches a
+previously defined group name, all members of the previous
+group are applied to the current group (with access reversed
+if prefixed with a &lsquo;!&rsquo;). If <i>username</i>
+doesn&rsquo;t match a previously defined group and
+<i>username</i> begins with &lsquo;@&rsquo;, the name (minus
+the &lsquo;@&rsquo;) is checked against the host&rsquo;s
+group database. All users found in the group will be
+recorded with (or without, if prefixed with &lsquo;!&rsquo;)
+access. If <i>username</i> doesn&rsquo;t match a previous
+group and doesn&rsquo;t begin with &lsquo;@&rsquo;, the
+users will be recorded with (or without, if prefixed with
+&lsquo;!&rsquo;) access. If the null string
+(&lsquo;&lsquo;<b>&quot;&quot;</b>&rsquo;&rsquo;) is used,
+any users previously defined for this group are removed.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="11%"></td>
+<td width="9%">
+
+
+<p><b>task</b> <i>c</i></p></td>
+<td width="2%"></td>
+<td width="78%">
+
+
+<p>Define a task where <i>c</i> is a lowercase alphanumeric
+(0-9a-z). Tasks are invoked via the
+&lsquo;&lsquo;^Ec!<i>c</i>&rsquo;&rsquo; client escape
+sequence.</p> </td></tr>
+</table>
+
+<p style="margin-left:22%;"><b>cmd</b>
+<i>command</i>|<b>&quot;&quot;</b></p>
+
+<p style="margin-left:32%;">Invoke <i>command</i> on the
+server when instructed by the client. All file descriptors
+are closed, except for stderr (which is inherited from the
+server). The <i>command</i> is passed as an argument to
+&lsquo;&lsquo;/bin/sh -ce&rsquo;&rsquo; and is a
+&lsquo;&lsquo;fire and forget&rsquo;&rsquo; methodology (you
+need to check logs for any issues). If the null string
+(&lsquo;&lsquo;<b>&quot;&quot;</b>&rsquo;&rsquo;) is used,
+the entire task definition is ignored.</p>
+
+<p style="margin-left:22%;"><b>confirm
+yes</b>|<b>true</b>|<b>on</b>|<b>no</b>|<b>false</b>|<b>off</b></p>
+
+<p style="margin-left:32%;">Set whether or not to ask the
+client for confirmation before invoking the task. The
+default is &lsquo;&lsquo;no&rsquo;&rsquo;.</p>
+
+<p style="margin-left:22%;"><b>description</b>
+<i>string</i></p>
+
+<p style="margin-left:32%;">Set a description for the task.
+When a client lists tasks, <i>string</i> will be printed
+instead of the command defined above. If the null string
+(&lsquo;&lsquo;<b>&quot;&quot;</b>&rsquo;&rsquo;) is used,
+the command defined above will be printed.</p>
+
+<p style="margin-left:22%;"><b>runas</b>
+[<i>user</i>][:<i>group</i>]|<b>&quot;&quot;</b></p>
+
+<p style="margin-left:32%;">By default, the command invoked
+by <b>cmd</b> is run with the same privileges as the server.
+If the server is running with root privileges, this option
+resets the user and/or group of the invoked process to
+<i>user</i> and <i>group</i> respectively. <i>user</i> may
+be a username or numeric uid and <i>group</i> may be a group
+name or numeric gid. Either one is optional. If the server
+is not running with root privileges, these values are not
+used. If the null string
+(&lsquo;&lsquo;<b>&quot;&quot;</b>&rsquo;&rsquo;) is
+specified, the default of running with the same privileges
+as the server is restored.</p>
+
+<p style="margin-left:22%;"><b>subst</b>
+<i>c</i><b>=</b><i>t</i>[<i>n</i>]<i>f</i>[<b>,</b>...]|<b>&quot;&quot;</b></p>
+
+<p style="margin-left:32%;">Perform character substitutions
+on the <b>cmd</b> value. See the <b>devicesubst</b> option
+for an explanation of the format string. If the null string
+(&lsquo;&lsquo;<b>&quot;&quot;</b>&rsquo;&rsquo;) is used,
+no replacements will be done.</p>
+
+<h2>AUTHORS
+<a name="AUTHORS"></a>
+</h2>
+
+
+<p style="margin-left:11%; margin-top: 1em">Bryan Stansell,
+conserver.com</p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+
+<p style="margin-left:11%; margin-top: 1em"><b>console</b>(1),
+<b>conserver.passwd</b>(5), <b>conserver</b>(8)</p>
+<hr>
+</body>
+</html>

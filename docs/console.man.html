@@ -1,0 +1,1836 @@
+<!-- Creator     : groff version 1.21 -->
+<!-- CreationDate: Wed Mar 22 17:55:23 2017 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>CONSOLE</title>
+
+</head>
+<body>
+
+<h1 align="center">CONSOLE</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#CONFIGURATION">CONFIGURATION</a><br>
+<a href="#ESCAPE SEQUENCES">ESCAPE SEQUENCES</a><br>
+<a href="#EXAMPLES">EXAMPLES</a><br>
+<a href="#FILES">FILES</a><br>
+<a href="#BUGS">BUGS</a><br>
+<a href="#AUTHORS">AUTHORS</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:11%; margin-top: 1em">console &minus;
+console server client program</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<p style="margin-left:11%; margin-top: 1em"><b>console</b>
+[<i>generic-args</i>] [<b>&minus;aAfFsS</b>]
+<b>[</b>&minus;e <i>esc</i>] <i>console</i> <b><br>
+console</b> [<i>generic-args</i>] [<b>&minus;iIuwWx</b>]
+[<i>console</i>] <b><br>
+console</b> [<i>generic-args</i>] [<b>&minus;hPqQrRV</b>]
+[<b>&minus;</b>[<b>bB</b>] <i>message</i>] [<b>&minus;d</b>
+[<i>user</i>][<b>@</b><i>console</i>]] [<b>&minus;t</b>
+[<i>user</i>][<b>@</b><i>console</i>] <i>message</i>]
+[<b>&minus;</b>[<b>zZ</b>] <i>cmd</i>]</p>
+
+
+<p style="margin-left:11%; margin-top: 1em"><i>generic-args</i>:
+[<b>&minus;7DEnUv</b>] [<b>&minus;c</b> <i>cred</i>]
+[<b>&minus;C</b> <i>config</i>] <b>[</b>&minus;M
+<i>master</i>] <b>[</b>&minus;p <i>port</i>]
+<b>[</b>&minus;l <i>user</i>]</p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:11%; margin-top: 1em"><b>Console</b>
+is used to manipulate console terminals remotely or to poll
+running <b>conserver</b>(8) daemons for status
+information.</p>
+
+<p style="margin-left:11%; margin-top: 1em">In the first
+form above, <b>console</b> asks the user&rsquo;s password
+before granting interactive access to a console (on a
+non-trusted system), since such a session may provide
+single-user access. If the server&rsquo;s autocompletion
+feature is enabled, only as much of the console name as is
+required to identify it uniquely to the server is
+required.</p>
+
+<p style="margin-left:11%; margin-top: 1em">For
+non-interactive options, <b>console</b> outputs only the
+requested information and exits.</p>
+
+<p style="margin-left:11%; margin-top: 1em"><b>Console</b>
+knows only of a primary <b>conserver</b> host (see the
+<b>&minus;M</b> option below), to which it initially
+connects. In a multi-server environment, the primary server
+may refer the client to a different server handling the
+requested console, or it will provide a list of all servers
+if required (as when <b>console</b> is invoked with the
+<b>&minus;r</b> option). <b>Console</b> then opens
+connections to the appropriate server(s). It is not
+necessary for the user of <b>console</b> to know which
+server manages which consoles, as long as <b>console</b>
+knows a valid primary server and all available consoles are
+listed in the primary server&rsquo;s configuration file.</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+<p style="margin-left:11%; margin-top: 1em">Options may be
+given as separate arguments (e.g., <b>&minus;v &minus;w</b>)
+or clustered (e.g., <b>&minus;vw</b>). Options and their
+arguments may be separated by optional white space. Option
+arguments containing spaces or other characters special to
+the shell must be quoted.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="11%"></td>
+<td width="14%">
+
+
+<p><b>&minus;7</b></p></td>
+<td width="3%"></td>
+<td width="72%">
+
+
+<p>Strip the high bit off of all data received, whether
+from user input or from the server, before any processing
+occurs. Disallows escape sequence characters with the high
+bit set.</p></td></tr>
+<tr valign="top" align="left">
+<td width="11%"></td>
+<td width="14%">
+
+
+<p><b>&minus;a</b></p></td>
+<td width="3%"></td>
+<td width="72%">
+
+
+<p>Access a console with a two-way (read-write) connection
+(this is the default). The connection is dropped to spy mode
+if someone else is attached read-write.</p></td></tr>
+<tr valign="top" align="left">
+<td width="11%"></td>
+<td width="14%">
+
+
+<p><b>&minus;b</b><i>message</i></p></td>
+<td width="3%"></td>
+<td width="72%">
+
+
+<p>Broadcast a <i>message</i> to all users connected to
+each server.</p></td></tr>
+<tr valign="top" align="left">
+<td width="11%"></td>
+<td width="14%">
+
+
+<p><b>&minus;B</b><i>message</i></p></td>
+<td width="3%"></td>
+<td width="72%">
+
+
+<p>Same as <b>&minus;b</b> but just send a <i>message</i>
+to users on the primary server.</p></td></tr>
+<tr valign="top" align="left">
+<td width="11%"></td>
+<td width="14%">
+
+
+<p><b>&minus;c</b><i>cred</i></p></td>
+<td width="3%"></td>
+<td width="72%">
+
+
+<p>Load an SSL certificate and key from the PEM encoded
+file <i>cred</i>.</p></td></tr>
+<tr valign="top" align="left">
+<td width="11%"></td>
+<td width="14%">
+
+
+<p><b>&minus;C</b><i>config</i></p></td>
+<td width="3%"></td>
+<td width="72%">
+
+
+<p>Use the per-user configuration file <i>config</i>.</p></td></tr>
+<tr valign="top" align="left">
+<td width="11%"></td>
+<td width="14%">
+
+
+<p><b>&minus;d</b></p></td>
+<td width="3%"></td>
+<td width="72%">
+
+
+<p>Disconnect the users specified by
+<i>user</i>@<i>console</i>. You may specify the target as
+<i>user</i> (disconnect the <i>user,</i> regardless of what
+console they are attached to), @<i>console</i> (disconnect
+all users attached to <i>console</i>), or
+<i>user</i>@<i>console</i> (disconnect the <i>user</i>
+attached to <i>console</i>).</p></td></tr>
+<tr valign="top" align="left">
+<td width="11%"></td>
+<td width="14%">
+
+
+<p><b>&minus;D</b></p></td>
+<td width="3%"></td>
+<td width="72%">
+
+
+<p>Enable debugging output.</p></td></tr>
+<tr valign="top" align="left">
+<td width="11%"></td>
+<td width="14%">
+
+
+<p><b>&minus;e</b><i>esc</i></p></td>
+<td width="3%"></td>
+<td width="72%">
+
+
+<p>Set the initial two-character escape sequence to those
+represented by <i>esc</i>. Any of the forms output by
+<b>cat</b>(1)&rsquo;s <b>&minus;v</b> option are accepted.
+The default value is
+&lsquo;&lsquo;<b>^Ec</b>&rsquo;&rsquo;.</p> </td></tr>
+<tr valign="top" align="left">
+<td width="11%"></td>
+<td width="14%">
+
+
+<p><b>&minus;E</b></p></td>
+<td width="3%"></td>
+<td width="72%">
+
+
+<p>If encryption has been built into the code
+(<b>--with-openssl</b>), encrypted client connections are,
+by default, a requirement. This option disables any attempt
+at creating an encrypted connection. If you&rsquo;d like to
+use encrypted connections when your server supports it, but
+fallback to non-encrypted otherwise, the <b>&minus;U</b>
+option is what you want.</p></td></tr>
+<tr valign="top" align="left">
+<td width="11%"></td>
+<td width="14%">
+
+
+<p><b>&minus;f</b></p></td>
+<td width="3%"></td>
+<td width="72%">
+
+
+<p>Same as <b>&minus;a</b> except it will force any
+existing connection into spy mode.</p></td></tr>
+<tr valign="top" align="left">
+<td width="11%"></td>
+<td width="14%">
+
+
+<p><b>&minus;h</b></p></td>
+<td width="3%"></td>
+<td width="72%">
+
+
+<p>Display a brief help message.</p></td></tr>
+<tr valign="top" align="left">
+<td width="11%"></td>
+<td width="14%">
+
+
+<p><b>&minus;i</b></p></td>
+<td width="3%"></td>
+<td width="72%">
+
+
+<p>Display status information in a machine-parseable format
+(see below for the details).</p></td></tr>
+<tr valign="top" align="left">
+<td width="11%"></td>
+<td width="14%">
+
+
+<p><b>&minus;I</b></p></td>
+<td width="3%"></td>
+<td width="72%">
+
+
+<p>Same as <b>&minus;i</b> but just acts on the primary
+server.</p> </td></tr>
+<tr valign="top" align="left">
+<td width="11%"></td>
+<td width="14%">
+
+
+<p><b>&minus;l</b><i>user</i></p></td>
+<td width="3%"></td>
+<td width="72%">
+
+
+<p>Set the login name used for authentication to
+<i>user</i>. By default, <b>console</b> uses $USER if its
+uid matches the user&rsquo;s real uid, or $LOGNAME if its
+uid matches the user&rsquo;s real uid, or else the name
+associated with the user&rsquo;s real uid.</p></td></tr>
+<tr valign="top" align="left">
+<td width="11%"></td>
+<td width="14%">
+
+
+<p><b>&minus;M</b><i>master</i></p></td>
+<td width="3%"></td>
+<td width="72%">
+
+
+<p>The <b>console</b> client program polls <i>master</i> as
+the primary server, rather than the default set at compile
+time (typically &lsquo;&lsquo;<b>console</b>&rsquo;&rsquo;).
+The default <i>master</i> may be changed at compile time
+using the <b>--with-master</b> option. If <b>--with-uds</b>
+is used to enable Unix domain sockets, however, this option
+points <b>console</b> to the directory which holds those
+sockets. The default <i>master</i> directory
+(&lsquo;&lsquo;<b>/tmp/conserver</b>&rsquo;&rsquo;) may be
+changed at compile time using the <b>--with-uds</b>
+option.</p> </td></tr>
+<tr valign="top" align="left">
+<td width="11%"></td>
+<td width="14%">
+
+
+<p><b>&minus;n</b></p></td>
+<td width="3%"></td>
+<td width="72%">
+
+
+<p>Do not read the system-wide configuration file.</p></td></tr>
+<tr valign="top" align="left">
+<td width="11%"></td>
+<td width="14%">
+
+
+<p><b>&minus;p</b><i>port</i></p></td>
+<td width="3%"></td>
+<td width="72%">
+
+
+<p>Set the port to connect to. This may be either a port
+number or a service name. The default <i>port</i> may be
+changed at compile time using the <b>--with-port</b> option.
+If the <b>--with-uds</b> option was used, this option is
+ignored.</p> </td></tr>
+<tr valign="top" align="left">
+<td width="11%"></td>
+<td width="14%">
+
+
+<p><b>&minus;P</b></p></td>
+<td width="3%"></td>
+<td width="72%">
+
+
+<p>Display the pid of the master daemon process on each
+server.</p> </td></tr>
+<tr valign="top" align="left">
+<td width="11%"></td>
+<td width="14%">
+
+
+<p><b>&minus;q</b></p></td>
+<td width="3%"></td>
+<td width="72%">
+
+
+<p>The <b>console</b> client connects to each server to
+request that the server daemon quit (shut down). The root
+password of the host(s) running conserver is required unless
+the local host is listed as
+&lsquo;&lsquo;trusted&rsquo;&rsquo; in the conserver.cf
+file; in that case, just press &lt;return&gt;.</p></td></tr>
+<tr valign="top" align="left">
+<td width="11%"></td>
+<td width="14%">
+
+
+<p><b>&minus;Q</b></p></td>
+<td width="3%"></td>
+<td width="72%">
+
+
+<p>Same as <b>&minus;q</b> but just acts on the primary
+server.</p> </td></tr>
+<tr valign="top" align="left">
+<td width="11%"></td>
+<td width="14%">
+
+
+<p><b>&minus;r</b></p></td>
+<td width="3%"></td>
+<td width="72%">
+
+
+<p>Display daemon versions. The <b>console</b> client
+connects to each server to request its version
+information.</p> </td></tr>
+<tr valign="top" align="left">
+<td width="11%"></td>
+<td width="14%">
+
+
+<p><b>&minus;R</b></p></td>
+<td width="3%"></td>
+<td width="72%">
+
+
+<p>Same as <b>&minus;r</b> but just acts on the primary
+server.</p> </td></tr>
+<tr valign="top" align="left">
+<td width="11%"></td>
+<td width="14%">
+
+
+<p><b>&minus;s</b></p></td>
+<td width="3%"></td>
+<td width="72%">
+
+
+<p>Request a read-only (spy mode) connection. In this mode
+all the escape sequences (below) work, or report errors, but
+all other keyboard input is discarded.</p></td></tr>
+<tr valign="top" align="left">
+<td width="11%"></td>
+<td width="14%">
+
+
+<p><b>&minus;t</b></p></td>
+<td width="3%"></td>
+<td width="72%">
+
+
+<p>Send a text <i>message</i> to
+<i>user</i>@<i>console</i>. You may specify the target as
+<i>user</i> (send to <i>user,</i> regardless of what console
+they are attached to), @<i>console</i> (send to all users
+attached to <i>console</i>), or <i>user</i>@<i>console</i>
+(send to <i>user</i> attached to <i>console</i>).</p></td></tr>
+<tr valign="top" align="left">
+<td width="11%"></td>
+<td width="14%">
+
+
+<p><b>&minus;u</b></p></td>
+<td width="3%"></td>
+<td width="72%">
+
+
+<p>Show a list of all consoles with status
+(&lsquo;up&rsquo;, &lsquo;down&rsquo;, or
+&lsquo;init&rsquo;) and attached users
+(<i>user</i>@<i>host</i> if attached read-write,
+&lsquo;&lt;spies&gt;&rsquo; if only users in spy mode, or
+&lsquo;&lt;none&gt;&rsquo;).</p> </td></tr>
+<tr valign="top" align="left">
+<td width="11%"></td>
+<td width="14%">
+
+
+<p><b>&minus;U</b></p></td>
+<td width="3%"></td>
+<td width="72%">
+
+
+<p>If encryption has been built into the code
+(<b>--with-openssl</b>), encrypted client connections are,
+by default, a requirement. This option allows the client to
+attempt an encrypted connection but fall back to a
+non-encrypted connection if the server doesn&rsquo;t support
+encryption. If the encryption handshake is failing,
+disabling encryption on the client with the <b>&minus;E</b>
+option is probably what you want.</p></td></tr>
+<tr valign="top" align="left">
+<td width="11%"></td>
+<td width="14%">
+
+
+<p><b>&minus;v</b></p></td>
+<td width="3%"></td>
+<td width="72%">
+
+
+<p>Be more verbose when building the connection(s). Use
+this option in combination with any of &lsquo;show&rsquo;
+options (below) for added benefit.</p></td></tr>
+<tr valign="top" align="left">
+<td width="11%"></td>
+<td width="14%">
+
+
+<p><b>&minus;V</b></p></td>
+<td width="3%"></td>
+<td width="72%">
+
+
+<p>Output the version and settings of the console client
+program and then exit.</p></td></tr>
+<tr valign="top" align="left">
+<td width="11%"></td>
+<td width="14%">
+
+
+<p><b>&minus;w</b></p></td>
+<td width="3%"></td>
+<td width="72%">
+
+
+<p>Show a list of all who are currently connected to
+consoles, including the hostnames where the <b>console</b>
+connections originate and the idle times. This is useful to
+see if anybody is actively using the console system if it
+becomes necessary to shut down <b>conserver</b>.</p></td></tr>
+<tr valign="top" align="left">
+<td width="11%"></td>
+<td width="14%">
+
+
+<p><b>&minus;W</b></p></td>
+<td width="3%"></td>
+<td width="72%">
+
+
+<p>Same as <b>&minus;w</b> but just acts on the primary
+server.</p> </td></tr>
+<tr valign="top" align="left">
+<td width="11%"></td>
+<td width="14%">
+
+
+<p><b>&minus;x</b></p></td>
+<td width="3%"></td>
+<td width="72%">
+
+
+<p>Show a list of consoles and devices.</p></td></tr>
+<tr valign="top" align="left">
+<td width="11%"></td>
+<td width="14%">
+
+
+<p><b>&minus;z</b><i>cmd</i></p></td>
+<td width="3%"></td>
+<td width="72%">
+
+
+<p>Sends a command (<i>cmd</i>) to each server and displays
+the result. The valid commands are:</p></td></tr>
+</table>
+
+<p style="margin-left:28%;"><b>bringup</b></p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="11%"></td>
+<td width="29%"></td>
+<td width="6%"></td>
+<td width="54%">
+
+
+<p style="margin-top: 1em">Try to connect all consoles
+marked as down (this is equivalent to sending the server a
+SIGUSR1)</p> </td></tr>
+<tr valign="top" align="left">
+<td width="11%"></td>
+<td width="29%">
+
+
+<p><b>SIGUSR1</b></p></td>
+<td width="6%"></td>
+<td width="54%">
+
+
+<p>Same as <b>bringup</b></p></td></tr>
+<tr valign="top" align="left">
+<td width="11%"></td>
+<td width="29%">
+
+
+<p><b>help</b></p></td>
+<td width="6%"></td>
+<td width="54%">
+
+
+<p>Displays the help message</p></td></tr>
+<tr valign="top" align="left">
+<td width="11%"></td>
+<td width="29%">
+
+
+<p><b>pid</b></p></td>
+<td width="6%"></td>
+<td width="54%">
+
+
+<p>Returns the pid of the server (this is equivalent to
+<b>&minus;P</b>)</p> </td></tr>
+<tr valign="top" align="left">
+<td width="11%"></td>
+<td width="29%">
+
+
+<p><b>quit</b></p></td>
+<td width="6%"></td>
+<td width="54%">
+
+
+<p>Instructs the server to shut down (this is equivalent to
+<b>&minus;q</b> or sending the server a SIGTERM)</p></td></tr>
+<tr valign="top" align="left">
+<td width="11%"></td>
+<td width="29%">
+
+
+<p><b>SIGTERM</b></p></td>
+<td width="6%"></td>
+<td width="54%">
+
+
+<p>Same as <b>quit</b></p></td></tr>
+<tr valign="top" align="left">
+<td width="11%"></td>
+<td width="29%">
+
+
+<p><b>reconfig</b></p></td>
+<td width="6%"></td>
+<td width="54%">
+
+
+<p>Instructs the server to reload the configuration file,
+then perform the actions of <b>reopen</b> (this is
+equivalent to sending the server a SIGHUP)</p></td></tr>
+<tr valign="top" align="left">
+<td width="11%"></td>
+<td width="29%">
+
+
+<p><b>SIGHUP</b></p></td>
+<td width="6%"></td>
+<td width="54%">
+
+
+<p>Same as <b>reconfig</b></p></td></tr>
+<tr valign="top" align="left">
+<td width="11%"></td>
+<td width="29%">
+
+
+<p><b>reopen</b></p></td>
+<td width="6%"></td>
+<td width="54%">
+
+
+<p>Instructs the server to reopen all logfiles, then
+perform the actions of <b>bringup</b> (this is equivalent to
+sending the server a SIGUSR2)</p></td></tr>
+<tr valign="top" align="left">
+<td width="11%"></td>
+<td width="29%">
+
+
+<p><b>SIGUSR2</b></p></td>
+<td width="6%"></td>
+<td width="54%">
+
+
+<p>Same as <b>reopen</b></p></td></tr>
+<tr valign="top" align="left">
+<td width="11%"></td>
+<td width="29%">
+
+
+<p><b>version</b></p></td>
+<td width="6%"></td>
+<td width="54%">
+
+
+<p>Returns the version of the server (this is equivalent to
+<b>&minus;V</b>)</p> </td></tr>
+<tr valign="top" align="left">
+<td width="11%"></td>
+<td width="29%">
+
+
+<p><b>&minus;Z</b><i>cmd</i></p></td>
+<td width="6%"></td>
+<td width="54%">
+</td></tr>
+</table>
+
+<p style="margin-left:28%; margin-top: 1em">Same as
+<b>&minus;z</b> but just sends <i>cmd</i> to the primary
+server.</p>
+
+<p style="margin-left:11%; margin-top: 1em">The
+<b>&minus;A</b>, <b>&minus;F</b>, or <b>&minus;S</b> options
+have the same effect as their lower-case variants. In
+addition, they each request the last 20 lines of the console
+output after making the connection (as if
+&lsquo;&lsquo;<b>^Ecr</b>&rsquo;&rsquo; were typed).</p>
+
+<p style="margin-left:11%; margin-top: 1em">The
+<b>&minus;i</b>, <b>&minus;u</b>, <b>&minus;w</b>, and
+<b>&minus;x</b> options can be given a console name, which
+will limit their output to that console.</p>
+
+<p style="margin-left:11%; margin-top: 1em">The
+<b>&minus;i</b> option outputs status information regarding
+each console in 15 colon-separated fields.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="11%"></td>
+<td width="6%">
+
+
+<p style="margin-top: 1em"><i>name</i></p></td>
+<td width="5%"></td>
+<td width="36%">
+
+
+<p style="margin-top: 1em">The name of the console.</p></td>
+<td width="42%">
+</td></tr>
+</table>
+
+<p style="margin-left:11%;"><i>hostname,pid,socket</i></p>
+
+<p style="margin-left:22%;">The hostname, pid, and socket
+number of the child process managing the console.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="11%"></td>
+<td width="6%">
+
+
+<p><i>type</i></p></td>
+<td width="5%"></td>
+<td width="78%">
+
+
+<p>The type of console. Values will be a &lsquo;/&rsquo;
+for a local device, &lsquo;|&rsquo; for a command,
+&lsquo;!&rsquo; for a remote port, &lsquo;%&rsquo; for a
+Unix domain socket, and &lsquo;#&rsquo; for a noop
+console.</p> </td></tr>
+</table>
+
+<p style="margin-left:11%;"><i>console-details</i></p>
+
+<p style="margin-left:22%;">The details regarding the
+console. The values here (all comma-separated) depend on the
+type of the console. Local devices will have values of the
+device file, baud rate/parity, and file descriptor for the
+device. Commands will have values of the command, the
+command&rsquo;s pid, the pseudo-tty, and file descriptor for
+the pseudo-tty. Remote ports will have values of the remote
+hostname, remote port number,
+&lsquo;&lsquo;raw&rsquo;&rsquo; or
+&lsquo;&lsquo;telnet&rsquo;&rsquo; protocol, and file
+descriptor for the socket connection. Unix domain sockets
+will have the path to the socket and the file descriptor for
+the socket connection. Noop consoles will have nothing.</p>
+
+<p style="margin-left:11%;"><i>users-list</i></p>
+
+<p style="margin-left:22%;">The details of each user
+connected to the console. The details for each user are an
+&lsquo;@&rsquo; separated list of &lsquo;w&rsquo;,
+&lsquo;r&rsquo;, or &lsquo;s&rsquo; (for read-write,
+read-only, or suspended), username, hostname the user is on,
+the user&rsquo;s idle time, and (for &lsquo;r&rsquo; and
+&lsquo;s&rsquo; users only) &lsquo;&lsquo;rw&rsquo;&rsquo;
+or &lsquo;&lsquo;ro&rsquo;&rsquo; (if the user wants
+read-write mode or not). Each user bundle is separated by
+commas.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="11%"></td>
+<td width="7%">
+
+
+<p><i>state</i></p></td>
+<td width="4%"></td>
+<td width="78%">
+
+
+<p>The state of the console. Values with either be
+&lsquo;&lsquo;up&rsquo;&rsquo;,
+&lsquo;&lsquo;down&rsquo;&rsquo;, or
+&lsquo;&lsquo;init&rsquo;&rsquo;.</p> </td></tr>
+<tr valign="top" align="left">
+<td width="11%"></td>
+<td width="7%">
+
+
+<p><i>perm</i></p></td>
+<td width="4%"></td>
+<td width="78%">
+
+
+<p>This value will either be &lsquo;&lsquo;rw&rsquo;&rsquo;
+or &lsquo;&lsquo;ro&rsquo;&rsquo;. It will only be
+&lsquo;&lsquo;ro&rsquo;&rsquo; if the console is a local
+device (&lsquo;/&rsquo; type) and the permissions are such
+that the server can open the file for read, but not
+write.</p> </td></tr>
+</table>
+
+<p style="margin-left:11%;"><i>logfile-details</i></p>
+
+<p style="margin-left:22%;">The details regarding the
+logging for the console. The comma-separated values will be
+the logfile, &lsquo;&lsquo;log&rsquo;&rsquo; or
+&lsquo;&lsquo;nolog&rsquo;&rsquo; (if logging is on or not -
+toggled via &lsquo;&lsquo;^EcL&rsquo;&rsquo;),
+&lsquo;&lsquo;act&rsquo;&rsquo; or
+&lsquo;&lsquo;noact&rsquo;&rsquo; (if activity logging is
+enabled or not - the &lsquo;a&rsquo; timestamp option), the
+timestamp interval, and the file descriptor of the
+logfile.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="11%"></td>
+<td width="7%">
+
+
+<p><i>break</i></p></td>
+<td width="4%"></td>
+<td width="78%">
+
+
+<p>The default break sequence used for the console.</p></td></tr>
+<tr valign="top" align="left">
+<td width="11%"></td>
+<td width="7%">
+
+
+<p><i>reup</i></p></td>
+<td width="4%"></td>
+<td width="78%">
+
+
+<p>If the console is currently down and the automatic
+reconnection code is at work, it will have the value of
+&lsquo;&lsquo;autoup&rsquo;&rsquo;, otherwise it will be
+&lsquo;&lsquo;noautoup&rsquo;&rsquo;.</p> </td></tr>
+</table>
+
+<p style="margin-left:11%;"><i>aliases</i></p>
+
+<p style="margin-left:22%;">The console aliases are
+presented in a comma-separated list.</p>
+
+<p style="margin-left:11%;"><i>options</i></p>
+
+<p style="margin-left:22%;">The active options for the
+console are presented in a comma-separated list.</p>
+
+<p style="margin-left:11%;"><i>initcmd</i></p>
+
+<p style="margin-left:22%;">The initcmd configuration
+option for the console.</p>
+
+<p style="margin-left:11%;"><i>idletimeout</i></p>
+
+<p style="margin-left:22%;">The idletimeout configuration
+option for the console.</p>
+
+<p style="margin-left:11%;"><i>idlestring</i></p>
+
+<p style="margin-left:22%;">The idlestring configuration
+option for the console.</p>
+
+<h2>CONFIGURATION
+<a name="CONFIGURATION"></a>
+</h2>
+
+
+<p style="margin-left:11%; margin-top: 1em"><b>Console</b>
+reads configuration information from the system-wide
+configuration file (<b>console.cf</b>), then the per-user
+configuration file (<b>.consolerc</b>), and then applies
+command-line arguments. Each configuration location can
+override the previous. The same happens when parsing an
+individual file - the later entries always override the
+earlier entries. Because of that, you should put
+&lsquo;&lsquo;global&rsquo;&rsquo; defaults first and more
+specific defaults second.</p>
+
+<p style="margin-left:11%; margin-top: 1em">The
+configuration file is read using the same parser as
+<b>conserver.cf</b>(5), and you should check that manpage
+for parser details. <b>Console</b> recognizes the following
+configuration blocks. <b><br>
+config</b> <i>hostname</i>|<i>ipaddr</i></p>
+
+<p style="margin-left:22%;">Define a configuration block
+for the client host named <i>hostname</i> or using the
+address <i>ipaddr</i>. If the value of
+&lsquo;&lsquo;*&rsquo;&rsquo; is used, the configuration
+block will be applied to all client hosts. <b><br>
+escape</b> <i>esc</i></p>
+
+<p style="margin-left:32%;">Set the escape sequence (see
+the <b>&minus;e</b> command-line flag).</p>
+
+<p style="margin-left:22%;"><b>master</b> <i>master</i></p>
+
+<p style="margin-left:32%;">Set the default master to
+<i>master</i> (see the <b>&minus;M</b> command-line
+flag).</p>
+
+<p style="margin-left:22%;"><b>playback</b>
+<i>num</i>|<b>&quot;&quot;</b></p>
+
+<p style="margin-left:32%;">Override the playback length
+for the <b>p</b> escape command to <i>num</i> lines (if the
+server supports it). Using the special value of
+&lsquo;&lsquo;0&rsquo;&rsquo; will cause the client to use
+the number of lines of the current terminal (if that can be
+determined). If the null string
+(&lsquo;&lsquo;&quot;&quot;&rsquo;&rsquo;) is used, the
+playback length will not be overridden.</p>
+
+<p style="margin-left:22%;"><b>port</b> <i>port</i></p>
+
+<p style="margin-left:32%;">Set the default port to
+<i>port</i> (see the <b>&minus;p</b> command-line flag).</p>
+
+<p style="margin-left:22%;"><b>replay</b>
+<i>num</i>|<b>&quot;&quot;</b></p>
+
+<p style="margin-left:32%;">Override the replay length for
+the <b>r</b> escape command to <i>num</i> lines (if the
+server supports it). Using the special value of
+&lsquo;&lsquo;0&rsquo;&rsquo; will cause the client to use
+the number of lines of the current terminal (if that can be
+determined). If the null string
+(&lsquo;&lsquo;&quot;&quot;&rsquo;&rsquo;) is used, the
+replay length will not be overridden.</p>
+
+<p style="margin-left:22%;"><b>sslcacertificatefile</b>
+<i>filename</i></p>
+
+<p style="margin-left:32%;">Load the valid CA certificates
+for the <small>SSL</small> connection from the PEM encoded
+file.</p>
+
+<p style="margin-left:22%;"><b>sslcacertificatepath</b>
+<i>directory</i></p>
+
+<p style="margin-left:32%;">Load the valid CA certificates
+for the <small>SSL</small> connection from the PEM encoded
+files in the directory.</p>
+
+<p style="margin-left:22%;"><b>sslcredentials</b>
+<i>filename</i></p>
+
+<p style="margin-left:32%;">Set the <small>SSL</small>
+credentials file location (see the <b>&minus;c</b>
+command-line flag).</p>
+
+<p style="margin-left:22%;"><b>sslenabled
+yes</b>|<b>true</b>|<b>on</b>|<b>no</b>|<b>false</b>|<b>off</b></p>
+
+<p style="margin-left:32%;">Set whether or not encryption
+is attempted when talking to servers (see the
+<b>&minus;E</b> command-line flag).</p>
+
+<p style="margin-left:22%;"><b>sslrequired
+yes</b>|<b>true</b>|<b>on</b>|<b>no</b>|<b>false</b>|<b>off</b></p>
+
+<p style="margin-left:32%;">Set whether or not encryption
+is required when talking to servers (see the <b>&minus;U</b>
+command-line flag).</p>
+
+<p style="margin-left:22%;"><b>striphigh
+yes</b>|<b>true</b>|<b>on</b>|<b>no</b>|<b>false</b>|<b>off</b></p>
+
+<p style="margin-left:32%;">Set whether or not to strip the
+high bit off all data received (see the <b>&minus;7</b>
+command-line flag).</p>
+
+<p style="margin-left:22%;"><b>username</b> <i>user</i></p>
+
+<p style="margin-left:32%;">Set the username passed to the
+server to <i>user</i> (see the <b>&minus;l</b> command-line
+flag).</p>
+
+<p style="margin-left:11%;"><b>terminal</b> <i>type</i></p>
+
+<p style="margin-left:22%;">Define a configuration block
+when using a terminal of type <i>type</i>. If the value of
+&lsquo;&lsquo;*&rsquo;&rsquo; is used, the configuration
+block will be applied to all terminal types. <b><br>
+attach</b> <i>string</i>|<b>&quot;&quot;</b></p>
+
+<p style="margin-left:32%;">Set a <i>string</i> to print
+when successfully attached to a console. Character
+substitions will be performed based on the
+<b>attachsubst</b> value and occur <i>before</i>
+interpretation of the special characters below. If the null
+string (&lsquo;&lsquo;<b>&quot;&quot;</b>&rsquo;&rsquo;) is
+used, no string will be printed. <i>string</i> is a simple
+character string with the exception of &lsquo;\&rsquo; and
+&lsquo;^&rsquo;:</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="43%"></td>
+<td width="6%">
+
+
+<p><b>\a</b></p></td>
+<td width="3%"></td>
+<td width="48%">
+
+
+<p>alert</p></td></tr>
+<tr valign="top" align="left">
+<td width="43%"></td>
+<td width="6%">
+
+
+<p><b>\b</b></p></td>
+<td width="3%"></td>
+<td width="48%">
+
+
+<p>backspace</p></td></tr>
+<tr valign="top" align="left">
+<td width="43%"></td>
+<td width="6%">
+
+
+<p><b>\f</b></p></td>
+<td width="3%"></td>
+<td width="48%">
+
+
+<p>form-feed</p></td></tr>
+<tr valign="top" align="left">
+<td width="43%"></td>
+<td width="6%">
+
+
+<p><b>\n</b></p></td>
+<td width="3%"></td>
+<td width="48%">
+
+
+<p>newline</p></td></tr>
+<tr valign="top" align="left">
+<td width="43%"></td>
+<td width="6%">
+
+
+<p><b>\r</b></p></td>
+<td width="3%"></td>
+<td width="48%">
+
+
+<p>carriage-return</p></td></tr>
+<tr valign="top" align="left">
+<td width="43%"></td>
+<td width="6%">
+
+
+<p><b>\t</b></p></td>
+<td width="3%"></td>
+<td width="48%">
+
+
+<p>tab</p></td></tr>
+<tr valign="top" align="left">
+<td width="43%"></td>
+<td width="6%">
+
+
+<p><b>\v</b></p></td>
+<td width="3%"></td>
+<td width="48%">
+
+
+<p>vertical-tab</p></td></tr>
+<tr valign="top" align="left">
+<td width="43%"></td>
+<td width="6%">
+
+
+<p><b>\\</b></p></td>
+<td width="3%"></td>
+<td width="48%">
+
+
+<p>backslash</p></td></tr>
+<tr valign="top" align="left">
+<td width="43%"></td>
+<td width="6%">
+
+
+<p><b>\^</b></p></td>
+<td width="3%"></td>
+<td width="48%">
+
+
+<p>circumflex</p></td></tr>
+<tr valign="top" align="left">
+<td width="43%"></td>
+<td width="6%">
+
+
+<p><b>\</b><i>ooo</i></p></td>
+<td width="3%"></td>
+<td width="48%">
+
+
+<p>octal representation of a character (where <i>ooo</i> is
+one to three octal digits)</p></td></tr>
+<tr valign="top" align="left">
+<td width="43%"></td>
+<td width="6%">
+
+
+<p><b>\</b><i>c</i></p></td>
+<td width="3%"></td>
+<td width="48%">
+
+
+<p>character <i>c</i></p></td></tr>
+<tr valign="top" align="left">
+<td width="43%"></td>
+<td width="6%">
+
+
+<p><b>^?</b></p></td>
+<td width="3%"></td>
+<td width="48%">
+
+
+<p>delete</p></td></tr>
+<tr valign="top" align="left">
+<td width="43%"></td>
+<td width="6%">
+
+
+<p><b>^</b><i>c</i></p></td>
+<td width="3%"></td>
+<td width="48%">
+
+
+<p>control character (<i>c</i> is
+&lsquo;&lsquo;and&rsquo;&rsquo;ed with 0x1f)</p></td></tr>
+</table>
+
+<p style="margin-left:32%; margin-top: 1em">An interesting
+use of <b>attach</b> and <b>attachsubst</b> would be:</p>
+
+<p style="margin-left:43%; margin-top: 1em">terminal xterm
+{ <br>
+attach &quot;^[]0;conserver: U@C^G&quot;; <br>
+attachsubst U=us,C=cs; <br>
+}</p>
+
+<p style="margin-left:22%;"><b>attachsubst</b>
+<i>c</i><b>=</b><i>t</i>[<i>n</i>]<i>f</i>[<b>,</b>...]|<b>&quot;&quot;</b></p>
+
+<p style="margin-left:32%;">Perform character substitutions
+on the <b>attach</b> value. A series of replacements can be
+defined by specifying a comma-separated list of
+<i>c</i><b>=</b><i>t</i>[<i>n</i>]<i>f</i> sequences where
+<i>c</i> is any printable character, <i>t</i> specifies the
+replacement value, <i>n</i> is a field length (optional),
+and <i>f</i> is the format string. <i>t</i> can be one of
+the characters below, catagorized as a string replacement or
+a numeric replacement, which dictates the use of the
+<i>n</i> and <i>f</i> fields.</p>
+
+<p style="margin-left:43%;">String Replacement</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="43%"></td>
+<td width="2%">
+
+
+<p><b>u</b></p></td>
+<td width="9%"></td>
+<td width="18%">
+
+
+<p>username</p></td>
+<td width="28%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="43%"></td>
+<td width="2%">
+
+
+<p><b>c</b></p></td>
+<td width="9%"></td>
+<td width="18%">
+
+
+<p>console name</p></td>
+<td width="28%">
+</td></tr>
+</table>
+
+<p style="margin-left:43%; margin-top: 1em">Numeric
+Replacement <br>
+none available (yet)</p>
+
+<p style="margin-left:32%; margin-top: 1em">For string
+replacements, if the replacement isn&rsquo;t at least
+<i>n</i> characters, it will be padded with space characters
+on the left. <i>f</i> must be &lsquo;s&rsquo;. For numeric
+replacements, the value will be formatted to at least
+<i>n</i> characters, padded with 0s if <i>n</i> begins with
+a 0, and space characters otherwise. <i>f</i> must be either
+&lsquo;d&rsquo;, &lsquo;x&rsquo; or &lsquo;X&rsquo;,
+specifying a decimal, lower-case hexadecimal, or an
+uppercase hexadecimal conversion. If the null string
+(&lsquo;&lsquo;<b>&quot;&quot;</b>&rsquo;&rsquo;) is used,
+no replacements will be done.</p>
+
+<p style="margin-left:22%;"><b>detach</b>
+<i>string</i>|<b>&quot;&quot;</b></p>
+
+<p style="margin-left:32%;">Set a <i>string</i> to print
+once detached from a console. Character substitions will be
+performed based on the <b>detachsubst</b> value. See the
+<b>attach</b> option for an explanation of <i>string</i>. If
+the null string
+(&lsquo;&lsquo;<b>&quot;&quot;</b>&rsquo;&rsquo;) is used,
+no string will be printed.</p>
+
+<p style="margin-left:22%;"><b>detachsubst</b>
+<i>c</i><b>=</b><i>t</i>[<i>n</i>]<i>f</i>[<b>,</b>...]|<b>&quot;&quot;</b></p>
+
+<p style="margin-left:32%;">Perform character substitutions
+on the <b>detach</b> value. See the <b>attachsubst</b>
+option for an explanation of the format string.</p>
+
+<p style="margin-left:11%; margin-top: 1em">A simple
+configuration to set a new default escape sequence and
+override the master location would be:</p>
+
+<p style="margin-left:22%; margin-top: 1em"># override
+options for all hosts <br>
+config * { <br>
+master localhost; <br>
+escape ^Ee; <br>
+} <br>
+# set things more specific to host1 <br>
+# note: if the entries were reversed, host1 <br>
+# would also use localhost. <br>
+config host1 { <br>
+master console1; <br>
+}</p>
+
+<h2>ESCAPE SEQUENCES
+<a name="ESCAPE SEQUENCES"></a>
+</h2>
+
+
+<p style="margin-left:11%; margin-top: 1em">The connection
+can be controlled by a two-character escape sequence,
+followed by a command. The default escape sequence is
+&lsquo;&lsquo;control-E c&rsquo;&rsquo; (octal 005 143).
+(The escape sequences are actually processed by the server;
+see the <b>conserver</b>(8) man page for more information.)
+Commands are:</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="11%"></td>
+<td width="17%">
+
+
+<p><b>.</b></p></td>
+<td width="3%"></td>
+<td width="69%">
+
+
+<p>disconnect</p></td></tr>
+<tr valign="top" align="left">
+<td width="11%"></td>
+<td width="17%">
+
+
+<p><b>;</b></p></td>
+<td width="3%"></td>
+<td width="69%">
+
+
+<p>move to another console</p></td></tr>
+<tr valign="top" align="left">
+<td width="11%"></td>
+<td width="17%">
+
+
+<p><b>a</b></p></td>
+<td width="3%"></td>
+<td width="69%">
+
+
+<p>attach read-write if nobody already is</p></td></tr>
+<tr valign="top" align="left">
+<td width="11%"></td>
+<td width="17%">
+
+
+<p><b>b</b></p></td>
+<td width="3%"></td>
+<td width="69%">
+
+
+<p>send broadcast message to all users on this console</p></td></tr>
+<tr valign="top" align="left">
+<td width="11%"></td>
+<td width="17%">
+
+
+<p><b>c</b></p></td>
+<td width="3%"></td>
+<td width="69%">
+
+
+<p>toggle flow control (don&rsquo;t do this)</p></td></tr>
+<tr valign="top" align="left">
+<td width="11%"></td>
+<td width="17%">
+
+
+<p><b>d</b></p></td>
+<td width="3%"></td>
+<td width="69%">
+
+
+<p>down the current console</p></td></tr>
+<tr valign="top" align="left">
+<td width="11%"></td>
+<td width="17%">
+
+
+<p><b>e</b><i>cc</i></p></td>
+<td width="3%"></td>
+<td width="69%">
+
+
+<p>change the escape sequence to the next two
+characters</p> </td></tr>
+<tr valign="top" align="left">
+<td width="11%"></td>
+<td width="17%">
+
+
+<p><b>f</b></p></td>
+<td width="3%"></td>
+<td width="69%">
+
+
+<p>forcibly attach read-write</p></td></tr>
+<tr valign="top" align="left">
+<td width="11%"></td>
+<td width="17%">
+
+
+<p><b>g</b></p></td>
+<td width="3%"></td>
+<td width="69%">
+
+
+<p>group info</p></td></tr>
+<tr valign="top" align="left">
+<td width="11%"></td>
+<td width="17%">
+
+
+<p><b>i</b></p></td>
+<td width="3%"></td>
+<td width="69%">
+
+
+<p>information dump</p></td></tr>
+<tr valign="top" align="left">
+<td width="11%"></td>
+<td width="17%">
+
+
+<p><b>L</b></p></td>
+<td width="3%"></td>
+<td width="69%">
+
+
+<p>toggle logging on/off</p></td></tr>
+<tr valign="top" align="left">
+<td width="11%"></td>
+<td width="17%">
+
+
+<p><b>l?</b></p></td>
+<td width="3%"></td>
+<td width="69%">
+
+
+<p>list the break sequences available</p></td></tr>
+<tr valign="top" align="left">
+<td width="11%"></td>
+<td width="17%">
+
+
+<p><b>l0</b></p></td>
+<td width="3%"></td>
+<td width="69%">
+
+
+<p>send the break sequence associated with this console</p></td></tr>
+<tr valign="top" align="left">
+<td width="11%"></td>
+<td width="17%">
+
+
+<p><b>l1-9a-z</b></p></td>
+<td width="3%"></td>
+<td width="69%">
+
+
+<p>send the specific break sequence</p></td></tr>
+<tr valign="top" align="left">
+<td width="11%"></td>
+<td width="17%">
+
+
+<p><b>m</b></p></td>
+<td width="3%"></td>
+<td width="69%">
+
+
+<p>display the &quot;message of the day&quot;</p></td></tr>
+<tr valign="top" align="left">
+<td width="11%"></td>
+<td width="17%">
+
+
+<p><b>o</b></p></td>
+<td width="3%"></td>
+<td width="69%">
+
+
+<p>close (if open) and reopen the line (to clear errors
+(silo overflows)) and the log file</p></td></tr>
+<tr valign="top" align="left">
+<td width="11%"></td>
+<td width="17%">
+
+
+<p><b>p</b></p></td>
+<td width="3%"></td>
+<td width="69%">
+
+
+<p>playback the last 60 lines of output</p></td></tr>
+<tr valign="top" align="left">
+<td width="11%"></td>
+<td width="17%">
+
+
+<p><b>P</b></p></td>
+<td width="3%"></td>
+<td width="69%">
+
+
+<p>set number of playback lines</p></td></tr>
+<tr valign="top" align="left">
+<td width="11%"></td>
+<td width="17%">
+
+
+<p><b>r</b></p></td>
+<td width="3%"></td>
+<td width="69%">
+
+
+<p>replay the last 20 lines of output</p></td></tr>
+<tr valign="top" align="left">
+<td width="11%"></td>
+<td width="17%">
+
+
+<p><b>R</b></p></td>
+<td width="3%"></td>
+<td width="69%">
+
+
+<p>set number of replay lines</p></td></tr>
+<tr valign="top" align="left">
+<td width="11%"></td>
+<td width="17%">
+
+
+<p><b>s</b></p></td>
+<td width="3%"></td>
+<td width="69%">
+
+
+<p>switch to spy mode (read only)</p></td></tr>
+<tr valign="top" align="left">
+<td width="11%"></td>
+<td width="17%">
+
+
+<p><b>u</b></p></td>
+<td width="3%"></td>
+<td width="69%">
+
+
+<p>show status of hosts/users in this group</p></td></tr>
+<tr valign="top" align="left">
+<td width="11%"></td>
+<td width="17%">
+
+
+<p><b>v</b></p></td>
+<td width="3%"></td>
+<td width="69%">
+
+
+<p>show the version of the group server</p></td></tr>
+<tr valign="top" align="left">
+<td width="11%"></td>
+<td width="17%">
+
+
+<p><b>w</b></p></td>
+<td width="3%"></td>
+<td width="69%">
+
+
+<p>who is using this console</p></td></tr>
+<tr valign="top" align="left">
+<td width="11%"></td>
+<td width="17%">
+
+
+<p><b>x</b></p></td>
+<td width="3%"></td>
+<td width="69%">
+
+
+<p>examine this group&rsquo;s devices and modes</p></td></tr>
+<tr valign="top" align="left">
+<td width="11%"></td>
+<td width="17%">
+
+
+<p><b>z</b></p></td>
+<td width="3%"></td>
+<td width="69%">
+
+
+<p>suspend this connection</p></td></tr>
+<tr valign="top" align="left">
+<td width="11%"></td>
+<td width="17%">
+
+
+<p><b>!</b></p></td>
+<td width="3%"></td>
+<td width="69%">
+
+
+<p>invoke task</p></td></tr>
+<tr valign="top" align="left">
+<td width="11%"></td>
+<td width="17%">
+
+
+<p><b>|</b></p></td>
+<td width="3%"></td>
+<td width="69%">
+
+
+<p>attach a local command to the console</p></td></tr>
+<tr valign="top" align="left">
+<td width="11%"></td>
+<td width="17%">
+
+
+<p><b>?</b></p></td>
+<td width="3%"></td>
+<td width="69%">
+
+
+<p>display list of commands</p></td></tr>
+<tr valign="top" align="left">
+<td width="11%"></td>
+<td width="17%">
+
+
+<p><b>^M</b> (return)</p></td>
+<td width="3%"></td>
+<td width="69%">
+
+
+<p>continue, ignore the escape sequence</p></td></tr>
+<tr valign="top" align="left">
+<td width="11%"></td>
+<td width="17%">
+
+
+<p><b>^R</b> (ctrl-R)</p></td>
+<td width="3%"></td>
+<td width="69%">
+
+
+<p>replay the last line only</p></td></tr>
+<tr valign="top" align="left">
+<td width="11%"></td>
+<td width="17%">
+
+
+<p><b>\</b><i>ooo</i></p></td>
+<td width="3%"></td>
+<td width="69%">
+
+
+<p>send character having octal code <i>ooo</i> (must
+specify three octal digits)</p></td></tr>
+</table>
+
+<p style="margin-left:11%; margin-top: 1em">If any other
+character is hit after the escape sequence, all three
+characters will be discarded. Note that a line break or a
+down command can only be sent from a read-write connection.
+To send the escape sequence through the connection one must
+redefine the outer escape sequence, or use
+<b>^Ec\</b><i>ooo</i> to send the first escape character
+before typing the second character directly.</p>
+
+<p style="margin-left:11%; margin-top: 1em">In the
+<b>&minus;u</b> output, the login
+&lsquo;&lsquo;&lt;none&gt;&rsquo;&rsquo; indicates no one is
+viewing that console, and the login
+&lsquo;&lsquo;&lt;spies&gt;&rsquo;&rsquo; indicates that no
+one has a read-write connection (only read-only).</p>
+
+<p style="margin-left:11%; margin-top: 1em">When running a
+local command via &lsquo;&lsquo;<b>^Ec|</b>&rsquo;&rsquo;,
+you can type &lsquo;<b>^C</b>&rsquo; to send the command a
+SIGHUP, &lsquo;<b>^\</b>&rsquo; to send the command a
+SIGKILL, and &lsquo;<b>o</b>&rsquo; to toggle the display of
+the console data.</p>
+
+<h2>EXAMPLES
+<a name="EXAMPLES"></a>
+</h2>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="11%"></td>
+<td width="15%">
+
+
+<p style="margin-top: 1em">console &minus;u</p></td>
+<td width="8%"></td>
+<td width="35%">
+
+
+<p style="margin-top: 1em">Outputs something like:</p></td>
+<td width="31%">
+</td></tr>
+</table>
+
+<p style="margin-left:34%; margin-top: 1em">dumb up
+&lt;none&gt; <br>
+expert up ksb@mentor <br>
+tyro up &lt;spies&gt; <br>
+mentor up &lt;none&gt; <br>
+sage up fine@cis</p>
+
+<p style="margin-left:34%; margin-top: 1em">The
+<b>&lt;none&gt;</b> indicates no one is viewing <i>dumb</i>
+or <i>mentor</i>, the <b>&lt;spies&gt;</b> indicates only
+read-only connections exist for <i>tyro</i>, and other
+<i>login</i>@<i>host</i> entries indicate users attached
+read-write to <i>sage</i> and <i>expert</i>.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="11%"></td>
+<td width="15%">
+
+
+<p style="margin-top: 1em">console &minus;w</p></td>
+<td width="8%"></td>
+<td width="35%">
+
+
+<p style="margin-top: 1em">Outputs something like:</p></td>
+<td width="31%">
+</td></tr>
+</table>
+
+<p style="margin-left:34%; margin-top: 1em">ksb@extra
+attach 2days expert <br>
+file@cis attach 21:46 sage <br>
+dmr@alice spy 0:04 tyro</p>
+
+<p style="margin-left:34%; margin-top: 1em">The third
+column is the idle time of the user. Either
+<i>hours</i>:<i>minutes</i> or number of days is
+displayed.</p>
+
+<p style="margin-left:11%;">console &minus;e
+&quot;^[1&quot; lv426</p>
+
+<p style="margin-left:34%;">Requests a connection to the
+host &lsquo;&lsquo;lv426&rsquo;&rsquo; with the escape
+characters set to &lsquo;&lsquo;escape
+one&rsquo;&rsquo;.</p>
+
+<h2>FILES
+<a name="FILES"></a>
+</h2>
+
+
+<p style="margin-left:11%; margin-top: 1em">The following
+default file locations may be overridden at compile time or
+by the command-line options described above. Run <b>console
+&minus;V</b> to see the defaults set at compile time.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="11%"></td>
+<td width="24%">
+
+
+<p><b>/etc/console.cf</b></p></td>
+<td width="14%"></td>
+<td width="46%">
+
+
+<p>system-wide configuration file</p></td>
+<td width="5%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="11%"></td>
+<td width="24%">
+
+
+<p><b><small>$HOME</small> /.consolerc</b></p></td>
+<td width="14%"></td>
+<td width="46%">
+
+
+<p>per-user configuration file</p></td>
+<td width="5%">
+</td></tr>
+</table>
+
+<h2>BUGS
+<a name="BUGS"></a>
+</h2>
+
+
+<p style="margin-left:11%; margin-top: 1em">It is possible
+to create a loop of console connections, with ugly results.
+Never run <b>console</b> from within a console connection
+(unless you set each escape sequence differently).</p>
+
+<p style="margin-left:11%; margin-top: 1em">The &minus;i
+output can produce more than the stated number of fields of
+information if the user-provided information has embedded
+colons.</p>
+
+<p style="margin-left:11%; margin-top: 1em">I&rsquo;m sure
+there are more, I just don&rsquo;t know where they are.
+Please let me know if you find any.</p>
+
+<h2>AUTHORS
+<a name="AUTHORS"></a>
+</h2>
+
+
+<p style="margin-left:11%; margin-top: 1em">Thomas A. Fine,
+Ohio State Computer Science <br>
+Kevin Braunsdorf, Purdue University Computing Center <br>
+Bryan Stansell, conserver.com</p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+
+<p style="margin-left:11%; margin-top: 1em"><b>conserver.cf</b>(5),
+<b>conserver.passwd</b>(5), <b>conserver</b>(8)</p>
+<hr>
+</body>
+</html>
